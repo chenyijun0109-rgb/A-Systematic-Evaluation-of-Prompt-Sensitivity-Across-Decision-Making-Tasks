@@ -1,0 +1,73 @@
+{
+  "id": "resp_0c9601d233ae5cd0016a2df565ad548191bbcdcd77c24244e1",
+  "object": "response",
+  "created_at": 1781396837,
+  "status": "completed",
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1781396841,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 6000,
+  "max_tool_calls": null,
+  "model": "gpt-4o-2024-11-20",
+  "moderation": null,
+  "output": [
+    {
+      "id": "msg_0c9601d233ae5cd0016a2df5667b048191b5d1dd097029da7e",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "```markdown\n## detailed\n# Four-Deck Reward Task\n\nYou will make a total of 100 choices during this task. Your cumulative score begins at 2000 points.\n\nOn each trial, you will select one of four decks: A, B, C, or D. Each deck has its own pattern of rewards and losses, but these patterns are not known to you at the start of the task. After making a choice, you will receive feedback that includes the following information:\n- The reward you received from the chosen deck.\n- Any loss associated with the chosen deck.\n- The net outcome, which is the reward minus the loss.\n- Your updated cumulative score, which reflects the net outcome added to or subtracted from your previous score.\n\nYou can use the feedback provided after each choice, as well as the history of your previous choices and outcomes, to inform your decisions in subsequent trials.\n\nYour goal is to complete all 100 trials with the highest cumulative score possible.\n\nCurrent task state:\n\n```text\n{observation}\n```\n\nValid responses:\n\n```text\nCHOICE: A\nCHOICE: B\nCHOICE: C\nCHOICE: D\n```\n\nRespond with exactly one valid response and no additional text.\n\n## role_human\n# Four-Deck Reward Task\n\nYou are participating in a task where you will make 100 choices. Your cumulative score starts at 2000 points.\n\nOn each trial, you will choose one of four decks: A, B, C, or D. Each deck has a unique but initially unknown pattern of rewards and losses. After each choice, you will receive feedback that includes:\n- The reward you earned from the deck you selected.\n- Any loss associated with that deck.\n- The net outcome, which is the reward minus the loss.\n- Your updated cumulative score, which reflects the net outcome added to or subtracted from your previous score.\n\nYou can use the feedback and the history of your choices to guide your decisions as you progress through the task.\n\nYour objective is to finish all 100 trials with the highest cumulative score you can achieve.\n\nCurrent task state:\n\n```text\n{observation}\n```\n\nValid responses:\n\n```text\nCHOICE: A\nCHOICE: B\nCHOICE: C\nCHOICE: D\n```\n\nRespond with exactly one valid response and no additional text.\n\n## reward_loss_emphasis\n# Four-Deck Reward Task\n\nYou will make 100 choices in this task. Your cumulative score starts at 2000 points.\n\nOn each trial, you will select one of four decks: A, B, C, or D. Each deck has a distinct but initially unknown pattern of rewards and losses. After every choice, you will receive detailed feedback, including:\n- **The reward** you earned from the deck you selected.\n- **Any loss** associated with that deck.\n- **The net outcome**, which is the reward minus the loss.\n- **Your updated cumulative score**, which reflects the net outcome added to or subtracted from your previous score.\n\nThis feedback, along with the history of your previous choices and outcomes, is available for you to consider when making future decisions.\n\nYour goal is to complete all 100 trials with the highest cumulative score possible.\n\nCurrent task state:\n\n```text\n{observation}\n```\n\nValid responses:\n\n```text\nCHOICE: A\nCHOICE: B\nCHOICE: C\nCHOICE: D\n```\n\nRespond with exactly one valid response and no additional text.\n\n## Constraint audit\n| Condition            | Intended linguistic change                     | New task facts added | Rules changed | Strategy hints added | Placeholders preserved | Response format preserved |\n|-----------------------|-----------------------------------------------|----------------------|---------------|-----------------------|------------------------|---------------------------|\n| detailed             | More explicit and organized explanation       | none                | none          | none                 | yes                    | yes                       |\n| role_human           | Framed task as if model is a human participant | none                | none          | none                 | yes                    | yes                       |\n| reward_loss_emphasis | Emphasized rewards, losses, net outcomes, and cumulative consequences | none                | none          | none                 | yes                    | yes                       |\n```"
+        }
+      ],
+      "role": "assistant"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "in_memory",
+  "reasoning": {
+    "context": null,
+    "effort": null,
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 0.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 1.0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 872,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 857,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1729
+  },
+  "user": null,
+  "metadata": {}
+}

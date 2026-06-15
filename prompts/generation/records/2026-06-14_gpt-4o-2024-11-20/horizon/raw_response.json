@@ -1,0 +1,73 @@
+{
+  "id": "resp_09915083178d7f64016a2df55cf314819db127d8fd25f9eaaf",
+  "object": "response",
+  "created_at": 1781396828,
+  "status": "completed",
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1781396837,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": 6000,
+  "max_tool_calls": null,
+  "model": "gpt-4o-2024-11-20",
+  "moderation": null,
+  "output": [
+    {
+      "id": "msg_09915083178d7f64016a2df55dd988819d8ba0634c9f9e65b5",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "```markdown\n## detailed\n# Two-Option Reward Task\n\nYou will complete 40 separate games. Each game consists of a series of choices between two options: option A and option B.\n\nAt the start of each game, you will make four forced choices. During these forced-choice trials, the current task state will specify which option you must select. After completing these four forced choices, you will proceed to make either one or six free choices, where you can freely choose between option A and option B.\n\nWithin each game, the reward patterns for options A and B may differ, and these patterns are not revealed to you beforehand. After every choice you make, you will receive feedback showing the reward associated with the option you selected. You can use the rewards you observe, along with the number of remaining choices in the current game, to inform your subsequent decisions.\n\nYour objective is to complete all 40 games and achieve the highest total reward possible.\n\nCurrent task state:\n\n```text\n{observation}\n```\n\nValid responses:\n\n```text\nCHOICE: A\nCHOICE: B\n```\n\nRespond with exactly one valid response and no additional text.\n\n## role_human\n# Two-Option Reward Task\n\nYou are participating in a task that involves completing 40 separate games. In each game, you will make a series of decisions between two options: option A and option B.\n\nAt the beginning of each game, you will make four forced choices. During these forced-choice trials, the task will specify which option you must select. After these four forced choices, you will make either one or six free choices, where you can decide freely between option A and option B.\n\nThe reward patterns for options A and B in each game are different and are not known to you in advance. After each choice, you will see the reward associated with the option you selected. You can use the rewards you observe and the number of remaining choices in the current game to guide your decisions.\n\nYour goal is to complete all 40 games and maximize the total reward you earn.\n\nCurrent task state:\n\n```text\n{observation}\n```\n\nValid responses:\n\n```text\nCHOICE: A\nCHOICE: B\n```\n\nRespond with exactly one valid response and no additional text.\n\n## uncertainty_emphasis\n# Two-Option Reward Task\n\nYou will complete 40 separate games. In each game, you will make a series of choices between two options: option A and option B.\n\nEach game begins with four forced-choice trials. During these trials, the task will specify which option you must select. After completing these four forced choices, you will make either one or six free choices, where you can freely choose between option A and option B.\n\nThe reward patterns for options A and B in each game are initially unknown to you. After each choice, you will see the reward associated with the option you selected. However, the observed rewards provide only partial information about the underlying reward patterns for A and B. You can use this incomplete information, along with the number of remaining choices in the current game, to guide your decisions.\n\nYour objective is to complete all 40 games and achieve the highest total reward possible.\n\nCurrent task state:\n\n```text\n{observation}\n```\n\nValid responses:\n\n```text\nCHOICE: A\nCHOICE: B\n```\n\nRespond with exactly one valid response and no additional text.\n\n## Constraint audit\n\n| Condition           | Intended linguistic change                                      | New task facts added | Rules changed | Strategy hints added | Placeholders preserved | Response format preserved |\n|----------------------|---------------------------------------------------------------|----------------------|---------------|----------------------|------------------------|---------------------------|\n| detailed            | Explained and organized the same facts more explicitly         | none                | none          | none                 | yes                    | yes                       |\n| role_human          | Framed the task as if the model were a human participant       | none                | none          | none                 | yes                    | yes                       |\n| uncertainty_emphasis | Highlighted the initially unknown reward patterns and incomplete information | none                | none          | none                 | yes                    | yes                       |\n```"
+        }
+      ],
+      "role": "assistant"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "in_memory",
+  "reasoning": {
+    "context": null,
+    "effort": null,
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": false,
+  "temperature": 0.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tools": [],
+  "top_logprobs": 0,
+  "top_p": 1.0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 902,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 835,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 1737
+  },
+  "user": null,
+  "metadata": {}
+}

@@ -1,0 +1,35 @@
+{
+  "task": "horizon",
+  "generated_at": "2026-06-14T00:26:52.533400+00:00",
+  "provider": "OpenAI Responses API via university-provided access",
+  "requested_model": "gpt-4o-2024-11-20",
+  "response_model": "gpt-4o-2024-11-20",
+  "response_id": "resp_09915083178d7f64016a2df55cf314819db127d8fd25f9eaaf",
+  "reasoning_effort": "not sent",
+  "text_verbosity": "not sent",
+  "temperature": 0.0,
+  "top_p": 1.0,
+  "max_output_tokens": 6000,
+  "seed": "not supported",
+  "meta_prompt_path": "prompts\\generation\\meta_prompt_v2.md",
+  "baseline_path": "prompts\\bandit\\baseline.md",
+  "baseline_sha256": "D9EF2CAF1C1C2C75C6277A51E909BDCE0A3CF77D593E0F5F0FD64374F82BC116",
+  "task_specific_condition": "uncertainty_emphasis",
+  "candidate_sets_requested": 1,
+  "raw_request_path": "prompts\\generation\\records\\2026-06-14_gpt-4o-2024-11-20\\horizon\\request.md",
+  "raw_response_path": "prompts\\generation\\records\\2026-06-14_gpt-4o-2024-11-20\\horizon\\raw_response.json",
+  "raw_output_path": "prompts\\generation\\records\\2026-06-14_gpt-4o-2024-11-20\\horizon\\raw_output.md",
+  "installed_as_final_prompts": true,
+  "manual_review_status": "passed_with_edits",
+  "manual_review_record_path": "prompts\\generation\\records\\2026-06-14_gpt-4o-2024-11-20\\final_review.md",
+  "final_prompt_paths": {
+    "detailed": "prompts\\bandit\\detailed.md",
+    "role_human": "prompts\\bandit\\role_human.md",
+    "uncertainty_emphasis": "prompts\\bandit\\uncertainty_emphasis.md"
+  },
+  "final_prompt_sha256": {
+    "detailed": "1A1374B5AF26F83D9DCF55EA8BC182BA0E0FB85BF2866694A177B5940FC09D40",
+    "role_human": "927AE942EFF1763A7D91F4E32FBBB6F72E5987E4BDA9B54D033C77DA02650815",
+    "uncertainty_emphasis": "AC93F76FBEF89859B3B92AF3576F47B8474FB95EFDE7BE494EB622E3C0FC7830"
+  }
+}

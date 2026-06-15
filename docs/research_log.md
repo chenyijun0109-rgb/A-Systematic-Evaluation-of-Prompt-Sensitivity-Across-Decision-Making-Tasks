@@ -1,0 +1,2440 @@
+# Research Log
+
+这个文件用于记录项目后续每一步实质性工作。规则是：只要一个步骤会影响实验设计、代码实现、prompt、数据、分析或论文写作，就必须在这里留下记录。
+
+## 2026-06-15: GitHub repository organization
+
+- Expanded `.gitignore` to exclude local secrets, virtual environments,
+  caches, human datasets, generated experiment outputs, local agent/editor
+  state, and the local proposal PDF.
+- Kept `DATASET/` and `outputs/` on disk; the cleanup only prevents accidental
+  GitHub publication.
+- Removed the superseded `pilot_results_only.md`, temporary supervisor-meeting
+  simulation, and completed presentation-only Superpowers documents.
+- Removed the unused scaffold `main.py` and replaced the placeholder package
+  description in `pyproject.toml`.
+- Updated `README.md` as the current-state entry point and documented how local
+  data and generated outputs are handled.
+- Repaired current documentation references that pointed to files no longer
+  present in the repository.
+
+## 记录模板
+
+```text
+Date:
+Phase:
+Step:
+Action:
+Why this was done:
+Evidence / basis:
+Related citations:
+Files changed or created:
+Output / result:
+Status:
+Next step:
+Notes:
+```
+
+## Evidence / Basis 标签
+
+如果某一步不是直接来自文献，也必须说明依据类型：
+
+- Literature-based decision
+- Dataset-based decision
+- Config-based decision
+- Pilot-based decision
+- Project design decision
+- Implementation necessity
+- Assumption to verify
+
+## Log Entries
+
+### 2026-05-26 - 建立研究记录与引用规则
+
+Date: 2026-05-26
+
+Phase: Project management / research reproducibility
+
+Step: Establish recording and citation workflow
+
+Action:
+
+- 在 `plan.md` 中加入“研究记录与引用规则”；
+- 新建 `docs/research_log.md`；
+- 新建 `docs/citation_map.md`；
+- 规定后续每一步工作都要记录，并同步记录文献依据和引用位置。
+
+Why this was done:
+
+- 本项目是学术毕业设计，需要保证实验设计、任务实现、prompt manipulation、metrics 和分析都有可追踪依据；
+- prompt sensitivity 是项目核心，因此 prompt 的每一次设计和修改都必须可追溯；
+- 后期 dissertation 写作需要清楚说明“哪里引用哪篇文献”。
+
+Evidence / basis:
+
+- Project design decision；
+- Academic reproducibility requirement；
+- Dissertation writing requirement。
+
+Related citations:
+
+- 暂无单一特定文献；这是项目管理和学术写作规范。
+
+Files changed or created:
+
+- `plan.md`
+- `docs/research_log.md`
+- `docs/citation_map.md`
+
+Output / result:
+
+- 项目建立了后续工作记录与引用登记机制。
+
+Status: Done
+
+### 2026-06-13 - Reconstruct Three Canonical Baselines
+
+Change:
+
+- Reconstructed the neutral Horizon, four-deck, and balloon baselines from
+  the original task literature, local human-data structure, and implemented
+  task parameters.
+- Added `docs/baseline_prompt_source_map.md`.
+- Removed Horizon analysis labels from participant-facing observations and
+  replaced them with the number of choices remaining in the current game.
+- Added content and interface regression tests.
+- Made unavailable generated conditions fail with an explicit error.
+- Added `meta_prompt_v2.md`, which generates three variants per task while
+  treating the canonical baseline as frozen input.
+
+Prompt boundary:
+
+- Baselines include the neutral total-reward objective and explain that
+  outcome patterns are initially unknown.
+- They do not expose task names, behavioural metrics, advantageous decks,
+  true reward distributions, or hidden balloon explosion parameters.
+
+Verification:
+
+- Canonical baseline dry run replaced every observation placeholder and
+  parsed every configured legal response.
+- `uv run python -m unittest discover -s tests`: 56 tests passed.
+- SHA-256 hashes for all three baseline inputs are stored in
+  `prompts/generation/records/2026-06-13_canonical_baselines/review.md`.
+
+Status: Done
+
+### 2026-06-14 - Implement Multi-Run Aggregation and PSI Pipeline
+
+Change:
+
+- Added seed-specific successful and failed pilot filenames.
+- Fixed task seed offsets at Horizon `+0`, IGT `+1`, and BART `+2`, including
+  task-subset runs.
+- Added config and prompt SHA-256 provenance to pilot JSON.
+- Added `src/aggregate_experiment_results.py`.
+- Added `src/compute_prompt_sensitivity.py`.
+- Added strict validation and explicit `--allow-incomplete` recovery.
+- Added duplicate detection with optional `--duplicate-policy latest`.
+- Added paired-seed, failed-run, model, config-version, and prompt-hash audits.
+- Integrated run-level Horizon `random_exploration_effect` estimates.
+- Added IGT `learning_curve_change`, defined as block 5 minus block 1.
+- Froze three primary PSI metrics per task in config version 0.4.
+
+PSI variance rules:
+
+- Use baseline sample SD when nonzero.
+- Use pooled SD when baseline SD is zero but condition SD is nonzero.
+- Assign zero effect when both groups are constant and equal.
+- Treat constant but unequal groups as undefined.
+- Warn, without replacing the denominator, when baseline variance is very low.
+
+Outputs:
+
+- `llm_run_metrics.csv`
+- `aggregation_quality_report.json`
+- `metric_summary.csv`
+- `prompt_effects.csv`
+- `prompt_sensitivity.csv`
+- `analysis_summary.json`
+
+Verification:
+
+- Focused pilot and Horizon tests: 16 passed.
+- Focused aggregation and PSI tests: 22 passed.
+- Complete synthetic mini pilot: 36 run rows, 27 effect rows, 9 complete PSI
+  rows, and 12 finite Horizon random-exploration estimates.
+- `uv run python -m unittest discover -s tests`: 92 tests passed.
+- Configuration JSON parsed successfully.
+- `git diff --check` passed.
+
+Status: Done; the pipeline is ready for the 36-run mini pilot.
+
+### 2026-06-14 - Complete 36-Run Mini Pilot
+
+Run design:
+
+```text
+3 tasks x 4 prompt conditions x 3 paired base seeds = 36 runs
+```
+
+Base seeds:
+
+- `20260614`
+- `20260615`
+- `20260616`
+
+Model:
+
+- `gpt-4.1`
+
+Outputs:
+
+- Raw run JSON: `outputs/mini_pilot_v01`
+- Aggregated analysis: `outputs/processed/mini_pilot_v01`
+
+Quality result:
+
+- 36 discovered files and 36 valid runs.
+- Every task-condition cell contains three paired runs.
+- All runs completed with parse success rate 1.0.
+- Total invalid responses: 0.
+- All 12 Horizon runs received finite `random_exploration_effect` estimates.
+- `aggregation_quality_report.json`: zero issues.
+- `analysis_summary.json`: `analysis_complete=true`.
+- 124 metric-summary rows, 27 prompt-effect rows, and 9 complete PSI rows.
+
+Mini-pilot PSI values:
+
+| Task | Condition | PSI |
+|---|---|---:|
+| Horizon | `detailed` | 1.094 |
+| Horizon | `role_human` | 0.939 |
+| Horizon | `uncertainty_emphasis` | 2.676 |
+| IGT | `detailed` | 0.305 |
+| IGT | `role_human` | 0.526 |
+| IGT | `reward_loss_emphasis` | 3.333 |
+| BART | `detailed` | 1.338 |
+| BART | `role_human` | 1.193 |
+| BART | `risk_emphasis` | 0.389 |
+
+Interpretation boundary:
+
+- These estimates are based on only three runs per cell and are diagnostic.
+- The large IGT reward/loss PSI is strongly influenced by a standardised
+  advantageous-choice effect and must be checked for low baseline variability
+  before the formal experiment.
+
+Status: Done; mini-pilot outputs are ready for diagnostic review and method
+freeze.
+
+### 2026-06-13 - Add Separate GPT-5.5 Prompt Generator
+
+Change:
+
+- Added `PROMPT_GENERATOR_MODEL=gpt-5.5` while retaining
+  `OPENAI_MODEL=gpt-4.1` for cognitive-task runs.
+- Added `src/generate_prompt_variants.py`.
+- Extended the Responses API client to support `reasoning.effort` and
+  `text.verbosity`.
+- Configured prompt generation with low reasoning effort, low verbosity, and
+  6000 maximum output tokens. Temperature and top-p are not sent.
+- Added auditable per-task outputs for the rendered request, raw response,
+  raw output text, and generation metadata.
+- The generator does not install outputs as final prompts.
+
+Reason:
+
+- Prompt generation and experimental task performance use different models
+  and must remain methodologically and operationally separate.
+- The API response model identifier and complete raw materials must be
+  retained for reproducibility.
+
+Verification:
+
+- The three generation requests render with no unresolved meta-prompt
+  placeholders and exactly one `{observation}` placeholder each.
+- `uv run python -m unittest discover -s tests`: 59 tests passed.
+- The experiment configuration is valid JSON.
+- `.env` remains ignored by Git.
+
+Status: Done
+
+### 2026-06-14 - Lock Prompt Generator Sampling Configuration
+
+Change:
+
+- Replaced the planned prompt-generation model with the fixed snapshot
+  `gpt-4o-2024-11-20`.
+- Kept `OPENAI_MODEL=gpt-4.1` unchanged for cognitive-task runs.
+- Extended the shared Responses API client to accept optional `temperature`
+  and `top_p` parameters.
+- Configured the prompt generator to send `temperature=0.0` and `top_p=1.0`.
+- Removed reasoning-effort and text-verbosity arguments from the generator
+  while preserving those optional capabilities in the shared client.
+- Updated Prompt Generation Protocol 1.2, configuration, provenance,
+  environment examples, README, and generation-record template.
+
+Reason:
+
+- A dated model snapshot is more reproducible than the moving `gpt-4o` alias.
+- Temperature zero reduces sampling variation, while top-p one is retained as
+  a fixed neutral setting.
+- The generation metadata must describe the parameters actually sent to the
+  API.
+
+Evidence / basis:
+
+- OpenAI's GPT-4o model documentation lists `gpt-4o-2024-11-20` as a snapshot
+  and states that snapshots lock a specific model version for more consistent
+  behaviour.
+- Project reproducibility requirement.
+
+Verification:
+
+- Prompt-generation and HTTP-client tests verify that `temperature=0.0` and
+  `top_p=1.0` are included in the request body and audit record.
+- `uv run python -m unittest discover -s tests`: 60 tests passed.
+- The experiment configuration parses as valid JSON.
+- No prompt-generation API call was made during this change.
+
+Status: Implemented; generation API calls remain pending.
+
+### 2026-06-14 - Generate Nine Prompt Candidates
+
+Change:
+
+- Called the university-provided OpenAI Responses API once for each of the
+  Horizon, IGT, and BART tasks.
+- Generated three candidate variants per task: `detailed`, `role_human`, and
+  the task-specific emphasis condition.
+- Retained each rendered request, raw API response, extracted output,
+  generation record, response ID, returned model identifier, baseline hash,
+  and sampling configuration.
+- Added `pre_review.md` without modifying the raw outputs.
+
+Generation settings:
+
+```text
+model = gpt-4o-2024-11-20
+temperature = 0.0
+top_p = 1.0
+max_output_tokens = 6000
+candidate sets per task = 1
+```
+
+Result:
+
+- All three calls succeeded.
+- The requested and returned model identifiers matched.
+- All nine candidates preserved the observation placeholder and legal
+  response tokens.
+- Initial review identified minor semantic drift: strengthened reward-pattern
+  claims in Horizon and IGT, and a changed probability claim in BART.
+- Raw candidates remain uninstalled pending documented minimal edits, manual
+  review, dry-run checks, and parser tests.
+
+Files:
+
+- `prompts/generation/records/2026-06-14_gpt-4o-2024-11-20/`
+- `prompts/generation/records/2026-06-14_gpt-4o-2024-11-20/pre_review.md`
+
+Status: Generation complete; manual review and prompt freezing pending.
+
+### 2026-06-14 - Review and Freeze Twelve-Prompt Matrix
+
+Change:
+
+- Reviewed the three frozen baselines and all nine generated candidates.
+- Preserved every raw generation output unchanged.
+- Installed nine final variants after only the edits needed to restore task
+  equivalence and isolate the intended manipulation.
+- Added all nine paths to the experiment configuration.
+- Added complete 12-prompt dry-run validation.
+- Recorded the exact edit log and SHA-256 hash for every final prompt in
+  `final_review.md`.
+- Marked all three generation records as `passed_with_edits`.
+
+Main corrections:
+
+- Restored uncertain reward-pattern wording in Horizon and IGT.
+- Removed IGT explanations that were absent from the frozen baseline.
+- Removed unintended risk emphasis from BART `detailed` and `role_human`.
+- Restored BART wording about unknown explosion outcomes instead of making a
+  new claim about explosion probabilities.
+
+Verification:
+
+- All 12 prompts contain exactly one observation placeholder.
+- All 12 prompts passed rendering and parser checks.
+- No experimental prompt exposes canonical task names or configured hidden
+  information.
+- `uv run python -m unittest discover -s tests`: 63 tests passed.
+
+Files:
+
+- `prompts/bandit/*.md`
+- `prompts/igt/*.md`
+- `prompts/bart/*.md`
+- `prompts/generation/records/2026-06-14_gpt-4o-2024-11-20/final_review.md`
+- `outputs/debug/prompt_dry_run/prompt_matrix_dry_run.json`
+
+Status: Done; current 12-prompt experimental matrix frozen.
+
+### 2026-06-14 - Tighten Prompt Manipulation Isolation
+
+Change:
+
+- Reopened the prompt freeze after a second independent review found that the
+  first reviewed variants still changed non-target wording.
+- Updated Prompt Generation Protocol from 1.2 to 1.3.
+- Required every prompt to preserve the exact neutral baseline objective.
+- Rebuilt each `role_human` prompt as the baseline plus one explicit
+  human-participant role sentence.
+- Rebuilt each task-specific emphasis prompt as the baseline with only one
+  authorised paragraph changed.
+- Retained the detailed variants' explanatory organisation while restoring
+  the exact objective.
+- Added `docs/prompt_generation_and_review_record.md`, which records the
+  generation instruction, task substitutions, model, temperature, top-p,
+  raw records, two review rounds, and final hashes.
+
+Reason:
+
+- Broad paraphrasing in role and emphasis conditions could confound the
+  intended manipulation with wording length, style, or objective strength.
+- Restoring non-target content exactly to baseline provides a stronger
+  control-variable design.
+
+Verification boundary:
+
+- Raw API requests and responses were not changed.
+- No behavioural pilot result was consulted when choosing final wording.
+- Automated tests now enforce the role-sentence and one-paragraph-difference
+  invariants.
+
+Final verification:
+
+- All 12 prompt conditions passed observation rendering and parser checks.
+- `uv run python -m unittest discover -s tests`: 66 tests passed.
+- Experiment configuration and all three generation records parsed as valid
+  JSON.
+- Final hashes were updated in the generation records, `final_review.md`, and
+  `docs/prompt_generation_and_review_record.md`.
+- `git diff --check` passed.
+
+Status: Done; Protocol 1.3 prompt matrix frozen.
+
+### 2026-06-14 - Apply Adult Filter to BART Human Data
+
+Change:
+
+- Identified participant age at zero-based Excel column index 8.
+- Verified that age is constant across all 40 rows for every participant.
+- Added a dynamic `age >= 18` inclusion rule to BART preprocessing.
+- Excluded six participants: IDs 4, 5, 7, 13, 79, and 86.
+- Regenerated BART human metrics with 141 adult participants.
+- Added `bart_exclusions.csv` and filter metadata to `summary.json`.
+- Added `docs/bart_human_preprocessing.md`.
+
+Audit result:
+
+- Source: 147 participants, 5,880 rows.
+- Excluded: 6 participants, 240 rows.
+- Included: 141 participants, 5,640 rows.
+- Excluded ages: 16, 14, 17, 13, 16, and 16.
+- Every source participant had 40 balloon records.
+
+Reason:
+
+- The planned human comparison uses the adult analysis sample.
+- The exclusion must be rule-based and reproducible rather than implemented
+  as a hard-coded participant-ID list.
+
+Verification:
+
+- `uv run python -m unittest discover -s tests`: 67 tests passed.
+- `bart_human_metrics.csv`: 141 rows; every participant has 40 balloons.
+- `bart_exclusions.csv`: 6 rows for IDs 4, 5, 7, 13, 79, and 86.
+- `summary.json`: 147 source participants, 6 excluded, 141 included.
+- Experiment configuration parsed as valid JSON.
+- `git diff --check` passed.
+
+Status: Done; adult BART analysis sample fixed at 141 participants.
+
+### 2026-06-13 - Remove Historical Experimental Prompts
+
+Change:
+
+- Removed the 12 prompt files in the current three-task by four-condition
+  experimental matrix.
+- Retained the three `baseline_task_named.md` files because they are outside
+  the current four-condition matrix and may support a future task-name
+  exposure comparison.
+- Selected prospective regeneration under Prompt Generation Protocol 1.0.
+- Updated README, provenance record, and next-steps plan to pause new LLM
+  pilots until replacement prompts are generated, reviewed, tested, and
+  frozen.
+
+Reason:
+
+- The exact historical meta-prompt, generator settings, raw outputs, and
+  manual edit history were not recorded.
+- Regenerating prospectively provides a complete reproducibility chain.
+
+Data boundary:
+
+- Historical pilot outputs remain development records.
+- They must not be pooled with results produced using the replacement prompt
+  version.
+
+Status: Done
+
+### 2026-06-13 - Add Prompt Generation Protocol
+
+Change:
+
+- Added `docs/prompt_generation_protocol.md`.
+- Added the exact reusable meta-prompt at
+  `prompts/generation/meta_prompt_v1.md`.
+- Added generation-record and manual-review templates.
+- Added `prompts/generation/current_prompt_provenance.md` so unavailable
+  historical generation metadata is explicitly marked `not recorded`.
+- Added prompt provenance and version-freeze requirements to the README and
+  next-steps plan.
+
+Method boundary:
+
+- The task literature and local implementation determine task content.
+- The prompt-generation LLM is limited to constrained rewriting.
+- Existing prompt-generation metadata that was not recorded historically
+  must be reported as `not recorded`; it must not be reconstructed or
+  invented retrospectively.
+- Formal data collection requires retained raw outputs, manual edit records,
+  prompt review, and a frozen version identifier.
+
+Status: Done
+
+Next step:
+
+- 后续进行 Phase 1 固定研究设计时，逐项记录 research questions、task parameters、prompt conditions、metrics 和 human datasets 的依据。
+
+Notes:
+
+- 如果某个决定暂时没有文献依据，应在记录中标记为 `Assumption to verify`，不能留空。
+
+### 2026-05-26 - Draft Final Experiment Design Table
+
+Date: 2026-05-26
+
+Phase: Phase 1 / 固定研究设计
+
+Step: Step 1 - Final Experiment Design Table
+
+Action:
+
+- 新建 `docs/project_design.md`；
+- 写出三项任务的 draft final experiment design table；
+- 为每个 task 整理 prompt conditions、runs per condition、trials / units per run、main metrics、human dataset 和 citation basis；
+- 标记了进入 implementation 前需要确认的 open decisions。
+
+Why this was done:
+
+- 用户询问 Step 1 中 “Task, Prompt conditions, Runs per condition, Trials per run, Main metrics, Human dataset” 应该具体做什么；
+- 在写代码前，需要先固定实验矩阵，避免 task implementation、prompt writing 和 analysis 指标后续反复变化；
+- 这一步是后续 data schema、task environment 和 pilot 的前置条件。
+
+Evidence / basis:
+
+- Project design decision；
+- Literature-based decision；
+- Dataset-based decision；
+- Assumption to verify；
+- Config-based decision could not be used directly because `configs/experiment_config_stage01.json` is currently empty on disk.
+
+Related citations:
+
+- BinzSchulz2023PNAS；
+- BinzSchulz2023CognitiveModels；
+- Shanahan2023RolePlay；
+- LoyaSinhaFutrell2023；
+- Sclar2023PromptFormatting；
+- Razavi2025PromptSensitivity；
+- Wilson2014HorizonTask；
+- Feng2021ExploreExploit；
+- Bechara1994IGT；
+- Toplak2010IGTReview；
+- Steingroever2015IGTData；
+- Lejuez2002BART；
+- Lejuez2003BARTAdolescent；
+- Canning2022BARTReview；
+- Sebri2023BART。
+
+Files changed or created:
+
+- `docs/project_design.md`
+- `docs/research_log.md`
+- `docs/citation_map.md`
+
+Output / result:
+
+- 生成了 draft final experiment design table；
+- 明确了当前可以固定的内容；
+- 标记了 Horizon reward schedule、IGT payoff schedule、BART balloon count / explosion rule、response labels 和空 config 文件等待确认事项。
+
+Status: Draft completed
+
+Next step:
+
+- 继续完成 Step 2：确定每个 task 的 exact parameters；
+- 在实现代码前恢复或重新生成 `configs/experiment_config_stage01.json`。
+
+Notes:
+
+- 当前 `docs/project_design.md` 是 draft，不是 locked design。
+- BART 的 30 vs 40 balloons、Horizon exact game structure、IGT exact payoff table 需要在下一步确认。
+### 2026-05-26 - Project Action Plan
+
+Date: 2026-05-26
+
+Phase: Project management / execution planning
+
+Step: Create practical action plan
+
+Action:
+
+- Created `docs/action_plan.md`.
+- Summarised what needs to be prepared before implementation.
+- Converted the current draft experiment design into an ordered execution plan.
+- Listed phases from design locking through task implementation, prompts, pilot, formal experiment, human dataset processing, analysis, and dissertation writing.
+
+Why this was done:
+
+- The project needs a practical plan showing what to prepare and what to do next.
+- The current design document identifies open decisions, but a separate action plan makes the next steps easier to follow.
+
+Evidence / basis:
+
+- Project design decision.
+- Based on `docs/project_design.md`.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `docs/action_plan.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- A Chinese execution plan was added, including preparation checklist, phase-by-phase tasks, outputs, completion criteria, risks, and final deliverables.
+
+Status: Done
+
+Next step:
+
+- Use the plan to complete task parameter decisions and regenerate `configs/experiment_config_stage01.json`.
+
+Notes:
+
+- The existing `plan.md`, `research_log.md`, and `citation_map.md` appear to contain encoding issues in some Chinese text. They were not rewritten in this step.
+
+### 2026-05-26 - Three Task Details Document
+
+Date: 2026-05-26
+
+Phase: Phase 1 / 固定研究设计
+
+Step: Create detailed task description document
+
+Action:
+
+- 新建 `docs/task_details.md`；
+- 详细说明 Horizon Task / two-option bandit、Iowa Gambling Task 和 Balloon Analogue Risk Task；
+- 为每个 task 整理概述、任务内容、流程、变量、prompt 条件、主要 metrics、human dataset 对齐和待确认事项；
+- 汇总跨任务共同变量、控制变量、记录字段和 dissertation 对应位置。
+
+Why this was done:
+
+- 用户要求“再做一份文档，详细说一下这三个 task，包括概述，任务内容，不同变量等”；
+- 后续实现 task environments、编写 prompts、设计 data schema 和写 dissertation methodology 都需要一份更细的 task-level 说明；
+- 当前 `docs/project_design.md` 是实验矩阵层面的设计，不足以直接作为 task implementation specification。
+
+Evidence / basis:
+
+- Project design decision；
+- Based on `docs/project_design.md`；
+- Based on `docs/action_plan.md`；
+- Assumption to verify for unresolved exact task parameters.
+
+Related citations:
+
+- Wilson2014HorizonTask；
+- Feng2021ExploreExploit；
+- Bechara1994IGT；
+- Toplak2010IGTReview；
+- Steingroever2015IGTData；
+- Lejuez2002BART；
+- Lejuez2003BARTAdolescent；
+- Canning2022BARTReview；
+- Sebri2023BART。
+
+Files changed or created:
+
+- `docs/task_details.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- 生成了一份中文 task details 文档，覆盖三个任务的概述、流程、变量、prompt 条件、metrics、human data alignment 和 open decisions。
+
+Status: Draft completed
+
+Next step:
+
+- 继续确认 Horizon、IGT 和 BART 的 exact parameters；
+- 将确认后的参数写入 `docs/task_parameters.md` 或 `configs/experiment_config_stage01.json`。
+
+Notes:
+
+- 文档中未锁定的参数均标记为 `To verify`，避免把草案误写成最终实验规则。
+
+### 2026-05-26 - Prompt Sensitivity Formula Basis
+
+Date: 2026-05-26
+
+Phase: Phase 1 / 固定研究设计
+
+Step: Clarify prompt sensitivity operationalisation
+
+Action:
+
+- Updated `docs/task_details.md` section 2.4 to explain the literature basis and methodological status of the prompt sensitivity formula；
+- Clarified that the formula is an operational definition for this project, not a fixed formula directly copied from one LLM prompt sensitivity paper；
+- Added explanation linking the formula to standardised mean difference / effect size logic, Glass-type baseline SD standardisation, and LLM prompt variation comparison；
+- Added statistical method citation entries to `docs/citation_map.md`。
+
+Why this was done:
+
+- The project needs to justify why prompt sensitivity can be calculated using standardised differences between manipulated prompt conditions and baseline；
+- The PSI should be described as a descriptive composite index constructed for this project, not as a standard psychological scale；
+- This clarification will make the proposal and dissertation methodology more rigorous.
+
+Evidence / basis:
+
+- Literature-based decision；
+- Statistical method basis；
+- Project design decision。
+
+Related citations:
+
+- Cohen1988PowerAnalysis；
+- HedgesOlkin1985MetaAnalysis；
+- Glass1976Delta；
+- Sclar2023PromptFormatting；
+- Razavi2025PromptSensitivity。
+
+Files changed or created:
+
+- `docs/task_details.md`
+- `docs/citation_map.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- Prompt sensitivity is now described as an operationalised standardised mean-difference measure；
+- PSI is explicitly described as a project-specific descriptive summary index；
+- Citation map now includes effect-size and Glass-type standardisation basis.
+
+Status: Done
+
+Next step:
+
+- Use this operational definition in the proposal / methodology draft and later implement it in the analysis scripts.
+
+Notes:
+
+- If the final analysis uses pooled SD rather than baseline SD, the formula and citation notes should be updated consistently.
+
+### 2026-05-28 - Literature-Based Exact Task Parameters
+
+Date: 2026-05-28
+
+Phase: Phase 2 / Confirm exact task parameters
+
+Step: Fix task parameters using literature and local dataset alignment
+
+Action:
+
+- Created `docs/task_parameters.md`.
+- Fixed the working exact parameters for the Horizon Task, Iowa Gambling Task, and Balloon Analogue Risk Task.
+- Used literature sources to justify the task structure, reward/payoff schedules, trial counts, and main scoring variables.
+- Checked local datasets to align implementation decisions with available human comparison data.
+
+Why this was done:
+
+- The previous design documents still marked several task parameters as `To verify`.
+- The project cannot safely move to config generation, prompt writing, or task environment implementation until task rules are fixed.
+- The dissertation methodology needs a clear explanation of which task version was implemented and why.
+
+Evidence / basis:
+
+- Literature-based decision.
+- Dataset-based decision.
+- Implementation necessity.
+
+Related citations:
+
+- Wilson et al. (2014) for the Horizon Task.
+- Bechara et al. (1994) and Steingroever et al. (2015) for the Iowa Gambling Task.
+- Lejuez et al. (2002) and Sebri et al. (2023) for the Balloon Analogue Risk Task.
+
+Files changed or created:
+
+- `docs/task_parameters.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- Horizon Task: Wilson-style 4 forced-choice trials plus Horizon 1 / Horizon 6 free-choice phase.
+- IGT: standard 100-trial Bechara payoff scheme.
+- BART: 40-balloon probabilistic version aligned with the local human dataset.
+
+Status: Working decision completed
+
+Next step:
+
+- Generate `configs/experiment_config_stage01.json` from the fixed parameters.
+- Write the three baseline prompts.
+- Create `docs/data_schema.md`.
+
+Notes:
+
+- Horizon uses 40 games per LLM run for cost and runtime reasons, not the full 320 games used in Wilson et al. (2014).
+- BART follows the 40-balloon Sebri et al. style because the local dataset contains 147 participants x 40 balloons.
+
+### 2026-05-28 - Stage 01 Experiment Config
+
+Date: 2026-05-28
+
+Phase: Phase 2 / Convert task parameters into executable configuration
+
+Step: Generate `configs/experiment_config_stage01.json`
+
+Action:
+
+- Filled `configs/experiment_config_stage01.json`.
+- Added global model/run settings, prompt conditions, task-specific parameters, response formats, metric lists, human dataset paths, output paths, and prompt sensitivity analysis settings.
+- Validated the file with `python -m json.tool`.
+
+Why this was done:
+
+- The config file was empty, so later task environments, prompt loaders, parsers, and runners did not yet have a single machine-readable source of truth.
+- The project has now moved from literature-based parameter decisions to executable experiment setup.
+
+Evidence / basis:
+
+- Config-based decision.
+- Based on `docs/task_parameters.md`.
+- Implementation necessity.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `configs/experiment_config_stage01.json`
+- `docs/research_log.md`
+
+Output / result:
+
+- A valid JSON experiment config now exists.
+- The config includes Horizon, IGT, and BART task parameters and all four prompt conditions per task.
+
+Status: Done
+
+Next step:
+
+- Create `docs/data_schema.md`.
+- Write baseline prompt files for Horizon, IGT, and BART.
+
+Notes:
+
+- `model_name` and `max_tokens` remain marked as `TO_CONFIRM` until API access and pilot testing are complete.
+
+### 2026-05-28 - Data Schema Draft
+
+Date: 2026-05-28
+
+Phase: Phase 3 / Data schema design
+
+Step: Define raw, trial-level, run-level, and invalid-response schemas
+
+Action:
+
+- Created `docs/data_schema.md`.
+- Defined common identifiers, raw LLM output fields, trial/action-level fields, task-specific fields for Horizon, IGT, and BART, run-level metrics, invalid response logging, and file naming rules.
+
+Why this was done:
+
+- The project needs a stable data format before task environments, parsers, runners, and analysis scripts are implemented.
+- All planned metrics must be computable from saved data.
+- Raw model responses and invalid outputs must remain traceable for reproducibility.
+
+Evidence / basis:
+
+- Implementation necessity.
+- Based on `configs/experiment_config_stage01.json`.
+- Based on `docs/task_parameters.md`.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `docs/data_schema.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- A draft data schema now exists for all three tasks.
+- The schema defines raw output, processed trial/action data, run-level metrics, invalid response logs, and naming conventions.
+
+Status: Draft completed
+
+Next step:
+
+- Write baseline prompt files for Horizon, IGT, and BART.
+- Then implement task environments with a random agent before connecting to an LLM.
+
+Notes:
+
+- BART uses both action-level and balloon-level records because one balloon may contain multiple model actions.
+
+### 2026-05-28 - Project Detail Overview
+
+Date: 2026-05-28
+
+Phase: Project documentation / design summary
+
+Step: Create overall project detail document
+
+Action:
+
+- Created `docs/detail.md`.
+- Summarised the whole project, including research aim, three tasks, prompt conditions, concrete settings, metrics, prompt sensitivity analysis, human dataset comparison, expected outputs, and dissertation argument.
+
+Why this was done:
+
+- The project now has several specialised documents, including task parameters, config, and data schema.
+- A single overview document is useful for understanding the whole study design without reading every lower-level file.
+
+Evidence / basis:
+
+- Project design decision.
+- Based on `docs/task_parameters.md`.
+- Based on `configs/experiment_config_stage01.json`.
+- Based on `docs/data_schema.md`.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `docs/detail.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- A project-level detail document now exists.
+- It can be used as a high-level explanation of the project design and as a starting point for dissertation methodology writing.
+
+Status: Done
+
+Next step:
+
+- Write the baseline prompt files for Horizon, IGT, and BART.
+
+Notes:
+
+- `docs/detail.md` is an overview document. Exact implementation details should still be taken from `docs/task_parameters.md`, `docs/data_schema.md`, and `configs/experiment_config_stage01.json`.
+
+### 2026-05-28 - Rewrite Detail Document In Chinese
+
+Date: 2026-05-28
+
+Phase: Project documentation / design summary
+
+Step: Improve `docs/detail.md`
+
+Action:
+
+- Rewrote `docs/detail.md` into a clearer Chinese-heavy overview document.
+- Reorganised tables for experiment design, prompt conditions, task settings, metrics, human datasets, analysis methods, and final outputs.
+
+Why this was done:
+
+- The previous version was useful but mixed English and Chinese unevenly.
+- The user requested a clearer Chinese document with correctly represented tables.
+
+Evidence / basis:
+
+- Project documentation need.
+- Based on existing project design documents.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `docs/detail.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- `docs/detail.md` now provides a cleaner Chinese overview of the project.
+
+Status: Done
+
+Next step:
+
+- Continue to baseline prompt drafting.
+
+### 2026-05-28 - Baseline Prompt Drafts
+
+Date: 2026-05-28
+
+Phase: Prompt design
+
+Step: Create baseline prompts for all three tasks
+
+Action:
+
+- Created `prompts/bandit/baseline.md`.
+- Created `prompts/igt/baseline.md`.
+- Created `prompts/bart/baseline.md`.
+- Kept the prompts neutral: they explain the task, current state placeholder, valid outputs, and strict response format without role framing, cognitive emphasis, or strategy advice.
+
+Why this was done:
+
+- Baseline prompts are needed before detailed, role, and task-specific prompts can be written.
+- They provide the reference condition for prompt sensitivity analysis.
+
+Evidence / basis:
+
+- Prompt design necessity.
+- Based on `configs/experiment_config_stage01.json`.
+- Based on `docs/detail.md`.
+- Based on `docs/task_parameters.md`.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `prompts/bandit/baseline.md`
+- `prompts/igt/baseline.md`
+- `prompts/bart/baseline.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- Three baseline prompt files now exist and match the prompt paths in the experiment config.
+
+Status: Done
+
+Next step:
+
+- Implement a simple parser for legal response formats.
+- Then implement task environments and run them with a random agent before connecting an LLM.
+
+Notes:
+
+- The prompts use `{observation}` as the placeholder for the current task state.
+
+### 2026-05-28 - Next Implementation Plan
+
+Date: 2026-05-28
+
+Phase: Planning / implementation roadmap
+
+Step: Create next-stage implementation plan
+
+Action:
+
+- Created `docs/next_plan.md`.
+- Summarised the current project state and defined the next implementation phases: parser, task environments, random runner, baseline prompt dry run, LLM pilot, prompt expansion, and formal experiment locking.
+
+Why this was done:
+
+- The early design phase is mostly complete.
+- The project needs a current plan that starts from the present state, rather than the older broad action plan.
+
+Evidence / basis:
+
+- Project planning need.
+- Based on `docs/detail.md`, `docs/data_schema.md`, `configs/experiment_config_stage01.json`, and baseline prompt files.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `docs/next_plan.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- A concrete next-stage plan now exists.
+
+Status: Done
+
+Next step:
+
+- Implement `src/parser.py` and parser tests.
+
+Notes:
+
+- The plan recommends not calling an LLM until the parser, task environments, and random baseline runner are working locally.
+
+### 2026-05-29 - Parser And Base Task Interface
+
+Date: 2026-05-29
+
+Phase: Implementation / parser and task interface
+
+Step: Implement Phase 1 and Phase 2 from `docs/next_plan.md`
+
+Action:
+
+- Added parser tests in `tests/test_parser.py`.
+- Added base task interface tests in `tests/test_task_base.py`.
+- Implemented `src/parser.py` with `parse_response()` and `ParseResult`.
+- Implemented `src/tasks/base.py` with `BaseTaskEnvironment` and `StepResult`.
+- Added package initialisers under `src/`.
+
+Why this was done:
+
+- The project needs a stable parser before any LLM runner can be implemented.
+- The task environments need a shared interface before Horizon, IGT, and BART are implemented separately.
+
+Evidence / basis:
+
+- Implementation necessity.
+- Based on `docs/next_plan.md`.
+- Based on `docs/data_schema.md`.
+- Based on `configs/experiment_config_stage01.json`.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `src/__init__.py`
+- `src/parser.py`
+- `src/tasks/__init__.py`
+- `src/tasks/base.py`
+- `tests/test_parser.py`
+- `tests/test_task_base.py`
+- `docs/research_log.md`
+
+Output / result:
+
+- Parser supports strict one-line `CHOICE: ...` and `ACTION: ...` formats.
+- Parser returns structured parse results including `parsed_action`, `parse_success`, `invalid_reason`, and `normalized_response`.
+- Base task interface defines `reset`, `get_observation`, `get_valid_actions`, `step`, `is_done`, `get_trial_records`, and `get_run_metrics`.
+
+Verification:
+
+- `python -m unittest tests.test_parser tests.test_task_base`
+- Result: 8 tests passed.
+
+Status: Done
+
+Next step:
+
+- Implement the concrete task environments, starting with IGT or Horizon.
+
+Notes:
+
+- The parser currently accepts case-insensitive valid actions and normalises them to uppercase.
+
+### 2026-05-29 - Horizon Task Environment
+
+Date: 2026-05-29
+
+Phase: Implementation / task environments
+
+Step: Implement Phase 3 from `docs/next_plan.md`
+
+Action:
+
+- Added Horizon environment tests in `tests/test_horizon.py`.
+- Implemented `src/tasks/horizon.py` with `HorizonTaskEnvironment`.
+- Added support for game generation, Horizon 1 / Horizon 6 structure, equal and unequal information conditions, forced-choice trials, free-choice trials, Gaussian rewards, trial-level records, and basic run-level metrics.
+
+Why this was done:
+
+- The project needs task environments that can run without LLM calls before any LLM pilot is attempted.
+- Horizon is the first concrete task environment required by the next-stage implementation plan.
+
+Evidence / basis:
+
+- Implementation necessity.
+- Based on `docs/next_plan.md`.
+- Based on `docs/task_parameters.md`.
+- Based on `configs/experiment_config_stage01.json`.
+- Based on `docs/data_schema.md`.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `src/tasks/horizon.py`
+- `tests/__init__.py`
+- `tests/test_horizon.py`
+- `docs/research_log.md`
+
+Output / result:
+
+- `HorizonTaskEnvironment` supports `reset`, `get_observation`, `get_valid_actions`, `step`, `is_done`, `get_trial_records`, and `get_run_metrics`.
+- Forced-choice trials restrict valid actions to the required option.
+- Random-policy execution can complete a full Horizon run.
+- Same seed and same policy produce reproducible rewards and metrics.
+
+Verification:
+
+- `python -m unittest tests.test_parser tests.test_task_base tests.test_horizon`
+- Result: 12 tests passed.
+- `python -m unittest discover`
+- Result: 12 tests passed.
+
+Status: Done
+
+Next step:
+
+- Implement IGT environment as Phase 4.
+
+Notes:
+
+- `random_exploration` is currently represented with a simple exploration-rate proxy. It can be refined later when the full analysis script is implemented.
+
+### 2026-05-29 - IGT Task Environment
+
+Date: 2026-05-29
+
+Phase: Implementation / task environments
+
+Step: Implement Phase 4 from `docs/next_plan.md`
+
+Action:
+
+- Added IGT environment tests in `tests/test_igt.py`.
+- Implemented `src/tasks/igt.py` with `IGTTaskEnvironment`.
+- Added support for 100-trial IGT runs, initial score, A/B/C/D decks, per-deck 10-card payoff cycles, reward/loss/net outcome feedback, cumulative score tracking, trial-level records, and run-level metrics.
+
+Why this was done:
+
+- IGT is the next concrete task environment after Horizon.
+- The project needs task environments that can run locally with a random or deterministic policy before connecting to an LLM.
+
+Evidence / basis:
+
+- Implementation necessity.
+- Based on `docs/next_plan.md`.
+- Based on `docs/task_parameters.md`.
+- Based on `configs/experiment_config_stage01.json`.
+- Based on `docs/data_schema.md`.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `src/tasks/igt.py`
+- `tests/test_igt.py`
+- `docs/research_log.md`
+
+Output / result:
+
+- `IGTTaskEnvironment` supports the shared task interface.
+- A/B have net -250 per 10 selections.
+- C/D have net +250 per 10 selections.
+- Run-level metrics include `net_score`, `advantageous_choice_rate`, deck rates, final cumulative score, post-loss switching rate, and block-wise net scores.
+
+Verification:
+
+- `python -m unittest tests.test_igt`
+- Result: 5 tests passed.
+- `python -m unittest discover`
+- Result: 17 tests passed.
+
+Status: Done
+
+Next step:
+
+- Implement BART environment as Phase 5.
+
+Notes:
+
+- The payoff schedule is indexed by per-deck selection count, not global trial number.
+
+### 2026-05-29 - BART Task Environment
+
+Date: 2026-05-29
+
+Phase: Implementation / task environments
+
+Step: Implement Phase 5 from `docs/next_plan.md`
+
+Action:
+
+- Added BART environment tests in `tests/test_bart.py`.
+- Implemented `src/tasks/bart.py` with `BARTTaskEnvironment`.
+- Added support for 40-balloon BART runs, 2x20 block numbering, `PUMP` and `CASH_OUT` actions, 0.05 reward per successful pump, increasing explosion probability, certain explosion at pump 32, action-level records, balloon-level records, and run-level metrics.
+
+Why this was done:
+
+- BART is the third concrete task environment required before the random baseline runner can exercise all tasks locally.
+- The implementation follows the BART settings described in `docs/detail.md`.
+
+Evidence / basis:
+
+- Implementation necessity.
+- Based on `docs/detail.md`.
+- Based on `docs/next_plan.md`.
+- Based on `docs/task_parameters.md`.
+- Based on `configs/experiment_config_stage01.json`.
+- Based on `docs/data_schema.md`.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `src/tasks/bart.py`
+- `tests/test_bart.py`
+- `docs/research_log.md`
+
+Output / result:
+
+- `BARTTaskEnvironment` supports the shared task interface.
+- Each balloon has a pre-sampled hidden explosion point.
+- `CASH_OUT` banks temporary earning and ends the balloon.
+- Explosion clears current temporary earning and ends the balloon.
+- Run-level metrics include average pumps, adjusted average pumps, explosion rate, cash-out threshold, total earnings, and post-explosion adjustment.
+
+Verification:
+
+- `python -m unittest tests.test_bart`
+- Result: 6 tests passed.
+- `python -m unittest discover`
+- Result: 23 tests passed.
+
+Status: Done
+
+Next step:
+
+- Implement random baseline runner as Phase 6.
+
+Notes:
+
+- Explosion probabilities follow `1 / (33 - pump_number)` with pump 32 as certain explosion.
+
+### 2026-05-29 - Random Baseline Runner
+
+Date: 2026-05-29
+
+Phase: Implementation / random baseline runner
+
+Step: Implement Phase 6 from `docs/next_plan.md`
+
+Action:
+
+- Added random baseline runner tests in `tests/test_random_baseline.py`.
+- Implemented `src/run_random_baseline.py`.
+- Added config-based environment construction for Horizon, IGT, and BART.
+- Added a CLI entry point for running all three tasks with a random agent.
+- Wrote debug JSON outputs under `outputs/debug/random_baseline/`.
+
+Why this was done:
+
+- Before connecting any LLM, the three task environments need to be runnable locally.
+- A random agent is a simple sanity check for task logic, records, metrics, seed reproducibility, and config loading.
+- This step reduces the risk that later LLM pilot failures are caused by environment bugs rather than prompt or model behaviour.
+
+Evidence / basis:
+
+- Implementation necessity.
+- Based on `docs/next_plan.md`.
+- Based on `docs/detail.md`.
+- Based on `configs/experiment_config_stage01.json`.
+- Based on `docs/data_schema.md`.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `src/run_random_baseline.py`
+- `tests/test_random_baseline.py`
+- `outputs/debug/random_baseline/horizon_random_baseline.json`
+- `outputs/debug/random_baseline/igt_random_baseline.json`
+- `outputs/debug/random_baseline/bart_random_baseline.json`
+- `docs/research_log.md`
+
+Output / result:
+
+- The random runner can build and run all three environments from the stage 01 config.
+- Horizon random baseline produced 300 trial records across 40 games.
+- IGT random baseline produced 100 trial records.
+- BART random baseline produced action-level records and balloon-level metrics for 40 balloons.
+- Each output file contains task name, seed, completion status, records, and run-level metrics.
+
+Verification:
+
+- `python -m unittest tests.test_random_baseline`
+- Result: 3 tests passed.
+- `python -m unittest discover`
+- Result: 26 tests passed.
+- `python -m src.run_random_baseline --seed 20260528 --output-dir outputs/debug/random_baseline`
+- Result: all three random baselines completed and wrote JSON debug outputs.
+
+Status: Done
+
+Next step:
+
+- Implement Phase 7: baseline prompt dry run.
+- Add a prompt loader that reads baseline prompt files and inserts task observations.
+- Check that prompt response formats match the parser.
+
+Notes:
+
+- The random baseline is not intended as a psychological model. It is a debugging and pipeline validation tool.
+
+### 2026-05-29 - README Project Status Update
+
+Date: 2026-05-29
+
+Phase: Project documentation / implementation status
+
+Step: Update project README after Phase 6
+
+Action:
+
+- Updated `README.md`.
+- Added the project aim, task overview, current phase status, project structure, test command, random baseline command, output paths, and next-step guidance.
+
+Why this was done:
+
+- The README was empty.
+- After Phase 6, the project has a runnable local pipeline for parser, task environments, and random baseline checks.
+- A clear README helps keep the implementation state, usage commands, and next phase visible.
+
+Evidence / basis:
+
+- Project documentation need.
+- Based on the current implementation state.
+- Based on `docs/detail.md`, `docs/next_plan.md`, and the completed random baseline runner.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `README.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- The repository now has a readable entry-point document.
+- The README explains how to run tests and random baselines.
+- The README identifies Phase 7 baseline prompt dry run as the next step.
+
+Status: Done
+
+Next step:
+
+- Continue with Phase 7: prompt loader and baseline prompt dry run.
+
+Notes:
+
+- README status should be updated again after the LLM pilot or any major pipeline change.
+
+### 2026-05-29 - Baseline Prompt Dry Run
+
+Date: 2026-05-29
+
+Phase: Implementation / baseline prompt dry run
+
+Step: Implement Phase 7 from `docs/next_plan.md`
+
+Action:
+
+- Added prompt dry-run tests in `tests/test_prompt_dry_run.py`.
+- Implemented `src/prompt_loader.py`.
+- Implemented `src/run_prompt_dry_run.py`.
+- Added a CLI command for checking baseline prompt rendering without calling an LLM.
+- Generated `outputs/debug/prompt_dry_run/baseline_prompt_dry_run.json`.
+- Updated `README.md` to include Phase 7 status and the dry-run command.
+
+Why this was done:
+
+- Before calling an LLM, the project needs to verify that prompt files can be loaded and rendered correctly.
+- The prompt response format must match the parser and the config-defined legal outputs.
+- This step reduces the chance that the first LLM pilot fails because of prompt loading or parser-format mismatch.
+
+Evidence / basis:
+
+- Implementation necessity.
+- Based on `docs/next_plan.md`.
+- Based on `configs/experiment_config_stage01.json`.
+- Based on baseline prompt files under `prompts/`.
+- Based on the existing parser in `src/parser.py`.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `src/prompt_loader.py`
+- `src/run_prompt_dry_run.py`
+- `tests/test_prompt_dry_run.py`
+- `outputs/debug/prompt_dry_run/baseline_prompt_dry_run.json`
+- `README.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- Baseline prompt templates for Horizon, IGT, and BART can be loaded from the config.
+- `{observation}` is replaced with the current task state for all three tasks.
+- Config-defined valid outputs parse successfully for all three tasks.
+
+Verification:
+
+- `python -m unittest tests.test_prompt_dry_run`
+- Result: 4 tests passed.
+- `python -m src.run_prompt_dry_run --seed 20260528 --output-path outputs/debug/prompt_dry_run/baseline_prompt_dry_run.json`
+- Result: all three tasks reported `placeholder_replaced: true` and `all_config_valid_outputs_parse: true`.
+- `python -m unittest discover`
+- Result: 30 tests passed.
+
+Status: Done
+
+Next step:
+
+- Implement Phase 8: small LLM pilot runner.
+- Start with `3 tasks x baseline prompt x 1 run`.
+
+Notes:
+
+- This dry run does not evaluate prompt quality or model behaviour. It only checks local prompt rendering and parser compatibility.
+
+### 2026-05-29 - Clarify Project Title And Research Aim
+
+Date: 2026-05-29
+
+Phase: Project documentation / research framing
+
+Step: Align README research aim with dissertation title
+
+Action:
+
+- Updated the README title to `How Reliable Are LLMs as Cognitive Models?`
+- Added the subtitle `A Systematic Evaluation of Prompt Sensitivity Across Decision-Making Tasks`.
+- Rewrote the README research aim section to foreground prompt sensitivity quantification and cognitive-model reliability evaluation.
+- Clarified that human data are used as an important reference for evaluating reliability, not as the only or primary research target.
+
+Why this was done:
+
+- The previous README framing over-emphasised whether LLM behaviour is close to human data.
+- The user's dissertation title and intended focus are about quantifying LLM sensitivity to different prompts and evaluating whether this sensitivity undermines LLM reliability as cognitive models.
+
+Evidence / basis:
+
+- Project design decision.
+- User clarification.
+- Dissertation framing requirement.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `README.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- The README now states that the project evaluates prompt sensitivity across decision-making tasks and uses that evidence to assess whether LLMs can be reliable cognitive models.
+
+Status: Done
+
+Next step:
+
+- Keep future documentation, prompt design, analysis scripts, and dissertation writing aligned with this framing.
+
+Notes:
+
+- Future analysis should report human-data comparison as part of reliability evaluation, not as the sole success criterion.
+
+### 2026-05-29 - Prepare Small LLM Pilot Runner
+
+Date: 2026-05-29
+
+Phase: Implementation / small LLM pilot preparation
+
+Step: Prepare Phase 8 API-ready pilot runner
+
+Action:
+
+- Added `tests/test_llm_pilot.py` with fake-client tests that do not call the network.
+- Implemented `src/llm_client.py` with a standard-library OpenAI Responses API client and local `.env` loading.
+- Implemented `src/run_llm_pilot.py` for the baseline small LLM pilot.
+- Updated `.gitignore` to exclude `.env`.
+- Updated `README.md` with API key setup and pilot run instructions.
+
+Why this was done:
+
+- The user will provide an API key locally later.
+- The project needs the Phase 8 pilot runner prepared before the real API run.
+- API keys must not be hard-coded or committed.
+- Pilot output must preserve raw model responses, parsed actions, invalid responses, task records, and run-level metrics.
+
+Evidence / basis:
+
+- Implementation necessity.
+- API preparation requirement.
+- Based on the OpenAI Responses API reference.
+- Based on `docs/next_plan.md`.
+- Based on the existing parser, prompt loader, and task environments.
+
+Related citations:
+
+- No new academic literature citation was introduced in this step.
+- API basis: OpenAI Responses API reference, `POST https://api.openai.com/v1/responses`.
+
+Files changed or created:
+
+- `src/llm_client.py`
+- `src/run_llm_pilot.py`
+- `tests/test_llm_pilot.py`
+- `.gitignore`
+- `README.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- The codebase is ready for the user to set `OPENAI_API_KEY` and run the minimal baseline LLM pilot.
+- Tests use a fake client, so no API calls or costs are incurred during test runs.
+
+Verification:
+
+- `python -m unittest tests.test_llm_pilot`
+- Result: 3 tests passed.
+
+Status: Prepared, awaiting local API key
+
+Next step:
+
+- User sets `OPENAI_API_KEY` and optionally `OPENAI_MODEL`.
+- Run `python -m src.run_llm_pilot --seed 20260528 --output-dir outputs/pilot/baseline`.
+
+Notes:
+
+- The default model is currently `gpt-4.1`, matching the user's local `.env` setting.
+- The first real API run should be treated as a pilot and inspected before scaling up.
+
+### 2026-05-29 - Save Failed LLM Pilot Debug Output
+
+Date: 2026-05-29
+
+Phase: Implementation / small LLM pilot debugging
+
+Step: Improve Phase 8 failure handling
+
+Action:
+
+- Added a failing test for unparsable LLM output in `tests/test_llm_pilot.py`.
+- Updated `src/run_llm_pilot.py` so parser failure writes a `*_baseline_pilot_failed.json` debug file before raising `RuntimeError`.
+- Updated `README.md` to document failed pilot debug outputs.
+
+Why this was done:
+
+- The first real API pilot failed because the model returned text without the required parser prefix, producing `missing_required_prefix`.
+- The previous runner raised an error but did not save the raw model output for inspection.
+- Failed pilot attempts need to be reproducible and diagnosable without rerunning paid API calls.
+
+Evidence / basis:
+
+- Pilot-based decision.
+- Implementation necessity.
+- User-provided traceback from the first Phase 8 API pilot attempt.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `src/run_llm_pilot.py`
+- `tests/test_llm_pilot.py`
+- `README.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- If parsing fails after all retries, the runner now saves a debug JSON file containing raw model outputs, prompts, observations, invalid responses, current records, metrics, and failure reason.
+
+Verification:
+
+- `python -m unittest tests.test_llm_pilot`
+- Result: 4 tests passed.
+- `python -m unittest discover`
+- Result: 34 tests passed.
+
+Status: Done
+
+Next step:
+
+- Rerun the Phase 8 pilot.
+- If parsing fails again, inspect the generated `*_baseline_pilot_failed.json` file before changing prompts or parser rules.
+
+Notes:
+
+- The current parser remains intentionally strict. Whether to loosen it should be decided after inspecting actual failed model outputs.
+
+### 2026-05-29 - Align Pilot Model Setting
+
+Date: 2026-05-29
+
+Phase: Implementation / small LLM pilot configuration
+
+Step: Align model name with local `.env`
+
+Action:
+
+- Checked project files for model-name references.
+- Updated `src/run_llm_pilot.py` default model from `gpt-4.1-mini` to `gpt-4.1`.
+- Updated README API setup examples to use `gpt-4.1`.
+- Updated `configs/experiment_config_stage01.json` `global_settings.model_name` to `gpt-4.1`.
+- Updated `docs/detail.md` and previous research-log note to match the selected pilot model.
+
+Why this was done:
+
+- The user configured `OPENAI_MODEL=gpt-4.1` in `.env`.
+- Documentation and fallback defaults should match the selected pilot model to avoid accidental runs with a different model.
+
+Evidence / basis:
+
+- Config-based decision.
+- User-confirmed local model setting.
+- Implementation consistency requirement.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `src/run_llm_pilot.py`
+- `README.md`
+- `configs/experiment_config_stage01.json`
+- `docs/detail.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- The project now consistently uses `gpt-4.1` as the Phase 8 pilot model.
+
+Status: Done
+
+Next step:
+
+- Rerun the Phase 8 pilot using the aligned model setting.
+
+Notes:
+
+- Tests that use `gpt-test` remain unchanged because they use a fake client and do not call the API.
+
+### 2026-05-29 - Handle Markdown-Fenced LLM Pilot Responses
+
+Date: 2026-05-29
+
+Phase: Implementation / small LLM pilot debugging
+
+Step: Handle real BART pilot parser failure
+
+Action:
+
+- Inspected `outputs/pilot/baseline/bart_baseline_pilot_failed.json`.
+- Found that the model returned ````text\nACTION: PUMP\n```` instead of a bare `ACTION: PUMP`.
+- Added a parser test for valid responses wrapped in a Markdown code fence.
+- Updated `src/parser.py` to strip a single surrounding Markdown code fence before strict parsing.
+- Updated `src/run_llm_pilot.py` so future parser failures include the debug output path in the error message.
+- Updated README test count.
+
+Why this was done:
+
+- The model's decision was semantically valid but wrapped in Markdown formatting.
+- The strict parser rejected it as `missing_required_prefix` because the response did not start directly with `ACTION:`.
+- For pilot stability, a narrow parser normalisation step is appropriate when the only extra content is a Markdown code fence.
+
+Evidence / basis:
+
+- Pilot-based decision.
+- Real API pilot output from `bart_baseline_pilot_failed.json`.
+- Implementation necessity.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `src/parser.py`
+- `src/run_llm_pilot.py`
+- `tests/test_parser.py`
+- `README.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- Parser now accepts strict valid responses wrapped in one Markdown code fence.
+- Parser still rejects plain missing-prefix responses such as `A`.
+- Future LLM pilot failures now show the debug JSON path directly in the raised error.
+
+Verification:
+
+- `python -m unittest tests.test_parser`
+- Result: 7 tests passed.
+- `python -m unittest tests.test_llm_pilot`
+- Result: 4 tests passed.
+- `python -m unittest discover`
+- Result: 35 tests passed.
+
+Status: Done
+
+Next step:
+
+- Rerun the Phase 8 pilot.
+- Inspect any remaining failed debug JSON if another parser issue appears.
+
+Notes:
+
+- This is a narrow parser normalisation, not a broad acceptance of explanatory text.
+
+### 2026-05-29 - Baseline LLM Pilot Completed
+
+Date: 2026-05-29
+
+Phase: Implementation / small LLM pilot
+
+Step: Complete Phase 8 baseline pilot
+
+Action:
+
+- Reran the baseline LLM pilot after parser normalisation.
+- Checked all three output files under `outputs/pilot/baseline/`.
+- Updated README with pilot completion summary and next-step direction.
+
+Why this was done:
+
+- Phase 8 needed to verify the full baseline prompt + LLM API + parser + task runner + metric pipeline.
+- After the previous BART parser failure was fixed, the pilot needed to be rerun and checked.
+
+Evidence / basis:
+
+- Pilot-based decision.
+- Generated output files:
+  - `outputs/pilot/baseline/horizon_baseline_pilot.json`
+  - `outputs/pilot/baseline/igt_baseline_pilot.json`
+  - `outputs/pilot/baseline/bart_baseline_pilot.json`
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `outputs/pilot/baseline/horizon_baseline_pilot.json`
+- `outputs/pilot/baseline/igt_baseline_pilot.json`
+- `outputs/pilot/baseline/bart_baseline_pilot.json`
+- `README.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- Horizon baseline pilot completed with 300 LLM outputs, 300 trial records, 0 invalid responses, and parse success rate 1.0.
+- IGT baseline pilot completed with 100 LLM outputs, 100 trial records, 0 invalid responses, and parse success rate 1.0.
+- BART baseline pilot completed with 379 LLM outputs, 379 action records, 40 balloon records, 0 invalid responses, and parse success rate 1.0.
+
+Status: Done
+
+Next step:
+
+- Start Phase 9: write and pilot the remaining prompt conditions.
+- Expand the runner to support task and prompt-condition selection before scaling to formal experiment runs.
+
+Notes:
+
+- The previous `bart_baseline_pilot_failed.json` should be treated as a debug artifact from the earlier failed attempt, not as the final BART pilot result.
+
+### 2026-05-29 - Create Neutral Baseline Prompts
+
+Date: 2026-05-29
+
+Phase: Prompt design / baseline refinement
+
+Step: Preserve task-named baseline and create neutral baseline
+
+Action:
+
+- Preserved the original task-name prompt files as:
+  - `prompts/bandit/baseline_task_named.md`
+  - `prompts/igt/baseline_task_named.md`
+  - `prompts/bart/baseline_task_named.md`
+- Rewrote current `baseline.md` titles to remove classic task names:
+  - Horizon baseline title changed to `Two-Option Decision Task Baseline Prompt`.
+  - IGT baseline title changed to `Four-Deck Card Task Baseline Prompt`.
+  - BART baseline title changed to `Balloon Decision Task Baseline Prompt`.
+- Added `task_named_baseline` paths to `configs/experiment_config_stage01.json`.
+- Added tests to confirm neutral baselines do not include classic task names and task-named baseline paths remain available.
+- Updated README prompt file list and next-step notes.
+
+Why this was done:
+
+- The first baseline pilot suggested possible task-name leakage, especially in IGT where the model strongly preferred Deck D.
+- The original task-named prompts may still be useful later as an explicit comparison condition.
+- The main baseline should avoid exposing classic task names so model behaviour is less likely to reflect memorised task knowledge.
+
+Evidence / basis:
+
+- Pilot-based decision.
+- Prompt design necessity.
+- Based on observed Phase 8 baseline pilot behaviour.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `prompts/bandit/baseline.md`
+- `prompts/bandit/baseline_task_named.md`
+- `prompts/igt/baseline.md`
+- `prompts/igt/baseline_task_named.md`
+- `prompts/bart/baseline.md`
+- `prompts/bart/baseline_task_named.md`
+- `configs/experiment_config_stage01.json`
+- `tests/test_prompt_dry_run.py`
+- `README.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- The default baseline prompt condition is now neutral with respect to classic task names.
+- The original task-named baseline prompts are preserved for future leakage/task-awareness comparison.
+
+Verification:
+
+- `python -m unittest tests.test_prompt_dry_run`
+- Result: 6 tests passed.
+- `python -m src.run_prompt_dry_run --seed 20260528 --output-path outputs/debug/prompt_dry_run/baseline_prompt_dry_run.json`
+- Result: all three neutral baselines rendered and parsed successfully.
+- `python -m json.tool configs/experiment_config_stage01.json`
+- Result: config JSON is valid.
+
+Status: Done
+
+Next step:
+
+- Rerun a baseline pilot using the neutral baseline prompts.
+- Compare neutral baseline behaviour against the previous task-named baseline pilot.
+
+Notes:
+
+- The old pilot outputs under `outputs/pilot/baseline/` were generated with the task-named baseline prompts and should be labelled accordingly during analysis.
+
+### 2026-05-30 - Add History-Rich Observations
+
+Date: 2026-05-30
+
+Phase: Implementation / task observation design
+
+Step: Add structured task memory to IGT and BART
+
+Action:
+
+- Added tests for history-rich observations in `tests/test_igt.py` and `tests/test_bart.py`.
+- Updated `IGTTaskEnvironment.get_observation()` to include:
+  - previous trial feedback,
+  - deck-level selection and net-outcome summary,
+  - recent choices and outcomes.
+- Updated `BARTTaskEnvironment.get_observation()` to include:
+  - previous balloon outcome,
+  - recent balloon outcomes,
+  - overall completed-balloon summary.
+- Updated README to document the history-rich observation design and the recommended next pilot output path.
+
+Why this was done:
+
+- API calls are stateless by default, while human participants remember previous choices and outcomes during continuous cognitive tasks.
+- Without task memory in the observation, LLM behaviour in IGT and BART is difficult to compare fairly with human data.
+- The previous IGT pilot strongly preferred Deck D despite limited feedback history in the prompt, suggesting the need to make task memory explicit and controlled.
+
+Evidence / basis:
+
+- Pilot-based decision.
+- Cognitive task design requirement.
+- Implementation necessity.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `src/tasks/igt.py`
+- `src/tasks/bart.py`
+- `tests/test_igt.py`
+- `tests/test_bart.py`
+- `README.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- IGT and BART observations now provide structured memory summaries that make trial-by-trial and balloon-by-balloon behaviour more interpretable.
+- This supports a fairer comparison between LLM behaviour and human continuous-task behaviour.
+
+Verification:
+
+- `python -m unittest tests.test_igt`
+- Result: 6 tests passed.
+- `python -m unittest tests.test_bart`
+- Result: 7 tests passed.
+- `python -m unittest discover`
+- Result: 39 tests passed.
+
+Status: Done
+
+Next step:
+
+- Rerun neutral baseline pilot with history-rich observations:
+  `python -m src.run_llm_pilot --seed 20260528 --output-dir outputs/pilot/neutral_baseline_with_history`
+
+Notes:
+
+- Horizon already includes observed reward histories for both options, so it was not changed in this step.
+
+### 2026-05-30 - Complete Prompt Expansion And Condition-Aware Pilot Runner
+
+Date: 2026-05-30
+
+Phase: Prompt design / runner expansion
+
+Step: Prepare Phase 9 prompt conditions
+
+Action:
+
+- Added all remaining prompt files:
+  - `prompts/bandit/detailed.md`
+  - `prompts/bandit/role_human.md`
+  - `prompts/bandit/uncertainty_emphasis.md`
+  - `prompts/igt/detailed.md`
+  - `prompts/igt/role_human.md`
+  - `prompts/igt/reward_loss_emphasis.md`
+  - `prompts/bart/detailed.md`
+  - `prompts/bart/role_human.md`
+  - `prompts/bart/risk_emphasis.md`
+- Extended `src/run_llm_pilot.py` so the runner supports `--condition`.
+- Extended `src/run_llm_pilot.py` so the CLI supports `--tasks`.
+- Kept `run_baseline_llm_pilot()` as a compatibility wrapper around the condition-aware runner.
+- Added tests confirming all configured prompt paths exist, use `{observation}`, and include valid outputs.
+- Added tests confirming non-baseline pilot conditions produce condition-specific output files.
+- Updated README, `docs/detail.md`, and `docs/task_parameters.md`.
+
+Why this was done:
+
+- Formal prompt sensitivity evaluation requires all task x prompt-condition combinations to exist before pilot expansion.
+- The runner must support running one condition at a time for small pilot checks.
+- All formal prompt conditions should share the same history-rich observation structure so differences reflect prompt wording/framing rather than different visible task memory.
+
+Evidence / basis:
+
+- Prompt design necessity.
+- Implementation necessity.
+- Pilot-based decision from the history-rich observation comparison.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `prompts/bandit/detailed.md`
+- `prompts/bandit/role_human.md`
+- `prompts/bandit/uncertainty_emphasis.md`
+- `prompts/igt/detailed.md`
+- `prompts/igt/role_human.md`
+- `prompts/igt/reward_loss_emphasis.md`
+- `prompts/bart/detailed.md`
+- `prompts/bart/role_human.md`
+- `prompts/bart/risk_emphasis.md`
+- `src/run_llm_pilot.py`
+- `tests/test_prompt_dry_run.py`
+- `tests/test_llm_pilot.py`
+- `README.md`
+- `docs/detail.md`
+- `docs/task_parameters.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- The project now has prompt files for all configured prompt conditions.
+- The LLM pilot runner can run a specified condition using `--condition`.
+- The official design now states that all formal prompt conditions use the same history-rich observation structure.
+
+Verification:
+
+- `python -m unittest tests.test_prompt_dry_run`
+- Result: 7 tests passed.
+- `python -m unittest tests.test_llm_pilot`
+- Result: 6 tests passed.
+
+Status: Done
+
+Next step:
+
+- Run small pilots for the non-baseline conditions, one condition at a time.
+- Suggested commands:
+  - `python -m src.run_llm_pilot --condition detailed --seed 20260528 --output-dir outputs/pilot/detailed`
+  - `python -m src.run_llm_pilot --condition role_human --seed 20260528 --output-dir outputs/pilot/role_human`
+- Task-specific conditions should be piloted by task using `--tasks`.
+
+Notes:
+
+- The current runner applies one condition name across all requested tasks. Common conditions such as `baseline`, `detailed`, and `role_human` can be run across all tasks directly. Task-specific conditions should be run with the matching task only.
+
+### 2026-05-30 - Task-Specific Prompt Pilots Completed
+
+Date: 2026-05-30
+
+Phase: Pilot / task-specific prompt conditions
+
+Step: Run Phase 10 task-specific prompt pilots
+
+Action:
+
+- Ran Horizon `uncertainty_emphasis` pilot.
+- Ran IGT `reward_loss_emphasis` pilot.
+- Ran BART `risk_emphasis` pilot.
+- Checked output metrics, invalid response counts, and parse success rates.
+
+Why this was done:
+
+- Task-specific prompt conditions are part of the planned prompt sensitivity matrix.
+- Each task-specific condition should be piloted separately before any formal repeated-runs experiment.
+
+Evidence / basis:
+
+- Pilot-based decision.
+- Prompt sensitivity design.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `outputs/pilot/horizon_uncertainty/horizon_uncertainty_emphasis_pilot.json`
+- `outputs/pilot/igt_reward_loss/igt_reward_loss_emphasis_pilot.json`
+- `outputs/pilot/bart_risk/bart_risk_emphasis_pilot.json`
+- `docs/research_log.md`
+
+Output / result:
+
+- Horizon uncertainty emphasis: 300 outputs, 0 invalid responses, parse success rate 1.0.
+- IGT reward-loss emphasis: 100 outputs, 0 invalid responses, parse success rate 1.0.
+- BART risk emphasis: 354 outputs, 0 invalid responses, parse success rate 1.0.
+
+Key pilot metrics:
+
+- Horizon uncertainty emphasis: exploration rate 0.35, directed exploration 0.90, horizon effect 0.10.
+- IGT reward-loss emphasis: advantageous choice rate 0.86, Deck C rate 0.30, Deck D rate 0.56, final cumulative score 4100.
+- BART risk emphasis: average pumps 8.15, adjusted average pumps 9.43, explosion rate 0.30, total earnings 13.20.
+
+Verification:
+
+- `python -m unittest discover`
+- Result: 42 tests passed.
+
+Status: Done
+
+Next step:
+
+- Analyze and compare all available pilot conditions: baseline with history, detailed, role_human, and task-specific prompts.
+
+Notes:
+
+- The first attempt to run Horizon task-specific pilot failed under sandboxed network permissions. It was rerun with approved network access and completed successfully.
+
+### 2026-05-30 - Pilot Run 01 Analysis Document
+
+Date: 2026-05-30
+
+Phase: Pilot analysis / documentation
+
+Step: Summarise first pilot matrix
+
+Action:
+
+- Created `docs/pilot_run01_analysis.md`.
+- Summarised completed pilot conditions, parse stability, task-level metrics, cross-task prompt sensitivity patterns, limitations, and next-step recommendations.
+
+Why this was done:
+
+- The first pilot matrix now includes baseline with history, detailed, role_human, and task-specific prompt conditions.
+- A written analysis is needed to prepare for supervisor discussion and to guide the next formal-experiment planning step.
+
+Evidence / basis:
+
+- Pilot-based decision.
+- Generated pilot JSON outputs under `outputs/pilot/`.
+
+Related citations:
+
+- No new literature citation was introduced in this step.
+
+Files changed or created:
+
+- `docs/pilot_run01_analysis.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- A structured pilot analysis document now exists.
+- It identifies BART as the task with the strongest apparent prompt sensitivity in the current single-run pilot.
+- It identifies history-rich observation as a necessary design choice for sequential cognitive task comparison.
+
+Status: Done
+
+Next step:
+
+- Implement scripts to aggregate multiple pilot/formal runs into run-level metric tables.
+
+Notes:
+
+- The document explicitly marks current findings as pilot observations rather than formal statistical conclusions.
+
+### 2026-06-03 - Rerun Single-Run Pilot Matrix With Average Metrics
+
+Date: 2026-06-03
+
+Phase: Pilot rerun / metric alignment
+
+Step: Regenerate pilot outputs after changing total outcome metrics to average outcome metrics
+
+Action:
+
+- Updated the OpenAI API client to retry transient request failures, including read timeouts, HTTP 429, and HTTP 5xx errors.
+- Added a unit test confirming the client retries a transient timeout and then returns a successful response.
+- Reran the 12 single-run pilot outputs as separated task-by-task commands:
+  - Horizon: `baseline`, `detailed`, `role_human`, `uncertainty_emphasis`
+  - IGT: `baseline`, `detailed`, `role_human`, `reward_loss_emphasis`
+  - BART: `baseline`, `detailed`, `role_human`, `risk_emphasis`
+- Used the updated average run-level metrics:
+  - Horizon: `average_reward_per_trial`
+  - IGT: `average_net_outcome`
+  - BART: `average_earning_per_balloon`
+
+Why this was done:
+
+- Total outcome metrics are harder to compare across human participants and LLM runs when task lengths or dataset scales differ.
+- Average outcome metrics are more suitable for later human-data comparison.
+- Long API pilot runs had intermittent timeout / 503 failures, so transient retry handling was needed to complete task-level pilot runs robustly.
+
+Evidence / basis:
+
+- Implementation necessity.
+- Human-comparison design decision.
+- Pilot-based decision from observed API timeout and 503 errors.
+
+Related citations:
+
+- No new academic literature citation was introduced in this step.
+
+Files changed or created:
+
+- `src/llm_client.py`
+- `tests/test_llm_pilot.py`
+- `README.md`
+- Updated pilot JSON outputs under:
+  - `outputs/pilot/neutral_baseline_with_history/`
+  - `outputs/pilot/detailed/`
+  - `outputs/pilot/role_human/`
+  - `outputs/pilot/horizon_uncertainty/`
+  - `outputs/pilot/igt_reward_loss/`
+  - `outputs/pilot/bart_risk/`
+
+Output / result:
+
+- All 12 pilot outputs completed with `done = true`.
+- All 12 pilot outputs had `parse_success_rate = 1.0`.
+- All 12 pilot outputs had `invalid_response_count = 0`.
+- Output metrics now include the updated average outcome fields.
+
+Verification:
+
+- `python -m unittest discover`
+- Result: 43 tests passed.
+
+Status: Done
+
+Next step:
+
+- Implement analysis scripts to aggregate pilot JSON files and produce run-level metric tables for prompt-condition comparison.
+
+Notes:
+
+- The current single-run pilots are still pilot observations, not formal statistical results.
+
+### 2026-06-03 - Process Human Datasets Into Comparable Metrics
+
+Date: 2026-06-03
+
+Phase: Human data processing / metric alignment
+
+Step: Convert human raw datasets into participant-level metric tables
+
+Action:
+
+- Added `src/process_human_metrics.py`.
+- Processed Horizon human data into participant-level metrics.
+- Processed IGT 100-trial human data into participant-level metrics.
+- Processed BART 40-balloon human data into participant-level metrics.
+- Added tests for the human metric processing functions.
+- Updated README and the pilot rerun analysis document with processed human metric paths.
+
+Why this was done:
+
+- Later LLM-human comparison will be simpler and more reproducible if human raw data is converted into metric tables that match LLM run-level metrics.
+- Human data should be compared at the metric level rather than directly against raw LLM text or raw task records.
+
+Evidence / basis:
+
+- Dataset-based decision.
+- Human-comparison design decision.
+- Implementation necessity.
+
+Related citations:
+
+- No new academic literature citation was introduced in this step.
+
+Files changed or created:
+
+- `src/process_human_metrics.py`
+- `tests/test_process_human_metrics.py`
+- `outputs/processed/human_metrics/horizon_human_metrics.csv`
+- `outputs/processed/human_metrics/igt_human_metrics.csv`
+- `outputs/processed/human_metrics/bart_human_metrics.csv`
+- `outputs/processed/human_metrics/summary.json`
+- `README.md`
+- `docs/pilot_rerun_average_metrics_analysis.md`
+- `docs/research_log.md`
+
+Output / result:
+
+- Horizon processed participants: 60
+- IGT processed participants: 504
+- BART processed participants: 147
+
+Verification:
+
+- `python -m src.process_human_metrics --output-dir outputs/processed/human_metrics`
+- `python -m unittest discover`
+
+Status: Done
+
+Next step:
+
+- Implement a comparison/aggregation script that reads LLM pilot JSON files and human metric CSV files into aligned tables.
+
+Notes:
+
+- Horizon `random_exploration` remains a proxy and should be interpreted cautiously.
+- BART earning columns may use dataset-specific scaling, so pump-based metrics should be prioritised for human comparison.
+
+### 2026-06-08 - Remove Redundant BART Cash-Out Threshold
+
+Change:
+
+- Removed `cash_out_threshold` from BART run-level metrics, human-data preprocessing, configuration, schema, README, and current analysis documentation.
+- Regenerated `outputs/processed/human_metrics/bart_human_metrics.csv`.
+
+Reason:
+
+- Under the current BART rules, every unexploded balloon ends through `CASH_OUT`.
+- Therefore, `cash_out_threshold` and `adjusted_average_pumps` were calculated from exactly the same balloons and were numerically identical.
+- Retaining both would duplicate one behavioural construct and could double-weight it in later analyses.
+
+Verification:
+
+- `python -m unittest discover -s tests`: 46 tests passed.
+- The regenerated BART human CSV no longer contains a `cash_out_threshold` column.
+
+Status: Done
+
+### 2026-06-13 - Replace Horizon Random-Exploration Proxy
+
+Change:
+
+- Removed the old `random_exploration = exploration_rate` proxy from Horizon run metrics and processed human summaries.
+- Added `src/horizon_random_exploration.py`.
+- Implemented a first-free-choice logistic model following the choice-model logic of Wilson et al. (2014).
+- Defined the formal metric as:
+
+```text
+random_exploration_effect = decision_noise_h6 - decision_noise_h1
+```
+
+- Added run-level Gaussian shrinkage on log reward sensitivity so repeated 40-game LLM runs can be estimated with partial pooling.
+- Added loaders for repeated LLM JSON runs and the raw Horizon human dataset.
+- Added explicit `insufficient_runs` output when a prompt condition contains only one run.
+
+Method boundary:
+
+- Wilson et al. (2014) provides the decision-noise interpretation and logistic choice-model logic.
+- Hierarchical MAP estimation with fixed Gaussian shrinkage is a project-specific adaptation to the smaller number of games per LLM run.
+- The result is interpreted as choice variability consistent with random exploration, not proof of a psychologically random mechanism.
+
+Outputs:
+
+- `outputs/processed/pilot_horizon_random_exploration.json`
+- `outputs/processed/human_horizon_random_exploration.json`
+
+Verification:
+
+- The four current single-run pilot conditions are correctly marked `insufficient_runs`.
+- The human model used 60 participants and 19,200 first-free choices and converged.
+- Human condition estimate: `decision_noise_h1 = 6.245`, `decision_noise_h6 = 14.717`, `random_exploration_effect = 8.473`.
+- `uv run python -m unittest discover -s tests`: 51 tests passed.
+
+Status: Done
