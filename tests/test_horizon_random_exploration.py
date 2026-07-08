@@ -7,10 +7,13 @@ from pathlib import Path
 from src.horizon_random_exploration import (
     ChoiceObservation,
     analyze_choice_observations,
+    bootstrap_hierarchical_random_exploration,
     build_choice_observation,
     fit_hierarchical_random_exploration,
     llm_run_id,
     load_human_choice_observations,
+    resample_run_clusters,
+    run_shrinkage_sensitivity,
 )
 
 
@@ -89,6 +92,70 @@ class HorizonRandomExplorationTests(unittest.TestCase):
         result = analyze_choice_observations(observations)
 
         self.assertEqual(result["baseline"]["status"], "insufficient_runs")
+
+    def test_resample_run_clusters_preserves_whole_runs_and_relabels_duplicates(self):
+        observations = self._synthetic_observations()
+
+        sampled = resample_run_clusters(
+            observations,
+            sampled_run_ids=["run-1", "run-1", "run-3"],
+        )
+
+        sampled_ids = {observation.run_id for observation in sampled}
+        self.assertEqual(
+            sampled_ids,
+            {
+                "bootstrap_cluster_1:run-1",
+                "bootstrap_cluster_2:run-1",
+                "bootstrap_cluster_3:run-3",
+            },
+        )
+        original_count = sum(
+            observation.run_id == "run-1" for observation in observations
+        )
+        first_copy_count = sum(
+            observation.run_id == "bootstrap_cluster_1:run-1"
+            for observation in sampled
+        )
+        self.assertEqual(first_copy_count, original_count)
+
+    def test_cluster_bootstrap_returns_reproducible_intervals(self):
+        observations = self._synthetic_observations()
+
+        first = bootstrap_hierarchical_random_exploration(
+            observations,
+            run_effect_sd=0.35,
+            replicates=8,
+            bootstrap_seed=123,
+            confidence_level=0.95,
+        )
+        second = bootstrap_hierarchical_random_exploration(
+            observations,
+            run_effect_sd=0.35,
+            replicates=8,
+            bootstrap_seed=123,
+            confidence_level=0.95,
+        )
+
+        self.assertEqual(first, second)
+        self.assertEqual(first["bootstrap_replicates"], 8)
+        self.assertGreater(first["successful_fits"], 0)
+        self.assertIn("random_exploration_effect_ci_lower", first)
+        self.assertTrue(first["diagnostic_only"])
+
+    def test_shrinkage_sensitivity_reports_each_requested_setting(self):
+        observations = self._synthetic_observations()
+
+        result = run_shrinkage_sensitivity(
+            observations,
+            run_effect_sds=(0.25, 0.5, 1.0),
+        )
+
+        self.assertEqual(
+            [row["run_effect_sd"] for row in result],
+            [0.25, 0.5, 1.0],
+        )
+        self.assertTrue(all(row["converged"] for row in result))
 
     def test_load_human_observations_uses_first_free_choice(self):
         with tempfile.TemporaryDirectory() as tmpdir:

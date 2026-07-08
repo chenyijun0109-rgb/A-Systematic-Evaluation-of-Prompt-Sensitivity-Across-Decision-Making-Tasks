@@ -1,14 +1,14 @@
 {
   "config_name": "experiment_config_stage01",
-  "version": "0.4",
-  "status": "prompt_matrix_frozen_bart_human_filtered_psi_pipeline",
+  "version": "0.5",
+  "status": "frozen_for_validation_rerun",
   "created_date": "2026-05-28",
   "description": "Stage 01 experiment configuration for three cognitive decision-making tasks under four prompt conditions.",
   "global_settings": {
-    "model_name": "gpt-4.1",
+    "model_name": "gpt-4.1-2025-04-14",
     "temperature": 0.7,
     "top_p": 1.0,
-    "max_tokens": "TO_CONFIRM_AFTER_PILOT",
+    "max_tokens": 16,
     "runs_per_condition": {
       "target": 20,
       "minimum_valid": 15,
@@ -362,9 +362,11 @@
   "analysis": {
     "baseline_condition": "baseline",
     "prompt_sensitivity": {
-      "standardised_effect_formula": "(mean(metric_condition) - mean(metric_baseline)) / sd(metric_baseline)",
-      "fallback_sd": "pooled_sd_if_baseline_sd_is_zero_or_too_small",
+      "standardised_effect_formula": "Hedges_g = J * (mean(metric_condition) - mean(metric_baseline)) / pooled_sample_sd",
+      "sensitivity_effect_formula": "(mean(metric_condition) - mean(metric_baseline)) / sd(metric_baseline)",
+      "zero_variance_rule": "undefined_if_both_groups_are_constant_with_different_means",
       "psi_formula": "mean(abs(standardised_effects_across_selected_metrics))",
+      "bootstrap_unit": "paired_seed",
       "primary_metrics": {
         "horizon": [
           "directed_exploration",
@@ -373,7 +375,6 @@
         ],
         "igt": [
           "advantageous_choice_rate",
-          "learning_curve_change",
           "post_loss_switching_rate"
         ],
         "bart": [
@@ -382,8 +383,27 @@
           "post_explosion_adjustment"
         ]
       },
+      "supplementary_metrics": {
+        "horizon": [
+          "exploration_rate",
+          "switching_rate",
+          "average_reward_per_trial"
+        ],
+        "igt": [
+          "learning_slope",
+          "learning_curve_change",
+          "block_wise_learning_curve"
+        ],
+        "bart": [
+          "average_pumps",
+          "average_earning_per_balloon"
+        ]
+      },
       "zero_tolerance": 1e-12,
       "minimum_partial_metrics": 2,
+      "confidence_level": 0.95,
+      "bootstrap_replicates": 2000,
+      "bootstrap_seed": 20260615,
       "bounded_metrics": [
         "directed_exploration",
         "horizon_effect",
@@ -393,6 +413,20 @@
       ],
       "low_variance_absolute_threshold": 1e-6,
       "low_variance_relative_threshold": 1e-6
+    },
+    "horizon_random_exploration": {
+      "model": "hierarchical_logistic_map_fixed_gaussian_shrinkage",
+      "run_effect_sd": 0.5,
+      "shrinkage_sensitivity_grid": [
+        0.25,
+        0.5,
+        1.0
+      ],
+      "bootstrap_unit": "run_cluster",
+      "bootstrap_replicates": 2000,
+      "confidence_level": 0.95,
+      "minimum_formal_runs": 15,
+      "target_runs": 20
     }
   }
 }

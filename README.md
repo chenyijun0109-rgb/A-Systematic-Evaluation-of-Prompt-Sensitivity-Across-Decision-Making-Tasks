@@ -2,6 +2,59 @@
 
 ## A Systematic Evaluation of Prompt Sensitivity Across Decision-Making Tasks
 
+## Frozen Validation Method (2026-06-15)
+
+The current validation configuration is frozen in:
+
+```text
+configs/experiment_config_stage01.json
+configs/formal_experiment_freeze.json
+docs/formal_experiment_freeze.md
+```
+
+Experiment sampling settings:
+
+```text
+model: gpt-4.1-2025-04-14
+temperature: 0.7
+top_p: 1.0
+max_output_tokens: 16
+max retries per trial: 1
+```
+
+`src.run_llm_pilot` now takes its default model and sampling parameters from
+the experiment config. `--model`, `--temperature`, and `--top-p` are explicit
+overrides. Every new raw JSON records the requested model, API-resolved model,
+temperature, top-p, token limit, config version, prompt path, and prompt hash.
+
+Primary PSI metrics:
+
+| Task | Primary metrics |
+|---|---|
+| Horizon | `directed_exploration`, `horizon_effect`, `random_exploration_effect` |
+| IGT | `advantageous_choice_rate`, `post_loss_switching_rate` |
+| BART | `adjusted_average_pumps`, `explosion_rate`, `post_explosion_adjustment` |
+
+IGT `learning_slope`, `learning_curve_change`, and the complete five-block
+curve are supplementary trajectory analyses. They are not primary PSI
+metrics because a model that starts at ceiling can have a slope near zero.
+
+The primary standardized effect is pooled-SD Hedges' g. The previous
+baseline-SD standardized difference is retained as a sensitivity column.
+PSI is the mean absolute Hedges' g across the task's primary metrics.
+Raw differences, paired-seed 95% bootstrap intervals, and valid bootstrap
+replicate counts must be reported with PSI.
+
+Horizon random exploration uses the first-free-choice hierarchical logistic
+MAP model. Formal reporting uses whole-run cluster bootstrap intervals and
+checks `run_effect_sd` values `0.25`, `0.50`, and `1.00`. Results with fewer
+than 15 valid runs are diagnostic only; the target is 20 runs per condition.
+
+The historical 36-run mini-pilot in `outputs/mini_pilot_v01` actually used
+API-resolved `temperature=1.0`, because the old runner did not send the
+configured value. Its reprocessed outputs diagnose the analysis pipeline but
+do not replace the required validation rerun under the frozen settings.
+
 本项目是一个毕业设计实验项目，目标是系统评估大型语言模型在经典认知决策任务中的行为是否稳定，以及这种行为是否会受到 prompt wording / framing 的影响。
 
 核心问题不是单纯判断 LLM 是否“像人类”，而是：
@@ -464,7 +517,7 @@ Primary PSI metrics：
 | Task | Metrics |
 |---|---|
 | Horizon | `directed_exploration`, `horizon_effect`, `random_exploration_effect` |
-| IGT | `advantageous_choice_rate`, `learning_curve_change`, `post_loss_switching_rate` |
+| IGT | `advantageous_choice_rate`, `post_loss_switching_rate` |
 | BART | `adjusted_average_pumps`, `explosion_rate`, `post_explosion_adjustment` |
 
 `learning_curve_change` 定义为 IGT block 5 net score 减去 block 1 net score。
@@ -472,6 +525,35 @@ PSI 是三个 absolute standardised effects 的等权平均。它是本项目定
 指标，正式解释仍需同时报告 signed effects。
 
 ## Current Pilot Status
+
+**Validation mini-pilot v02, run on 2026-06-15, is now the current diagnostic
+mini-pilot.** It used the frozen settings in
+`configs/formal_experiment_freeze.json`: `gpt-4.1-2025-04-14`,
+`temperature=0.7`, `top_p=1.0`, `max_output_tokens=16`, config v0.5.
+
+Outputs:
+
+```text
+outputs/validation_mini_pilot_v02
+outputs/processed/validation_mini_pilot_v02
+docs/validation_mini_pilot_v02_summary.md
+```
+
+Quality summary:
+
+- 36/36 valid runs.
+- 12 task-condition cells x 3 paired runs.
+- 0 invalid responses.
+- Prompt hashes, resolved model, temperature, top-p, and token limit were
+  consistent across the batch.
+- Aggregation and PSI analyses were both `analysis_complete=true`.
+- The batch produced 24 primary prompt-effect rows and 9 PSI rows.
+
+Main diagnostic finding: the frozen runner and analysis pipeline work, but
+v2 is still not a formal experiment. IGT `post_loss_switching_rate` can
+produce very large standardized effects with only three runs, and Horizon
+random-exploration intervals remain diagnostic only. The next empirical step
+is the 15-20 valid runs per task-condition cell batch.
 
 按最新平均指标重新生成的 single-run pilot matrix 已经完成，见
 `docs/pilot_rerun_average_metrics_analysis.md`。更早的实施历史保留在

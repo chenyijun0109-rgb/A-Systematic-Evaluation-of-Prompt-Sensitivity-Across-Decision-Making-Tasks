@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import math
+import random
 import statistics
 from pathlib import Path
 from typing import Any
@@ -35,8 +37,17 @@ EFFECT_FIELDS = (
     "condition_sd",
     "denominator",
     "sd_source",
+    "hedges_correction",
+    "baseline_sd_standardised_effect",
     "signed_standardised_effect",
     "absolute_standardised_effect",
+    "confidence_level",
+    "bootstrap_replicates",
+    "standardised_valid_replicates",
+    "raw_difference_ci_lower",
+    "raw_difference_ci_upper",
+    "standardised_effect_ci_lower",
+    "standardised_effect_ci_upper",
     "warning_flags",
 )
 PSI_FIELDS = (
@@ -47,6 +58,11 @@ PSI_FIELDS = (
     "valid_metric_count",
     "excluded_metrics",
     "status",
+    "confidence_level",
+    "bootstrap_replicates",
+    "psi_valid_replicates",
+    "psi_ci_lower",
+    "psi_ci_upper",
 )
 
 
@@ -95,8 +111,42 @@ def summarise_values(
     }
 
 
-def pooled_sd(baseline_sd: float, condition_sd: float) -> float:
-    return math.sqrt((baseline_sd**2 + condition_sd**2) / 2.0)
+def pooled_sample_sd(
+    baseline_sd: float,
+    condition_sd: float,
+    baseline_n: int,
+    condition_n: int,
+) -> float:
+    degrees_of_freedom = baseline_n + condition_n - 2
+    if degrees_of_freedom <= 0:
+        raise ValueError("Pooled SD requires at least two total degrees of freedom.")
+    variance = (
+        (baseline_n - 1) * baseline_sd**2
+        + (condition_n - 1) * condition_sd**2
+    ) / degrees_of_freedom
+    return math.sqrt(variance)
+
+
+def hedges_correction(baseline_n: int, condition_n: int) -> float:
+    degrees_of_freedom = baseline_n + condition_n - 2
+    if degrees_of_freedom <= 1:
+        raise ValueError("Hedges' correction requires more than one degree of freedom.")
+    return 1.0 - 3.0 / (4.0 * degrees_of_freedom - 1.0)
+
+
+def percentile(values: list[float], probability: float) -> float | None:
+    if not values:
+        return None
+    if not 0.0 <= probability <= 1.0:
+        raise ValueError("Percentile probability must be between zero and one.")
+    ordered = sorted(values)
+    position = probability * (len(ordered) - 1)
+    lower = math.floor(position)
+    upper = math.ceil(position)
+    if lower == upper:
+        return ordered[lower]
+    fraction = position - lower
+    return ordered[lower] + fraction * (ordered[upper] - ordered[lower])
 
 
 def _validation_issue(
@@ -139,57 +189,72 @@ def compute_standardised_effect(
     difference = condition_mean - baseline_mean
     tolerance = float(policy["zero_tolerance"])
     warning_flags: list[str] = []
+    correction = hedges_correction(
+        len(baseline_values),
+        len(condition_values),
+    )
 
-    if baseline_sd > tolerance:
-        denominator = baseline_sd
-        sd_source = "baseline"
-        if metric in set(policy.get("bounded_metrics", [])):
-            low_variance = (
-                baseline_sd
-                <= float(policy["low_variance_absolute_threshold"])
-            )
-        else:
-            scale = max(abs(baseline_mean), abs(condition_mean), 1.0)
-            low_variance = (
-                baseline_sd / scale
-                <= float(policy["low_variance_relative_threshold"])
-            )
-        if low_variance:
-            warning_flags.append("low_baseline_variance")
+    if metric in set(policy.get("bounded_metrics", [])):
+        low_variance = (
+            baseline_sd
+            <= float(policy["low_variance_absolute_threshold"])
+        )
     else:
-        fallback = pooled_sd(baseline_sd, condition_sd)
-        if fallback > tolerance:
-            denominator = fallback
-            sd_source = "pooled_fallback"
-        elif abs(difference) <= tolerance:
-            denominator = 0.0
-            sd_source = "constant_equal"
-        else:
-            issue = _validation_issue(
-                "zero_variance_undefined_effect",
-                "Both groups are constant but their means differ.",
-                metric=metric,
-                baseline_mean=baseline_mean,
-                condition_mean=condition_mean,
-            )
-            if allow_incomplete:
-                return {
-                    "baseline_n": len(baseline_values),
-                    "condition_n": len(condition_values),
-                    "baseline_mean": baseline_mean,
-                    "condition_mean": condition_mean,
-                    "raw_mean_difference": difference,
-                    "baseline_sd": baseline_sd,
-                    "condition_sd": condition_sd,
-                    "denominator": None,
-                    "sd_source": "undefined",
-                    "signed_standardised_effect": None,
-                    "absolute_standardised_effect": None,
-                    "warning_flags": "zero_variance_undefined_effect",
-                }
-            raise PromptSensitivityValidationError([issue])
+        scale = max(abs(baseline_mean), abs(condition_mean), 1.0)
+        low_variance = (
+            baseline_sd / scale
+            <= float(policy["low_variance_relative_threshold"])
+        )
+    if low_variance:
+        warning_flags.append("low_baseline_variance")
 
-    effect = 0.0 if sd_source == "constant_equal" else difference / denominator
+    denominator = pooled_sample_sd(
+        baseline_sd,
+        condition_sd,
+        len(baseline_values),
+        len(condition_values),
+    )
+    if denominator > tolerance:
+        sd_source = "pooled"
+        effect = correction * difference / denominator
+    elif abs(difference) <= tolerance:
+        denominator = 0.0
+        sd_source = "constant_equal"
+        effect = 0.0
+    else:
+        issue = _validation_issue(
+            "zero_variance_undefined_effect",
+            "Both groups are constant but their means differ.",
+            metric=metric,
+            baseline_mean=baseline_mean,
+            condition_mean=condition_mean,
+        )
+        if allow_incomplete:
+            return {
+                "baseline_n": len(baseline_values),
+                "condition_n": len(condition_values),
+                "baseline_mean": baseline_mean,
+                "condition_mean": condition_mean,
+                "raw_mean_difference": difference,
+                "baseline_sd": baseline_sd,
+                "condition_sd": condition_sd,
+                "denominator": None,
+                "sd_source": "undefined",
+                "hedges_correction": correction,
+                "baseline_sd_standardised_effect": None,
+                "signed_standardised_effect": None,
+                "absolute_standardised_effect": None,
+                "warning_flags": "zero_variance_undefined_effect",
+            }
+        raise PromptSensitivityValidationError([issue])
+
+    baseline_effect = (
+        difference / baseline_sd
+        if baseline_sd > tolerance
+        else 0.0
+        if abs(difference) <= tolerance
+        else None
+    )
     return {
         "baseline_n": len(baseline_values),
         "condition_n": len(condition_values),
@@ -200,10 +265,224 @@ def compute_standardised_effect(
         "condition_sd": condition_sd,
         "denominator": denominator,
         "sd_source": sd_source,
+        "hedges_correction": correction,
+        "baseline_sd_standardised_effect": baseline_effect,
         "signed_standardised_effect": effect,
         "absolute_standardised_effect": abs(effect),
         "warning_flags": "|".join(warning_flags),
     }
+
+
+def bootstrap_paired_effect(
+    *,
+    baseline_by_seed: dict[int, float],
+    condition_by_seed: dict[int, float],
+    metric: str,
+    policy: dict[str, Any],
+    replicates: int,
+    bootstrap_seed: int,
+    confidence_level: float,
+) -> dict[str, Any]:
+    if replicates < 1:
+        raise ValueError("Bootstrap replicates must be positive.")
+    if not 0.0 < confidence_level < 1.0:
+        raise ValueError("Confidence level must be between zero and one.")
+    seeds = sorted(set(baseline_by_seed).intersection(condition_by_seed))
+    if len(seeds) < 2:
+        raise ValueError("Paired bootstrap requires at least two complete seed pairs.")
+    if set(baseline_by_seed) != set(condition_by_seed):
+        raise ValueError("Paired bootstrap requires identical seed sets.")
+
+    rng = random.Random(bootstrap_seed)
+    raw_differences: list[float] = []
+    standardised_effects: list[float] = []
+    for _ in range(replicates):
+        sampled = [rng.choice(seeds) for _ in seeds]
+        baseline_values = [baseline_by_seed[seed] for seed in sampled]
+        condition_values = [condition_by_seed[seed] for seed in sampled]
+        raw_differences.append(
+            statistics.mean(condition_values)
+            - statistics.mean(baseline_values)
+        )
+        result = compute_standardised_effect(
+            baseline_values=baseline_values,
+            condition_values=condition_values,
+            metric=metric,
+            policy=policy,
+            allow_incomplete=True,
+        )
+        effect = result["signed_standardised_effect"]
+        if effect is not None:
+            standardised_effects.append(float(effect))
+
+    alpha = (1.0 - confidence_level) / 2.0
+    return {
+        "confidence_level": confidence_level,
+        "bootstrap_replicates": replicates,
+        "standardised_valid_replicates": len(standardised_effects),
+        "raw_difference_ci_lower": percentile(raw_differences, alpha),
+        "raw_difference_ci_upper": percentile(raw_differences, 1.0 - alpha),
+        "standardised_effect_ci_lower": percentile(
+            standardised_effects,
+            alpha,
+        ),
+        "standardised_effect_ci_upper": percentile(
+            standardised_effects,
+            1.0 - alpha,
+        ),
+    }
+
+
+def stable_bootstrap_seed(base_seed: int, *labels: str) -> int:
+    digest = hashlib.sha256(":".join(labels).encode("utf-8")).digest()
+    return base_seed + int.from_bytes(digest[:4], byteorder="big")
+
+
+def add_effect_bootstrap_intervals(
+    effect_rows: list[dict[str, Any]],
+    *,
+    rows: list[dict[str, Any]],
+    config: dict[str, Any],
+) -> None:
+    policy = config["analysis"]["prompt_sensitivity"]
+    baseline_condition = config["analysis"]["baseline_condition"]
+    replicates = int(policy["bootstrap_replicates"])
+    base_seed = int(policy["bootstrap_seed"])
+    confidence_level = float(policy["confidence_level"])
+    for effect in effect_rows:
+        task = str(effect["task"])
+        condition = str(effect["prompt_condition"])
+        metric = str(effect["metric"])
+        baseline_by_seed = {
+            int(row["seed"]): value
+            for row in rows
+            if row.get("task") == task
+            and row.get("prompt_condition") == baseline_condition
+            and (value := parse_optional_float(row.get(metric))) is not None
+        }
+        condition_by_seed = {
+            int(row["seed"]): value
+            for row in rows
+            if row.get("task") == task
+            and row.get("prompt_condition") == condition
+            and (value := parse_optional_float(row.get(metric))) is not None
+        }
+        effect.update(
+            bootstrap_paired_effect(
+                baseline_by_seed=baseline_by_seed,
+                condition_by_seed=condition_by_seed,
+                metric=metric,
+                policy=policy,
+                replicates=replicates,
+                bootstrap_seed=stable_bootstrap_seed(
+                    base_seed,
+                    task,
+                    condition,
+                    metric,
+                ),
+                confidence_level=confidence_level,
+            )
+        )
+
+
+def bootstrap_paired_psi(
+    *,
+    rows: list[dict[str, Any]],
+    task: str,
+    condition: str,
+    metrics: list[str],
+    config: dict[str, Any],
+) -> dict[str, Any]:
+    policy = config["analysis"]["prompt_sensitivity"]
+    baseline_condition = config["analysis"]["baseline_condition"]
+    replicates = int(policy["bootstrap_replicates"])
+    confidence_level = float(policy["confidence_level"])
+    baseline_rows = {
+        int(row["seed"]): row
+        for row in rows
+        if row.get("task") == task
+        and row.get("prompt_condition") == baseline_condition
+    }
+    condition_rows = {
+        int(row["seed"]): row
+        for row in rows
+        if row.get("task") == task
+        and row.get("prompt_condition") == condition
+    }
+    seeds = sorted(set(baseline_rows).intersection(condition_rows))
+    if len(seeds) < 2 or set(baseline_rows) != set(condition_rows):
+        raise ValueError("PSI bootstrap requires matching complete seed pairs.")
+
+    rng = random.Random(
+        stable_bootstrap_seed(
+            int(policy["bootstrap_seed"]),
+            task,
+            condition,
+            "psi",
+        )
+    )
+    psi_values: list[float] = []
+    for _ in range(replicates):
+        sampled = [rng.choice(seeds) for _ in seeds]
+        effects: list[float] = []
+        for metric in metrics:
+            baseline_values = [
+                parse_optional_float(baseline_rows[seed].get(metric))
+                for seed in sampled
+            ]
+            condition_values = [
+                parse_optional_float(condition_rows[seed].get(metric))
+                for seed in sampled
+            ]
+            if any(value is None for value in baseline_values + condition_values):
+                effects = []
+                break
+            result = compute_standardised_effect(
+                baseline_values=[
+                    float(value) for value in baseline_values if value is not None
+                ],
+                condition_values=[
+                    float(value) for value in condition_values if value is not None
+                ],
+                metric=metric,
+                policy=policy,
+                allow_incomplete=True,
+            )
+            effect = result["absolute_standardised_effect"]
+            if effect is None:
+                effects = []
+                break
+            effects.append(float(effect))
+        if len(effects) == len(metrics):
+            psi_values.append(statistics.mean(effects))
+
+    alpha = (1.0 - confidence_level) / 2.0
+    return {
+        "confidence_level": confidence_level,
+        "bootstrap_replicates": replicates,
+        "psi_valid_replicates": len(psi_values),
+        "psi_ci_lower": percentile(psi_values, alpha),
+        "psi_ci_upper": percentile(psi_values, 1.0 - alpha),
+    }
+
+
+def add_psi_bootstrap_intervals(
+    psi_rows: list[dict[str, Any]],
+    *,
+    rows: list[dict[str, Any]],
+    config: dict[str, Any],
+) -> None:
+    primary_metrics = config["analysis"]["prompt_sensitivity"]["primary_metrics"]
+    for psi_row in psi_rows:
+        psi_row.update(
+            bootstrap_paired_psi(
+                rows=rows,
+                task=str(psi_row["task"]),
+                condition=str(psi_row["prompt_condition"]),
+                metrics=list(primary_metrics[str(psi_row["task"])]),
+                config=config,
+            )
+        )
 
 
 def compute_psi_row(
@@ -334,6 +613,11 @@ def _metric_columns(
         "task",
         "prompt_condition",
         "model",
+        "requested_model",
+        "resolved_model",
+        "temperature",
+        "top_p",
+        "max_output_tokens",
         "seed",
         "config_name",
         "config_version",
@@ -557,12 +841,22 @@ def run_prompt_sensitivity_analysis(
         allow_incomplete=allow_incomplete,
     )
     issues.extend(effect_issues)
+    add_effect_bootstrap_intervals(
+        effect_rows,
+        rows=rows,
+        config=config,
+    )
     psi_rows, psi_issues = build_psi_rows(
         effect_rows,
         config=config,
         allow_incomplete=allow_incomplete,
     )
     issues.extend(psi_issues)
+    add_psi_bootstrap_intervals(
+        psi_rows,
+        rows=rows,
+        config=config,
+    )
 
     output_dir.mkdir(parents=True, exist_ok=True)
     _write_csv(output_dir / "metric_summary.csv", summary_rows, SUMMARY_FIELDS)

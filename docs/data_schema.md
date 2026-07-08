@@ -1,10 +1,41 @@
 # Data Schema
 
-Status: Current v0.2
+Status: Current v0.3
 
-Date: 2026-05-28
+Date: 2026-06-15
 
 Purpose: This document defines how data should be recorded for the LLM cognitive decision-making experiments. It covers raw LLM responses, trial-level/action-level records, run-level metrics, invalid response logs, and output file naming.
+
+## 2026-06-15 Provenance and Analysis Addendum
+
+New raw run JSON files must include these top-level provenance fields:
+
+| Field | Type | Description |
+|---|---|---|
+| `requested_model` | string | Exact model ID sent in the request |
+| `resolved_model` | string | Model ID returned by the API |
+| `temperature` | float | Sampling temperature returned by the API, falling back to the requested value only when absent |
+| `top_p` | float | Top-p returned by the API, falling back to the requested value only when absent |
+| `max_output_tokens` | integer | Output token limit returned by the API, falling back to the requested value only when absent |
+
+`llm_run_metrics.csv` additionally derives IGT `learning_slope` and
+`learning_curve_change`. Both are supplementary trajectory metrics.
+
+`prompt_effects.csv` reports:
+
+```text
+raw_mean_difference
+pooled sample SD denominator
+Hedges correction
+signed and absolute Hedges' g
+baseline-SD sensitivity effect
+paired-seed bootstrap confidence intervals
+valid bootstrap replicate count
+```
+
+`prompt_sensitivity.csv` reports PSI based on the configured primary metrics,
+its paired-seed bootstrap interval, and the number of valid bootstrap
+replicates.
 
 中文说明：这份文档规定后续实验数据应该如何保存。它的作用是让 task environment、LLM runner、parser 和 analysis scripts 使用同一套字段，避免后期发现某些指标无法计算。
 

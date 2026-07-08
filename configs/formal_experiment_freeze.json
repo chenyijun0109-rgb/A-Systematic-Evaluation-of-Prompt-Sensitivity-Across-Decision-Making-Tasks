@@ -1,0 +1,202 @@
+{
+  "freeze_name": "formal_experiment_freeze",
+  "version": "1.0",
+  "freeze_date": "2026-06-15",
+  "status": "frozen_for_validation_rerun",
+  "source_config": "configs/experiment_config_stage01.json",
+  "experiment_model": {
+    "provider": "OpenAI Responses API via university-provided access",
+    "requested_model": "gpt-4.1-2025-04-14",
+    "resolved_model_policy": "Record the model returned by every API response and reject mixed resolved models within an analysis batch.",
+    "temperature": 0.7,
+    "top_p": 1.0,
+    "max_output_tokens": 16,
+    "max_retries_per_trial": 1
+  },
+  "prompts": [
+    {
+      "task": "horizon",
+      "condition": "baseline",
+      "path": "prompts/bandit/baseline.md",
+      "sha256": "d9ef2caf1c1c2c75c6277a51e909bdce0a3cf77d593e0f5f0fd64374f82bc116"
+    },
+    {
+      "task": "horizon",
+      "condition": "detailed",
+      "path": "prompts/bandit/detailed.md",
+      "sha256": "1a1374b5af26f83d9dcf55ea8bc182ba0e0fb85bf2866694a177b5940fc09d40"
+    },
+    {
+      "task": "horizon",
+      "condition": "role_human",
+      "path": "prompts/bandit/role_human.md",
+      "sha256": "927ae942eff1763a7d91f4e32fbbb6f72e5987e4bda9b54d033c77da02650815"
+    },
+    {
+      "task": "horizon",
+      "condition": "uncertainty_emphasis",
+      "path": "prompts/bandit/uncertainty_emphasis.md",
+      "sha256": "ac93f76fbef89859b3b92af3576f47b8474fb95efde7be494eb622e3c0fc7830"
+    },
+    {
+      "task": "igt",
+      "condition": "baseline",
+      "path": "prompts/igt/baseline.md",
+      "sha256": "e09f035c448a21d6a0165f8a39d87056fa52af63a4f59e5deed833dd311859ce"
+    },
+    {
+      "task": "igt",
+      "condition": "detailed",
+      "path": "prompts/igt/detailed.md",
+      "sha256": "2fa981f9fdd93c07074284cc5fa83a76fa55660334f6d80b8cd2d1247745ead2"
+    },
+    {
+      "task": "igt",
+      "condition": "role_human",
+      "path": "prompts/igt/role_human.md",
+      "sha256": "3a76e59c727ce00237940d68b1dcb6c1322f663c8eaadfa741e01edc1ec6348f"
+    },
+    {
+      "task": "igt",
+      "condition": "reward_loss_emphasis",
+      "path": "prompts/igt/reward_loss_emphasis.md",
+      "sha256": "08c8b7567bf3a7f398cea6027ad46f3c3575874019778feb1c9ac62f5c37d977"
+    },
+    {
+      "task": "bart",
+      "condition": "baseline",
+      "path": "prompts/bart/baseline.md",
+      "sha256": "7e78abdc06504f2b1bda6c1a7932bbdb88b1dbdc312cf5be9ea11ab6cc6178ea"
+    },
+    {
+      "task": "bart",
+      "condition": "detailed",
+      "path": "prompts/bart/detailed.md",
+      "sha256": "2753c53da506162626754dd2a92aef9c129b5e2aac35e9a5379857b49dc2c9fc"
+    },
+    {
+      "task": "bart",
+      "condition": "role_human",
+      "path": "prompts/bart/role_human.md",
+      "sha256": "47cf4dc5f7058fe8b038d19bd79fc012fddcbc950b2391f101555ef4c6a868a6"
+    },
+    {
+      "task": "bart",
+      "condition": "risk_emphasis",
+      "path": "prompts/bart/risk_emphasis.md",
+      "sha256": "4cb602fcc67deeabc5ddaa03de9f4dc83b6855437230f34de15083e8d19ce534"
+    }
+  ],
+  "task_parameters": {
+    "horizon": {
+      "games_per_run": 40,
+      "forced_choices_per_game": 4,
+      "free_choice_horizons": [
+        1,
+        6
+      ],
+      "information_conditions": [
+        [
+          2,
+          2
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "primary_choice": "first_free_choice"
+    },
+    "igt": {
+      "trials_per_run": 100,
+      "block_size": 20,
+      "blocks": 5,
+      "advantageous_decks": [
+        "C",
+        "D"
+      ],
+      "payoff_schedule": "classic repeating 10-selection schedule in experiment_config_stage01.json"
+    },
+    "bart": {
+      "balloons_per_run": 40,
+      "pump_reward": 0.05,
+      "certain_explosion_pump": 32,
+      "explosion_probability": "1/(33-k) for pump k=1..32"
+    }
+  },
+  "metrics": {
+    "primary_psi": {
+      "horizon": [
+        "directed_exploration",
+        "horizon_effect",
+        "random_exploration_effect"
+      ],
+      "igt": [
+        "advantageous_choice_rate",
+        "post_loss_switching_rate"
+      ],
+      "bart": [
+        "adjusted_average_pumps",
+        "explosion_rate",
+        "post_explosion_adjustment"
+      ]
+    },
+    "supplementary": {
+      "horizon": [
+        "exploration_rate",
+        "switching_rate",
+        "average_reward_per_trial"
+      ],
+      "igt": [
+        "learning_slope",
+        "learning_curve_change",
+        "block_wise_learning_curve"
+      ],
+      "bart": [
+        "average_pumps",
+        "average_earning_per_balloon"
+      ]
+    }
+  },
+  "prompt_sensitivity": {
+    "primary_standardised_effect": "Hedges' g using pooled sample SD",
+    "sensitivity_standardised_effect": "Baseline-SD standardised difference, reported separately",
+    "psi": "Mean absolute Hedges' g across the task's primary metrics",
+    "confidence_level": 0.95,
+    "bootstrap_replicates": 2000,
+    "bootstrap_unit": "paired task seed",
+    "zero_variance_rule": "If both groups are constant and unequal, the standardised effect is undefined; retain and report the raw difference."
+  },
+  "horizon_random_exploration": {
+    "model": "hierarchical logistic MAP with fixed Gaussian run shrinkage",
+    "run_effect_sd": 0.5,
+    "shrinkage_grid": [
+      0.25,
+      0.5,
+      1.0
+    ],
+    "bootstrap_unit": "whole run cluster",
+    "bootstrap_replicates": 2000,
+    "confidence_level": 0.95,
+    "minimum_formal_runs": 15,
+    "target_runs": 20,
+    "fewer_than_minimum_label": "diagnostic_only"
+  },
+  "exclusion_rules": {
+    "llm_runs": {
+      "exclude_incomplete_task": true,
+      "exclude_unparseable_after_configured_retry": true,
+      "exclude_prompt_hash_mismatch": true,
+      "exclude_config_or_sampling_mismatch": true,
+      "exclude_unresolved_duplicate_run": true,
+      "exclude_zero_variance_or_extreme_behavior": false,
+      "exclude_unexpected_cognitive_model_direction": false,
+      "notes": "Behavioral extremity is an outcome, not a technical exclusion criterion. Model-fit failures are reported and investigated rather than used to silently remove the underlying run."
+    },
+    "human_data": {
+      "horizon": "Use complete participant records supported by the local open dataset and document any missing-data exclusion.",
+      "igt": "Use the 504 participants in the local 100-trial subset.",
+      "bart": "Apply age >= 18, excluding local IDs 4, 5, 7, 13, 79, and 86; retain 141 adults."
+    }
+  }
+}

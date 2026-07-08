@@ -92,6 +92,91 @@ Output / result:
 
 Status: Done
 
+### 2026-06-15 - Correct Mini-Pilot Effect Sizes and Freeze Validation Method
+
+Change:
+
+- Updated the LLM runner to send and record `temperature`, `top_p`, and
+  `max_output_tokens`, together with requested and API-resolved model IDs.
+- Made `configs/experiment_config_stage01.json` the default source for the
+  experiment model instead of allowing a stale `.env` model alias to override
+  it silently.
+- Froze the validation model as `gpt-4.1-2025-04-14`, temperature `0.7`,
+  top-p `1.0`, and 16 output tokens.
+- Removed `learning_curve_change` from IGT primary PSI metrics.
+- Added supplementary IGT `learning_slope` based on all five block net
+  scores.
+- Changed the primary standardized effect from a baseline-SD difference to
+  pooled-SD Hedges' g.
+- Retained the baseline-SD effect as a named sensitivity output.
+- Added paired-seed bootstrap intervals for raw differences, Hedges' g, and
+  PSI.
+- Added whole-run cluster bootstrap intervals and shrinkage sensitivity
+  diagnostics for the Horizon random-exploration model.
+- Created `configs/formal_experiment_freeze.json`.
+
+Diagnostic result:
+
+- The old IGT reward/loss PSI decreased from `3.333` to `0.880`.
+- Its advantageous-choice effect decreased from baseline-SD `7.506` to
+  Hedges' g `1.396`.
+- Horizon bootstrap fitting succeeded for all 200 diagnostic replicates in
+  all four conditions, but every random-exploration interval crossed zero.
+- The historical 36-run mini-pilot used API-resolved temperature `1.0`, not
+  the intended `0.7`, and therefore remains a methodological pilot.
+
+Files:
+
+- `src/run_llm_pilot.py`
+- `src/aggregate_experiment_results.py`
+- `src/compute_prompt_sensitivity.py`
+- `src/horizon_random_exploration.py`
+- `configs/experiment_config_stage01.json`
+- `configs/formal_experiment_freeze.json`
+- `docs/formal_experiment_freeze.md`
+- `docs/mini_pilot_method_diagnostics.md`
+- `README.md`
+
+Status: Validation rerun required before formal data collection.
+
+### 2026-06-15 - Frozen-Parameter Validation Mini-Pilot v02
+
+Change:
+
+- Ran a new 36-run validation mini-pilot under the frozen configuration:
+  `gpt-4.1-2025-04-14`, temperature `0.7`, top-p `1.0`, 16 output tokens,
+  config version `0.5`.
+- Used paired base seeds `20260620`, `20260621`, and `20260622`.
+- Wrote raw outputs to `outputs/validation_mini_pilot_v02`.
+- Wrote processed outputs to `outputs/processed/validation_mini_pilot_v02`.
+- Added `docs/validation_mini_pilot_v02_summary.md`.
+
+Result:
+
+- 36/36 valid runs.
+- 0 invalid responses.
+- Strict aggregation passed with no issues.
+- Prompt hashes, API-resolved model IDs, temperature, top-p, and token limits
+  were consistent across the batch.
+- PSI analysis completed with 24 primary prompt-effect rows and 9 PSI rows.
+- Horizon random-exploration diagnostic bootstrap produced intervals for all
+  four conditions with 100% convergence across 200 diagnostic replicates.
+
+Key diagnostic findings:
+
+- IGT `detailed` PSI was high (`5.965`), mainly because
+  `post_loss_switching_rate` had a Hedges' g of `10.648`.
+- IGT reward/loss runs all reached `advantageous_choice_rate = 1.0`, again
+  showing ceiling effects in supplementary learning-trajectory metrics.
+- Horizon random-exploration intervals remained wide and diagnostic only.
+
+Status:
+
+- The frozen runner and analysis pipeline are operational.
+- v02 is a validation mini-pilot, not the formal experiment.
+- The next stage is the 15-20 valid runs per task-condition cell formal
+  batch, with special attention to IGT post-loss switching variance.
+
 ### 2026-06-13 - Reconstruct Three Canonical Baselines
 
 Change:

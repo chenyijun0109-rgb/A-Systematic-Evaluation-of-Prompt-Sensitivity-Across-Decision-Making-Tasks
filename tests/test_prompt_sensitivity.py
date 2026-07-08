@@ -1,4 +1,5 @@
 import csv
+import hashlib
 import json
 import math
 import random
@@ -8,6 +9,7 @@ from pathlib import Path
 
 from src.compute_prompt_sensitivity import (
     PromptSensitivityValidationError,
+    bootstrap_paired_effect,
     compute_psi_row,
     compute_standardised_effect,
     run_prompt_sensitivity_analysis,
@@ -28,6 +30,9 @@ def policy():
         ],
         "low_variance_absolute_threshold": 1e-6,
         "low_variance_relative_threshold": 1e-6,
+        "confidence_level": 0.95,
+        "bootstrap_replicates": 200,
+        "bootstrap_seed": 20260615,
     }
 
 
@@ -55,6 +60,40 @@ def minimal_config():
 
 
 class PromptSensitivityTests(unittest.TestCase):
+    def test_formal_experiment_freeze_manifest_matches_prompt_files(self):
+        path = Path("configs/formal_experiment_freeze.json")
+        self.assertTrue(path.exists())
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+
+        self.assertEqual(manifest["status"], "frozen_for_validation_rerun")
+        self.assertEqual(manifest["experiment_model"]["temperature"], 0.7)
+        self.assertEqual(manifest["experiment_model"]["top_p"], 1.0)
+        self.assertEqual(manifest["experiment_model"]["max_output_tokens"], 16)
+        self.assertEqual(len(manifest["prompts"]), 12)
+        for prompt in manifest["prompts"]:
+            prompt_path = Path(prompt["path"])
+            expected_hash = hashlib.sha256(
+                prompt_path.read_bytes()
+            ).hexdigest()
+            self.assertEqual(prompt["sha256"], expected_hash)
+
+        self.assertEqual(
+            manifest["metrics"]["primary_psi"]["igt"],
+            [
+                "advantageous_choice_rate",
+                "post_loss_switching_rate",
+            ],
+        )
+        self.assertEqual(
+            manifest["horizon_random_exploration"]["shrinkage_grid"],
+            [0.25, 0.5, 1.0],
+        )
+        self.assertFalse(
+            manifest["exclusion_rules"]["llm_runs"][
+                "exclude_zero_variance_or_extreme_behavior"
+            ]
+        )
+
     def test_config_freezes_primary_metrics_and_variance_policy(self):
         config = load_config(Path("configs/experiment_config_stage01.json"))
         analysis = config["analysis"]["prompt_sensitivity"]
@@ -71,8 +110,15 @@ class PromptSensitivityTests(unittest.TestCase):
             analysis["primary_metrics"]["igt"],
             [
                 "advantageous_choice_rate",
-                "learning_curve_change",
                 "post_loss_switching_rate",
+            ],
+        )
+        self.assertEqual(
+            analysis["supplementary_metrics"]["igt"],
+            [
+                "learning_slope",
+                "learning_curve_change",
+                "block_wise_learning_curve",
             ],
         )
         self.assertEqual(
@@ -96,7 +142,7 @@ class PromptSensitivityTests(unittest.TestCase):
         self.assertEqual(summary["minimum"], 1.0)
         self.assertEqual(summary["maximum"], 3.0)
 
-    def test_standardised_effect_uses_baseline_sd(self):
+    def test_standardised_effect_uses_pooled_sd_and_hedges_correction(self):
         result = compute_standardised_effect(
             baseline_values=[1.0, 2.0, 3.0],
             condition_values=[3.0, 4.0, 5.0],
@@ -107,11 +153,13 @@ class PromptSensitivityTests(unittest.TestCase):
 
         self.assertEqual(result["raw_mean_difference"], 2.0)
         self.assertEqual(result["denominator"], 1.0)
-        self.assertEqual(result["sd_source"], "baseline")
-        self.assertEqual(result["signed_standardised_effect"], 2.0)
-        self.assertEqual(result["absolute_standardised_effect"], 2.0)
+        self.assertEqual(result["sd_source"], "pooled")
+        self.assertAlmostEqual(result["hedges_correction"], 0.8)
+        self.assertAlmostEqual(result["signed_standardised_effect"], 1.6)
+        self.assertAlmostEqual(result["absolute_standardised_effect"], 1.6)
+        self.assertEqual(result["baseline_sd_standardised_effect"], 2.0)
 
-    def test_zero_baseline_sd_uses_pooled_fallback(self):
+    def test_zero_baseline_sd_still_uses_pooled_sd(self):
         result = compute_standardised_effect(
             baseline_values=[1.0, 1.0, 1.0],
             condition_values=[1.0, 2.0, 3.0],
@@ -120,7 +168,7 @@ class PromptSensitivityTests(unittest.TestCase):
             allow_incomplete=False,
         )
 
-        self.assertEqual(result["sd_source"], "pooled_fallback")
+        self.assertEqual(result["sd_source"], "pooled")
         self.assertGreater(result["denominator"], 0.0)
 
     def test_equal_constant_groups_have_zero_effect(self):
@@ -159,8 +207,24 @@ class PromptSensitivityTests(unittest.TestCase):
             allow_incomplete=False,
         )
 
-        self.assertEqual(result["sd_source"], "baseline")
+        self.assertEqual(result["sd_source"], "pooled")
         self.assertIn("low_baseline_variance", result["warning_flags"])
+
+    def test_paired_bootstrap_preserves_constant_seed_difference(self):
+        result = bootstrap_paired_effect(
+            baseline_by_seed={1: 1.0, 2: 10.0, 3: 100.0},
+            condition_by_seed={1: 11.0, 2: 20.0, 3: 110.0},
+            metric="adjusted_average_pumps",
+            policy=policy(),
+            replicates=200,
+            bootstrap_seed=123,
+            confidence_level=0.95,
+        )
+
+        self.assertEqual(result["raw_difference_ci_lower"], 10.0)
+        self.assertEqual(result["raw_difference_ci_upper"], 10.0)
+        self.assertEqual(result["bootstrap_replicates"], 200)
+        self.assertGreater(result["standardised_valid_replicates"], 0)
 
     def test_complete_psi_averages_three_absolute_effects(self):
         row = compute_psi_row(
@@ -311,6 +375,15 @@ class PromptSensitivityTests(unittest.TestCase):
             self.assertEqual(len(result["effect_rows"]), 3)
             self.assertEqual(len(result["psi_rows"]), 1)
             self.assertEqual(result["psi_rows"][0]["status"], "complete")
+            self.assertIn(
+                "standardised_effect_ci_lower",
+                result["effect_rows"][0],
+            )
+            self.assertIn("psi_ci_lower", result["psi_rows"][0])
+            self.assertEqual(
+                result["psi_rows"][0]["bootstrap_replicates"],
+                policy()["bootstrap_replicates"],
+            )
 
     def test_complete_36_run_fixture_produces_nine_complete_psi_rows(self):
         config = load_config(Path("configs/experiment_config_stage01.json"))
@@ -432,7 +505,7 @@ class PromptSensitivityTests(unittest.TestCase):
             )
 
             self.assertEqual(len(aggregation.rows), 36)
-            self.assertEqual(len(analysis["effect_rows"]), 27)
+            self.assertEqual(len(analysis["effect_rows"]), 24)
             self.assertEqual(len(analysis["psi_rows"]), 9)
             self.assertTrue(
                 all(row["status"] == "complete" for row in analysis["psi_rows"])

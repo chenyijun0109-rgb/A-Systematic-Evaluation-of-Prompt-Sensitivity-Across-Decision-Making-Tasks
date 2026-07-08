@@ -43,6 +43,10 @@ def write_pilot(
     metrics: dict,
     done: bool = True,
     model: str = "gpt-test",
+    resolved_model: str | None = None,
+    temperature: float | None = None,
+    top_p: float | None = None,
+    max_output_tokens: int | None = None,
     prompt_hash: str | None = None,
     config_version: str = "1",
     trial_records: list[dict] | None = None,
@@ -62,6 +66,16 @@ def write_pilot(
         "parse_success_rate": 1.0,
         "run_metrics": metrics,
     }
+    if resolved_model is not None:
+        payload.update(
+            {
+                "requested_model": model,
+                "resolved_model": resolved_model,
+                "temperature": temperature,
+                "top_p": top_p,
+                "max_output_tokens": max_output_tokens,
+            }
+        )
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload), encoding="utf-8")
     return path
@@ -83,7 +97,7 @@ def igt_metrics(value=0.7):
 
 
 class AggregateExperimentResultsTests(unittest.TestCase):
-    def test_extract_run_row_flattens_metrics_and_derives_igt_learning_change(self):
+    def test_extract_run_row_derives_igt_learning_trajectory_metrics(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             path = write_pilot(
                 Path(tmpdir) / "legacy_name.json",
@@ -99,6 +113,7 @@ class AggregateExperimentResultsTests(unittest.TestCase):
         self.assertEqual(row["run_id"], "igt:baseline:11")
         self.assertEqual(row["n_trials"], 100)
         self.assertEqual(row["learning_curve_change"], 16.0)
+        self.assertEqual(row["learning_slope"], 4.0)
         self.assertEqual(row["invalid_response_count"], 0)
 
     def test_discover_json_paths_recurses_and_does_not_require_seed_filename(self):
@@ -252,6 +267,41 @@ class AggregateExperimentResultsTests(unittest.TestCase):
         codes = {issue["code"] for issue in result.quality_report["issues"]}
         self.assertIn("unpaired_seed", codes)
         self.assertIn("mixed_model", codes)
+
+    def test_mixed_resolved_model_and_sampling_parameters_are_reported(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            for condition in ("baseline", "detailed"):
+                for seed in (1, 2):
+                    write_pilot(
+                        root / f"{condition}-{seed}.json",
+                        task="igt",
+                        condition=condition,
+                        seed=seed,
+                        metrics=igt_metrics(),
+                        model="gpt-requested",
+                        resolved_model=(
+                            "gpt-resolved-a"
+                            if seed == 1
+                            else "gpt-resolved-b"
+                        ),
+                        temperature=0.7 if seed == 1 else 1.0,
+                        top_p=1.0,
+                        max_output_tokens=16,
+                    )
+
+            result = aggregate_experiment_results(
+                [root],
+                expected_runs_per_cell=2,
+                duplicate_policy="error",
+                allow_incomplete=True,
+                config=minimal_config(),
+                include_horizon_model=False,
+            )
+
+        codes = {issue["code"] for issue in result.quality_report["issues"]}
+        self.assertIn("mixed_resolved_model", codes)
+        self.assertIn("mixed_sampling_parameters", codes)
 
     def test_mixed_prompt_hash_inside_cell_and_failed_run_are_audited(self):
         with tempfile.TemporaryDirectory() as tmpdir:

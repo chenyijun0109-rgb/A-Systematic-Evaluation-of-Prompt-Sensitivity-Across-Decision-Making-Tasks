@@ -10,8 +10,15 @@ from src.run_llm_pilot import parse_task_names, run_baseline_llm_pilot, run_llm_
 
 
 class FakePilotClient:
-    def create_response(self, *, prompt: str, model: str, max_output_tokens: int) -> dict:
-        del model, max_output_tokens
+    def create_response(
+        self,
+        *,
+        prompt: str,
+        model: str,
+        max_output_tokens: int,
+        temperature: float,
+        top_p: float,
+    ) -> dict:
         if "ACTION: CASH_OUT" in prompt:
             text = "ACTION: CASH_OUT"
         elif "Forced choice: choose A." in prompt:
@@ -21,16 +28,36 @@ class FakePilotClient:
         else:
             text = "CHOICE: A"
         return {
-            "raw_response": {"output_text": text},
+            "raw_response": {
+                "output_text": text,
+                "model": f"{model}-resolved",
+                "temperature": temperature,
+                "top_p": top_p,
+                "max_output_tokens": max_output_tokens,
+            },
             "output_text": text,
         }
 
 
 class InvalidPilotClient:
-    def create_response(self, *, prompt: str, model: str, max_output_tokens: int) -> dict:
-        del prompt, model, max_output_tokens
+    def create_response(
+        self,
+        *,
+        prompt: str,
+        model: str,
+        max_output_tokens: int,
+        temperature: float,
+        top_p: float,
+    ) -> dict:
+        del prompt
         return {
-            "raw_response": {"output_text": "A"},
+            "raw_response": {
+                "output_text": "A",
+                "model": f"{model}-resolved",
+                "temperature": temperature,
+                "top_p": top_p,
+                "max_output_tokens": max_output_tokens,
+            },
             "output_text": "A",
         }
 
@@ -181,6 +208,11 @@ class LLMPilotTests(unittest.TestCase):
                     data = json.loads(path.read_text(encoding="utf-8"))
                     self.assertEqual(data["task"], task)
                     self.assertEqual(data["seed"], expected_seed)
+                    self.assertEqual(data["requested_model"], "gpt-test")
+                    self.assertEqual(data["resolved_model"], "gpt-test-resolved")
+                    self.assertEqual(data["temperature"], 0.7)
+                    self.assertEqual(data["top_p"], 1.0)
+                    self.assertEqual(data["max_output_tokens"], 16)
                     self.assertEqual(data["config_name"], "experiment_config_stage01")
                     self.assertEqual(
                         data["config_version"],
@@ -217,6 +249,11 @@ class LLMPilotTests(unittest.TestCase):
             data = json.loads(path.read_text(encoding="utf-8"))
             self.assertEqual(data["task"], "igt")
             self.assertFalse(data["done"])
+            self.assertEqual(data["requested_model"], "gpt-test")
+            self.assertEqual(data["resolved_model"], "gpt-test-resolved")
+            self.assertEqual(data["temperature"], 0.7)
+            self.assertEqual(data["top_p"], 1.0)
+            self.assertEqual(data["max_output_tokens"], 16)
             self.assertEqual(data["failure_reason"], "missing_required_prefix")
             self.assertGreater(len(data["raw_llm_outputs"]), 0)
             self.assertGreater(len(data["invalid_responses"]), 0)
@@ -236,6 +273,29 @@ class LLMPilotTests(unittest.TestCase):
 
             self.assertTrue(result["igt"]["done"])
             self.assertTrue((output_dir / "igt_detailed_seed-124.json").exists())
+
+    def test_run_llm_pilot_uses_frozen_config_model_by_default(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir)
+
+            run_llm_pilot(
+                client=FakePilotClient(),
+                model=None,
+                seed=123,
+                output_dir=output_dir,
+                prompt_condition="baseline",
+                task_names=("igt",),
+            )
+
+            data = json.loads(
+                (output_dir / "igt_baseline_seed-124.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(
+                data["requested_model"],
+                "gpt-4.1-2025-04-14",
+            )
 
     def test_single_task_uses_canonical_task_seed_offset(self):
         with tempfile.TemporaryDirectory() as tmpdir:

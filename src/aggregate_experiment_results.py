@@ -21,6 +21,11 @@ RUN_METADATA_COLUMNS = (
     "task",
     "prompt_condition",
     "model",
+    "requested_model",
+    "resolved_model",
+    "temperature",
+    "top_p",
+    "max_output_tokens",
     "seed",
     "config_name",
     "config_version",
@@ -93,6 +98,22 @@ def logical_run_id(task: str, condition: str, seed: int) -> str:
     return f"{task}:{condition}:{seed}"
 
 
+def linear_slope(values: list[float]) -> float:
+    if len(values) < 2:
+        raise ValueError("At least two values are required to estimate a slope.")
+    x_mean = (len(values) + 1) / 2.0
+    y_mean = sum(values) / len(values)
+    numerator = sum(
+        (index - x_mean) * (value - y_mean)
+        for index, value in enumerate(values, start=1)
+    )
+    denominator = sum(
+        (index - x_mean) ** 2
+        for index in range(1, len(values) + 1)
+    )
+    return numerator / denominator
+
+
 def extract_run_row(path: Path, payload: dict[str, Any]) -> dict[str, Any]:
     metrics = payload["run_metrics"]
     task = str(payload["task"])
@@ -103,6 +124,13 @@ def extract_run_row(path: Path, payload: dict[str, Any]) -> dict[str, Any]:
         "task": task,
         "prompt_condition": condition,
         "model": str(payload["model"]),
+        "requested_model": str(
+            payload.get("requested_model", payload["model"])
+        ),
+        "resolved_model": str(payload.get("resolved_model", "")),
+        "temperature": payload.get("temperature", ""),
+        "top_p": payload.get("top_p", ""),
+        "max_output_tokens": payload.get("max_output_tokens", ""),
         "seed": seed,
         "config_name": str(payload.get("config_name", "")),
         "config_version": str(payload.get("config_version", "")),
@@ -122,10 +150,16 @@ def extract_run_row(path: Path, payload: dict[str, Any]) -> dict[str, Any]:
 
     curve = metrics.get("block_wise_learning_curve")
     if task == "igt" and isinstance(curve, dict):
-        first = curve.get("1", curve.get(1))
-        last = curve.get("5", curve.get(5))
-        if first is not None and last is not None:
-            row["learning_curve_change"] = float(last) - float(first)
+        block_values = [
+            curve.get(str(block), curve.get(block))
+            for block in range(1, 6)
+        ]
+        if all(value is not None for value in block_values):
+            numeric_values = [float(value) for value in block_values]
+            row["learning_curve_change"] = (
+                numeric_values[-1] - numeric_values[0]
+            )
+            row["learning_slope"] = linear_slope(numeric_values)
     return row
 
 
@@ -361,6 +395,58 @@ def _validate_provenance(
             "Valid runs contain multiple model IDs.",
             models=sorted(models),
         )
+
+    resolved_models = {
+        row["resolved_model"] for row in rows if row["resolved_model"]
+    }
+    if len(resolved_models) > 1:
+        _issue(
+            issues,
+            "mixed_resolved_model",
+            "error",
+            "Valid runs contain multiple API-resolved model IDs.",
+            resolved_models=sorted(resolved_models),
+        )
+
+    sampling_parameters = {
+        (
+            row["temperature"],
+            row["top_p"],
+            row["max_output_tokens"],
+        )
+        for row in rows
+        if row["temperature"] != ""
+        and row["top_p"] != ""
+        and row["max_output_tokens"] != ""
+    }
+    if len(sampling_parameters) > 1:
+        _issue(
+            issues,
+            "mixed_sampling_parameters",
+            "error",
+            "Valid runs contain multiple sampling parameter settings.",
+            sampling_parameters=[
+                list(parameters)
+                for parameters in sorted(sampling_parameters)
+            ],
+        )
+    if sampling_parameters:
+        missing_sampling = [
+            row["run_id"]
+            for row in rows
+            if not row["resolved_model"]
+            or row["temperature"] == ""
+            or row["top_p"] == ""
+            or row["max_output_tokens"] == ""
+        ]
+        if missing_sampling:
+            _issue(
+                issues,
+                "missing_sampling_provenance",
+                "error",
+                "Some runs lack resolved model or sampling provenance.",
+                run_ids=missing_sampling,
+            )
 
     configs = {
         (row["config_name"], row["config_version"])

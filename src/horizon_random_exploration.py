@@ -4,7 +4,8 @@ import argparse
 import csv
 import json
 import math
-from dataclasses import dataclass
+import random
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -337,6 +338,128 @@ def analyze_choice_observations(
     return results
 
 
+def resample_run_clusters(
+    observations: list[ChoiceObservation],
+    *,
+    sampled_run_ids: list[str],
+) -> list[ChoiceObservation]:
+    by_run: dict[str, list[ChoiceObservation]] = {}
+    for observation in observations:
+        by_run.setdefault(observation.run_id, []).append(observation)
+    sampled: list[ChoiceObservation] = []
+    for cluster_index, run_id in enumerate(sampled_run_ids, start=1):
+        if run_id not in by_run:
+            raise ValueError(f"Unknown bootstrap run ID: {run_id}")
+        bootstrap_id = f"bootstrap_cluster_{cluster_index}:{run_id}"
+        sampled.extend(
+            replace(observation, run_id=bootstrap_id)
+            for observation in by_run[run_id]
+        )
+    return sampled
+
+
+def _percentile(values: list[float], probability: float) -> float | None:
+    if not values:
+        return None
+    ordered = sorted(values)
+    position = probability * (len(ordered) - 1)
+    lower = math.floor(position)
+    upper = math.ceil(position)
+    if lower == upper:
+        return ordered[lower]
+    fraction = position - lower
+    return ordered[lower] + fraction * (ordered[upper] - ordered[lower])
+
+
+def bootstrap_hierarchical_random_exploration(
+    observations: list[ChoiceObservation],
+    *,
+    run_effect_sd: float = DEFAULT_RUN_EFFECT_SD,
+    replicates: int = 2000,
+    bootstrap_seed: int = 20260615,
+    confidence_level: float = 0.95,
+) -> dict[str, Any]:
+    if replicates < 1:
+        raise ValueError("Bootstrap replicates must be positive.")
+    if not 0.0 < confidence_level < 1.0:
+        raise ValueError("Confidence level must be between zero and one.")
+    conditions = {observation.prompt_condition for observation in observations}
+    if len(conditions) != 1:
+        raise ValueError("Bootstrap input must contain exactly one prompt condition.")
+    run_ids = sorted({observation.run_id for observation in observations})
+    if len(run_ids) < 2:
+        raise ValueError("Cluster bootstrap requires at least two runs.")
+
+    rng = random.Random(bootstrap_seed)
+    estimates: dict[str, list[float]] = {
+        "decision_noise_h1": [],
+        "decision_noise_h6": [],
+        "random_exploration_effect": [],
+        "information_bonus_h1": [],
+        "information_bonus_h6": [],
+    }
+    failed_fits = 0
+    for _ in range(replicates):
+        sampled_ids = [rng.choice(run_ids) for _ in run_ids]
+        sampled = resample_run_clusters(
+            observations,
+            sampled_run_ids=sampled_ids,
+        )
+        try:
+            fit = fit_hierarchical_random_exploration(
+                sampled,
+                run_effect_sd=run_effect_sd,
+            )
+        except (ValueError, RuntimeError, FloatingPointError):
+            failed_fits += 1
+            continue
+        if not fit["converged"]:
+            failed_fits += 1
+            continue
+        condition = fit["condition_estimate"]
+        for name in estimates:
+            estimates[name].append(float(condition[name]))
+
+    successful_fits = replicates - failed_fits
+    alpha = (1.0 - confidence_level) / 2.0
+    result: dict[str, Any] = {
+        "cluster_unit": "run",
+        "confidence_level": confidence_level,
+        "bootstrap_replicates": replicates,
+        "successful_fits": successful_fits,
+        "failed_fits": failed_fits,
+        "convergence_rate": successful_fits / replicates,
+        "n_runs": len(run_ids),
+        "diagnostic_only": len(run_ids) < 15,
+    }
+    for name, values in estimates.items():
+        result[f"{name}_ci_lower"] = _percentile(values, alpha)
+        result[f"{name}_ci_upper"] = _percentile(values, 1.0 - alpha)
+    return result
+
+
+def run_shrinkage_sensitivity(
+    observations: list[ChoiceObservation],
+    *,
+    run_effect_sds: tuple[float, ...] = (0.25, 0.5, 1.0),
+) -> list[dict[str, Any]]:
+    results: list[dict[str, Any]] = []
+    for run_effect_sd in run_effect_sds:
+        fit = fit_hierarchical_random_exploration(
+            observations,
+            run_effect_sd=run_effect_sd,
+        )
+        results.append(
+            {
+                "run_effect_sd": run_effect_sd,
+                "converged": fit["converged"],
+                "optimizer_message": fit["optimizer_message"],
+                **fit["condition_estimate"],
+            }
+        )
+    return results
+
+
 def discover_json_paths(inputs: Iterable[Path]) -> list[Path]:
     paths: set[Path] = set()
     for input_path in inputs:
@@ -402,6 +525,14 @@ def main() -> None:
     )
     parser.add_argument("--output", type=Path)
     parser.add_argument("--run-effect-sd", type=float, default=DEFAULT_RUN_EFFECT_SD)
+    parser.add_argument("--bootstrap-replicates", type=int, default=0)
+    parser.add_argument("--bootstrap-seed", type=int, default=20260615)
+    parser.add_argument("--confidence-level", type=float, default=0.95)
+    parser.add_argument(
+        "--shrinkage-grid",
+        default="0.25,0.5,1.0",
+        help="Comma-separated run-effect SD values.",
+    )
     args = parser.parse_args()
 
     paths = eligible_horizon_json_paths(discover_json_paths(args.inputs))
@@ -410,15 +541,47 @@ def main() -> None:
         observations.extend(load_human_choice_observations(args.human_data))
     if not observations:
         raise SystemExit("No eligible first-free-choice observations were found.")
+    conditions = analyze_choice_observations(
+        observations,
+        run_effect_sd=args.run_effect_sd,
+    )
     result = {
         "analysis": "horizon_random_exploration",
         "source_files": [str(path) for path in paths],
         "n_first_free_choices": len(observations),
-        "conditions": analyze_choice_observations(
-            observations,
-            run_effect_sd=args.run_effect_sd,
-        ),
+        "conditions": conditions,
     }
+    shrinkage_grid = tuple(
+        float(value)
+        for value in args.shrinkage_grid.split(",")
+        if value.strip()
+    )
+    diagnostics: dict[str, Any] = {}
+    for condition in sorted(conditions):
+        condition_observations = [
+            observation
+            for observation in observations
+            if observation.prompt_condition == condition
+        ]
+        if conditions[condition]["status"] != "ok":
+            continue
+        diagnostics[condition] = {
+            "shrinkage_sensitivity": run_shrinkage_sensitivity(
+                condition_observations,
+                run_effect_sds=shrinkage_grid,
+            )
+        }
+        if args.bootstrap_replicates:
+            diagnostics[condition]["bootstrap"] = (
+                bootstrap_hierarchical_random_exploration(
+                    condition_observations,
+                    run_effect_sd=args.run_effect_sd,
+                    replicates=args.bootstrap_replicates,
+                    bootstrap_seed=args.bootstrap_seed,
+                    confidence_level=args.confidence_level,
+                )
+            )
+    result["diagnostics"] = diagnostics
     text = json.dumps(result, indent=2, ensure_ascii=False)
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
