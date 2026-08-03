@@ -37,7 +37,6 @@ This change does not include:
 - running the 36 API experiments;
 - bootstrap confidence intervals;
 - human-versus-LLM comparison;
-- ICC or test-retest analysis;
 - inferential hypothesis tests.
 
 These remain later analysis stages. The mini pilot pipeline will preserve the
@@ -456,4 +455,3 @@ The implementation change updates:
 
 This follows the repository rule that method, metric, command, output-schema,
 and workflow changes update README in the same change.
-

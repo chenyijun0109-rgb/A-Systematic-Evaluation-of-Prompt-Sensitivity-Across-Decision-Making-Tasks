@@ -5,6 +5,7 @@ from statistics import mean
 from typing import Any
 
 from src.tasks.base import BaseTaskEnvironment, StepResult
+from src.observation_renderer import render_bart_observation
 
 
 class BARTTaskEnvironment(BaseTaskEnvironment):
@@ -42,21 +43,22 @@ class BARTTaskEnvironment(BaseTaskEnvironment):
         self.balloon_records = []
         self.done = self.n_balloons == 0
 
-    def get_observation(self) -> str:
-        if self.is_done():
-            return "The BART run is complete."
-
-        lines = [
-            f"Balloon {self.current_balloon} of {self.n_balloons}",
-            f"Block number: {self._current_block()}",
-            f"Current pump count: {self.current_pump_count}",
-            f"Temporary earning: {self.temporary_earning:.2f}",
-            f"Total earning: {self.total_earning:.2f}",
-        ]
-        if self.balloon_records:
-            lines.extend(self._history_observation_lines())
-        lines.append("Available actions: PUMP, CASH_OUT")
-        return "\n".join(lines)
+    def get_observation(self, language: str = "en") -> str:
+        return render_bart_observation(
+            language=language,
+            done=self.is_done(),
+            current_balloon=self.current_balloon,
+            n_balloons=self.n_balloons,
+            block_number=(
+                self._current_block()
+                if not self.is_done()
+                else None
+            ),
+            current_pump_count=self.current_pump_count,
+            temporary_earning=self.temporary_earning,
+            total_earning=self.total_earning,
+            balloon_records=self.balloon_records,
+        )
 
     def get_valid_actions(self) -> tuple[str, ...]:
         return () if self.is_done() else ("PUMP", "CASH_OUT")
@@ -197,13 +199,13 @@ class BARTTaskEnvironment(BaseTaskEnvironment):
         if self.current_balloon > self.n_balloons:
             self.done = True
 
-    def _post_explosion_adjustment(self) -> float:
+    def _post_explosion_adjustment(self) -> float | None:
         changes = [
             record["pump_change_after_explosion"]
             for record in self.balloon_records
             if record["pump_change_after_explosion"] is not None
         ]
-        return mean(changes) if changes else 0.0
+        return mean(changes) if changes else None
 
     @staticmethod
     def _feedback(action: str, reward: float, exploded: bool, cashed_out: bool) -> str:

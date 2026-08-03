@@ -36,6 +36,11 @@ def safe_mean(values: list[float]) -> float:
     return mean(values) if values else 0.0
 
 
+def optional_mean(values: list[float]) -> float | None:
+    """Return None when an event-conditioned metric has no eligible events."""
+    return mean(values) if values else None
+
+
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if not rows:
@@ -326,7 +331,7 @@ def process_bart(
                 "adjusted_average_pumps": safe_mean([float(value) for value in unexploded_pumps]),
                 "explosion_rate": sum(exploded) / len(exploded) if exploded else 0.0,
                 "average_earning_per_balloon": safe_mean(earnings),
-                "post_explosion_adjustment": safe_mean(
+                "post_explosion_adjustment": optional_mean(
                     [float(value) for value in post_explosion_changes]
                 ),
             }

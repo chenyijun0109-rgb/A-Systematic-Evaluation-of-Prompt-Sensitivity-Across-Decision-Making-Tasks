@@ -18,7 +18,7 @@ class BaseTaskEnvironment(ABC):
         """Reset the environment and optionally set a seed."""
 
     @abstractmethod
-    def get_observation(self) -> str:
+    def get_observation(self, language: str = "en") -> str:
         """Return the current observation text for a prompt."""
 
     @abstractmethod

@@ -8,7 +8,13 @@ from typing import Any, Protocol
 
 from src.llm_client import OpenAIResponsesClient, get_env_value
 from src.parser import parse_response
-from src.prompt_loader import extract_response_format, load_config, load_prompt_template, render_prompt
+from src.prompt_loader import (
+    extract_response_format,
+    load_config,
+    load_prompt_template,
+    render_prompt,
+    resolve_prompt_path,
+)
 from src.run_random_baseline import build_environment
 from src.tasks.bart import BARTTaskEnvironment
 
@@ -59,10 +65,14 @@ def pilot_output_path(
     task: str,
     prompt_condition: str,
     seed: int,
+    language: str = "en",
     failed: bool = False,
 ) -> Path:
     suffix = "_failed" if failed else ""
-    return output_dir / f"{task}_{prompt_condition}_seed-{seed}{suffix}.json"
+    language_tag = "" if language == "en" else f"_lang-{language}"
+    return output_dir / (
+        f"{task}_{prompt_condition}{language_tag}_seed-{seed}{suffix}.json"
+    )
 
 
 def prompt_sha256(template: str) -> str:
@@ -79,6 +89,7 @@ def run_baseline_llm_pilot(
     max_output_tokens: int = DEFAULT_MAX_OUTPUT_TOKENS,
     temperature: float | None = None,
     top_p: float | None = None,
+    language: str = "en",
     config_path: Path = Path("configs/experiment_config_stage01.json"),
 ) -> dict[str, dict[str, Any]]:
     return run_llm_pilot(
@@ -91,6 +102,7 @@ def run_baseline_llm_pilot(
         max_output_tokens=max_output_tokens,
         temperature=temperature,
         top_p=top_p,
+        language=language,
         config_path=config_path,
     )
 
@@ -106,6 +118,7 @@ def run_llm_pilot(
     max_output_tokens: int = DEFAULT_MAX_OUTPUT_TOKENS,
     temperature: float | None = None,
     top_p: float | None = None,
+    language: str = "en",
     config_path: Path = Path("configs/experiment_config_stage01.json"),
 ) -> dict[str, dict[str, Any]]:
     config = load_config(config_path)
@@ -125,6 +138,7 @@ def run_llm_pilot(
             task=task,
             prompt_condition=prompt_condition,
             seed=current_seed,
+            language=language,
         )
         result = _run_single_task(
             task=task,
@@ -136,11 +150,13 @@ def run_llm_pilot(
             top_p=resolved_top_p,
             config=config,
             prompt_condition=prompt_condition,
+            language=language,
             failure_output_path=pilot_output_path(
                 output_dir,
                 task=task,
                 prompt_condition=prompt_condition,
                 seed=current_seed,
+                language=language,
                 failed=True,
             ),
         )
@@ -169,15 +185,28 @@ def _run_single_task(
     top_p: float,
     config: dict[str, Any],
     prompt_condition: str,
+    language: str,
     failure_output_path: Path | None = None,
 ) -> dict[str, Any]:
     environment = build_environment(task, config)
     environment.reset(seed=seed)
-    template = load_prompt_template(task, prompt_condition, config=config)
+    template = load_prompt_template(
+        task,
+        prompt_condition,
+        language=language,
+        config=config,
+    )
+    prompt_path = resolve_prompt_path(
+        task,
+        prompt_condition,
+        language=language,
+        config=config,
+    )
     provenance = {
         "config_name": str(config["config_name"]),
         "config_version": str(config["version"]),
-        "prompt_path": str(config["tasks"][task]["prompt_paths"][prompt_condition]),
+        "prompt_language": language,
+        "prompt_path": prompt_path.as_posix(),
         "prompt_sha256": prompt_sha256(template),
     }
     response_format = extract_response_format(task, config=config)
@@ -190,7 +219,7 @@ def _run_single_task(
     parse_attempts = 0
 
     while not environment.is_done():
-        observation = environment.get_observation()
+        observation = environment.get_observation(language)
         prompt = render_prompt(template, observation)
         valid_actions = environment.get_valid_actions()
         parsed_action = None
@@ -375,6 +404,11 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=20260528)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     parser.add_argument("--condition", default="baseline")
+    parser.add_argument(
+        "--language",
+        default="en",
+        help="Prompt language configured in prompt_languages (default: en).",
+    )
     parser.add_argument("--tasks", default="all", help="Comma-separated task names or 'all'.")
     parser.add_argument("--max-output-tokens", type=int, default=DEFAULT_MAX_OUTPUT_TOKENS)
     parser.add_argument("--temperature", type=float)
@@ -392,6 +426,7 @@ def main() -> None:
         seed=args.seed,
         output_dir=args.output_dir,
         prompt_condition=args.condition,
+        language=args.language,
         task_names=parse_task_names(args.tasks),
         max_output_tokens=args.max_output_tokens,
         temperature=args.temperature,

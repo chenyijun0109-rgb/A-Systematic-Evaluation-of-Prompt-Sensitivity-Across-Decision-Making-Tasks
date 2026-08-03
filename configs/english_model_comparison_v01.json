@@ -1,0 +1,115 @@
+{
+  "comparison_name": "english_model_comparison_v01",
+  "date": "2026-07-30",
+  "status": "gpt54_and_gpt54mini_complete",
+  "language": "en",
+  "canonical_config": "configs/experiment_config_stage01.json",
+  "models": [
+    {
+      "role": "existing_baseline",
+      "requested_model": "gpt-4.1-2025-04-14",
+      "resolved_model": "gpt-4.1-2025-04-14",
+      "output_dir": "outputs/formal_v01",
+      "collection_status": "complete"
+    },
+    {
+      "role": "openai_high_capability_comparison",
+      "requested_model": "gpt-5.4",
+      "resolved_model_smoke_test": "gpt-5.4-2026-03-05",
+      "output_dir": "outputs/model_comparison_en_v01/gpt-5.4",
+      "collection_status": "complete_240_of_240_valid_runs"
+    },
+    {
+      "role": "openai_compact_model_comparison",
+      "requested_model": "gpt-5.4-mini",
+      "output_dir": "outputs/model_comparison_en_v01/gpt-5.4-mini-formal-v01",
+      "collection_status": "complete_240_of_240_valid_runs"
+    }
+  ],
+  "base_seeds": [
+    20260708,
+    20260709,
+    20260710,
+    20260711,
+    20260712,
+    20260713,
+    20260714,
+    20260715,
+    20260716,
+    20260717,
+    20260718,
+    20260719,
+    20260720,
+    20260721,
+    20260722,
+    20260723,
+    20260724,
+    20260725,
+    20260726,
+    20260727
+  ],
+  "design": {
+    "tasks": 3,
+    "prompt_conditions_per_task": 4,
+    "runs_per_cell": 20,
+    "task_runs_in_gpt54_collection": 240,
+    "stage_policy": "Collect twenty matched seeds per English task-prompt cell as five sequential waves. Each wave contains two parallel workers with two seeds per worker.",
+    "wave_count": 5,
+    "seeds_per_worker": 2,
+    "workers_per_wave": 2,
+    "parallel_worker_limit": 2,
+    "post_collection_repair": {
+      "trigger": "after the five-wave formal master exits",
+      "concurrency": 2,
+      "success_target": 240,
+      "repeat_policy": "Repeat missing-run repair passes until all 240 English logical runs have valid completed JSON files."
+    },
+    "prompt_language": "en",
+    "other_languages_excluded": [
+      "zh-CN",
+      "es"
+    ]
+  },
+  "sampling": {
+    "temperature": 0.7,
+    "top_p": 1.0,
+    "max_output_tokens": 16
+  },
+  "selection_rationale": "Compare the completed GPT-4.1 baseline with GPT-5.4 and GPT-5.4 Mini using the same English prompts, seeds, task parameters, temperature, top-p, and output-token limit.",
+  "aborted_attempt": {
+    "models": [
+      "gpt-5.4-nano"
+    ],
+    "reason": "User requested a cross-provider comparison.",
+    "completed_task_runs": 0
+  },
+  "aborted_gpt54_single_worker_five_run_plan": {
+    "reason": "Replaced by two independent parallel shards at the user's request.",
+    "completed_task_runs": 0,
+    "failed_or_interrupted_task_runs": 1
+  },
+  "aborted_gpt54_three_plus_two_shard_plan": {
+    "reason": "Replaced by five sequential waves with two two-seed workers per wave.",
+    "completed_task_runs": 0,
+    "failed_or_interrupted_task_runs": 2
+  },
+  "deferred_repairs": {
+    "policy": "Formal workers and the slow Horizon repair are paused while the BART baseline repair runs alone, keeping API concurrency at one worker.",
+    "items": [
+      {
+        "shard": "wave-01-a",
+        "task": "horizon",
+        "condition": "baseline",
+        "base_seed": 20260709,
+        "task_seed": 20260709
+      },
+      {
+        "shard": "wave-01-b",
+        "task": "bart",
+        "condition": "baseline",
+        "base_seed": 20260710,
+        "task_seed": 20260712
+      }
+    ]
+  }
+}

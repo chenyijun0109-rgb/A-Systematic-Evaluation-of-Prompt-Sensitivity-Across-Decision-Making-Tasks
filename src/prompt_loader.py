@@ -24,16 +24,48 @@ def load_prompt_template(
     task: str,
     condition: str = "baseline",
     *,
+    language: str | None = None,
     config: dict[str, Any] | None = None,
 ) -> str:
     config = config or load_config()
+    prompt_path = resolve_prompt_path(
+        task,
+        condition,
+        language=language,
+        config=config,
+    )
+    return prompt_path.read_text(encoding="utf-8")
+
+
+def resolve_prompt_path(
+    task: str,
+    condition: str = "baseline",
+    *,
+    language: str | None = None,
+    config: dict[str, Any] | None = None,
+) -> Path:
+    config = config or load_config()
     task_key = task.lower()
-    prompt_paths = config["tasks"][task_key]["prompt_paths"]
+    resolved_language = language or str(config.get("default_prompt_language", "en"))
+    available_languages = tuple(config.get("prompt_languages", ("en",)))
+    if resolved_language not in available_languages:
+        available = ", ".join(available_languages)
+        raise ValueError(
+            f"Prompt language {resolved_language!r} is not available. "
+            f"Available languages: {available}."
+        )
+    task_config = config["tasks"][task_key]
+    prompt_paths = (
+        task_config["prompt_paths"]
+        if resolved_language == "en"
+        else task_config.get("multilingual_prompt_paths", {}).get(resolved_language, {})
+    )
     if condition not in prompt_paths:
         available = ", ".join(sorted(prompt_paths))
         raise ValueError(
             f"Prompt condition {condition!r} is not currently available for task "
-            f"{task_key!r}. Available conditions: {available}."
+            f"{task_key!r} in language {resolved_language!r}. "
+            f"Available conditions: {available}."
         )
 
     prompt_path = Path(prompt_paths[condition])
@@ -42,7 +74,7 @@ def load_prompt_template(
             f"Prompt condition {condition!r} is not currently available for task "
             f"{task_key!r}: missing file {prompt_path}."
         )
-    return prompt_path.read_text(encoding="utf-8")
+    return prompt_path
 
 
 def render_prompt(template: str, observation: str) -> str:

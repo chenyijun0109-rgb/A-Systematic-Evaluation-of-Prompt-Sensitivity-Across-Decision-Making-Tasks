@@ -369,6 +369,167 @@ Notes:
 
 - 本项目的 baseline prompt 是 reference/control condition，因此 baseline SD 的使用应表述为 Glass-type standardisation，而不是标准 Cohen's d。
 
+### Bootstrap Resampling
+
+Citation key: Efron1979Bootstrap
+
+Source: Efron, B. (1979). Bootstrap methods: Another look at the jackknife. Annals of Statistics, 7(1), 1-26. https://doi.org/10.1214/aos/1176344552
+
+Type: Statistical method
+
+Used for:
+
+- 支撑以重采样近似复杂统计量的抽样分布；
+- 支撑为 prompt effects 和 model-by-prompt interaction contrasts 构造不确定性区间。
+
+Project location:
+
+- `src/compute_prompt_sensitivity.py`；
+- `src/compare_model_results.py`；
+- `docs/english_model_comparison_analysis_plan.md`。
+
+Dissertation section:
+
+- Methodology / Statistical Analysis。
+
+Claim / decision supported:
+
+- Bootstrap can approximate the sampling distribution of an estimator by resampling observational units.
+
+Status: Planned
+
+Notes:
+
+- 文献支持 bootstrap 的总体方法；具体重采样单位仍必须由本项目的数据生成结构决定。
+
+### Percentile Bootstrap Confidence Intervals
+
+Citation key: Efron1987BootstrapCI
+
+Source: Efron, B. (1987). Better bootstrap confidence intervals. Journal of the American Statistical Association, 82(397), 171-185. https://doi.org/10.1080/01621459.1987.10478410
+
+Type: Statistical method
+
+Used for:
+
+- 支撑 bootstrap confidence interval 的方法学来源；
+- 为当前 percentile interval 及未来 BCa robustness check 提供依据。
+
+Project location:
+
+- Prompt-effect and model-by-prompt interaction uncertainty estimates。
+
+Dissertation section:
+
+- Methodology / Statistical Analysis；
+- Limitations / Robustness。
+
+Claim / decision supported:
+
+- Bootstrap distributions can be used to construct confidence intervals, with interval choice and finite-sample limitations stated explicitly.
+
+Status: Planned
+
+Notes:
+
+- 正式论文应说明当前主结果使用 percentile interval；BCa 可作为稳健性检查，不能暗示 20 runs 已保证名义覆盖率。
+
+### Bootstrap for Matched Pairs
+
+Citation key: KonietschkePauly2014MatchedBootstrap
+
+Source: Konietschke, F., & Pauly, M. (2014). Bootstrapping and permuting paired t-test type statistics. Statistics and Computing, 24, 283-296. https://doi.org/10.1007/s11222-012-9370-4
+
+Type: Statistical method
+
+Used for:
+
+- 支撑真正 matched observations 的重采样必须保留 pair/block 结构；
+- 约束 Horizon/BART 的 matched-environment-seed bootstrap 设计。
+
+Project location:
+
+- `src/compare_model_results.py`；
+- English two-model analysis Methods。
+
+Dissertation section:
+
+- Methodology / Statistical Analysis。
+
+Claim / decision supported:
+
+- Matched observations require resampling procedures that preserve their dependence structure.
+
+Status: Planned
+
+Notes:
+
+- 该依据不适用于 IGT 的名义 seed 配对，因为 IGT 环境忽略 seed，API stochastic sampling 也未由该 seed 耦合。
+
+### Common Random Numbers in Simulation Comparisons
+
+Citation key: Kleijnen1988CommonRandomNumbers
+
+Source: Kleijnen, J. P. C. (1988). Analyzing simulation experiments with common random numbers. Management Science, 34(1), 65-74. https://doi.org/10.1287/mnsc.34.1.65
+
+Type: Statistical method / simulation design
+
+Used for:
+
+- 支撑比较随机仿真系统时使用共同随机环境并保留由此产生的相关结构；
+- 解释 Horizon/BART 相同 environment seed 的 blocking 作用及其限制。
+
+Project location:
+
+- English model-comparison design；
+- `src/compare_model_results.py`。
+
+Dissertation section:
+
+- Methodology / Experimental Design；
+- Methodology / Statistical Analysis。
+
+Claim / decision supported:
+
+- Common random numbers can improve comparisons of stochastic systems, but inference must respect the induced covariance structure.
+
+Status: Planned
+
+Notes:
+
+- 相同 seed 只耦合任务环境随机性，不耦合 OpenAI API token sampling；因此不得把它描述为完全相同的随机轨迹或因果配对。
+
+### Model-by-Prompt Interaction Contrast
+
+Citation keys: Efron1979Bootstrap; KonietschkePauly2014MatchedBootstrap; Kleijnen1988CommonRandomNumbers
+
+Type: Project statistical estimand
+
+Used for:
+
+- 定义 `[(model B condition - model B baseline) - (model A condition - model A baseline)]`；
+- 区分 factorial interaction contrast 与 causal difference-in-differences design。
+
+Project location:
+
+- `docs/english_model_comparison_analysis_plan.md`；
+- `src/compare_model_results.py`。
+
+Dissertation section:
+
+- Methodology / Statistical Analysis；
+- Results / Cross-model moderation。
+
+Claim / decision supported:
+
+- The contrast directly estimates whether the prompt effect differs between models; it does not by itself identify a causal policy-style difference-in-differences effect.
+
+Status: Planned
+
+Notes:
+
+- 正式写作时应再引用 factorial-design 或 general-linear-model 权威教材来支持 interaction contrast 的标准定义；上述三篇主要支持 resampling 与 simulation blocking。
+
 ### Horizon Task
 
 Citation key: Wilson2014HorizonTask

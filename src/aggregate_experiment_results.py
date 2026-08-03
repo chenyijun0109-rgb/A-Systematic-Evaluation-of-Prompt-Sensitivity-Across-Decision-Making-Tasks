@@ -18,6 +18,7 @@ from src.prompt_loader import load_config
 TASK_ORDER = ("horizon", "igt", "bart")
 RUN_METADATA_COLUMNS = (
     "run_id",
+    "prompt_language",
     "task",
     "prompt_condition",
     "model",
@@ -68,8 +69,9 @@ class Candidate:
     payload: dict[str, Any]
 
     @property
-    def key(self) -> tuple[str, str, int]:
+    def key(self) -> tuple[str, str, str, int]:
         return (
+            str(self.payload.get("prompt_language", "en")),
             str(self.payload["task"]),
             str(self.payload["prompt_condition"]),
             int(self.payload["seed"]),
@@ -94,8 +96,8 @@ def load_candidate(path: Path) -> dict[str, Any] | None:
     return payload if isinstance(payload, dict) else None
 
 
-def logical_run_id(task: str, condition: str, seed: int) -> str:
-    return f"{task}:{condition}:{seed}"
+def logical_run_id(language: str, task: str, condition: str, seed: int) -> str:
+    return f"{language}:{task}:{condition}:{seed}"
 
 
 def linear_slope(values: list[float]) -> float:
@@ -118,9 +120,11 @@ def extract_run_row(path: Path, payload: dict[str, Any]) -> dict[str, Any]:
     metrics = payload["run_metrics"]
     task = str(payload["task"])
     condition = str(payload["prompt_condition"])
+    language = str(payload.get("prompt_language", "en"))
     seed = int(payload["seed"])
     row: dict[str, Any] = {
-        "run_id": logical_run_id(task, condition, seed),
+        "run_id": logical_run_id(language, task, condition, seed),
+        "prompt_language": language,
         "task": task,
         "prompt_condition": condition,
         "model": str(payload["model"]),
@@ -290,7 +294,7 @@ def _select_candidates(
     if duplicate_policy not in {"error", "latest"}:
         raise ValueError("duplicate_policy must be 'error' or 'latest'.")
 
-    grouped: dict[tuple[str, str, int], list[Candidate]] = {}
+    grouped: dict[tuple[str, str, str, int], list[Candidate]] = {}
     for candidate in candidates:
         grouped.setdefault(candidate.key, []).append(candidate)
 
@@ -312,9 +316,10 @@ def _select_candidates(
                 "duplicate_run",
                 severity,
                 "Multiple files share one logical run key.",
-                task=key[0],
-                prompt_condition=key[1],
-                seed=key[2],
+                prompt_language=key[0],
+                task=key[1],
+                prompt_condition=key[2],
+                seed=key[3],
                 candidates=[str(item.path) for item in group],
                 selected=str(chosen.path) if chosen else None,
             )
@@ -331,55 +336,51 @@ def _validate_completeness(
     rows: list[dict[str, Any]],
     config: dict[str, Any],
     expected_runs_per_cell: int,
+    expected_languages: tuple[str, ...] | None,
     issues: list[ValidationIssue],
 ) -> None:
-    for task, task_config in config["tasks"].items():
-        seed_sets: dict[str, set[int]] = {}
-        for condition in task_config["prompt_conditions"]:
-            cell = [
-                row for row in rows
-                if row["task"] == task
-                and row["prompt_condition"] == condition
-            ]
-            seeds = {int(row["seed"]) for row in cell}
-            seed_sets[condition] = seeds
-            if len(cell) < expected_runs_per_cell:
+    languages = list(expected_languages) if expected_languages else sorted(
+        {str(row.get("prompt_language", "en")) for row in rows}
+    )
+    for language in languages:
+        for task, task_config in config["tasks"].items():
+            seed_sets: dict[str, set[int]] = {}
+            for condition in task_config["prompt_conditions"]:
+                cell = [
+                    row for row in rows
+                    if row["prompt_language"] == language
+                    and row["task"] == task
+                    and row["prompt_condition"] == condition
+                ]
+                seeds = {int(row["seed"]) for row in cell}
+                seed_sets[condition] = seeds
+                if len(cell) != expected_runs_per_cell:
+                    _issue(
+                        issues,
+                        "missing_run" if len(cell) < expected_runs_per_cell else "unexpected_run",
+                        "error",
+                        "A language-task-condition cell has an invalid run count.",
+                        prompt_language=language,
+                        task=task,
+                        prompt_condition=condition,
+                        expected=expected_runs_per_cell,
+                        observed=len(cell),
+                        seeds=sorted(seeds),
+                    )
+            values = list(seed_sets.values())
+            if values and any(value != values[0] for value in values[1:]):
                 _issue(
                     issues,
-                    "missing_run",
+                    "unpaired_seed",
                     "error",
-                    "A task-condition cell has too few valid runs.",
+                    "Prompt conditions within a language-task cell do not share seeds.",
+                    prompt_language=language,
                     task=task,
-                    prompt_condition=condition,
-                    expected=expected_runs_per_cell,
-                    observed=len(cell),
-                    seeds=sorted(seeds),
+                    condition_seeds={
+                        condition: sorted(seeds)
+                        for condition, seeds in seed_sets.items()
+                    },
                 )
-            elif len(cell) > expected_runs_per_cell:
-                _issue(
-                    issues,
-                    "unexpected_run",
-                    "error",
-                    "A task-condition cell has too many valid runs.",
-                    task=task,
-                    prompt_condition=condition,
-                    expected=expected_runs_per_cell,
-                    observed=len(cell),
-                    seeds=sorted(seeds),
-                )
-        values = list(seed_sets.values())
-        if values and any(value != values[0] for value in values[1:]):
-            _issue(
-                issues,
-                "unpaired_seed",
-                "error",
-                "Prompt conditions within a task do not share the same seeds.",
-                task=task,
-                condition_seeds={
-                    condition: sorted(seeds)
-                    for condition, seeds in seed_sets.items()
-                },
-            )
 
 
 def _validate_provenance(
@@ -478,13 +479,13 @@ def _validate_provenance(
             run_ids=missing,
         )
 
-    cells: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    cells: dict[tuple[str, str, str], list[dict[str, Any]]] = {}
     for row in rows:
         cells.setdefault(
-            (row["task"], row["prompt_condition"]),
+            (row["prompt_language"], row["task"], row["prompt_condition"]),
             [],
         ).append(row)
-    for (task, condition), cell_rows in sorted(cells.items()):
+    for (language, task, condition), cell_rows in sorted(cells.items()):
         hashes = {row["prompt_sha256"] for row in cell_rows if row["prompt_sha256"]}
         paths = {row["prompt_path"] for row in cell_rows if row["prompt_path"]}
         if len(hashes) > 1 or len(paths) > 1:
@@ -493,6 +494,7 @@ def _validate_provenance(
                 "mixed_prompt_hash",
                 "error",
                 "A task-condition cell contains multiple prompt versions.",
+                prompt_language=language,
                 task=task,
                 prompt_condition=condition,
                 prompt_hashes=sorted(hashes),
@@ -507,6 +509,10 @@ def _sort_rows(
     task_rank = {
         task: index for index, task in enumerate(config["tasks"])
     }
+    language_rank = {
+        language: index
+        for index, language in enumerate(config.get("prompt_languages", ["en"]))
+    }
     condition_rank = {
         (task, condition): index
         for task, task_config in config["tasks"].items()
@@ -515,6 +521,7 @@ def _sort_rows(
     return sorted(
         rows,
         key=lambda row: (
+            language_rank.get(row["prompt_language"], len(language_rank)),
             task_rank.get(row["task"], len(task_rank)),
             condition_rank.get(
                 (row["task"], row["prompt_condition"]),
@@ -533,6 +540,7 @@ def aggregate_experiment_results(
     allow_incomplete: bool,
     config: dict[str, Any],
     include_horizon_model: bool = True,
+    expected_languages: tuple[str, ...] | None = None,
 ) -> AggregationResult:
     if expected_runs_per_cell < 1:
         raise ValueError("expected_runs_per_cell must be at least 1.")
@@ -550,7 +558,13 @@ def aggregate_experiment_results(
         issues.extend(horizon_issues)
         apply_horizon_run_estimates(rows, estimates)
 
-    _validate_completeness(rows, config, expected_runs_per_cell, issues)
+    _validate_completeness(
+        rows,
+        config,
+        expected_runs_per_cell,
+        expected_languages,
+        issues,
+    )
     _validate_provenance(rows, issues)
     rows = _sort_rows(rows, config)
     error_issues = [issue for issue in issues if issue.severity == "error"]
@@ -559,6 +573,7 @@ def aggregate_experiment_results(
         "allow_incomplete": allow_incomplete,
         "duplicate_policy": duplicate_policy,
         "expected_runs_per_cell": expected_runs_per_cell,
+        "expected_languages": list(expected_languages or ()),
         "discovered_file_count": len(paths),
         "candidate_file_count": len(candidates),
         "valid_run_count": len(rows),
@@ -622,14 +637,27 @@ def run_aggregation(
     duplicate_policy: str,
     allow_incomplete: bool,
     config_path: Path,
+    languages: str | None = None,
 ) -> AggregationResult:
     config = load_config(config_path)
+    expected_languages = None
+    if languages:
+        expected_languages = (
+            tuple(str(item) for item in config.get("prompt_languages", ["en"]))
+            if languages.strip().lower() == "all"
+            else tuple(
+                item.strip()
+                for item in languages.split(",")
+                if item.strip()
+            )
+        )
     result = aggregate_experiment_results(
         inputs,
         expected_runs_per_cell=expected_runs_per_cell,
         duplicate_policy=duplicate_policy,
         allow_incomplete=True,
         config=config,
+        expected_languages=expected_languages,
     )
     result.quality_report["allow_incomplete"] = allow_incomplete
     write_aggregation_outputs(result, output_dir)
@@ -665,6 +693,10 @@ def main() -> None:
         type=Path,
         default=Path("configs/experiment_config_stage01.json"),
     )
+    parser.add_argument(
+        "--languages",
+        help="Comma-separated required languages, or 'all'; default validates observed languages.",
+    )
     args = parser.parse_args()
 
     try:
@@ -675,6 +707,7 @@ def main() -> None:
             duplicate_policy=args.duplicate_policy,
             allow_incomplete=args.allow_incomplete,
             config_path=args.config,
+            languages=args.languages,
         )
     except AggregationValidationError as exc:
         raise SystemExit(str(exc)) from exc

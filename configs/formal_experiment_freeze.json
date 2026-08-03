@@ -169,6 +169,8 @@
   },
   "horizon_random_exploration": {
     "model": "hierarchical logistic MAP with fixed Gaussian run shrinkage",
+    "run_estimate_type": "partially pooled model-derived run estimate",
+    "refit_within_downstream_bootstrap": true,
     "run_effect_sd": 0.5,
     "shrinkage_grid": [
       0.25,
@@ -181,6 +183,9 @@
     "minimum_formal_runs": 15,
     "target_runs": 20,
     "fewer_than_minimum_label": "diagnostic_only"
+  },
+  "event_conditioned_missing_values": {
+    "bart_post_explosion_adjustment": "missing_if_no_explosion_with_a_subsequent_balloon; never replace with zero"
   },
   "exclusion_rules": {
     "llm_runs": {

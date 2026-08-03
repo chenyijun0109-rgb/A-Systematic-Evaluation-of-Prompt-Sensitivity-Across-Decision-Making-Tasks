@@ -1,6 +1,7 @@
 import json
 import tempfile
 import unittest
+from http.client import IncompleteRead, RemoteDisconnected
 from pathlib import Path
 from unittest.mock import patch
 
@@ -21,9 +22,23 @@ class FakePilotClient:
     ) -> dict:
         if "ACTION: CASH_OUT" in prompt:
             text = "ACTION: CASH_OUT"
-        elif "Forced choice: choose A." in prompt:
+        elif any(
+            marker in prompt
+            for marker in (
+                "Forced choice: choose A.",
+                "强制选择：请选择 A。",
+                "Elección forzada: elige A.",
+            )
+        ):
             text = "CHOICE: A"
-        elif "Forced choice: choose B." in prompt:
+        elif any(
+            marker in prompt
+            for marker in (
+                "Forced choice: choose B.",
+                "强制选择：请选择 B。",
+                "Elección forzada: elige B.",
+            )
+        ):
             text = "CHOICE: B"
         else:
             text = "CHOICE: A"
@@ -101,6 +116,81 @@ class LLMPilotTests(unittest.TestCase):
             return FakeResponse()
 
         client = OpenAIResponsesClient(api_key="test-key", max_retries=1, retry_sleep_seconds=0)
+
+        with patch("src.llm_client.request.urlopen", side_effect=fake_urlopen):
+            result = client.create_response(
+                prompt="Choose.",
+                model="gpt-test",
+                max_output_tokens=16,
+            )
+
+        self.assertEqual(result["output_text"], "CHOICE: A")
+        self.assertEqual(calls["count"], 2)
+
+    def test_openai_client_retries_remote_disconnect(self):
+        class FakeResponse:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, traceback):
+                return False
+
+            def read(self):
+                return json.dumps({"output_text": "CHOICE: A"}).encode("utf-8")
+
+        calls = {"count": 0}
+
+        def fake_urlopen(request, timeout):
+            del request, timeout
+            calls["count"] += 1
+            if calls["count"] == 1:
+                raise RemoteDisconnected("temporary remote disconnect")
+            return FakeResponse()
+
+        client = OpenAIResponsesClient(
+            api_key="test-key",
+            max_retries=1,
+            retry_sleep_seconds=0,
+        )
+
+        with patch("src.llm_client.request.urlopen", side_effect=fake_urlopen):
+            result = client.create_response(
+                prompt="Choose.",
+                model="gpt-test",
+                max_output_tokens=16,
+            )
+
+        self.assertEqual(result["output_text"], "CHOICE: A")
+        self.assertEqual(calls["count"], 2)
+
+    def test_openai_client_retries_incomplete_read(self):
+        class FakeResponse:
+            def __init__(self, *, fail: bool):
+                self.fail = fail
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, traceback):
+                return False
+
+            def read(self):
+                if self.fail:
+                    raise IncompleteRead(b'{"output_text":', 20)
+                return json.dumps({"output_text": "CHOICE: A"}).encode("utf-8")
+
+        calls = {"count": 0}
+
+        def fake_urlopen(request, timeout):
+            del request, timeout
+            calls["count"] += 1
+            return FakeResponse(fail=calls["count"] == 1)
+
+        client = OpenAIResponsesClient(
+            api_key="test-key",
+            max_retries=1,
+            retry_sleep_seconds=0,
+        )
 
         with patch("src.llm_client.request.urlopen", side_effect=fake_urlopen):
             result = client.create_response(
@@ -273,6 +363,31 @@ class LLMPilotTests(unittest.TestCase):
 
             self.assertTrue(result["igt"]["done"])
             self.assertTrue((output_dir / "igt_detailed_seed-124.json").exists())
+
+    def test_run_llm_pilot_records_multilingual_prompt_provenance(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_dir = Path(tmpdir)
+
+            result = run_llm_pilot(
+                client=FakePilotClient(),
+                model="gpt-test",
+                seed=123,
+                output_dir=output_dir,
+                prompt_condition="baseline",
+                language="zh-CN",
+                task_names=("igt",),
+            )
+
+            path = output_dir / "igt_baseline_lang-zh-CN_seed-124.json"
+            self.assertTrue(result["igt"]["done"])
+            self.assertTrue(path.exists())
+            data = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(data["prompt_language"], "zh-CN")
+            self.assertEqual(
+                Path(data["prompt_path"]),
+                Path("prompts/multilingual/zh-CN/igt/baseline.md"),
+            )
+            self.assertIn("四牌组奖励任务", data["raw_llm_outputs"][0]["prompt"])
 
     def test_run_llm_pilot_uses_frozen_config_model_by_default(self):
         with tempfile.TemporaryDirectory() as tmpdir:

@@ -12,6 +12,7 @@ from src.prompt_loader import (
     load_config,
     load_prompt_template,
     render_prompt,
+    resolve_prompt_path,
 )
 from src.run_random_baseline import build_environment
 
@@ -27,6 +28,7 @@ def run_baseline_prompt_dry_run(
     seed: int,
     output_path: Path = DEFAULT_OUTPUT_PATH,
     config_path: Path = CONFIG_PATH,
+    language: str = "en",
 ) -> dict[str, dict[str, Any]]:
     config = load_config(config_path)
     results: dict[str, dict[str, Any]] = {}
@@ -34,12 +36,13 @@ def run_baseline_prompt_dry_run(
     for offset, task in enumerate(("horizon", "igt", "bart")):
         environment = build_environment(task, config)
         environment.reset(seed=seed + offset)
-        observation = environment.get_observation()
+        observation = environment.get_observation(language)
         results[task] = _validate_prompt(
             task=task,
             condition="baseline",
             observation=observation,
             config=config,
+            language=language,
         )
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -52,6 +55,7 @@ def run_prompt_matrix_dry_run(
     seed: int,
     output_path: Path = MATRIX_DEFAULT_OUTPUT_PATH,
     config_path: Path = CONFIG_PATH,
+    language: str = "en",
 ) -> dict[str, dict[str, Any]]:
     config = load_config(config_path)
     results: dict[str, dict[str, Any]] = {}
@@ -59,18 +63,43 @@ def run_prompt_matrix_dry_run(
     for offset, task in enumerate(("horizon", "igt", "bart")):
         environment = build_environment(task, config)
         environment.reset(seed=seed + offset)
-        observation = environment.get_observation()
+        observation = environment.get_observation(language)
         for condition in config["tasks"][task]["prompt_conditions"]:
-            key = f"{task}:{condition}"
+            key = f"{language}:{task}:{condition}"
             results[key] = _validate_prompt(
                 task=task,
                 condition=condition,
                 observation=observation,
                 config=config,
+                language=language,
             )
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8")
+    return results
+
+
+def run_multilingual_prompt_matrix_dry_run(
+    *,
+    seed: int,
+    output_path: Path,
+    config_path: Path = CONFIG_PATH,
+) -> dict[str, dict[str, Any]]:
+    config = load_config(config_path)
+    results: dict[str, dict[str, Any]] = {}
+    for language in config.get("prompt_languages", ["en"]):
+        language_results = run_prompt_matrix_dry_run(
+            seed=seed,
+            output_path=output_path,
+            config_path=config_path,
+            language=str(language),
+        )
+        results.update(language_results)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(
+        json.dumps(results, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
     return results
 
 
@@ -80,8 +109,14 @@ def _validate_prompt(
     condition: str,
     observation: str,
     config: dict[str, Any],
+    language: str,
 ) -> dict[str, Any]:
-    template = load_prompt_template(task, condition, config=config)
+    template = load_prompt_template(
+        task,
+        condition,
+        language=language,
+        config=config,
+    )
     rendered_prompt = render_prompt(template, observation)
     response_format = extract_response_format(task, config=config)
     parse_checks = [
@@ -96,7 +131,13 @@ def _validate_prompt(
     return {
         "task": task,
         "prompt_condition": condition,
-        "prompt_path": config["tasks"][task]["prompt_paths"][condition],
+        "prompt_language": language,
+        "prompt_path": resolve_prompt_path(
+                task,
+                condition,
+                language=language,
+                config=config,
+            ).as_posix(),
         "observation": observation,
         "rendered_prompt": rendered_prompt,
         "placeholder_replaced": "{observation}" not in rendered_prompt,
@@ -120,23 +161,40 @@ def _validate_prompt(
 def main() -> None:
     parser = argparse.ArgumentParser(description="Dry-run baseline prompts without calling an LLM.")
     parser.add_argument("--seed", type=int, default=20260528)
+    parser.add_argument(
+        "--language",
+        default="en",
+        help="Prompt language configured in prompt_languages (default: en).",
+    )
     parser.add_argument("--output-path", type=Path)
     parser.add_argument(
         "--all-conditions",
         action="store_true",
         help="Validate the complete 3-task by 4-condition prompt matrix.",
     )
+    parser.add_argument(
+        "--all-languages",
+        action="store_true",
+        help="Validate every configured language; implies --all-conditions.",
+    )
     args = parser.parse_args()
 
-    if args.all_conditions:
+    if args.all_languages:
+        results = run_multilingual_prompt_matrix_dry_run(
+            seed=args.seed,
+            output_path=args.output_path or MATRIX_DEFAULT_OUTPUT_PATH,
+        )
+    elif args.all_conditions:
         results = run_prompt_matrix_dry_run(
             seed=args.seed,
             output_path=args.output_path or MATRIX_DEFAULT_OUTPUT_PATH,
+            language=args.language,
         )
     else:
         results = run_baseline_prompt_dry_run(
             seed=args.seed,
             output_path=args.output_path or DEFAULT_OUTPUT_PATH,
+            language=args.language,
         )
     compact = {
         task: {

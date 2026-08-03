@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import json
 import os
+import ssl
 import time
+from http.client import IncompleteRead, RemoteDisconnected
 from pathlib import Path
 from typing import Any
 from urllib import request
@@ -37,7 +39,7 @@ class OpenAIResponsesClient:
         api_key: str,
         *,
         api_url: str = RESPONSES_API_URL,
-        max_retries: int = 2,
+        max_retries: int = 5,
         retry_sleep_seconds: float = 2.0,
     ) -> None:
         if not api_key:
@@ -100,12 +102,19 @@ class OpenAIResponsesClient:
                 if not self._should_retry_http_error(error.code) or attempt >= self.max_retries:
                     raise RuntimeError(f"OpenAI API request failed: {error.code} {detail}") from error
                 last_error = RuntimeError(f"OpenAI API request failed: {error.code} {detail}")
-            except (TimeoutError, URLError) as error:
+            except (
+                TimeoutError,
+                URLError,
+                IncompleteRead,
+                RemoteDisconnected,
+                ConnectionError,
+                ssl.SSLError,
+            ) as error:
                 if attempt >= self.max_retries:
                     raise RuntimeError(f"OpenAI API request failed: {error}") from error
                 last_error = error
 
-            time.sleep(self.retry_sleep_seconds)
+            time.sleep(self.retry_sleep_seconds * (2**attempt))
 
         raise RuntimeError(f"OpenAI API request failed: {last_error}")
 

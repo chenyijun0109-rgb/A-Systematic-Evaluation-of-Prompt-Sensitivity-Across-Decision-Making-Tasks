@@ -1,0 +1,15 @@
+{
+  "analysis": "formal_v01_llm_human_comparison",
+  "llm_metrics_path": "outputs\\processed\\formal_v01\\llm_run_metrics.csv",
+  "human_metrics_dir": "outputs\\processed\\human_metrics",
+  "comparison_rows": 32,
+  "human_metric_rows": 8,
+  "closest_prompt_rows": 8,
+  "task_participants": {
+    "horizon": 60,
+    "horizon_random_exploration": 60,
+    "igt": 504,
+    "bart": 141
+  },
+  "interpretation_boundary": "Each LLM run is compared with participant-level human summaries; human datasets are task-specific reference distributions, not population-level definitive benchmarks."
+}

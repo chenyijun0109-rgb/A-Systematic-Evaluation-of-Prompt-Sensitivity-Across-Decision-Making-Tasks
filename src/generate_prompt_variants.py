@@ -15,7 +15,9 @@ DEFAULT_MODEL = "gpt-4o-2024-11-20"
 DEFAULT_MAX_OUTPUT_TOKENS = 6000
 DEFAULT_TEMPERATURE = 0.0
 DEFAULT_TOP_P = 1.0
-META_PROMPT_PATH = Path("prompts/generation/meta_prompt_v2.md")
+META_PROMPT_PATH = Path(
+    "prompts/generation/controlled_prompt_variant_generation_protocol.md"
+)
 ALL_TASKS = ("horizon", "igt", "bart")
 
 TASK_GENERATION_SPECS = {

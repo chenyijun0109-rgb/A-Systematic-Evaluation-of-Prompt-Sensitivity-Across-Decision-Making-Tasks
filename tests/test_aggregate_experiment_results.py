@@ -50,10 +50,12 @@ def write_pilot(
     prompt_hash: str | None = None,
     config_version: str = "1",
     trial_records: list[dict] | None = None,
+    prompt_language: str = "en",
 ) -> Path:
     payload = {
         "task": task,
         "prompt_condition": condition,
+        "prompt_language": prompt_language,
         "model": model,
         "seed": seed,
         "done": done,
@@ -110,7 +112,7 @@ class AggregateExperimentResultsTests(unittest.TestCase):
 
             row = extract_run_row(path, payload)
 
-        self.assertEqual(row["run_id"], "igt:baseline:11")
+        self.assertEqual(row["run_id"], "en:igt:baseline:11")
         self.assertEqual(row["n_trials"], 100)
         self.assertEqual(row["learning_curve_change"], 16.0)
         self.assertEqual(row["learning_slope"], 4.0)
@@ -160,6 +162,63 @@ class AggregateExperimentResultsTests(unittest.TestCase):
                 )
 
         self.assertIn("duplicate_run", context.exception.issue_codes)
+
+    def test_same_seed_in_different_languages_is_not_a_duplicate(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            for language in ("en", "zh-CN"):
+                for condition in ("baseline", "detailed"):
+                    write_pilot(
+                        root / f"{language}-{condition}.json",
+                        task="igt",
+                        condition=condition,
+                        seed=1,
+                        metrics=igt_metrics(),
+                        prompt_language=language,
+                    )
+            result = aggregate_experiment_results(
+                [root],
+                expected_runs_per_cell=1,
+                duplicate_policy="error",
+                allow_incomplete=False,
+                config=minimal_config(),
+                include_horizon_model=False,
+            )
+
+        self.assertEqual(len(result.rows), 4)
+        self.assertEqual(
+            {row["prompt_language"] for row in result.rows},
+            {"en", "zh-CN"},
+        )
+
+    def test_required_language_missing_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            for condition in ("baseline", "detailed"):
+                write_pilot(
+                    root / f"en-{condition}.json",
+                    task="igt",
+                    condition=condition,
+                    seed=1,
+                    metrics=igt_metrics(),
+                )
+            result = aggregate_experiment_results(
+                [root],
+                expected_runs_per_cell=1,
+                duplicate_policy="error",
+                allow_incomplete=True,
+                config=minimal_config(),
+                include_horizon_model=False,
+                expected_languages=("en", "zh-CN"),
+            )
+
+        missing = [
+            issue
+            for issue in result.quality_report["issues"]
+            if issue["code"] == "missing_run"
+            and issue["details"]["prompt_language"] == "zh-CN"
+        ]
+        self.assertEqual(len(missing), 2)
 
     def test_latest_duplicate_policy_selects_newest_successful_file(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -419,7 +478,8 @@ class AggregateExperimentResultsTests(unittest.TestCase):
             result = AggregationResult(
                 rows=[
                     {
-                        "run_id": "igt:baseline:1",
+                        "run_id": "en:igt:baseline:1",
+                        "prompt_language": "en",
                         "task": "igt",
                         "prompt_condition": "baseline",
                         "model": "gpt-test",
@@ -451,7 +511,7 @@ class AggregateExperimentResultsTests(unittest.TestCase):
             self.assertIsNotNone(csv_path)
             with csv_path.open(newline="", encoding="utf-8") as handle:
                 rows = list(csv.DictReader(handle))
-            self.assertEqual(rows[0]["run_id"], "igt:baseline:1")
+            self.assertEqual(rows[0]["run_id"], "en:igt:baseline:1")
 
     def test_strict_cli_path_writes_quality_report_before_raising(self):
         with tempfile.TemporaryDirectory() as tmpdir:

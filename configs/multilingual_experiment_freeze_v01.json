@@ -1,0 +1,142 @@
+{
+  "freeze_name": "multilingual_experiment_freeze_v01",
+  "version": "1.0",
+  "date": "2026-07-29",
+  "status": "frozen_for_formal_multilingual_completion",
+  "canonical_config": "configs/experiment_config_stage01.json",
+  "languages": [
+    "en",
+    "zh-CN",
+    "es"
+  ],
+  "formal_design": {
+    "english_source": "outputs/formal_v01",
+    "new_language_output_dir": "outputs/formal_multilingual_v01",
+    "new_languages_to_collect": [
+      "zh-CN",
+      "es"
+    ],
+    "base_seeds": [
+      20260708,
+      20260709,
+      20260710,
+      20260711,
+      20260712,
+      20260713,
+      20260714,
+      20260715,
+      20260716,
+      20260717,
+      20260718,
+      20260719,
+      20260720,
+      20260721,
+      20260722,
+      20260723,
+      20260724,
+      20260725,
+      20260726,
+      20260727
+    ],
+    "task_seed_offsets": {
+      "horizon": 0,
+      "igt": 1,
+      "bart": 2
+    },
+    "runs_per_language_task_condition": 20,
+    "existing_english_task_runs": 240,
+    "new_task_runs": 480,
+    "total_three_language_task_runs": 720,
+    "pilot_outputs_excluded": [
+      "outputs/multilingual_v01"
+    ]
+  },
+  "language_comparison_scope": "All three languages are tested together; pairwise comparisons are not part of the primary analysis.",
+  "experimental_unit": [
+    "prompt_language",
+    "task",
+    "prompt_condition",
+    "seed"
+  ],
+  "seed_policy": "Use identical task-specific seeds across languages and prompt conditions.",
+  "prompt_sensitivity_definition": "Within each language, compare every manipulated prompt condition with the baseline in the same language using paired seeds, Hedges' g, bootstrap intervals, and PSI.",
+  "language_effect_definition": "For each task, condition, and metric, compare en, zh-CN, and es together with a seed-paired Friedman omnibus test, Kendall's W, and within-seed permutation p-value.",
+  "language_prompt_interaction_definition": "For each manipulated condition, compare the within-language condition-minus-baseline effects across en, zh-CN, and es together using the same omnibus procedure.",
+  "observation_policy": "Static instructions and dynamically rendered observations must use the selected prompt language; parser action tokens remain invariant ASCII.",
+  "prompt_constraints": "prompts/multilingual/translation_constraints.md",
+  "semantic_review": {
+    "status": "complete",
+    "reviewer": "Codex acting as a fluent Chinese and Spanish semantic reviewer at the user's request",
+    "record": "prompts/multilingual/generation_and_audit_record.md"
+  },
+  "prompt_sha256": {
+    "en": {
+      "horizon": {
+        "baseline": "d9ef2caf1c1c2c75c6277a51e909bdce0a3cf77d593e0f5f0fd64374f82bc116",
+        "detailed": "1a1374b5af26f83d9dcf55ea8bc182ba0e0fb85bf2866694a177b5940fc09d40",
+        "role_human": "927ae942eff1763a7d91f4e32fbbb6f72e5987e4bda9b54d033c77da02650815",
+        "uncertainty_emphasis": "ac93f76fbef89859b3b92af3576f47b8474fb95efde7be494eb622e3c0fc7830"
+      },
+      "igt": {
+        "baseline": "e09f035c448a21d6a0165f8a39d87056fa52af63a4f59e5deed833dd311859ce",
+        "detailed": "2fa981f9fdd93c07074284cc5fa83a76fa55660334f6d80b8cd2d1247745ead2",
+        "role_human": "3a76e59c727ce00237940d68b1dcb6c1322f663c8eaadfa741e01edc1ec6348f",
+        "reward_loss_emphasis": "08c8b7567bf3a7f398cea6027ad46f3c3575874019778feb1c9ac62f5c37d977"
+      },
+      "bart": {
+        "baseline": "7e78abdc06504f2b1bda6c1a7932bbdb88b1dbdc312cf5be9ea11ab6cc6178ea",
+        "detailed": "2753c53da506162626754dd2a92aef9c129b5e2aac35e9a5379857b49dc2c9fc",
+        "role_human": "47cf4dc5f7058fe8b038d19bd79fc012fddcbc950b2391f101555ef4c6a868a6",
+        "risk_emphasis": "4cb602fcc67deeabc5ddaa03de9f4dc83b6855437230f34de15083e8d19ce534"
+      }
+    },
+    "zh-CN": {
+      "horizon": {
+        "baseline": "8b720bd1d4d4cf047c7b3407a248a4d74f1010e67084b975b2ccfd4411c09d51",
+        "detailed": "a696db83005fede322780a72a7920ba713823ee63ebcecf078b24390c28405af",
+        "role_human": "109c538a79bad503e999bc9fd900aef0def9a1235d2168f535b0ff269ef06d04",
+        "uncertainty_emphasis": "f5670c6834546035e27101b3396733746c495776bd93ac51a00499bdca038a87"
+      },
+      "igt": {
+        "baseline": "def248b8555ff187988d5cdf59e788a8e0aba84015b1cce7d1c429a38d87cfe5",
+        "detailed": "abe60a7a2f7323ac3ec94d6e16348a4098ff1c3a7aa3b12eb0c1faa3c8db0989",
+        "role_human": "be4771191d7af24d10156e43171ccfc880883137070bd5decc37c6ea48d513ed",
+        "reward_loss_emphasis": "7e89d30340c1d25f05cc7df85515a9aeb759fa9d6c4898490a5b89fc210daaf5"
+      },
+      "bart": {
+        "baseline": "39d8372bfabaf8cc8501b9715d004d51e533d1bc88a5dd3e0821ff918e979a37",
+        "detailed": "05791325b04ec53d7926acec0b71aabd4c8b3d254bfabb50d3f4d3244b87adc8",
+        "role_human": "a2b04188f2f8397506dab9b811ea26a5b73812d207f304fb333f7ef73c33b002",
+        "risk_emphasis": "5bcacb5fdce08ea1a67b68f08974819fa675d88c460991a9b2e7ad3d4a4cdb10"
+      }
+    },
+    "es": {
+      "horizon": {
+        "baseline": "2557096cbdcf34e58d69e1d30c061cb06edc9189bdd5539736bbbd26dd33030f",
+        "detailed": "347a3077272348a020fb2a79db18e003a34a47224f1d4c6b60eb939ba3f67941",
+        "role_human": "22801bce0b27d1be525e1038e43b0e275aececbd626607a2cf3b279eac2a96a3",
+        "uncertainty_emphasis": "8aa2bb9f6d1b14b88165f2c2c401651e6225939cd5e3f7de220ce09cf8f901e9"
+      },
+      "igt": {
+        "baseline": "65ee2a263c41e5dfd36850d4238e20a628106d56d9c6f649d987681a0a13a92e",
+        "detailed": "3778ac5bfa39e8ea6153f28a1fb868d63c66d229e82c65b15bd4bd67c1688f09",
+        "role_human": "6a04c4c31a4987cf0a4a1324aee327bfd7cf5732241ad6aee5890a4aee9f59ad",
+        "reward_loss_emphasis": "54b7f462889aee8590f3273b756b70d40d35b616e4b426a66b7943b28594bad8"
+      },
+      "bart": {
+        "baseline": "99db05d7ab43255f4b929ad37611de7cc1868e608df971d2188e9949e937eb4b",
+        "detailed": "3359ce414d7ac6eb3896cd869d6d870212f0e57bee884b127b01c08343f3aca0",
+        "role_human": "4cbf60d3974b322022a825c237d213420d4bf75e217df913d36cdb2ecf99d80d",
+        "risk_emphasis": "24609ffc478b36d6b888d3df69229e221026f90c15836e0b18a79bab06622e80"
+      }
+    }
+  },
+  "required_outputs": [
+    "llm_run_metrics.csv",
+    "metric_summary.csv",
+    "prompt_effects.csv",
+    "prompt_sensitivity.csv",
+    "language_omnibus.csv",
+    "language_prompt_omnibus.csv"
+  ]
+}

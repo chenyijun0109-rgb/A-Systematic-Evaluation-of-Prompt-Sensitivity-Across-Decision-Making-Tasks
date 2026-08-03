@@ -5,6 +5,7 @@ from statistics import mean
 from typing import Any
 
 from src.tasks.base import BaseTaskEnvironment, StepResult
+from src.observation_renderer import render_horizon_observation
 
 
 class HorizonTaskEnvironment(BaseTaskEnvironment):
@@ -36,29 +37,24 @@ class HorizonTaskEnvironment(BaseTaskEnvironment):
         self.current_trial_index = 0
         self.done = self.n_games_per_run == 0
 
-    def get_observation(self) -> str:
+    def get_observation(self, language: str = "en") -> str:
         if self.is_done():
-            return "The Horizon Task run is complete."
-
+            return render_horizon_observation(language=language, done=True)
         game = self._current_game()
         trial_number = self.current_trial_index + 1
         choices_remaining = game["total_trials"] - self.current_trial_index
         forced_target = self._forced_target(game)
-        trial_mode = (
-            f"Forced choice: choose {forced_target}."
-            if forced_target is not None
-            else "Free choice: choose A or B."
-        )
-
-        return "\n".join(
-            [
-                f"Game {game['game_id']} of {self.n_games_per_run}",
-                f"Trial {trial_number} of {game['total_trials']}",
-                f"Choices remaining in this game: {choices_remaining}",
-                f"Observed rewards for A: {game['observed_rewards']['A']}",
-                f"Observed rewards for B: {game['observed_rewards']['B']}",
-                trial_mode,
-            ]
+        return render_horizon_observation(
+            language=language,
+            done=False,
+            game_id=game["game_id"],
+            n_games=self.n_games_per_run,
+            trial_number=trial_number,
+            total_trials=game["total_trials"],
+            choices_remaining=choices_remaining,
+            rewards_a=game["observed_rewards"]["A"],
+            rewards_b=game["observed_rewards"]["B"],
+            forced_target=forced_target,
         )
 
     def get_valid_actions(self) -> tuple[str, ...]:

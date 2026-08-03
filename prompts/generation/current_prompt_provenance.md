@@ -24,7 +24,7 @@
 | Historical raw responses | `not recorded` |
 | Historical manual edits | `not recorded` |
 
-`prompts/generation/meta_prompt_v2.md` was adopted prospectively on
+`prompts/generation/controlled_prompt_variant_generation_protocol.md` was adopted prospectively on
 2026-06-13 to generate three variants from each frozen baseline. It must not
 be described as the exact historical instruction used to create the removed
 prompt files.
@@ -59,7 +59,7 @@ Choose and record one approach:
       and freeze the final files.
 - [x] **Prospective regeneration:** Manually reconstruct and freeze the three
       canonical baselines, then generate nine variants using
-      `meta_prompt_v2.md`. Save exact requests and raw outputs, complete
+      `controlled_prompt_variant_generation_protocol.md`. Save exact requests and raw outputs, complete
       review records, freeze the generated files, and rerun affected pilots.
 
 **Decision:** Remove the historical prompts, reconstruct the three canonical
@@ -114,3 +114,8 @@ prompts/generation/records/2026-06-14_gpt-4o-2024-11-20/final_review.md
 Raw outputs remain unchanged. Under Protocol 1.3, role prompts differ from
 baseline only by one role sentence, and task-specific prompts differ only in
 one authorised paragraph.
+
+The protocol file was renamed from `meta_prompt_v2.md` to
+`controlled_prompt_variant_generation_protocol.md` on 2026-08-02 to use a
+manuscript-appropriate descriptive name. Historical generation JSON retains
+the original path value as immutable provenance of the 2026-06-14 run.

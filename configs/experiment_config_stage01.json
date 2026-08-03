@@ -1,9 +1,15 @@
 {
   "config_name": "experiment_config_stage01",
-  "version": "0.5",
+  "version": "0.7",
   "status": "frozen_for_validation_rerun",
   "created_date": "2026-05-28",
-  "description": "Stage 01 experiment configuration for three cognitive decision-making tasks under four prompt conditions.",
+  "description": "Stage 01 experiment configuration for three cognitive decision-making tasks under four prompt conditions, with English, Simplified Chinese, and Spanish prompt versions.",
+  "prompt_languages": [
+    "en",
+    "zh-CN",
+    "es"
+  ],
+  "default_prompt_language": "en",
   "global_settings": {
     "model_name": "gpt-4.1-2025-04-14",
     "temperature": 0.7,
@@ -64,6 +70,20 @@
         "role_human": "prompts/bandit/role_human.md",
         "uncertainty_emphasis": "prompts/bandit/uncertainty_emphasis.md",
         "task_named_baseline": "prompts/bandit/baseline_task_named.md"
+      },
+      "multilingual_prompt_paths": {
+        "zh-CN": {
+          "baseline": "prompts/multilingual/zh-CN/bandit/baseline.md",
+          "detailed": "prompts/multilingual/zh-CN/bandit/detailed.md",
+          "role_human": "prompts/multilingual/zh-CN/bandit/role_human.md",
+          "uncertainty_emphasis": "prompts/multilingual/zh-CN/bandit/uncertainty_emphasis.md"
+        },
+        "es": {
+          "baseline": "prompts/multilingual/es/bandit/baseline.md",
+          "detailed": "prompts/multilingual/es/bandit/detailed.md",
+          "role_human": "prompts/multilingual/es/bandit/role_human.md",
+          "uncertainty_emphasis": "prompts/multilingual/es/bandit/uncertainty_emphasis.md"
+        }
       },
       "response_format": {
         "valid_outputs": [
@@ -158,6 +178,20 @@
         "role_human": "prompts/igt/role_human.md",
         "reward_loss_emphasis": "prompts/igt/reward_loss_emphasis.md",
         "task_named_baseline": "prompts/igt/baseline_task_named.md"
+      },
+      "multilingual_prompt_paths": {
+        "zh-CN": {
+          "baseline": "prompts/multilingual/zh-CN/igt/baseline.md",
+          "detailed": "prompts/multilingual/zh-CN/igt/detailed.md",
+          "role_human": "prompts/multilingual/zh-CN/igt/role_human.md",
+          "reward_loss_emphasis": "prompts/multilingual/zh-CN/igt/reward_loss_emphasis.md"
+        },
+        "es": {
+          "baseline": "prompts/multilingual/es/igt/baseline.md",
+          "detailed": "prompts/multilingual/es/igt/detailed.md",
+          "role_human": "prompts/multilingual/es/igt/role_human.md",
+          "reward_loss_emphasis": "prompts/multilingual/es/igt/reward_loss_emphasis.md"
+        }
       },
       "response_format": {
         "valid_outputs": [
@@ -294,6 +328,20 @@
         "risk_emphasis": "prompts/bart/risk_emphasis.md",
         "task_named_baseline": "prompts/bart/baseline_task_named.md"
       },
+      "multilingual_prompt_paths": {
+        "zh-CN": {
+          "baseline": "prompts/multilingual/zh-CN/bart/baseline.md",
+          "detailed": "prompts/multilingual/zh-CN/bart/detailed.md",
+          "role_human": "prompts/multilingual/zh-CN/bart/role_human.md",
+          "risk_emphasis": "prompts/multilingual/zh-CN/bart/risk_emphasis.md"
+        },
+        "es": {
+          "baseline": "prompts/multilingual/es/bart/baseline.md",
+          "detailed": "prompts/multilingual/es/bart/detailed.md",
+          "role_human": "prompts/multilingual/es/bart/role_human.md",
+          "risk_emphasis": "prompts/multilingual/es/bart/risk_emphasis.md"
+        }
+      },
       "response_format": {
         "valid_outputs": [
           "ACTION: PUMP",
@@ -366,7 +414,11 @@
       "sensitivity_effect_formula": "(mean(metric_condition) - mean(metric_baseline)) / sd(metric_baseline)",
       "zero_variance_rule": "undefined_if_both_groups_are_constant_with_different_means",
       "psi_formula": "mean(abs(standardised_effects_across_selected_metrics))",
-      "bootstrap_unit": "paired_seed",
+      "bootstrap_unit_by_task": {
+        "horizon": "paired_environment_seed; random_exploration_effect refits the hierarchical model within every bootstrap replicate",
+        "igt": "independent_cell",
+        "bart": "paired_environment_seed"
+      },
       "primary_metrics": {
         "horizon": [
           "directed_exploration",
@@ -414,8 +466,29 @@
       "low_variance_absolute_threshold": 1e-6,
       "low_variance_relative_threshold": 1e-6
     },
+    "language_sensitivity": {
+      "languages_compared_together": [
+        "en",
+        "zh-CN",
+        "es"
+      ],
+      "paired_unit": "seed",
+      "omnibus_test": "Friedman repeated-measures test with within-seed language-label permutation",
+      "effect_size": "Kendall_W",
+      "permutation_replicates": 2000,
+      "pairwise_comparisons": false,
+      "language_effect": "three-language omnibus comparison within task_condition_metric",
+      "language_prompt_interaction": "three-language omnibus comparison of within-language condition-minus-baseline effects",
+      "outputs": [
+        "language_omnibus.csv",
+        "language_prompt_omnibus.csv",
+        "language_omnibus_summary.json"
+      ]
+    },
     "horizon_random_exploration": {
       "model": "hierarchical_logistic_map_fixed_gaussian_shrinkage",
+      "run_estimate_type": "partially_pooled_model_derived",
+      "refit_within_downstream_bootstrap": true,
       "run_effect_sd": 0.5,
       "shrinkage_sensitivity_grid": [
         0.25,
@@ -427,6 +500,9 @@
       "confidence_level": 0.95,
       "minimum_formal_runs": 15,
       "target_runs": 20
+    },
+    "event_conditioned_missing_values": {
+      "bart_post_explosion_adjustment": "missing_if_no_explosion_with_a_subsequent_balloon; never replace with zero"
     }
   }
 }

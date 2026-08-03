@@ -4,6 +4,7 @@ from collections import Counter
 from typing import Any
 
 from src.tasks.base import BaseTaskEnvironment, StepResult
+from src.observation_renderer import render_igt_observation
 
 
 class IGTTaskEnvironment(BaseTaskEnvironment):
@@ -54,18 +55,16 @@ class IGTTaskEnvironment(BaseTaskEnvironment):
         self.records = []
         self.done = self.n_trials == 0
 
-    def get_observation(self) -> str:
-        if self.is_done():
-            return "The Iowa Gambling Task run is complete."
-
-        lines = [
-            f"Trial {self.current_trial} of {self.n_trials}",
-            f"Current cumulative score: {self.cumulative_score}",
-        ]
-        if self.records:
-            lines.extend(self._history_observation_lines())
-        lines.append("Available decks: A, B, C, D")
-        return "\n".join(lines)
+    def get_observation(self, language: str = "en") -> str:
+        return render_igt_observation(
+            language=language,
+            done=self.is_done(),
+            current_trial=self.current_trial,
+            n_trials=self.n_trials,
+            cumulative_score=self.cumulative_score,
+            records=self.records,
+            decks=self.decks,
+        )
 
     def get_valid_actions(self) -> tuple[str, ...]:
         return () if self.is_done() else self.decks

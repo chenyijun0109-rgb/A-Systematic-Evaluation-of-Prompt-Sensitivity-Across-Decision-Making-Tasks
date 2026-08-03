@@ -48,6 +48,10 @@ class ProcessHumanMetricsTests(unittest.TestCase):
         self.assertIn("explosion_rate", first)
         self.assertNotIn("cash_out_threshold", first)
         self.assertIn("average_earning_per_balloon", first)
+        self.assertEqual(
+            sum(row["post_explosion_adjustment"] is None for row in rows),
+            1,
+        )
 
     def test_bart_filter_summary_records_age_exclusions(self):
         summary = bart_filter_summary()

@@ -74,7 +74,23 @@ class BARTTaskEnvironmentTests(unittest.TestCase):
         self.assertEqual(metrics["explosion_rate"], 0.0)
         self.assertNotIn("cash_out_threshold", metrics)
         self.assertEqual(metrics["average_earning_per_balloon"], 0.0)
-        self.assertIn("post_explosion_adjustment", metrics)
+        self.assertIsNone(metrics["post_explosion_adjustment"])
+
+    def test_post_explosion_adjustment_uses_only_eligible_transitions(self):
+        env = BARTTaskEnvironment(n_balloons=3)
+        env.reset(seed=1)
+        env.explosion_points = [2, 32, 32]
+
+        env.step("PUMP")
+        env.step("PUMP")
+        env.step("PUMP")
+        env.step("CASH_OUT")
+        env.step("PUMP")
+        env.step("PUMP")
+        env.step("PUMP")
+        env.step("CASH_OUT")
+
+        self.assertEqual(env.get_run_metrics()["post_explosion_adjustment"], -1.0)
 
     def test_same_seed_produces_same_explosion_points(self):
         first = BARTTaskEnvironment(n_balloons=5)

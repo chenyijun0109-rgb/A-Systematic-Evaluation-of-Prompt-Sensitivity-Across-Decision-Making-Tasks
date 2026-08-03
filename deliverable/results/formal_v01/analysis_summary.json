@@ -1,0 +1,18 @@
+{
+  "analysis": "prompt_sensitivity",
+  "source_run_metrics": "E:\\UoE\\IPP\\project\\outputs\\processed\\formal_v01\\llm_run_metrics.csv",
+  "baseline_condition": "baseline",
+  "expected_runs_per_cell": 20,
+  "allow_incomplete": false,
+  "analysis_complete": true,
+  "metric_summary_rows": 128,
+  "prompt_effect_rows": 24,
+  "psi_rows": 9,
+  "issues": [],
+  "bootstrap_unit_by_task": {
+    "horizon": "paired_environment_seed; random_exploration_effect refits the hierarchical model within every bootstrap replicate",
+    "igt": "independent_cell",
+    "bart": "paired_environment_seed"
+  },
+  "psi_definition": "Project-defined descriptive mean of absolute standardised effects; not a validated psychological scale."
+}

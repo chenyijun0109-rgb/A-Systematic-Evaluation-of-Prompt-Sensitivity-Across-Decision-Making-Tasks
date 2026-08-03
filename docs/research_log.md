@@ -1,5 +1,71 @@
 # Research Log
 
+## 2026-08-03: Propagate Horizon model uncertainty and correct BART missingness
+
+- Classified Horizon `random_exploration_effect` run values as partially
+  pooled, model-derived estimates.
+- Changed downstream prompt-effect and PSI bootstraps to resample complete
+  Horizon run clusters and refit the hierarchical logistic model within every
+  replicate before recomputing raw effects, pooled-SD Hedges' g, and PSI.
+- Changed cross-model random-exploration interaction intervals to refit all
+  four model--prompt cells within each matched-seed bootstrap replicate.
+- Changed BART `post_explosion_adjustment` to missing when no explosion has a
+  subsequent balloon, rather than assigning an arbitrary zero.
+- Audited the formal data: none of the 240 LLM BART runs lacks an eligible
+  transition; one of 141 adult human participants does, giving effective
+  human n=140 for this metric.
+- No LLM API recollection is required; affected processed and statistical
+  outputs must be regenerated from retained raw records.
+
+## 2026-08-01: Correct IGT uncertainty resampling
+
+- Changed IGT within-model prompt-effect bootstrap from nominal seed pairing to independent resampling within the baseline and manipulated-condition cells.
+- Changed IGT PSI bootstrap to use the same independent-cell scheme while preserving within-run correlations across IGT primary metrics.
+- Retained paired environment-seed block bootstrap for Horizon and BART.
+- Added `bootstrap_unit` to every prompt-effect and PSI output row.
+- Recomputed GPT-4.1, GPT-5.4, and GPT-5.4 Mini prompt effects and PSI using 2,000 bootstrap replicates.
+- All three analyses completed with 24 prompt-effect rows, 9 PSI rows, and `issues=[]`.
+
+Status: IGT uncertainty correction complete.
+
+## 2026-08-01: Delete superseded GPT-5.4 Mini failed attempts
+
+- Deleted the three failed-attempt JSON files under
+  `outputs/model_comparison_en_v01/gpt-5.4-mini-failed-audit-v01/` after their
+  logical runs had been successfully repaired.
+- Retained all 240 successful formal runs and all processed analysis outputs.
+- Future processing inputs contain successful formal data only.
+
+Status: Superseded failures deleted; successful dataset unchanged.
+
+## 2026-08-01: Remove obsolete two-model manuscript figures and tables
+
+- Removed the generated GPT-4.1-versus-GPT-5.4 Figures 2-6 directory.
+- Removed the generated two-model Tables 1-6, table manifest, and primary-results checklist.
+- Retained raw data, model-specific processed outputs, two-model comparison CSVs, human-comparison CSVs, generation scripts, captions, and table notes for audit and three-model pipeline development.
+- Final manuscript figures and tables must be regenerated with GPT-5.4 Mini included.
+
+Status: Obsolete two-model figure/table outputs removed.
+
+## 2026-08-01: Complete and process GPT-5.4 Mini English formal batch
+
+- Completed the five-wave, two-worker English GPT-5.4 Mini collection with
+  240/240 successful logical runs.
+- Deferred failures during formal collection and repaired all three failed
+  logical runs after wave 5.
+- Preserved the superseded failed-attempt JSON files under
+  `outputs/model_comparison_en_v01/gpt-5.4-mini-failed-audit-v01/` so they do
+  not collide with their successful replacements during strict aggregation.
+- Strict aggregation completed with 240 valid runs and `issues=[]`.
+- Prompt-sensitivity analysis produced 128 metric-summary rows, 24
+  prompt-effect rows, and 9 PSI rows with `analysis_complete=true`.
+- The API resolved the requested model to `gpt-5.4-mini-2026-03-17`.
+- One Horizon baseline run (`seed=20260726`) contained one invalid intermediate
+  response followed by a successful retry; the completed output contains all
+  300 valid trials and was retained.
+
+Status: Complete and analysis-ready.
+
 这个文件用于记录项目后续每一步实质性工作。规则是：只要一个步骤会影响实验设计、代码实现、prompt、数据、分析或论文写作，就必须在这里留下记录。
 
 ## 2026-06-15: GitHub repository organization
@@ -49,6 +115,106 @@ Notes:
 
 ## Log Entries
 
+### 2026-07-29 - Unify Current Project Scope and Documentation
+
+Change:
+
+- Rewrote `docs/next_steps_plan.md` as a current-state plan instead of an
+  experiment-preparation history.
+- Updated the formal freeze document to define one 720-run, three-language
+  experiment and its matched seed policy.
+- Updated README and deliverable indexes to label `formal_v01` and its current
+  human comparison as the completed English stage.
+- Fixed the project-wide boundary at one open human reference dataset per task
+  and no independent second LLM batch.
+- Kept historical pilot and implementation entries in this log as history,
+  while current-state documents now use the unified scope.
+
+Verification:
+
+- Current-scope conflict search returned no matches.
+- `python -m unittest discover -s tests`: 125 tests passed.
+- `git diff --check`: passed.
+- The active multilingual smoke process remained running during documentation
+  edits.
+
+Status: Done
+
+### 2026-07-29 - Freeze Formal Multilingual Completion
+
+Change:
+
+- Defined English, Simplified Chinese, and Spanish as levels of one formal
+  language factor.
+- Kept the completed 240-run English `formal_v01` batch and froze 480 matched
+  Chinese/Spanish task runs for collection.
+- Reused base seeds `20260708` through `20260727`, which reproduce the existing
+  task-specific English seed sets through offsets 0, 1, and 2.
+- Reserved `outputs/formal_multilingual_v01/` for new formal language runs and
+  excluded the earlier `outputs/multilingual_v01/` pilot artifacts.
+- Updated README and the active next-step order before paid API collection.
+
+Status: Frozen; one-seed Chinese/Spanish smoke collection is in progress.
+
+### 2026-07-29 - Retry Formal API Disconnects
+
+Change:
+
+- The first formal multilingual smoke cell failed when the remote endpoint
+  closed a connection during a 300-trial Horizon run.
+- Added retry handling for remote disconnects, connection errors, and TLS
+  errors in addition to the existing timeout and URL-error handling.
+- Increased transient network retries to five and applied exponential backoff.
+- Added a regression test for recovery from `RemoteDisconnected`.
+- Stopped the remaining smoke matrix after the first failed cell to avoid
+  unnecessary API calls before the retry fix was validated.
+
+Status: Implemented and validated by the completed first formal Chinese cell.
+
+### 2026-07-29 - First Formal Multilingual Cell Completed
+
+Result:
+
+- Language: `zh-CN`
+- Task: Horizon
+- Condition: `baseline`
+- Base/task seed: `20260708`
+- Trials: 300
+- Parse success rate: 1.0
+- Invalid responses: 0
+- Requested and resolved model: `gpt-4.1-2025-04-14`
+- The resumed 24-cell Chinese/Spanish smoke matrix skipped this valid output
+  and continued with the remaining cells.
+
+Status: One formal cell complete; matched one-seed smoke matrix in progress.
+
+### 2026-07-29 - Remove Independent Second-Batch Scope
+
+Change:
+
+- Standardized the project around one formal experiment and removed the
+  independent second-batch design.
+- Removed out-of-scope comparison artifacts, dedicated source modules, tests,
+  claims, and workflow instructions.
+- The later multilingual scope freeze treats English, Chinese, and Spanish as
+  levels of this same formal experiment rather than separate experiments.
+
+Status: Done
+
+### 2026-07-29 - Keep One Open Human Dataset Set
+
+Change:
+
+- Removed the three supplementary raw human-data sources, their processed
+  metrics, the additional LLM-human comparison, and the dataset-comparison
+  robustness analysis.
+- Removed the dedicated processing/comparison modules and tests.
+- Kept one open human reference dataset per task:
+  Horizon 60 participants, IGT 504 participants, and BART 141 adults.
+- Kept the primary `formal_v01` LLM-human comparison only.
+
+Status: Done
+
 ### 2026-05-26 - 建立研究记录与引用规则
 
 Date: 2026-05-26
@@ -89,6 +255,78 @@ Files changed or created:
 Output / result:
 
 - 项目建立了后续工作记录与引用登记机制。
+
+Status: Done
+
+### 2026-07-18 - Primary LLM-Human Comparison
+
+Change:
+
+- Added `src/compare_llm_human.py`.
+- Added `tests/test_llm_human_comparison.py`.
+- Generated primary LLM-human comparison outputs in `deliverable/results/human_comparison_formal_v01/`.
+- Updated README and deliverable result index with the human comparison location and headline findings.
+
+Input data:
+
+```text
+LLM: deliverable/results/formal_v01/llm_run_metrics.csv
+Human Horizon: outputs/processed/human_metrics/horizon_human_metrics.csv, 60 participants
+Human IGT: outputs/processed/human_metrics/igt_human_metrics.csv, 504 participants
+Human BART: outputs/processed/human_metrics/bart_human_metrics.csv, 141 participants
+Horizon random exploration: outputs/processed/human_horizon_random_exploration.json
+```
+
+Outputs:
+
+```text
+deliverable/results/human_comparison_formal_v01/human_metric_summary.csv
+deliverable/results/human_comparison_formal_v01/llm_human_comparison.csv
+deliverable/results/human_comparison_formal_v01/closest_prompt_by_metric.csv
+deliverable/results/human_comparison_formal_v01/human_comparison_summary.json
+deliverable/results/human_comparison_formal_v01/human_comparison_analysis_zh.md
+deliverable/results/human_comparison_formal_v01/metric_notes.md
+deliverable/results/human_comparison_formal_v01/README.md
+```
+
+Headline findings:
+
+- BART metrics are broadly human-compatible across prompt conditions.
+- Horizon `directed_exploration` is close to the human reference distribution, especially under baseline.
+- Horizon `horizon_effect` and `random_exploration_effect` are weaker than human reference values.
+- IGT `post_loss_switching_rate` falls within the human reference distribution.
+- IGT `advantageous_choice_rate` is above the human reference interval across all prompt conditions.
+
+Verification:
+
+- `uv run python -m unittest tests.test_llm_human_comparison`: 5 tests passed.
+
+Status: Done
+
+### 2026-07-14 - Supervisor Review Deliverable View
+
+Change:
+
+- Added a compact supervisor-review deliverable directory at `deliverable/`.
+- Copied only the completed formal v01 processed outputs into `deliverable/results/formal_v01/`.
+- Added `deliverable/README_DELIVERABLE.md` and `deliverable/results/README.md` to explain included result files and excluded local process artifacts.
+- Updated `README.md` to identify the deliverable entry point and the current formal v01 status.
+
+Formal v01 quality status:
+
+```text
+valid_run_count = 240
+expected_runs_per_cell = 20
+aggregation analysis_complete = true
+PSI analysis_complete = true
+issues = []
+```
+
+Packaging boundary:
+
+- Included: source code, tests, configs, prompts, method documentation, and compact processed formal v01 result tables.
+- Excluded from the deliverable view: `.env`, `.venv/`, `.tmp/`, `.uv-cache/`, `DATASET/`, raw JSON runs, and early debug/pilot outputs.
+- Raw runs and datasets were not deleted; they remain local audit/regeneration materials.
 
 Status: Done
 
@@ -2523,3 +2761,149 @@ Verification:
 - `uv run python -m unittest discover -s tests`: 51 tests passed.
 
 Status: Done
+
+## 2026-07-20: Chinese and Spanish prompt derivation
+
+- Added a prospective multilingual constraint file before creating any target-
+  language prompt.
+- Derived six `zh-CN`/`es` baselines from the three frozen English baselines.
+- Derived 18 variants only from the corresponding baseline in the same language.
+- Preserved `{observation}` and all ASCII parser outputs byte-for-byte.
+- Added `--language` support to the dry-run and LLM pilot commands and recorded
+  `prompt_language` in raw output provenance.
+- Kept English as the default and left the completed English formal experiment
+  unchanged.
+- Marked the new files `pilot_ready`; independent fluent-language review is still
+  required before formal freezing.
+
+Status: Implemented and structurally validated; linguistic sign-off pending.
+
+## 2026-07-25: Complete language-aware experimental pipeline
+
+- Completed final semantic review of all Simplified Chinese and Spanish static
+  prompts; no meaning-changing defect required a prompt edit.
+- Added language-specific dynamic observation and history renderers for Horizon,
+  IGT, and BART.
+- Verified that rendering observations in three languages does not mutate hidden
+  task state or random outcomes.
+- Changed the aggregation identity to
+  `prompt_language + task + prompt_condition + seed`, with legacy raw files
+  defaulting to English.
+- Changed metric summaries, Hedges' g, paired bootstrap intervals, and PSI to
+  operate within language.
+- Added a three-language, paired-seed Friedman omnibus analysis with Kendall's W
+  and within-seed permutation p-values. Pairwise language comparisons are not
+  part of the primary analysis.
+- Added a second omnibus analysis comparing within-language
+  `condition - baseline` prompt effects across all three languages together.
+- Added a 36-prompt `--all-languages` dry run and a machine-readable multilingual
+  pilot freeze.
+
+Status: Implemented; ready for a small multilingual API pilot before formal data
+collection.
+
+## 2026-07-25: Add resumable multilingual experiment runner
+
+- Re-ran the complete 36-prompt multilingual dry run; all prompt loading,
+  localized observation rendering, and parser-format checks passed.
+- Added `src/run_multilingual_experiment.py` to construct and sequentially run
+  the frozen language × task × prompt-condition × seed matrix.
+- Added strict identity-aware resume checks and a continuously updated
+  `multilingual_run_status.json` containing completed, skipped, and failed runs.
+- Added a plan-only mode that makes no API calls and reports request bounds.
+- For seeds `20260528,20260531`, the plan contains 72 task runs: 7,200 Horizon
+  requests, 2,400 IGT requests, and 960–30,720 BART requests, giving a total
+  bound of 10,560–40,320 API requests.
+- Added focused tests for matrix size, duplicate seed rejection, full resume
+  identity validation, and status persistence when all work is skipped.
+
+Status: Local planning and validation complete; paid API execution awaits an
+explicit quota/cost confirmation.
+
+## 2026-07-26: Multilingual pilot blocked by API connectivity
+
+- Received explicit approval to start the two-seed, three-language API pilot.
+- The first sandboxed attempt failed with Windows socket permission error
+  `WinError 10013`.
+- Retried with approved external network access. All 72 task runs still failed:
+  70 with TLS `UNEXPECTED_EOF_WHILE_READING` and two with the remote connection
+  closing without a response.
+- A separate unauthenticated endpoint check could not connect to
+  `api.openai.com:443`, confirming an environment/network connectivity problem
+  rather than a prompt-rendering or parser failure.
+- No successful model response or analysis-ready multilingual run was created.
+  Failure details remain in
+  `outputs/multilingual_v01/multilingual_run_status.json`.
+
+Status: API pilot blocked until the execution environment can reach the OpenAI
+Responses API; the resumable experiment plan remains ready.
+## 2026-07-31: English cross-model interaction inference terminology
+
+- Replaced the planned causal-sounding `difference-in-differences` label with
+  `model-by-prompt interaction contrast`; the algebraic contrast is unchanged.
+- Audited the seed mechanism: Horizon and BART use the seed for environment
+  randomness, IGT ignores it, and the API sampling is not seed-coupled.
+- Consequently, Horizon/BART uncertainty resamples matched environment-seed
+  blocks, whereas IGT resamples runs independently within each model-prompt
+  cell.
+- Added Efron (1979), Efron (1987), Konietschke and Pauly (2014), and Kleijnen
+  (1988) to `docs/citation_map.md`, including explicit limits on what each
+  reference supports.
+
+## 2026-07-31: English two-model Figures 2-5
+
+- Added a reproducible Matplotlib figure pipeline and declared/locked the
+  plotting dependency.
+- Generated run-level distributions, within-model prompt-effect forests,
+  metric-specific model-by-prompt interaction forests, and PSI comparison
+  panels as both 300-dpi PNG and vector PDF.
+- Kept incompatible behavioural metrics on separate axes, disclosed that PSI
+  differences are descriptive without intervals, and added manuscript-ready
+  captions with interpretation limits.
+
+## 2026-07-31: Two-model human-reference comparison and Figure 6
+
+- Re-ran the frozen human-reference pipeline separately for GPT-4.1 and GPT-5.4
+  using identical Horizon (60), IGT (504), and BART (141) reference datasets.
+- Added a validated combined table with signed and absolute human-SD distance,
+  reference-interval coverage, and changes from each model's baseline.
+- Generated Figure 6 with metric-specific human reference bands and prioritised
+  pump-based BART measures to avoid monetary-scale mismatch.
+- Standardised all figure condition orders to baseline, detailed, human role,
+  and the task-specific emphasis condition.
+- Retained the explicit boundary that distributional similarity does not imply
+  a shared cognitive mechanism.
+
+## 2026-07-31: Main Tables 1-6 and primary-results checklist
+
+- Added a reproducible builder for the six planned main manuscript tables.
+- Enforced frozen row counts for design/provenance, primary descriptives,
+  within-model effects, model-by-prompt interactions, PSI, and human-reference
+  comparisons.
+- Generated 218 source-linked checklist statements, covering every row in
+  Tables 2-6 exactly once.
+- Documented why FDR-adjusted p-values are not inserted into Table 3 without a
+  pre-specified null-resampling test; effect sizes and bootstrap intervals
+  remain the current frozen inferential outputs.
+
+## 2026-07-31: Chinese analysis and manuscript-output map
+
+- Added a Chinese current-state overview covering the exact two-model LLM
+  design, eight primary metrics, supplementary metrics, frozen human datasets,
+  required comparisons, six main tables, six main figures, and planned
+  supplementary package.
+- Distinguished completed artifacts from pending robustness, multiplicity,
+  Figure 1, and supplementary work.
+- Recorded a pre-writing correction: IGT ignores the nominal run seed, so its
+  existing within-model prompt-effect and PSI bootstrap intervals must be
+  regenerated using independent model-prompt-cell resampling. Point estimates
+  are unaffected; Tables 3/5 and Figures 3/5 are not final until this is done.
+
+## 2026-08-02: Rename prompt-variant generation protocol
+
+- Renamed the current protocol file from the development-oriented
+  `meta_prompt_v2.md` to
+  `controlled_prompt_variant_generation_protocol.md`.
+- Updated the generator default path and current documentation.
+- Preserved the old path and heading inside immutable 2026-06-14 request and
+  generation records because they document the artifact actually used then.

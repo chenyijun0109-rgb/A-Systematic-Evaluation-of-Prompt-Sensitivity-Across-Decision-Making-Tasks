@@ -1,4 +1,5 @@
 import json
+import hashlib
 import tempfile
 import unittest
 from pathlib import Path
@@ -12,11 +13,16 @@ from src.prompt_loader import (
 from src.run_prompt_dry_run import (
     run_baseline_prompt_dry_run,
     run_prompt_matrix_dry_run,
+    run_multilingual_prompt_matrix_dry_run,
 )
 
 
 class PromptDryRunTests(unittest.TestCase):
     ROLE_SENTENCE = "Take the role of a human participant completing this task.\n\n"
+    MULTILINGUAL_ROLE_SENTENCES = {
+        "zh-CN": "请以一名正在完成此任务的人类参与者的身份作答。\n\n",
+        "es": "Asume el papel de un participante humano que está completando esta tarea.\n\n",
+    }
 
     def test_load_prompt_template_reads_baseline_prompt_from_config(self):
         template = load_prompt_template("igt", "baseline")
@@ -135,6 +141,101 @@ class PromptDryRunTests(unittest.TestCase):
                 with self.subTest(task=task, condition=condition):
                     template = load_prompt_template(task, condition)
                     self.assertEqual(template.count("{observation}"), 1)
+
+    def test_multilingual_baselines_and_variants_are_configured(self):
+        config = load_config()
+
+        self.assertEqual(config["prompt_languages"], ["en", "zh-CN", "es"])
+        self.assertEqual(config["default_prompt_language"], "en")
+        for language in ("zh-CN", "es"):
+            for task, task_config in config["tasks"].items():
+                expected = set(task_config["prompt_conditions"])
+                configured = set(task_config["multilingual_prompt_paths"][language])
+                self.assertEqual(configured, expected)
+                for condition in expected:
+                    with self.subTest(language=language, task=task, condition=condition):
+                        template = load_prompt_template(
+                            task,
+                            condition,
+                            language=language,
+                        )
+                        self.assertEqual(template.count("{observation}"), 1)
+                        for output in task_config["response_format"]["valid_outputs"]:
+                            self.assertIn(output, template)
+
+    def test_multilingual_role_prompts_only_add_authorised_sentence(self):
+        for language, sentence in self.MULTILINGUAL_ROLE_SENTENCES.items():
+            for task in ("horizon", "igt", "bart"):
+                with self.subTest(language=language, task=task):
+                    baseline = load_prompt_template(
+                        task,
+                        "baseline",
+                        language=language,
+                    )
+                    role = load_prompt_template(
+                        task,
+                        "role_human",
+                        language=language,
+                    )
+                    self.assertEqual(role.replace(sentence, "", 1), baseline)
+
+    def test_unknown_prompt_language_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "Prompt language"):
+            load_prompt_template("igt", "baseline", language="fr")
+
+    def test_multilingual_prompt_matrix_dry_run_checks_twelve_prompts(self):
+        for language in ("zh-CN", "es"):
+            with self.subTest(language=language), tempfile.TemporaryDirectory() as tmpdir:
+                result = run_prompt_matrix_dry_run(
+                    seed=123,
+                    language=language,
+                    output_path=Path(tmpdir) / "matrix.json",
+                )
+                self.assertEqual(len(result), 12)
+                self.assertTrue(
+                    all(row["prompt_language"] == language for row in result.values())
+                )
+                self.assertTrue(
+                    all(row["all_config_valid_outputs_parse"] for row in result.values())
+                )
+
+    def test_all_languages_dry_run_checks_thirty_six_prompts(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            result = run_multilingual_prompt_matrix_dry_run(
+                seed=123,
+                output_path=Path(tmpdir) / "all_languages.json",
+            )
+
+        self.assertEqual(len(result), 36)
+        self.assertEqual(
+            {row["prompt_language"] for row in result.values()},
+            {"en", "zh-CN", "es"},
+        )
+
+    def test_multilingual_freeze_hashes_match_all_thirty_six_prompts(self):
+        manifest = json.loads(
+            Path("configs/multilingual_experiment_freeze_v01.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        config = load_config()
+        observed = 0
+        for language, tasks in manifest["prompt_sha256"].items():
+            for task, conditions in tasks.items():
+                for condition, expected_hash in conditions.items():
+                    path = (
+                        Path(config["tasks"][task]["prompt_paths"][condition])
+                        if language == "en"
+                        else Path(
+                            config["tasks"][task]["multilingual_prompt_paths"][
+                                language
+                            ][condition]
+                        )
+                    )
+                    actual_hash = hashlib.sha256(path.read_bytes()).hexdigest()
+                    self.assertEqual(actual_hash, expected_hash)
+                    observed += 1
+        self.assertEqual(observed, 36)
 
     def test_reviewed_variants_preserve_semantic_boundaries(self):
         for condition in ("detailed", "role_human", "uncertainty_emphasis"):

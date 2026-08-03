@@ -81,5 +81,11 @@ The filter changes sample inclusion only. The metric formulas remain:
 - `average_earning_per_balloon`;
 - `post_explosion_adjustment`.
 
+`post_explosion_adjustment` averages `next balloon pumps - exploded balloon
+pumps` only for explosions followed by another balloon. A participant with no
+eligible transition has a missing value rather than zero. In the retained
+adult sample, one participant has no eligible transition, so this metric has
+an effective sample size of 140; the other BART metrics retain all 141 adults.
+
 The 40-balloon task structure is aligned with the local dataset and Sebri et
 al. (2023): https://doi.org/10.1080/20445911.2023.2181065

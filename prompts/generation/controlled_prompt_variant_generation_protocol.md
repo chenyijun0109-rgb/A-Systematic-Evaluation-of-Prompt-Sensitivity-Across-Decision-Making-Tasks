@@ -1,4 +1,4 @@
-# Prompt Generation Meta-Prompt v2.0
+# Controlled Prompt Variant Generation Protocol
 
 You are assisting with prompt construction for a cognitive
 decision-making experiment involving large language models.
@@ -99,4 +99,3 @@ Condition | Intended linguistic change | New task facts added | Rules changed | 
 
 Use `none` where no prohibited change was made. Do not include any other
 commentary.
-

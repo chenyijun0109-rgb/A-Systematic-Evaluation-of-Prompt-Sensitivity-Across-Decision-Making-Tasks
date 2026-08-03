@@ -94,7 +94,7 @@ task.
 The exact reusable instruction is stored at:
 
 ```text
-prompts/generation/meta_prompt_v2.md
+prompts/generation/controlled_prompt_variant_generation_protocol.md
 ```
 
 The following inputs must be inserted without paraphrasing:

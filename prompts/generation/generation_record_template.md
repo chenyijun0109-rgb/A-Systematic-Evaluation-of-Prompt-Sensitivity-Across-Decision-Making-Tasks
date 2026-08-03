@@ -25,7 +25,7 @@
 | Maximum output tokens | |
 | Seed | |
 | System prompt | |
-| Meta-prompt file | `prompts/generation/meta_prompt_v2.md` |
+| Generation protocol file | `prompts/generation/controlled_prompt_variant_generation_protocol.md` |
 | Number of candidate sets planned | |
 | Number actually generated | |
 

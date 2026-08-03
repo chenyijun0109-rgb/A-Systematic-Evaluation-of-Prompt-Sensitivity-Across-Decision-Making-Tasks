@@ -55,7 +55,7 @@ the probability mass. The same values were used for all three task calls.
 ## 3. Instruction Given to the Generator
 
 The generator received one rendered version of
-`prompts/generation/meta_prompt_v2.md` for each task. The exact reusable
+`prompts/generation/controlled_prompt_variant_generation_protocol.md` for each task. The exact reusable
 instruction is retained verbatim in that file. Its operational content was:
 
 ```text
@@ -124,7 +124,7 @@ audit. Preserve the observation placeholder and legal response format.
 ```
 
 The block above records the substantive instruction. The file
-`meta_prompt_v2.md` is the authoritative verbatim version, including all
+`controlled_prompt_variant_generation_protocol.md` is the authoritative verbatim version, including all
 headings, Markdown formatting, and the exact output template. The three
 rendered `request.md` files listed below are the exact prompts sent to the API
 after task-specific substitution.

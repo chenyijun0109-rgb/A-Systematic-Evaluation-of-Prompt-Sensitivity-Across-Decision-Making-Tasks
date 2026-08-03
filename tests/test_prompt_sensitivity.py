@@ -9,6 +9,7 @@ from pathlib import Path
 
 from src.compute_prompt_sensitivity import (
     PromptSensitivityValidationError,
+    bootstrap_independent_effect,
     bootstrap_paired_effect,
     compute_psi_row,
     compute_standardised_effect,
@@ -226,6 +227,50 @@ class PromptSensitivityTests(unittest.TestCase):
         self.assertEqual(result["bootstrap_replicates"], 200)
         self.assertGreater(result["standardised_valid_replicates"], 0)
 
+    def test_independent_bootstrap_does_not_preserve_arbitrary_seed_pairs(self):
+        result = bootstrap_independent_effect(
+            baseline_values=[1.0, 10.0, 100.0],
+            condition_values=[11.0, 20.0, 110.0],
+            metric="advantageous_choice_rate",
+            policy=policy(),
+            replicates=200,
+            bootstrap_seed=123,
+            confidence_level=0.95,
+        )
+
+        self.assertEqual(result["bootstrap_unit"], "independent_cell")
+        self.assertLess(result["raw_difference_ci_lower"], 10.0)
+        self.assertGreater(result["raw_difference_ci_upper"], 10.0)
+
+    def test_igt_end_to_end_uses_independent_cell_bootstrap(self):
+        config = minimal_config()
+        config["tasks"] = {"igt": {"prompt_conditions": ["baseline", "detailed"]}}
+        config["analysis"]["prompt_sensitivity"]["primary_metrics"] = {
+            "igt": ["advantageous_choice_rate", "post_loss_switching_rate"]
+        }
+        rows = []
+        for condition, offset in (("baseline", 0.0), ("detailed", 0.1)):
+            for seed, value in zip((1, 2, 3), (0.2, 0.5, 0.8)):
+                rows.append({
+                    "task": "igt", "prompt_condition": condition, "seed": seed,
+                    "advantageous_choice_rate": value + offset,
+                    "post_loss_switching_rate": 1.0 - value + offset,
+                })
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            input_path = root / "metrics.csv"
+            with input_path.open("w", newline="", encoding="utf-8") as handle:
+                writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+                writer.writeheader(); writer.writerows(rows)
+            config_path = root / "config.json"
+            config_path.write_text(json.dumps(config), encoding="utf-8")
+            result = run_prompt_sensitivity_analysis(
+                input_path, output_dir=root / "out", expected_runs_per_cell=3,
+                allow_incomplete=False, config_path=config_path,
+            )
+        self.assertTrue(all(row["bootstrap_unit"] == "independent_cell" for row in result["effect_rows"]))
+        self.assertEqual(result["psi_rows"][0]["bootstrap_unit"], "independent_cell")
+
     def test_complete_psi_averages_three_absolute_effects(self):
         row = compute_psi_row(
             task="bart",
@@ -387,6 +432,7 @@ class PromptSensitivityTests(unittest.TestCase):
 
     def test_complete_36_run_fixture_produces_nine_complete_psi_rows(self):
         config = load_config(Path("configs/experiment_config_stage01.json"))
+        config["analysis"]["prompt_sensitivity"]["bootstrap_replicates"] = 3
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
             raw_dir = root / "raw"
@@ -496,12 +542,14 @@ class PromptSensitivityTests(unittest.TestCase):
                 allow_incomplete=False,
                 config_path=Path("configs/experiment_config_stage01.json"),
             )
+            test_config_path = root / "test_config.json"
+            test_config_path.write_text(json.dumps(config), encoding="utf-8")
             analysis = run_prompt_sensitivity_analysis(
                 output_dir / "llm_run_metrics.csv",
                 output_dir=output_dir,
                 expected_runs_per_cell=3,
                 allow_incomplete=False,
-                config_path=Path("configs/experiment_config_stage01.json"),
+                config_path=test_config_path,
             )
 
             self.assertEqual(len(aggregation.rows), 36)
