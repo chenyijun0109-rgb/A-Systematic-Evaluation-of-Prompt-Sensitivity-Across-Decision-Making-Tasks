@@ -598,47 +598,41 @@ paths, \texttt{TASK} is \texttt{bandit}, \texttt{igt}, or \texttt{bart}.
 \toprule
 Language & Condition & Repository path pattern \\
 \midrule
-English & Neutral & Repository \texttt{prompts/TASK/baseline.md} \\
-English & Instruction specificity & Repository \texttt{prompts/TASK/detailed.md} \\
-English & Role framing & Repository \texttt{prompts/TASK/role\_human.md} \\
-English & Construct emphasis & Repository files named \texttt{uncertainty\_emphasis.md}, \texttt{reward\_loss\_emphasis.md}, and \texttt{risk\_emphasis.md} in the respective task folders \\
-Simplified Chinese & All four conditions & Repository \texttt{prompts/multilingual/zh-CN/TASK/} \\
-Spanish & All four conditions & Repository \texttt{prompts/multilingual/es/TASK/} \\
+English & Neutral & Repository \url{prompts/TASK/baseline.md} \\
+English & Instruction specificity & Repository \url{prompts/TASK/detailed.md} \\
+English & Role framing & Repository \url{prompts/TASK/role_human.md} \\
+English & Construct emphasis & Repository files \url{uncertainty_emphasis.md}, \url{reward_loss_emphasis.md}, and \url{risk_emphasis.md} in the respective task folders \\
+Simplified Chinese & All four conditions & Repository \url{prompts/multilingual/zh-CN/TASK/} \\
+Spanish & All four conditions & Repository \url{prompts/multilingual/es/TASK/} \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-The complete prompt collection is available at:
-\begin{center}
-\url{https://github.com/chenyijun0109-rgb/A-Systematic-Evaluation-of-Prompt-Sensitivity-Across-Decision-Making-Tasks/tree/main/prompts}
-\end{center}
-The prompt-development protocol and provenance are in the repository's
-\texttt{prompts/generation/} folder, including the dated generation records.
+The complete prompt collection is available in the \url{prompts/} directory of
+the research repository linked in the Reproducibility section. The
+prompt-development protocol and provenance are in \url{prompts/generation/},
+including the dated generation records.
 Multilingual constraints and the completed audit trail are in
-\texttt{prompts/multilingual/}. These records document informational checks and
+\url{prompts/multilingual/}. These records document informational checks and
 freezing; they do not establish complete pragmatic or cultural equivalence.
 
 \section{Supplementary Result Files}
 \label{app:supplementary-results}
 
-The authoritative machine-readable analysis package is available online at:
-\begin{center}
-\url{https://github.com/chenyijun0109-rgb/A-Systematic-Evaluation-of-Prompt-Sensitivity-Across-Decision-Making-Tasks/tree/main/outputs/processed/final_analysis_v03}
-\end{center}
+The authoritative machine-readable analysis package is available in
+\url{outputs/processed/final_analysis_v03/} within the research repository.
 Its
-\texttt{analysis\_manifest.json} records file hashes, expected row counts,
+\url{analysis_manifest.json} records file hashes, expected row counts,
 bootstrap-validity checks, aggregation completeness, and Random-exploration
 convergence. The package contains the complete RQ1 prompt effects and PSI
 values, both GPT-5.4-reference RQ2 interaction comparisons, the symmetric
 three-language RQ3 contrasts, Random-exploration diagnostics, and the RQ4
 human-reference outputs.
 
-Publication displays and additional detailed figures are available at:
-\begin{center}
-\url{https://github.com/chenyijun0109-rgb/A-Systematic-Evaluation-of-Prompt-Sensitivity-Across-Decision-Making-Tasks/tree/main/outputs/figures/final_results_v01}
-\end{center}
+Publication displays and additional detailed figures are available in
+\url{outputs/figures/final_results_v01/} within the same repository.
 Detailed or appendix-oriented versions are in the
-\texttt{detail\_or\_appendix/} subdirectory. These files
+\url{detail_or_appendix/} subdirectory. These files
 support inspection of cells omitted from the necessarily selective Results
 prose. The principal findings, methodological contribution, and evidence needed
 to assess the dissertation's conclusions remain in the main body.
