@@ -55,7 +55,12 @@ EFFECT_FIELDS = (
     "bootstrap_unit",
     "confidence_level",
     "bootstrap_replicates",
+    "raw_valid_replicates",
+    "raw_valid_proportion",
+    "raw_interval_status",
     "standardised_valid_replicates",
+    "standardised_valid_proportion",
+    "standardised_interval_status",
     "raw_difference_ci_lower",
     "raw_difference_ci_upper",
     "standardised_effect_ci_lower",
@@ -75,6 +80,8 @@ PSI_FIELDS = (
     "confidence_level",
     "bootstrap_replicates",
     "psi_valid_replicates",
+    "psi_valid_proportion",
+    "psi_interval_status",
     "psi_ci_lower",
     "psi_ci_upper",
 )
@@ -163,6 +170,51 @@ def percentile(values: list[float], probability: float) -> float | None:
     return ordered[lower] + fraction * (ordered[upper] - ordered[lower])
 
 
+def bootstrap_validity(
+    *,
+    valid_replicates: int,
+    requested_replicates: int,
+    policy: dict[str, Any],
+) -> tuple[float, str]:
+    if requested_replicates < 1:
+        raise ValueError("Requested bootstrap replicates must be positive.")
+    proportion = valid_replicates / requested_replicates
+    thresholds = policy.get("bootstrap_validity", {})
+    formal = float(thresholds.get("formal_minimum", 0.95))
+    warning = float(thresholds.get("warning_minimum", 0.90))
+    if not 0.0 <= warning <= formal <= 1.0:
+        raise ValueError("Bootstrap validity thresholds must satisfy 0 <= warning <= formal <= 1.")
+    if proportion >= formal:
+        return proportion, "report"
+    if proportion >= warning:
+        return proportion, "report_with_stability_warning"
+    return proportion, "withhold"
+
+
+def validated_percentile_interval(
+    values: list[float],
+    *,
+    requested_replicates: int,
+    confidence_level: float,
+    policy: dict[str, Any],
+) -> dict[str, Any]:
+    proportion, status = bootstrap_validity(
+        valid_replicates=len(values),
+        requested_replicates=requested_replicates,
+        policy=policy,
+    )
+    alpha = (1.0 - confidence_level) / 2.0
+    lower = percentile(values, alpha) if status != "withhold" else None
+    upper = percentile(values, 1.0 - alpha) if status != "withhold" else None
+    return {
+        "valid_replicates": len(values),
+        "valid_proportion": proportion,
+        "interval_status": status,
+        "ci_lower": lower,
+        "ci_upper": upper,
+    }
+
+
 def _validation_issue(
     code: str,
     message: str,
@@ -231,36 +283,28 @@ def compute_standardised_effect(
     if denominator > tolerance:
         sd_source = "pooled"
         effect = correction * difference / denominator
-    elif abs(difference) <= tolerance:
-        denominator = 0.0
-        sd_source = "constant_equal"
-        effect = 0.0
     else:
-        issue = _validation_issue(
-            "zero_variance_undefined_effect",
-            "Both groups are constant but their means differ.",
-            metric=metric,
-            baseline_mean=baseline_mean,
-            condition_mean=condition_mean,
+        constant_status = (
+            "constant_equal"
+            if abs(difference) <= tolerance
+            else "constant_unequal"
         )
-        if allow_incomplete:
-            return {
-                "baseline_n": len(baseline_values),
-                "condition_n": len(condition_values),
-                "baseline_mean": baseline_mean,
-                "condition_mean": condition_mean,
-                "raw_mean_difference": difference,
-                "baseline_sd": baseline_sd,
-                "condition_sd": condition_sd,
-                "denominator": None,
-                "sd_source": "undefined",
-                "hedges_correction": correction,
-                "baseline_sd_standardised_effect": None,
-                "signed_standardised_effect": None,
-                "absolute_standardised_effect": None,
-                "warning_flags": "zero_variance_undefined_effect",
-            }
-        raise PromptSensitivityValidationError([issue])
+        return {
+            "baseline_n": len(baseline_values),
+            "condition_n": len(condition_values),
+            "baseline_mean": baseline_mean,
+            "condition_mean": condition_mean,
+            "raw_mean_difference": difference,
+            "baseline_sd": baseline_sd,
+            "condition_sd": condition_sd,
+            "denominator": None,
+            "sd_source": constant_status,
+            "hedges_correction": correction,
+            "baseline_sd_standardised_effect": None,
+            "signed_standardised_effect": None,
+            "absolute_standardised_effect": None,
+            "warning_flags": "zero_variance_undefined_effect|" + constant_status,
+        }
 
     baseline_effect = (
         difference / baseline_sd
@@ -329,22 +373,28 @@ def bootstrap_paired_effect(
         if effect is not None:
             standardised_effects.append(float(effect))
 
-    alpha = (1.0 - confidence_level) / 2.0
+    raw_interval = validated_percentile_interval(
+        raw_differences, requested_replicates=replicates,
+        confidence_level=confidence_level, policy=policy,
+    )
+    standardised_interval = validated_percentile_interval(
+        standardised_effects, requested_replicates=replicates,
+        confidence_level=confidence_level, policy=policy,
+    )
     return {
         "bootstrap_unit": "paired_environment_seed",
         "confidence_level": confidence_level,
         "bootstrap_replicates": replicates,
-        "standardised_valid_replicates": len(standardised_effects),
-        "raw_difference_ci_lower": percentile(raw_differences, alpha),
-        "raw_difference_ci_upper": percentile(raw_differences, 1.0 - alpha),
-        "standardised_effect_ci_lower": percentile(
-            standardised_effects,
-            alpha,
-        ),
-        "standardised_effect_ci_upper": percentile(
-            standardised_effects,
-            1.0 - alpha,
-        ),
+        "raw_valid_replicates": raw_interval["valid_replicates"],
+        "raw_valid_proportion": raw_interval["valid_proportion"],
+        "raw_interval_status": raw_interval["interval_status"],
+        "standardised_valid_replicates": standardised_interval["valid_replicates"],
+        "standardised_valid_proportion": standardised_interval["valid_proportion"],
+        "standardised_interval_status": standardised_interval["interval_status"],
+        "raw_difference_ci_lower": raw_interval["ci_lower"],
+        "raw_difference_ci_upper": raw_interval["ci_upper"],
+        "standardised_effect_ci_lower": standardised_interval["ci_lower"],
+        "standardised_effect_ci_upper": standardised_interval["ci_upper"],
     }
 
 
@@ -379,16 +429,28 @@ def bootstrap_independent_effect(
         effect = result["signed_standardised_effect"]
         if effect is not None:
             standardised_effects.append(float(effect))
-    alpha = (1.0 - confidence_level) / 2.0
+    raw_interval = validated_percentile_interval(
+        raw_differences, requested_replicates=replicates,
+        confidence_level=confidence_level, policy=policy,
+    )
+    standardised_interval = validated_percentile_interval(
+        standardised_effects, requested_replicates=replicates,
+        confidence_level=confidence_level, policy=policy,
+    )
     return {
         "bootstrap_unit": "independent_cell",
         "confidence_level": confidence_level,
         "bootstrap_replicates": replicates,
-        "standardised_valid_replicates": len(standardised_effects),
-        "raw_difference_ci_lower": percentile(raw_differences, alpha),
-        "raw_difference_ci_upper": percentile(raw_differences, 1.0 - alpha),
-        "standardised_effect_ci_lower": percentile(standardised_effects, alpha),
-        "standardised_effect_ci_upper": percentile(standardised_effects, 1.0 - alpha),
+        "raw_valid_replicates": raw_interval["valid_replicates"],
+        "raw_valid_proportion": raw_interval["valid_proportion"],
+        "raw_interval_status": raw_interval["interval_status"],
+        "standardised_valid_replicates": standardised_interval["valid_replicates"],
+        "standardised_valid_proportion": standardised_interval["valid_proportion"],
+        "standardised_interval_status": standardised_interval["interval_status"],
+        "raw_difference_ci_lower": raw_interval["ci_lower"],
+        "raw_difference_ci_upper": raw_interval["ci_upper"],
+        "standardised_effect_ci_lower": standardised_interval["ci_lower"],
+        "standardised_effect_ci_upper": standardised_interval["ci_upper"],
     }
 
 
@@ -498,16 +560,28 @@ def bootstrap_refit_horizon_effect(
         effect = result["signed_standardised_effect"]
         if effect is not None:
             standardised_effects.append(float(effect))
-    alpha = (1.0 - confidence_level) / 2.0
+    raw_interval = validated_percentile_interval(
+        raw_differences, requested_replicates=replicates,
+        confidence_level=confidence_level, policy=policy,
+    )
+    standardised_interval = validated_percentile_interval(
+        standardised_effects, requested_replicates=replicates,
+        confidence_level=confidence_level, policy=policy,
+    )
     return {
         "bootstrap_unit": "paired_environment_seed_hierarchical_refit",
         "confidence_level": confidence_level,
         "bootstrap_replicates": replicates,
-        "standardised_valid_replicates": len(standardised_effects),
-        "raw_difference_ci_lower": percentile(raw_differences, alpha),
-        "raw_difference_ci_upper": percentile(raw_differences, 1.0 - alpha),
-        "standardised_effect_ci_lower": percentile(standardised_effects, alpha),
-        "standardised_effect_ci_upper": percentile(standardised_effects, 1.0 - alpha),
+        "raw_valid_replicates": raw_interval["valid_replicates"],
+        "raw_valid_proportion": raw_interval["valid_proportion"],
+        "raw_interval_status": raw_interval["interval_status"],
+        "standardised_valid_replicates": standardised_interval["valid_replicates"],
+        "standardised_valid_proportion": standardised_interval["valid_proportion"],
+        "standardised_interval_status": standardised_interval["interval_status"],
+        "raw_difference_ci_lower": raw_interval["ci_lower"],
+        "raw_difference_ci_upper": raw_interval["ci_upper"],
+        "standardised_effect_ci_lower": standardised_interval["ci_lower"],
+        "standardised_effect_ci_upper": standardised_interval["ci_upper"],
     }
 
 
@@ -710,7 +784,10 @@ def bootstrap_paired_psi(
         if len(effects) == len(metrics):
             psi_values.append(statistics.mean(effects))
 
-    alpha = (1.0 - confidence_level) / 2.0
+    interval = validated_percentile_interval(
+        psi_values, requested_replicates=replicates,
+        confidence_level=confidence_level, policy=policy,
+    )
     return {
         "bootstrap_unit": (
             "paired_environment_seed_hierarchical_refit"
@@ -719,9 +796,11 @@ def bootstrap_paired_psi(
         ),
         "confidence_level": confidence_level,
         "bootstrap_replicates": replicates,
-        "psi_valid_replicates": len(psi_values),
-        "psi_ci_lower": percentile(psi_values, alpha),
-        "psi_ci_upper": percentile(psi_values, 1.0 - alpha),
+        "psi_valid_replicates": interval["valid_replicates"],
+        "psi_valid_proportion": interval["valid_proportion"],
+        "psi_interval_status": interval["interval_status"],
+        "psi_ci_lower": interval["ci_lower"],
+        "psi_ci_upper": interval["ci_upper"],
     }
 
 
@@ -780,14 +859,19 @@ def bootstrap_independent_psi(
             effects.append(float(effect))
         if len(effects) == len(metrics):
             psi_values.append(statistics.mean(effects))
-    alpha = (1.0 - confidence_level) / 2.0
+    interval = validated_percentile_interval(
+        psi_values, requested_replicates=replicates,
+        confidence_level=confidence_level, policy=policy,
+    )
     return {
         "bootstrap_unit": "independent_cell",
         "confidence_level": confidence_level,
         "bootstrap_replicates": replicates,
-        "psi_valid_replicates": len(psi_values),
-        "psi_ci_lower": percentile(psi_values, alpha),
-        "psi_ci_upper": percentile(psi_values, 1.0 - alpha),
+        "psi_valid_replicates": interval["valid_replicates"],
+        "psi_valid_proportion": interval["valid_proportion"],
+        "psi_interval_status": interval["interval_status"],
+        "psi_ci_lower": interval["ci_lower"],
+        "psi_ci_upper": interval["ci_upper"],
     }
 
 
@@ -1132,7 +1216,7 @@ def build_psi_rows(
                 minimum_partial_metrics=int(
                     policy["minimum_partial_metrics"]
                 ),
-                allow_incomplete=allow_incomplete,
+                allow_incomplete=True,
             )
             rows.append(psi_row)
             if psi_row["status"] != "complete":

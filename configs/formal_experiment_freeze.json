@@ -165,7 +165,12 @@
     "confidence_level": 0.95,
     "bootstrap_replicates": 2000,
     "bootstrap_unit": "paired task seed",
-    "zero_variance_rule": "If both groups are constant and unequal, the standardised effect is undefined; retain and report the raw difference."
+    "zero_variance_rule": "If pooled SD is zero, Hedges' g is undefined. Retain the raw difference and flag constant_equal or constant_unequal.",
+    "bootstrap_validity": {
+      "formal_minimum": 0.95,
+      "warning_minimum": 0.9,
+      "below_warning_action": "withhold_interval"
+    }
   },
   "horizon_random_exploration": {
     "model": "hierarchical logistic MAP with fixed Gaussian run shrinkage",

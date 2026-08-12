@@ -1,0 +1,38 @@
+% Required packages: booktabs, tabularx
+\begin{table}[htbp]
+\centering
+\caption{Analysis sample and quality checks.}
+\label{tab:results_quality}
+\begin{tabularx}{\textwidth}{lrrrrX}
+\toprule
+Dataset & Valid runs & Cells & Runs/cell & Parser recoveries & Analysis status \\
+\midrule
+GPT-4.1 English & 240 & 12 & 20 & 0 & Complete; all reported bootstrap intervals used 2,000/2,000 valid replicates. \\
+GPT-5.4 English & 240 & 12 & 20 & 0 & Complete; all reported bootstrap intervals used 2,000/2,000 valid replicates. \\
+GPT-5.4 Mini English & 240 & 12 & 20 & 1 & Complete after the prespecified parser retry; all reported intervals passed the reporting gate. \\
+GPT-4.1 Simplified Chinese & 240 & 12 & 20 & 0 & Complete; provenance and cell-completeness checks passed. \\
+GPT-4.1 Spanish & 240 & 12 & 20 & 0 & Complete; provenance and cell-completeness checks passed. \\
+\midrule
+Unique total & 1,200 & 60 & 20 & 1 & The 240 English GPT-4.1 runs are shared across the model and language analyses and counted once. \\
+\bottomrule
+\end{tabularx}
+\begin{flushleft}\footnotesize
+Random-exploration point estimates and shrinkage-sensitivity fits converged for the human reference and every formal LLM cell. Parser recovery counts successful response-format retries, not API-level network retries.
+\end{flushleft}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Summary of answers to the research questions.}
+\label{tab:rq_summary}
+\begin{tabularx}{\textwidth}{p{1.0cm}p{3.2cm}Xp{3.8cm}}
+\toprule
+RQ & Primary display & Main empirical pattern & Interpretation boundary \\
+\midrule
+RQ1 & Figure~\ref{fig:rq1} & Prompt effects varied across models, tasks, metrics, and formulations; no condition produced a uniform behavioural shift. & Direction does not automatically indicate improved performance. \\
+RQ2 & Figure~\ref{fig:rq2} & Model differences were concentrated in specific task--metric--condition cells, particularly BART and selected Horizon/IGT outcomes. & Interactions compare prompt responses, not general model capability. \\
+RQ3 & Figure~\ref{fig:rq3} & Both Neutral-baseline locations and within-language prompt effects varied across English, Simplified Chinese, and Spanish. & Results are language-associated, not pure causal effects of language. \\
+RQ4 & Figures~\ref{fig:rq4a}--\ref{fig:rq4b} & Prompt formulations sometimes reduced and sometimes increased human-SD-scaled deviation; mean proximity and empirical coverage could diverge. & Human proximity is descriptive and does not establish shared mechanisms. \\
+\bottomrule
+\end{tabularx}
+\end{table}

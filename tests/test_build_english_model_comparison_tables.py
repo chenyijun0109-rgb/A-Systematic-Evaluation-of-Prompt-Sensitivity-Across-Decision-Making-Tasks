@@ -25,7 +25,7 @@ class BuildEnglishModelComparisonTablesTests(unittest.TestCase):
         self.assertEqual(row["prompt_condition"], "detailed")
         self.assertEqual(row["prompt_condition_label"], "Instruction specificity")
         self.assertEqual(
-            row["metric_label"], "Horizon-related change in exploration rate"
+            row["metric_label"], "Horizon-related exploration change"
         )
 
 

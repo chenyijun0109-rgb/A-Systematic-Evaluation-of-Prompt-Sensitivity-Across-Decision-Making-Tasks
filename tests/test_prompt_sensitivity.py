@@ -11,6 +11,7 @@ from src.compute_prompt_sensitivity import (
     PromptSensitivityValidationError,
     bootstrap_independent_effect,
     bootstrap_paired_effect,
+    bootstrap_validity,
     compute_psi_row,
     compute_standardised_effect,
     run_prompt_sensitivity_analysis,
@@ -33,6 +34,10 @@ def policy():
         "low_variance_relative_threshold": 1e-6,
         "confidence_level": 0.95,
         "bootstrap_replicates": 200,
+        "bootstrap_validity": {
+            "formal_minimum": 0.95,
+            "warning_minimum": 0.90,
+        },
         "bootstrap_seed": 20260615,
     }
 
@@ -132,6 +137,13 @@ class PromptSensitivityTests(unittest.TestCase):
         )
         self.assertEqual(analysis["zero_tolerance"], 1e-12)
         self.assertEqual(analysis["minimum_partial_metrics"], 2)
+        self.assertEqual(
+            analysis["zero_variance_rule"],
+            "undefined_whenever_pooled_sd_is_zero; retain_raw_difference; "
+            "flag_constant_equal_or_constant_unequal",
+        )
+        self.assertEqual(analysis["bootstrap_validity"]["formal_minimum"], 0.95)
+        self.assertEqual(analysis["bootstrap_validity"]["warning_minimum"], 0.9)
 
     def test_summarise_metric_uses_sample_standard_deviation(self):
         summary = summarise_values([1.0, 2.0, 3.0])
@@ -172,7 +184,7 @@ class PromptSensitivityTests(unittest.TestCase):
         self.assertEqual(result["sd_source"], "pooled")
         self.assertGreater(result["denominator"], 0.0)
 
-    def test_equal_constant_groups_have_zero_effect(self):
+    def test_equal_constant_groups_have_undefined_standardised_effect(self):
         result = compute_standardised_effect(
             baseline_values=[1.0, 1.0, 1.0],
             condition_values=[1.0, 1.0, 1.0],
@@ -182,21 +194,68 @@ class PromptSensitivityTests(unittest.TestCase):
         )
 
         self.assertEqual(result["sd_source"], "constant_equal")
-        self.assertEqual(result["signed_standardised_effect"], 0.0)
+        self.assertEqual(result["raw_mean_difference"], 0.0)
+        self.assertIsNone(result["denominator"])
+        self.assertIsNone(result["signed_standardised_effect"])
+        self.assertIn("zero_variance_undefined_effect", result["warning_flags"])
 
     def test_unequal_constant_groups_are_undefined(self):
-        with self.assertRaises(PromptSensitivityValidationError) as context:
-            compute_standardised_effect(
-                baseline_values=[1.0, 1.0, 1.0],
-                condition_values=[2.0, 2.0, 2.0],
-                metric="adjusted_average_pumps",
-                policy=policy(),
-                allow_incomplete=False,
-            )
+        result = compute_standardised_effect(
+            baseline_values=[1.0, 1.0, 1.0],
+            condition_values=[2.0, 2.0, 2.0],
+            metric="adjusted_average_pumps",
+            policy=policy(),
+            allow_incomplete=False,
+        )
 
-        self.assertIn(
-            "zero_variance_undefined_effect",
-            context.exception.issue_codes,
+        self.assertEqual(result["sd_source"], "constant_unequal")
+        self.assertEqual(result["raw_mean_difference"], 1.0)
+        self.assertIsNone(result["denominator"])
+        self.assertIsNone(result["signed_standardised_effect"])
+        self.assertIn("zero_variance_undefined_effect", result["warning_flags"])
+
+    def test_zero_variance_bootstrap_replicates_are_not_replaced_with_zero(self):
+        result = bootstrap_paired_effect(
+            baseline_by_seed={1: 1.0, 2: 1.0, 3: 1.0},
+            condition_by_seed={1: 1.0, 2: 1.0, 3: 1.0},
+            metric="adjusted_average_pumps",
+            policy=policy(),
+            replicates=20,
+            bootstrap_seed=123,
+            confidence_level=0.95,
+        )
+
+        self.assertEqual(result["standardised_valid_replicates"], 0)
+        self.assertIsNone(result["standardised_effect_ci_lower"])
+        self.assertIsNone(result["standardised_effect_ci_upper"])
+        self.assertEqual(result["standardised_interval_status"], "withhold")
+        self.assertEqual(result["standardised_valid_proportion"], 0.0)
+
+    def test_bootstrap_validity_thresholds_are_frozen(self):
+        active_policy = policy()
+        self.assertEqual(
+            bootstrap_validity(
+                valid_replicates=1900,
+                requested_replicates=2000,
+                policy=active_policy,
+            ),
+            (0.95, "report"),
+        )
+        self.assertEqual(
+            bootstrap_validity(
+                valid_replicates=1800,
+                requested_replicates=2000,
+                policy=active_policy,
+            ),
+            (0.9, "report_with_stability_warning"),
+        )
+        self.assertEqual(
+            bootstrap_validity(
+                valid_replicates=1799,
+                requested_replicates=2000,
+                policy=active_policy,
+            )[1],
+            "withhold",
         )
 
     def test_small_positive_baseline_sd_warns_without_replacement(self):

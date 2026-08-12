@@ -2,6 +2,8 @@ import unittest
 
 from src.process_human_metrics import (
     bart_filter_summary,
+    horizon_effect,
+    horizon_exploration_rate,
     process_bart,
     process_horizon,
     process_igt,
@@ -9,6 +11,16 @@ from src.process_human_metrics import (
 
 
 class ProcessHumanMetricsTests(unittest.TestCase):
+    def test_horizon_metrics_are_missing_without_eligible_choices(self):
+        tied = [{
+            "game_length": 5,
+            "observed_mean_1": 50.0,
+            "observed_mean_2": 50.0,
+            "choice": 1,
+        }]
+        self.assertIsNone(horizon_exploration_rate(tied))
+        self.assertIsNone(horizon_effect(tied))
+
     def test_process_horizon_outputs_comparable_metrics(self):
         rows = process_horizon()
 

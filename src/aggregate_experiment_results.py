@@ -386,7 +386,8 @@ def _validate_completeness(
 def _validate_provenance(
     rows: list[dict[str, Any]],
     issues: list[ValidationIssue],
-) -> None:
+    config: dict[str, Any],
+) -> dict[str, Any]:
     models = {row["model"] for row in rows if row["model"]}
     if len(models) > 1:
         _issue(
@@ -454,7 +455,42 @@ def _validate_provenance(
         for row in rows
         if row["config_name"] and row["config_version"]
     }
-    if len(configs) > 1:
+    configs_by_language: dict[str, set[tuple[str, str]]] = {}
+    for row in rows:
+        if row["config_name"] and row["config_version"]:
+            configs_by_language.setdefault(row["prompt_language"], set()).add(
+                (row["config_name"], row["config_version"])
+            )
+
+    language_policy = (
+        config.get("analysis", {})
+        .get("language_sensitivity", {})
+        .get("allowed_source_configurations", {})
+    )
+    authorised_mixed_configs = False
+    unexpected_language_configs: dict[str, list[list[str]]] = {}
+    if language_policy and len(configs_by_language) > 1:
+        for language, observed in configs_by_language.items():
+            allowed = {
+                (str(item["config_name"]), str(item["config_version"]))
+                for item in language_policy.get(language, [])
+            }
+            if len(observed) != 1 or not observed.issubset(allowed):
+                unexpected_language_configs[language] = [
+                    list(item) for item in sorted(observed)
+                ]
+        authorised_mixed_configs = len(configs) > 1 and not unexpected_language_configs
+
+    if unexpected_language_configs:
+        _issue(
+            issues,
+            "unexpected_language_config_version",
+            "error",
+            "Observed language-specific configuration provenance does not match the prespecified policy.",
+            observed=unexpected_language_configs,
+            allowed=language_policy,
+        )
+    elif len(configs) > 1 and not authorised_mixed_configs:
         _issue(
             issues,
             "mixed_config_version",
@@ -500,6 +536,15 @@ def _validate_provenance(
                 prompt_hashes=sorted(hashes),
                 prompt_paths=sorted(paths),
             )
+
+    return {
+        "configurations_by_language": {
+            language: [list(item) for item in sorted(values)]
+            for language, values in sorted(configs_by_language.items())
+        },
+        "language_specific_config_policy_applied": bool(language_policy) and len(configs_by_language) > 1,
+        "authorised_mixed_config_versions": authorised_mixed_configs,
+    }
 
 
 def _sort_rows(
@@ -565,7 +610,7 @@ def aggregate_experiment_results(
         expected_languages,
         issues,
     )
-    _validate_provenance(rows, issues)
+    provenance_audit = _validate_provenance(rows, issues, config)
     rows = _sort_rows(rows, config)
     error_issues = [issue for issue in issues if issue.severity == "error"]
     report = {
@@ -577,6 +622,7 @@ def aggregate_experiment_results(
         "discovered_file_count": len(paths),
         "candidate_file_count": len(candidates),
         "valid_run_count": len(rows),
+        "provenance_audit": provenance_audit,
         "ignored_files": ignored,
         "issues": [asdict(issue) for issue in issues],
     }

@@ -70,6 +70,33 @@ class HorizonTaskEnvironmentTests(unittest.TestCase):
         )
         self.assertEqual(first.get_run_metrics(), second.get_run_metrics())
 
+    def test_exploration_rate_excludes_equal_observed_means(self):
+        records = [
+            {
+                "observed_mean_A": 50.0,
+                "observed_mean_B": 50.0,
+                "choice": "A",
+            },
+            {
+                "observed_mean_A": 60.0,
+                "observed_mean_B": 40.0,
+                "choice": "B",
+            },
+        ]
+
+        self.assertEqual(HorizonTaskEnvironment._exploration_rate(records), 1.0)
+
+    def test_exploration_rate_is_missing_without_eligible_choices(self):
+        records = [
+            {
+                "observed_mean_A": 50.0,
+                "observed_mean_B": 50.0,
+                "choice": "A",
+            }
+        ]
+
+        self.assertIsNone(HorizonTaskEnvironment._exploration_rate(records))
+
     def _run_choose_first_valid(self, seed):
         env = HorizonTaskEnvironment(n_games_per_run=4)
         env.reset(seed=seed)

@@ -122,10 +122,13 @@ baseline-condition seed pairs. Formal analysis uses 2,000 bootstrap
 replicates and 95% percentile intervals.
 
 Within each language, every manipulated condition is compared only with the
-baseline in the same language. Language effects use a paired-seed Friedman
-omnibus test, Kendall's W, and a within-seed permutation p-value. A second
-omnibus analysis compares within-language `condition - baseline` effects
-across all three languages. Pairwise language comparisons are not primary.
+baseline in the same language. English is the prespecified language reference.
+Baseline language effects are reported as Simplified-Chinese-minus-English and
+Spanish-minus-English contrasts. Prompt-sensitivity differences use
+`(target condition - target baseline) - (English condition - English baseline)`
+interaction contrasts. Raw and Hedges' g contrasts receive 2,000 percentile-
+bootstrap 95% intervals. Horizon and BART resample matched seed blocks; IGT
+resamples runs independently within its deterministic-schedule cells.
 
 ## Horizon Random Exploration
 

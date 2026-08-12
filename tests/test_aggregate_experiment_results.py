@@ -191,6 +191,81 @@ class AggregateExperimentResultsTests(unittest.TestCase):
             {"en", "zh-CN"},
         )
 
+    def test_prespecified_language_config_versions_are_accepted(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            for language, version in (("en", "1"), ("zh-CN", "2")):
+                for condition in ("baseline", "detailed"):
+                    write_pilot(
+                        root / f"{language}-{condition}.json",
+                        task="igt",
+                        condition=condition,
+                        seed=1,
+                        metrics=igt_metrics(),
+                        config_version=version,
+                        prompt_language=language,
+                    )
+            config = minimal_config()
+            config["analysis"] = {
+                "language_sensitivity": {
+                    "allowed_source_configurations": {
+                        "en": [{"config_name": "test_config", "config_version": "1"}],
+                        "zh-CN": [{"config_name": "test_config", "config_version": "2"}],
+                    }
+                }
+            }
+            result = aggregate_experiment_results(
+                [root],
+                expected_runs_per_cell=1,
+                duplicate_policy="error",
+                allow_incomplete=False,
+                config=config,
+                include_horizon_model=False,
+                expected_languages=("en", "zh-CN"),
+            )
+
+        self.assertTrue(result.quality_report["analysis_complete"])
+        self.assertTrue(
+            result.quality_report["provenance_audit"][
+                "authorised_mixed_config_versions"
+            ]
+        )
+
+    def test_unexpected_language_config_version_is_rejected(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            for language, version in (("en", "2"), ("zh-CN", "2")):
+                for condition in ("baseline", "detailed"):
+                    write_pilot(
+                        root / f"{language}-{condition}.json",
+                        task="igt",
+                        condition=condition,
+                        seed=1,
+                        metrics=igt_metrics(),
+                        config_version=version,
+                        prompt_language=language,
+                    )
+            config = minimal_config()
+            config["analysis"] = {
+                "language_sensitivity": {
+                    "allowed_source_configurations": {
+                        "en": [{"config_name": "test_config", "config_version": "1"}],
+                        "zh-CN": [{"config_name": "test_config", "config_version": "2"}],
+                    }
+                }
+            }
+            result = aggregate_experiment_results(
+                [root],
+                expected_runs_per_cell=1,
+                duplicate_policy="error",
+                allow_incomplete=True,
+                config=config,
+                include_horizon_model=False,
+            )
+
+        codes = {issue["code"] for issue in result.quality_report["issues"]}
+        self.assertIn("unexpected_language_config_version", codes)
+
     def test_required_language_missing_is_reported(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)

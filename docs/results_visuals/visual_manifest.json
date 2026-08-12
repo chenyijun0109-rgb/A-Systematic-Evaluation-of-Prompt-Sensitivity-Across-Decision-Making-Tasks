@@ -1,0 +1,28 @@
+{
+  "figure_directory": "outputs\\figures\\final_results_v01",
+  "latex_directory": "docs\\results_visuals",
+  "figures": [
+    "detail_or_appendix",
+    "figure_rq1_prompt_effects_overview.pdf",
+    "figure_rq1_prompt_effects_overview.png",
+    "figure_rq2_model_interactions_overview.pdf",
+    "figure_rq2_model_interactions_overview.png",
+    "figure_rq3_language_overview.pdf",
+    "figure_rq3_language_overview.png",
+    "figure_rq4_absolute_deviation_heatmap.pdf",
+    "figure_rq4_absolute_deviation_heatmap.png",
+    "figure_rq4_coverage_heatmap.pdf",
+    "figure_rq4_coverage_heatmap.png",
+    "figure_rq4_human_reference_overview.pdf",
+    "figure_rq4_human_reference_overview.png",
+    "new_version",
+    "old_version"
+  ],
+  "latex_files": [
+    "results_figures.tex",
+    "results_tables.tex",
+    "results_visual_package.tex",
+    "visual_package_compile_test.tex"
+  ],
+  "source": "outputs\\processed\\final_analysis_v03\\analysis_manifest.json"
+}

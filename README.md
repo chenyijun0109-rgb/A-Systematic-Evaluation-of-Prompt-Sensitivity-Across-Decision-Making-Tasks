@@ -894,7 +894,7 @@ tests/
   test_task_base.py
 ```
 
-`DATASET/`、`outputs/`、`.venv/` 和本地 agent/editor 状态不属于 Git
+`DATASET/`、`outputs/`、`.venv/`、`.cache/`、`.tmp/`、`tmp/` 和本地 agent/editor 状态不属于 Git
 仓库内容，因此未列入上面的版本控制结构。
 
 ## GitHub Storage Policy

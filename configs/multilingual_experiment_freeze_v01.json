@@ -51,7 +51,22 @@
       "outputs/multilingual_v01"
     ]
   },
-  "language_comparison_scope": "All three languages are tested together; pairwise comparisons are not part of the primary analysis.",
+  "language_comparison_scope": "English is the prespecified reference language; Simplified Chinese and Spanish are each contrasted with English under fixed GPT-4.1.",
+  "source_configurations_by_language": {
+    "en": {
+      "config_name": "experiment_config_stage01",
+      "config_version": "0.5",
+      "reason": "Prespecified reuse of the completed formal English GPT-4.1 sample."
+    },
+    "zh-CN": {
+      "config_name": "experiment_config_stage01",
+      "config_version": "0.7"
+    },
+    "es": {
+      "config_name": "experiment_config_stage01",
+      "config_version": "0.7"
+    }
+  },
   "experimental_unit": [
     "prompt_language",
     "task",
@@ -59,9 +74,10 @@
     "seed"
   ],
   "seed_policy": "Use identical task-specific seeds across languages and prompt conditions.",
-  "prompt_sensitivity_definition": "Within each language, compare every manipulated prompt condition with the baseline in the same language using paired seeds, Hedges' g, bootstrap intervals, and PSI.",
-  "language_effect_definition": "For each task, condition, and metric, compare en, zh-CN, and es together with a seed-paired Friedman omnibus test, Kendall's W, and within-seed permutation p-value.",
-  "language_prompt_interaction_definition": "For each manipulated condition, compare the within-language condition-minus-baseline effects across en, zh-CN, and es together using the same omnibus procedure.",
+  "prompt_sensitivity_definition": "Within each language, compare every manipulated prompt condition with the baseline in the same language using signed raw differences, Hedges' g, bootstrap intervals, and PSI.",
+  "language_effect_definition": "For each task and primary metric, describe neutral-baseline differences as Simplified-Chinese-minus-English and Spanish-minus-English contrasts with bootstrap confidence intervals.",
+  "language_prompt_interaction_definition": "For each manipulated condition and primary metric, estimate [(target-language condition - target-language baseline) - (English condition - English baseline)] with raw and standardised contrasts and bootstrap confidence intervals.",
+  "language_bootstrap_policy": "Use matched-seed block bootstrap for Horizon and BART and independent-cell run bootstrap for deterministic-schedule IGT; use 2000 percentile-bootstrap replicates with seed 20260615.",
   "observation_policy": "Static instructions and dynamically rendered observations must use the selected prompt language; parser action tokens remain invariant ASCII.",
   "prompt_constraints": "prompts/multilingual/translation_constraints.md",
   "semantic_review": {
@@ -136,7 +152,8 @@
     "metric_summary.csv",
     "prompt_effects.csv",
     "prompt_sensitivity.csv",
-    "language_omnibus.csv",
-    "language_prompt_omnibus.csv"
+    "language_baseline_contrasts.csv",
+    "language_prompt_interactions.csv",
+    "language_interaction_summary.json"
   ]
 }

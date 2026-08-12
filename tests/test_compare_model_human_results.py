@@ -23,7 +23,7 @@ class CompareModelHumanResultsTests(unittest.TestCase):
         self.assertEqual(len(combined), 4)
         self.assertEqual(len(changes), 2)
         a_change = next(item for item in changes if item["model"] == "A")
-        self.assertEqual(a_change["absolute_distance_change_from_baseline"], -1.0)
+        self.assertEqual(a_change["absolute_deviation_change_from_baseline"], -1.0)
         self.assertAlmostEqual(a_change["reference_coverage_change_from_baseline"], 0.2)
 
     def test_rejects_mismatched_human_references(self):

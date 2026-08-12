@@ -95,7 +95,7 @@ outputs/formal_multilingual_v01/
 1. 将 English、中文和西班牙语合并为 720-run 正式分析数据。
 2. 在每种语言内部比较 manipulated condition 与同语言 baseline。
 3. 报告 raw difference、Hedges' g、paired bootstrap interval 和 PSI。
-4. 对三种语言进行 paired-seed Friedman omnibus analysis。
+4. 以英文为参照计算中文/西班牙语 baseline contrasts 与 language-by-prompt interaction contrasts，并使用任务适配的 bootstrap confidence intervals。
 5. 报告 Kendall's W 和 within-seed permutation p-value。
 6. 比较三种语言的 within-language `condition - baseline` prompt effects。
 7. primary analysis 不进行事后挑选的 pairwise language tests。

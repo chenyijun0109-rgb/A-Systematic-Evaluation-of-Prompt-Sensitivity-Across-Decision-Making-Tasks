@@ -148,6 +148,12 @@ class HorizonTaskEnvironment(BaseTaskEnvironment):
             [record for record in first_free_records if record["horizon_type"] == "horizon_6"]
         )
         directed_exploration = self._directed_exploration(first_free_records)
+        horizon_effect = (
+            horizon_6_exploration - horizon_1_exploration
+            if horizon_1_exploration is not None
+            and horizon_6_exploration is not None
+            else None
+        )
 
         return {
             "n_games": len(self.games),
@@ -156,7 +162,7 @@ class HorizonTaskEnvironment(BaseTaskEnvironment):
             "switching_rate": switching_rate,
             "exploration_rate": exploration_rate,
             "directed_exploration": directed_exploration,
-            "horizon_effect": horizon_6_exploration - horizon_1_exploration,
+            "horizon_effect": horizon_effect,
         }
 
     def _create_game(self, game_id: int) -> dict[str, Any]:
@@ -228,19 +234,18 @@ class HorizonTaskEnvironment(BaseTaskEnvironment):
         return left - right
 
     @staticmethod
-    def _exploration_rate(records: list[dict[str, Any]]) -> float:
+    def _exploration_rate(records: list[dict[str, Any]]) -> float | None:
         eligible = [
             record
             for record in records
             if record["observed_mean_A"] is not None and record["observed_mean_B"] is not None
+            and record["observed_mean_A"] != record["observed_mean_B"]
         ]
         if not eligible:
-            return 0.0
+            return None
 
         exploratory_choices = 0
         for record in eligible:
-            if record["observed_mean_A"] == record["observed_mean_B"]:
-                continue
             best_option = "A" if record["observed_mean_A"] > record["observed_mean_B"] else "B"
             if record["choice"] != best_option:
                 exploratory_choices += 1

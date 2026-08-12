@@ -23,8 +23,8 @@ PROMPT_CONDITION_LABELS = {
 }
 
 METRIC_LABELS = {
-    "directed_exploration": "Directed exploration",
-    "horizon_effect": "Horizon-related change in exploration rate",
+    "directed_exploration": "Information-seeking choice rate",
+    "horizon_effect": "Horizon-related exploration change",
     "random_exploration_effect": "Random exploration effect",
     "advantageous_choice_rate": "Advantageous choice rate",
     "post_loss_switching_rate": "Post-loss switching rate",

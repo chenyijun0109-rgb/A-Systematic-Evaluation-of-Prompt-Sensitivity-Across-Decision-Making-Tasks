@@ -12,8 +12,8 @@ from typing import Any
 from src.compute_prompt_sensitivity import (
     _horizon_observations_by_seed,
     _refit_horizon_run_values,
-    percentile,
     stable_bootstrap_seed,
+    validated_percentile_interval,
 )
 from src.prompt_loader import load_config
 
@@ -210,7 +210,10 @@ def build_model_prompt_interactions(
                         bootstrap_means.append((b_condition - b_base) - (a_condition - a_base))
                     resampling_unit = "independent_run_within_model_prompt_cell"
                     interaction_sd = None
-                alpha = (1.0 - confidence_level) / 2.0
+                interval = validated_percentile_interval(
+                    bootstrap_means, requested_replicates=replicates,
+                    confidence_level=confidence_level, policy=policy,
+                )
                 output.append(
                     {
                         "prompt_language": "en",
@@ -227,8 +230,11 @@ def build_model_prompt_interactions(
                         "resampling_unit": resampling_unit,
                         "confidence_level": confidence_level,
                         "bootstrap_replicates": replicates,
-                        "interaction_ci_lower": percentile(bootstrap_means, alpha),
-                        "interaction_ci_upper": percentile(bootstrap_means, 1.0 - alpha),
+                        "valid_replicates": interval["valid_replicates"],
+                        "valid_proportion": interval["valid_proportion"],
+                        "interval_status": interval["interval_status"],
+                        "interaction_ci_lower": interval["ci_lower"],
+                        "interaction_ci_upper": interval["ci_upper"],
                     }
                 )
     return output

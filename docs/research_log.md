@@ -1,5 +1,119 @@
 # Research Log
 
+## 2026-08-08: Complete manuscript formula and subscript audit
+
+- Checked all 26 display equations against the implemented task and analysis
+  code and verified balanced delimiters and braces.
+- Added the participant/run index to the direct Horizon effect and retained the
+  H6-minus-H1 direction used by preprocessing.
+- Removed nested display-math environments from the Horizon reward and BART
+  hazard equations without changing their definitions.
+- Aligned the Hedges' g zero-variance text with the frozen operational rule:
+  equal constant groups use `g=0`; unequal constant groups are undefined.
+- Defined human-reference coverage over non-missing metric values, documented
+  linear quantile interpolation, and replaced ambiguous `Delta|D|` notation
+  with `Delta^abs`.
+- Stated the zero-human-SD boundary for human-standardised distances.
+
+Status: manuscript formulas, notation, edge cases, and code are aligned; 54
+targeted tests pass.
+
+## 2026-08-08: Verify IGT signs and Horizon metric parameterisation
+
+- Confirmed that LLM and human IGT loss fields use zero or negative signed
+  values and that post-loss switching is triggered by `loss < 0`, independently
+  of the sign of net outcome.
+- Matched the manuscript `horizon_effect` definition to implementation: first
+  free choices only, both information conditions, pre-choice observed means,
+  ties excluded, and Horizon 6 minus Horizon 1.
+- Clarified that the model variable `reward_sensitivity` is the slope on reward
+  difference but multiplies the whole subjective-evidence bracket, making it
+  the overall evidence inverse-temperature under this parameterisation.
+
+Status: code, source-data signs, README, and manuscript terminology aligned.
+
+## 2026-08-08: Align Horizon tie handling and finalise metric definitions
+
+- Audited the manuscript definitions against the task and human-preprocessing
+  code and the retained source datasets.
+- Defined IGT post-loss switching from the recorded negative loss component,
+  not net outcome, and excluded trial 100 because it has no subsequent choice.
+- Clarified that legacy `directed_exploration` is the unequal-information
+  information-seeking choice rate, whereas `horizon_effect` is the Horizon-6
+  minus Horizon-1 lower-observed-mean choice rate across both information
+  conditions.
+- Fixed LLM Horizon preprocessing to exclude observed-mean ties, matching the
+  existing human rule. The audit found 160 ties in 16,000 formal English LLM
+  games and 151 in 19,200 human games.
+- Regenerated all three English model metric sets, prompt-sensitivity analyses,
+  model comparisons, human comparisons, and human-similarity tables from the
+  retained raw records.
+- Corrected manuscript provenance: the 60-person Horizon reference is the Feng
+  et al. release (31 `pilot-v1`, 29 `repeater-v1`), and the 504-person IGT
+  subset comprises seven documented study labels with complete 100-trial
+  choice, reward, and loss records.
+
+Status: definitions, implementation, English derived outputs, and manuscript
+wording aligned.
+
+## 2026-08-05: Complete manuscript interaction and uncertainty specification
+
+- Defined GPT-4.1-reference model interactions and English-reference language
+  baseline and prompt-interaction contrasts in the thesis Method.
+- Specified raw interaction contrasts as primary and cross-language Hedges' g
+  differences as supplementary standardised summaries.
+- Recorded 2,000 two-sided percentile-bootstrap 95% intervals, bootstrap seed
+  20260615, and task-specific resampling units.
+- Added an estimation-focused multiplicity policy: no family-wise adjustment,
+  no isolated binary decisions from unadjusted intervals, and interpretation
+  based on prespecified effect patterns and uncertainty.
+
+Status: manuscript wording aligned with the current interaction/bootstrap plan.
+
+## 2026-08-05: Replace multilingual omnibus tests with interactions
+
+- Replaced the planned Friedman/Kendall's W/permutation analysis with English-
+  reference baseline contrasts and language-by-prompt interaction contrasts.
+- Added `src/compute_language_interactions.py`, producing raw and Hedges' g
+  contrasts with 2,000 percentile-bootstrap confidence intervals.
+- Preserved matched-seed block bootstrap for Horizon and BART and independent-
+  cell run bootstrap for deterministic-schedule IGT.
+- Updated the canonical experiment config, multilingual freeze, tests, output
+  schema, command documentation, and compatibility entry point.
+
+Status: implemented; formal three-language data must be complete before the
+production interaction outputs can be generated.
+
+## 2026-08-04: Reorder the Statistical Analysis comparison logic
+
+- Reorganised the manuscript analysis in the order required by the controlled
+  comparisons: prompt conditions within one model and language; models within
+  English; then languages within GPT-4.1.
+- Added an explicit language index to prompt-effect, Hedges' g, and PSI
+  notation so the formulas match the multilingual design.
+- Kept model-by-prompt and language-by-prompt interactions as separate stages.
+
+Status: applied to the external manuscript source and repository method notes.
+
+## 2026-08-04: Revise thesis Method for behavioural metrics and languages
+
+- Audited the Method in `final.pdf` and recorded the required corrections in
+  `docs/method_revision_multilingual_metrics_zh.md`.
+- Replaced “pre-frozen” as the rationale for metric selection with construct
+  coverage, record-based measurability, and human--LLM comparability; freezing
+  is retained only as an analysis-timing safeguard.
+- Specified the multilingual comparison as English, Simplified Chinese, and
+  Spanish under fixed `gpt-4.1-2025-04-14`, semantically matched prompt
+  manipulations, matched task settings, and 20 base seeds per cell.
+- Kept the three-model English comparison separate from the fixed-model
+  language comparison and specified language-by-prompt interactions.
+- Flagged the distinction between the project-level information-seeking rate
+  named `directed_exploration` and the separate horizon-dependent exploration
+  effect.
+
+Status: paste-ready Method revision prepared; the external manuscript source
+must apply the wording and replace its model-collection date placeholders.
+
 ## 2026-08-03: Propagate Horizon model uncertainty and correct BART missingness
 
 - Classified Horizon `random_exploration_effect` run values as partially
@@ -2907,3 +3021,104 @@ Responses API; the resumable experiment plan remains ready.
 - Updated the generator default path and current documentation.
 - Preserved the old path and heading inside immutable 2026-06-14 request and
   generation records because they document the artifact actually used then.
+# 2026-08-05: Draft the thesis Introduction
+
+- Added the first full English Introduction to `docs/introduction_draft.md`
+  and inserted the same prose into `tmp/final_working.md`.
+- Structured the argument around LLMs as behavioural/cognitive research
+  objects, prompt-dependent measurement, the gap in repeated interactive-task
+  robustness, controlled cross-language comparison, task coverage, and four
+  research questions.
+- Kept prompt stability, task performance, and human-reference proximity as
+  separate criteria and avoided treating human-like behaviour as evidence of
+  shared mechanism.
+- Added a 21-item working bibliography covering synthetic participants,
+  cognitive-model framing, prompt sensitivity, multilingual evaluation, and
+  the Horizon, IGT, and BART paradigms and datasets.
+- Web checks used primary publisher, proceedings, and paper records where
+  available. A final bibliography-manager audit remains required before
+  submission, especially for proceedings pagination and the newest preprint.
+
+## 2026-08-10: Align inference code with the revised Method
+
+- Changed pooled-SD Hedges' g so that every zero pooled-SD case is undefined:
+  equal constants retain raw difference 0 with `constant_equal`, and unequal
+  constants retain their raw difference with `constant_unequal`.
+- Undefined standardised effects are no longer replaced by zero; PSI requires
+  all configured component g values to be defined for a complete estimate.
+- Added per-interval bootstrap validity diagnostics and frozen reporting gates:
+  at least 95% valid for routine reporting, 90%--<95% with a stability warning,
+  and below 90% withheld.
+- Changed LLM and human Horizon exploration-rate helpers to return missing when
+  no eligible non-tied choices exist; Horizon-related exploration change is
+  missing when either H1 or H6 is undefined.
+- Propagated validity status to within-model effects, PSI, cross-model
+  interactions, cross-language contrasts, and hierarchical Random-exploration
+  bootstrap outputs.
+- Updated the Method and Results/Discussion execution plan to require explicit
+  human--LLM Random-exploration specification alignment before RQ4 reporting.
+- The targeted suite (45 tests) and full suite (149 tests) passed before any
+  formal output regeneration.
+
+## 2026-08-10: Regenerate the final RQ1--RQ4 analysis package
+
+- Added a frozen per-language provenance allowlist for the reused English
+  config version 0.5 and newly collected Chinese/Spanish version 0.7. The
+  aggregation validator still rejects within-language mixing and unexpected
+  versions and records the observed mapping in its quality report.
+- Regenerated `outputs/processed/final_analysis_v03/`: English RQ1 outputs for
+  GPT-4.1, GPT-5.4 and GPT-5.4 Mini; multilingual GPT-4.1 RQ1/RQ3 outputs; and
+  both prespecified candidate-model-minus-GPT-5.4 RQ2 contrast sets.
+- The multilingual aggregation contains 720 valid runs, 20 per each of 36
+  language-task-prompt cells, with no quality issues. RQ3 contains 16 Neutral
+  baseline contrasts and 48 language-by-prompt interactions.
+- All RQ1, PSI, RQ2 and RQ3 intervals passed the frozen reporting threshold;
+  each used 2,000/2,000 valid replicates.
+- Refit human and all formal LLM Random-exploration cells with the same model
+  specification and the 0.25/0.5/1.0 shrinkage grid. Every point-estimate and
+  sensitivity fit converged, so the metric remains eligible for descriptive
+  RQ4 comparison.
+- Rebuilt human-reference comparisons for English three-model and GPT-4.1
+  multilingual cells. The combined package contains 160 comparison rows and
+  120 manipulated-minus-Neutral change rows, using the precise
+  `human-SD-scaled mean deviation` terminology.
+- Added and ran `src/build_final_analysis_manifest.py`; the final manifest
+  reports `analysis_ready=true`, no failures, and hashes every claim-bearing
+  table, diagnostic file, run-metric input and frozen configuration.
+- Drafted separate Results and Discussion sections in
+  `tmp/final_revision_all.md` after the manifest passed. Results report the
+  final RQ1--RQ4 estimates without mechanism claims; Discussion interprets the
+  patterns against the audited literature and states model, language,
+  human-reference, multiplicity and deployment limitations.
+- Replaced the Introduction's Results-achieved placeholder with a concise
+  findings summary and updated the document-structure paragraph to distinguish
+  Results from Discussion.
+- Re-audited Method after final output generation. Clarified that the two
+  720-run designs share 240 English GPT-4.1 runs (1,200 unique total), promoted
+  Neutral baseline language contrasts to primary RQ3 analyses, removed an
+  unsupported claim about exact proprietary-tokenizer prompt counts, aligned
+  bootstrap diagnostic wording with the actual output schema, and documented
+  the frozen English-0.5 versus Chinese/Spanish-0.7 provenance mapping.
+- Kept the exact config-version mapping in technical provenance records but
+  removed those engineering identifiers from the manuscript body. Method and
+  Results now state only the batch-level provenance checks relevant to
+  interpretation and direct readers to the appendix/quality report for detail.
+- Added `src/build_results_visual_package.py` and generated the final visual
+  Results package from `final_analysis_v03`: RQ1/RQ2 forest plots, an RQ3
+  baseline forest plot, RQ3 interaction heatmaps, and paired RQ4 deviation/
+  coverage heatmaps. Every figure is available as vector PDF and 600-dpi PNG.
+- Added two LaTeX tables (sample/quality and RQ summary) plus ready-to-input
+  figure environments in `docs/results_visuals/`. Static QA and raster visual
+  inspection passed; local LaTeX compilation could not be run because no TeX
+  engine is installed in the current environment.
+- Integrated the visual package into `tmp/final_revision_all.md`. Rewrote the
+  Results prose to point to Tables 1--2 and the RQ-specific figures, retained
+  only representative raw estimates, clarified the non-multiplicity-adjusted
+  heatmap marker, and merged the separate robustness subsection into the
+  analysis-quality section. Results now contains exactly five subsections.
+## 2026-08-11 — Symmetric joint-language RQ3 revision
+
+- Replaced the English-reference RQ3 specification with a joint, effect-coded comparison of English, Simplified Chinese, and Spanish.
+- Added `src/compute_joint_language_contrasts.py`. Neutral means and within-language prompt effects are centred on their corresponding three-language means; the three language deviations sum to zero, so no language is a reference category.
+- Generated 24 centred Neutral deviations and 72 centred prompt-effect deviations with 2,000-replicate task-appropriate bootstrap intervals.
+- Updated the analysis manifest, RQ3 figure, Method, Results, Discussion, Conclusion, and README to use only the symmetric three-language estimands.

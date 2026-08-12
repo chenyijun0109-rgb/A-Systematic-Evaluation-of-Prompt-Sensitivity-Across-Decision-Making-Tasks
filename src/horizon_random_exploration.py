@@ -422,6 +422,14 @@ def bootstrap_hierarchical_random_exploration(
 
     successful_fits = replicates - failed_fits
     alpha = (1.0 - confidence_level) / 2.0
+    valid_proportion = successful_fits / replicates
+    interval_status = (
+        "report"
+        if valid_proportion >= 0.95
+        else "report_with_stability_warning"
+        if valid_proportion >= 0.90
+        else "withhold"
+    )
     result: dict[str, Any] = {
         "cluster_unit": "run",
         "confidence_level": confidence_level,
@@ -429,12 +437,20 @@ def bootstrap_hierarchical_random_exploration(
         "successful_fits": successful_fits,
         "failed_fits": failed_fits,
         "convergence_rate": successful_fits / replicates,
+        "valid_proportion": valid_proportion,
+        "interval_status": interval_status,
         "n_runs": len(run_ids),
         "diagnostic_only": len(run_ids) < 15,
     }
     for name, values in estimates.items():
-        result[f"{name}_ci_lower"] = _percentile(values, alpha)
-        result[f"{name}_ci_upper"] = _percentile(values, 1.0 - alpha)
+        result[f"{name}_ci_lower"] = (
+            _percentile(values, alpha) if interval_status != "withhold" else None
+        )
+        result[f"{name}_ci_upper"] = (
+            _percentile(values, 1.0 - alpha)
+            if interval_status != "withhold"
+            else None
+        )
     return result
 
 

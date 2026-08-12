@@ -412,7 +412,7 @@
     "prompt_sensitivity": {
       "standardised_effect_formula": "Hedges_g = J * (mean(metric_condition) - mean(metric_baseline)) / pooled_sample_sd",
       "sensitivity_effect_formula": "(mean(metric_condition) - mean(metric_baseline)) / sd(metric_baseline)",
-      "zero_variance_rule": "undefined_if_both_groups_are_constant_with_different_means",
+      "zero_variance_rule": "undefined_whenever_pooled_sd_is_zero; retain_raw_difference; flag_constant_equal_or_constant_unequal",
       "psi_formula": "mean(abs(standardised_effects_across_selected_metrics))",
       "bootstrap_unit_by_task": {
         "horizon": "paired_environment_seed; random_exploration_effect refits the hierarchical model within every bootstrap replicate",
@@ -456,6 +456,11 @@
       "confidence_level": 0.95,
       "bootstrap_replicates": 2000,
       "bootstrap_seed": 20260615,
+      "bootstrap_validity": {
+        "formal_minimum": 0.95,
+        "warning_minimum": 0.9,
+        "below_warning_action": "withhold_interval"
+      },
       "bounded_metrics": [
         "directed_exploration",
         "horizon_effect",
@@ -467,22 +472,46 @@
       "low_variance_relative_threshold": 1e-6
     },
     "language_sensitivity": {
-      "languages_compared_together": [
-        "en",
+      "reference_language": "en",
+      "target_languages": [
         "zh-CN",
         "es"
       ],
-      "paired_unit": "seed",
-      "omnibus_test": "Friedman repeated-measures test with within-seed language-label permutation",
-      "effect_size": "Kendall_W",
-      "permutation_replicates": 2000,
-      "pairwise_comparisons": false,
-      "language_effect": "three-language omnibus comparison within task_condition_metric",
-      "language_prompt_interaction": "three-language omnibus comparison of within-language condition-minus-baseline effects",
+      "allowed_source_configurations": {
+        "en": [
+          {
+            "config_name": "experiment_config_stage01",
+            "config_version": "0.5"
+          }
+        ],
+        "zh-CN": [
+          {
+            "config_name": "experiment_config_stage01",
+            "config_version": "0.7"
+          }
+        ],
+        "es": [
+          {
+            "config_name": "experiment_config_stage01",
+            "config_version": "0.7"
+          }
+        ]
+      },
+      "baseline_language_contrast": "target language minus English",
+      "language_prompt_interaction": "(target condition - target baseline) - (English condition - English baseline)",
+      "bootstrap_replicates": 2000,
+      "bootstrap_seed": 20260615,
+      "confidence_level": 0.95,
+      "confidence_interval": "percentile",
+      "bootstrap_units": {
+        "horizon": "matched_seed_block",
+        "igt": "independent_cell_run",
+        "bart": "matched_seed_block"
+      },
       "outputs": [
-        "language_omnibus.csv",
-        "language_prompt_omnibus.csv",
-        "language_omnibus_summary.json"
+        "language_baseline_contrasts.csv",
+        "language_prompt_interactions.csv",
+        "language_interaction_summary.json"
       ]
     },
     "horizon_random_exploration": {

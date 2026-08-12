@@ -120,14 +120,14 @@ def process_horizon(path: Path = HORIZON_PATH) -> list[dict[str, Any]]:
     return summaries
 
 
-def horizon_exploration_rate(records: list[dict[str, Any]]) -> float:
+def horizon_exploration_rate(records: list[dict[str, Any]]) -> float | None:
     eligible = [
         record
         for record in records
         if record["observed_mean_1"] != record["observed_mean_2"]
     ]
     if not eligible:
-        return 0.0
+        return None
     exploratory = 0
     for record in eligible:
         best_option = 1 if record["observed_mean_1"] > record["observed_mean_2"] else 2
@@ -152,10 +152,14 @@ def horizon_directed_exploration(records: list[dict[str, Any]]) -> float:
     return directed / len(eligible)
 
 
-def horizon_effect(records: list[dict[str, Any]]) -> float:
+def horizon_effect(records: list[dict[str, Any]]) -> float | None:
     horizon_1 = [record for record in records if record["game_length"] == 5]
     horizon_6 = [record for record in records if record["game_length"] == 10]
-    return horizon_exploration_rate(horizon_6) - horizon_exploration_rate(horizon_1)
+    horizon_1_rate = horizon_exploration_rate(horizon_1)
+    horizon_6_rate = horizon_exploration_rate(horizon_6)
+    if horizon_1_rate is None or horizon_6_rate is None:
+        return None
+    return horizon_6_rate - horizon_1_rate
 
 
 def switching_rate(choices: list[Any]) -> float:

@@ -1,0 +1,117 @@
+% Required in the document preamble:
+% \usepackage{tikz}
+% \usetikzlibrary{positioning,arrows.meta,calc}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        font=\sffamily,
+        >=Latex,
+        arrow/.style={-{Latex[length=2.5mm]}, line width=1pt, draw=black!55},
+        branch/.style={
+            rounded corners=2.5mm,
+            line width=1pt,
+            align=center,
+            text width=0.36\textwidth,
+            minimum height=25mm,
+            inner sep=7pt
+        }
+    ]
+
+    % Step 1: common structure
+    \node[
+        draw=black!65,
+        fill=black!4,
+        rounded corners=2.5mm,
+        line width=1pt,
+        align=center,
+        text width=0.78\textwidth,
+        inner sep=7pt
+    ] (common) {
+        {\large\bfseries COMMON DESIGN}\\[3pt]
+        {\bfseries 3 tasks $\times$ 4 prompt conditions $\times$ 20 valid runs per cell}\\[2pt]
+        {\footnotesize Horizon Task \quad $\vert$ \quad IGT \quad $\vert$ \quad BART}\\[-1pt]
+        {\footnotesize Neutral baseline $+$ Instruction specificity $+$ Role framing $+$ Construct emphasis}
+    };
+
+    % Step 2: two comparison arms
+    \node[
+        branch,
+        draw=blue!65!black,
+        fill=blue!9,
+        below left=11mm and 4mm of common.south
+    ] (modelarm) {
+        {\large\bfseries ENGLISH}\\[2pt]
+        {\bfseries 3 MODELS}\\
+        {\footnotesize GPT-4.1 \quad GPT-5.4 \quad GPT-5.4 Mini}\\[5pt]
+        {\fontsize{18}{20}\selectfont\bfseries 720}\\[-1pt]
+        {\footnotesize valid task runs}
+    };
+
+    \node[
+        branch,
+        draw=teal!65!black,
+        fill=teal!9,
+        below right=11mm and 4mm of common.south
+    ] (languagearm) {
+        {\large\bfseries GPT-4.1}\\[2pt]
+        {\bfseries 3 LANGUAGES}\\
+        {\footnotesize English \quad Chinese \quad Spanish}\\[5pt]
+        {\fontsize{18}{20}\selectfont\bfseries 720}\\[-1pt]
+        {\footnotesize valid task runs}
+    };
+
+    \draw[arrow] (common.south) -- ++(0,-5mm) -| (modelarm.north);
+    \draw[arrow] (common.south) -- ++(0,-5mm) -| (languagearm.north);
+
+    % Step 3: overlap that must be counted once
+    \node[
+        draw=orange!75!black,
+        fill=orange!14,
+        rounded corners=2.5mm,
+        line width=1pt,
+        align=center,
+        text width=0.50\textwidth,
+        inner sep=7pt,
+        below=10mm of $(modelarm.south)!0.5!(languagearm.south)$
+    ] (shared) {
+        {\bfseries SHARED SAMPLE: ENGLISH GPT-4.1}\\[2pt]
+        {\fontsize{16}{18}\selectfont\bfseries 240 runs}\\[-1pt]
+        {\footnotesize used in both comparisons; counted once}
+    };
+
+    \draw[arrow, dashed] (modelarm.south) -- (shared.north west);
+    \draw[arrow, dashed] (languagearm.south) -- (shared.north east);
+
+    % Step 4: deduplicated total
+    \node[
+        draw=black!80,
+        fill=black!82,
+        text=white,
+        rounded corners=2.5mm,
+        line width=1pt,
+        align=center,
+        text width=0.58\textwidth,
+        inner sep=8pt,
+        below=8mm of shared
+    ] (total) {
+        {\large\bfseries DEDUPLICATED FORMAL DATASET}\\[3pt]
+        {\fontsize{22}{24}\selectfont\bfseries 1,200 UNIQUE RUNS}
+    };
+
+    \draw[arrow] (shared.south) -- (total.north);
+
+    \node[
+        below=4mm of total,
+        align=center,
+        text width=0.72\textwidth,
+        font=\footnotesize\itshape,
+        text=black!65
+    ] {
+        Primary analysis unit: one complete task run; trials are nested observations.
+    };
+
+    \end{tikzpicture}
+    \caption{Study design and deduplicated data structure. The English GPT-4.1 runs are shared across the two comparison arms and therefore counted only once.}
+    \label{fig:study_design_scope}
+\end{figure}
