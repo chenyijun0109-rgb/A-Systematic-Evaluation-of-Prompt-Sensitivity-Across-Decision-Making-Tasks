@@ -1,0 +1,1146 @@
+{
+  "analysis": "horizon_random_exploration",
+  "source_files": [
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-01-a\\es\\horizon_baseline_lang-es_seed-20260708.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-01-a\\es\\horizon_baseline_lang-es_seed-20260709.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-01-a\\es\\horizon_detailed_lang-es_seed-20260708.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-01-a\\es\\horizon_detailed_lang-es_seed-20260709.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-01-a\\es\\horizon_role_human_lang-es_seed-20260708.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-01-a\\es\\horizon_role_human_lang-es_seed-20260709.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-01-a\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260708.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-01-a\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260709.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-01-b\\es\\horizon_baseline_lang-es_seed-20260710.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-01-b\\es\\horizon_baseline_lang-es_seed-20260711.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-01-b\\es\\horizon_detailed_lang-es_seed-20260710.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-01-b\\es\\horizon_detailed_lang-es_seed-20260711.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-01-b\\es\\horizon_role_human_lang-es_seed-20260710.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-01-b\\es\\horizon_role_human_lang-es_seed-20260711.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-01-b\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260710.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-01-b\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260711.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-02-a\\es\\horizon_baseline_lang-es_seed-20260712.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-02-a\\es\\horizon_baseline_lang-es_seed-20260713.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-02-a\\es\\horizon_detailed_lang-es_seed-20260712.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-02-a\\es\\horizon_detailed_lang-es_seed-20260713.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-02-a\\es\\horizon_role_human_lang-es_seed-20260712.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-02-a\\es\\horizon_role_human_lang-es_seed-20260713.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-02-a\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260712.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-02-a\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260713.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-02-b\\es\\horizon_baseline_lang-es_seed-20260714.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-02-b\\es\\horizon_baseline_lang-es_seed-20260715.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-02-b\\es\\horizon_detailed_lang-es_seed-20260714.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-02-b\\es\\horizon_detailed_lang-es_seed-20260715.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-02-b\\es\\horizon_role_human_lang-es_seed-20260714.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-02-b\\es\\horizon_role_human_lang-es_seed-20260715.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-02-b\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260714.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-02-b\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260715.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-03-a\\es\\horizon_baseline_lang-es_seed-20260716.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-03-a\\es\\horizon_baseline_lang-es_seed-20260717.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-03-a\\es\\horizon_detailed_lang-es_seed-20260716.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-03-a\\es\\horizon_detailed_lang-es_seed-20260717.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-03-a\\es\\horizon_role_human_lang-es_seed-20260716.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-03-a\\es\\horizon_role_human_lang-es_seed-20260717.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-03-a\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260716.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-03-a\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260717.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-03-b\\es\\horizon_baseline_lang-es_seed-20260718.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-03-b\\es\\horizon_baseline_lang-es_seed-20260719.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-03-b\\es\\horizon_detailed_lang-es_seed-20260718.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-03-b\\es\\horizon_detailed_lang-es_seed-20260719.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-03-b\\es\\horizon_role_human_lang-es_seed-20260718.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-03-b\\es\\horizon_role_human_lang-es_seed-20260719.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-03-b\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260718.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-03-b\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260719.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-04-a\\es\\horizon_baseline_lang-es_seed-20260720.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-04-a\\es\\horizon_baseline_lang-es_seed-20260721.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-04-a\\es\\horizon_detailed_lang-es_seed-20260720.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-04-a\\es\\horizon_detailed_lang-es_seed-20260721.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-04-a\\es\\horizon_role_human_lang-es_seed-20260720.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-04-a\\es\\horizon_role_human_lang-es_seed-20260721.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-04-a\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260720.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-04-a\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260721.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-04-b\\es\\horizon_baseline_lang-es_seed-20260722.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-04-b\\es\\horizon_baseline_lang-es_seed-20260723.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-04-b\\es\\horizon_detailed_lang-es_seed-20260722.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-04-b\\es\\horizon_detailed_lang-es_seed-20260723.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-04-b\\es\\horizon_role_human_lang-es_seed-20260722.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-04-b\\es\\horizon_role_human_lang-es_seed-20260723.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-04-b\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260722.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-04-b\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260723.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-05-a\\es\\horizon_baseline_lang-es_seed-20260724.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-05-a\\es\\horizon_baseline_lang-es_seed-20260725.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-05-a\\es\\horizon_detailed_lang-es_seed-20260724.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-05-a\\es\\horizon_detailed_lang-es_seed-20260725.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-05-a\\es\\horizon_role_human_lang-es_seed-20260724.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-05-a\\es\\horizon_role_human_lang-es_seed-20260725.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-05-a\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260724.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-05-a\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260725.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-05-b\\es\\horizon_baseline_lang-es_seed-20260726.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-05-b\\es\\horizon_baseline_lang-es_seed-20260727.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-05-b\\es\\horizon_detailed_lang-es_seed-20260726.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-05-b\\es\\horizon_detailed_lang-es_seed-20260727.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-05-b\\es\\horizon_role_human_lang-es_seed-20260726.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-05-b\\es\\horizon_role_human_lang-es_seed-20260727.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-05-b\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260726.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-es-20run-v01\\wave-05-b\\es\\horizon_uncertainty_emphasis_lang-es_seed-20260727.json"
+  ],
+  "n_first_free_choices": 3200,
+  "conditions": {
+    "baseline": {
+      "status": "ok",
+      "prompt_condition": "baseline",
+      "model": "hierarchical_logistic_map_fixed_gaussian_shrinkage",
+      "definition": "decision_noise_h6 - decision_noise_h1",
+      "first_free_choices_only": true,
+      "run_effect_sd": 0.5,
+      "n_runs": 20,
+      "n_choices": 800,
+      "converged": true,
+      "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+      "objective": 216.35206851237453,
+      "condition_estimate": {
+        "decision_noise_h1": 4.467294135056447,
+        "decision_noise_h6": 5.099619589083358,
+        "random_exploration_effect": 0.632325454026911,
+        "information_bonus_h1": 6.971184660913511,
+        "information_bonus_h6": 5.628986653464779,
+        "label_bias_h1": -2.123744926060337,
+        "label_bias_h6": -2.0022367482795675
+      },
+      "run_estimates": [
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-01-a/es/horizon_baseline_lang-es_seed-20260708.json:seed=20260708",
+          "decision_noise_h1": 5.924910764523476,
+          "decision_noise_h6": 4.472533180498747,
+          "random_exploration_effect": -1.4523775840247293,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-01-a/es/horizon_baseline_lang-es_seed-20260709.json:seed=20260709",
+          "decision_noise_h1": 4.337382512876115,
+          "decision_noise_h6": 7.235495243526957,
+          "random_exploration_effect": 2.8981127306508423,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-01-b/es/horizon_baseline_lang-es_seed-20260710.json:seed=20260710",
+          "decision_noise_h1": 5.318421137730632,
+          "decision_noise_h6": 4.381738523167404,
+          "random_exploration_effect": -0.9366826145632281,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-01-b/es/horizon_baseline_lang-es_seed-20260711.json:seed=20260711",
+          "decision_noise_h1": 4.233430506169457,
+          "decision_noise_h6": 6.449069829510835,
+          "random_exploration_effect": 2.215639323341378,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-02-a/es/horizon_baseline_lang-es_seed-20260712.json:seed=20260712",
+          "decision_noise_h1": 2.9383788075652113,
+          "decision_noise_h6": 6.8367080624742425,
+          "random_exploration_effect": 3.898329254909031,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-02-a/es/horizon_baseline_lang-es_seed-20260713.json:seed=20260713",
+          "decision_noise_h1": 5.914873248357047,
+          "decision_noise_h6": 3.851488472389033,
+          "random_exploration_effect": -2.063384775968014,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-02-b/es/horizon_baseline_lang-es_seed-20260714.json:seed=20260714",
+          "decision_noise_h1": 5.982965805345207,
+          "decision_noise_h6": 4.54757257418632,
+          "random_exploration_effect": -1.4353932311588862,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-02-b/es/horizon_baseline_lang-es_seed-20260715.json:seed=20260715",
+          "decision_noise_h1": 7.5189089783492,
+          "decision_noise_h6": 4.943242525805518,
+          "random_exploration_effect": -2.5756664525436817,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-03-a/es/horizon_baseline_lang-es_seed-20260716.json:seed=20260716",
+          "decision_noise_h1": 2.9939669994481948,
+          "decision_noise_h6": 5.026594245295938,
+          "random_exploration_effect": 2.032627245847743,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-03-a/es/horizon_baseline_lang-es_seed-20260717.json:seed=20260717",
+          "decision_noise_h1": 5.458428533121689,
+          "decision_noise_h6": 5.192715387512139,
+          "random_exploration_effect": -0.26571314560955006,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-03-b/es/horizon_baseline_lang-es_seed-20260718.json:seed=20260718",
+          "decision_noise_h1": 2.7836533476540937,
+          "decision_noise_h6": 4.13322290790169,
+          "random_exploration_effect": 1.3495695602475961,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-03-b/es/horizon_baseline_lang-es_seed-20260719.json:seed=20260719",
+          "decision_noise_h1": 4.2671797409844086,
+          "decision_noise_h6": 8.914231247921347,
+          "random_exploration_effect": 4.647051506936938,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-04-a/es/horizon_baseline_lang-es_seed-20260720.json:seed=20260720",
+          "decision_noise_h1": 3.8850791236102387,
+          "decision_noise_h6": 3.316238271398045,
+          "random_exploration_effect": -0.5688408522121935,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-04-a/es/horizon_baseline_lang-es_seed-20260721.json:seed=20260721",
+          "decision_noise_h1": 4.792726227626315,
+          "decision_noise_h6": 5.198547901574548,
+          "random_exploration_effect": 0.40582167394823276,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-04-b/es/horizon_baseline_lang-es_seed-20260722.json:seed=20260722",
+          "decision_noise_h1": 3.068355547610581,
+          "decision_noise_h6": 4.968190985119284,
+          "random_exploration_effect": 1.899835437508703,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-04-b/es/horizon_baseline_lang-es_seed-20260723.json:seed=20260723",
+          "decision_noise_h1": 4.467844944367407,
+          "decision_noise_h6": 3.2031390714241432,
+          "random_exploration_effect": -1.2647058729432636,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-05-a/es/horizon_baseline_lang-es_seed-20260724.json:seed=20260724",
+          "decision_noise_h1": 3.7951118868296017,
+          "decision_noise_h6": 4.550106798412599,
+          "random_exploration_effect": 0.754994911582997,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-05-a/es/horizon_baseline_lang-es_seed-20260725.json:seed=20260725",
+          "decision_noise_h1": 4.239390028601652,
+          "decision_noise_h6": 7.442860343905303,
+          "random_exploration_effect": 3.203470315303651,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-05-b/es/horizon_baseline_lang-es_seed-20260726.json:seed=20260726",
+          "decision_noise_h1": 3.472928920374631,
+          "decision_noise_h6": 6.038971070550715,
+          "random_exploration_effect": 2.5660421501760835,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-05-b/es/horizon_baseline_lang-es_seed-20260727.json:seed=20260727",
+          "decision_noise_h1": 7.498409202132005,
+          "decision_noise_h6": 4.608061223639261,
+          "random_exploration_effect": -2.890347978492744,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        }
+      ]
+    },
+    "detailed": {
+      "status": "ok",
+      "prompt_condition": "detailed",
+      "model": "hierarchical_logistic_map_fixed_gaussian_shrinkage",
+      "definition": "decision_noise_h6 - decision_noise_h1",
+      "first_free_choices_only": true,
+      "run_effect_sd": 0.5,
+      "n_runs": 20,
+      "n_choices": 800,
+      "converged": true,
+      "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+      "objective": 183.0390576110675,
+      "condition_estimate": {
+        "decision_noise_h1": 3.5165688691605803,
+        "decision_noise_h6": 4.017773476253659,
+        "random_exploration_effect": 0.5012046070930785,
+        "information_bonus_h1": 3.5607068791940444,
+        "information_bonus_h6": 3.9146980594503002,
+        "label_bias_h1": -2.608274283203262,
+        "label_bias_h6": -2.9350901231751676
+      },
+      "run_estimates": [
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-01-a/es/horizon_detailed_lang-es_seed-20260708.json:seed=20260708",
+          "decision_noise_h1": 3.3518197751217724,
+          "decision_noise_h6": 4.831503314999932,
+          "random_exploration_effect": 1.4796835398781591,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-01-a/es/horizon_detailed_lang-es_seed-20260709.json:seed=20260709",
+          "decision_noise_h1": 3.024285513231267,
+          "decision_noise_h6": 3.842386123050003,
+          "random_exploration_effect": 0.8181006098187358,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-01-b/es/horizon_detailed_lang-es_seed-20260710.json:seed=20260710",
+          "decision_noise_h1": 2.7297367471165357,
+          "decision_noise_h6": 3.72210100534958,
+          "random_exploration_effect": 0.9923642582330445,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-01-b/es/horizon_detailed_lang-es_seed-20260711.json:seed=20260711",
+          "decision_noise_h1": 2.7590021372980966,
+          "decision_noise_h6": 2.6554855674491957,
+          "random_exploration_effect": -0.1035165698489009,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-02-a/es/horizon_detailed_lang-es_seed-20260712.json:seed=20260712",
+          "decision_noise_h1": 2.3774820569377404,
+          "decision_noise_h6": 2.700646375977688,
+          "random_exploration_effect": 0.3231643190399476,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-02-a/es/horizon_detailed_lang-es_seed-20260713.json:seed=20260713",
+          "decision_noise_h1": 3.789149279885043,
+          "decision_noise_h6": 4.265893342881117,
+          "random_exploration_effect": 0.47674406299607464,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-02-b/es/horizon_detailed_lang-es_seed-20260714.json:seed=20260714",
+          "decision_noise_h1": 2.795505687777366,
+          "decision_noise_h6": 4.003302127708531,
+          "random_exploration_effect": 1.2077964399311654,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-02-b/es/horizon_detailed_lang-es_seed-20260715.json:seed=20260715",
+          "decision_noise_h1": 5.667026926342168,
+          "decision_noise_h6": 5.7040925516999375,
+          "random_exploration_effect": 0.03706562535776925,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-03-a/es/horizon_detailed_lang-es_seed-20260716.json:seed=20260716",
+          "decision_noise_h1": 3.616976103047067,
+          "decision_noise_h6": 3.032447323787072,
+          "random_exploration_effect": -0.5845287792599949,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-03-a/es/horizon_detailed_lang-es_seed-20260717.json:seed=20260717",
+          "decision_noise_h1": 3.8664413215214024,
+          "decision_noise_h6": 4.445999626793041,
+          "random_exploration_effect": 0.5795583052716387,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-03-b/es/horizon_detailed_lang-es_seed-20260718.json:seed=20260718",
+          "decision_noise_h1": 3.817106680445153,
+          "decision_noise_h6": 3.622385377624332,
+          "random_exploration_effect": -0.19472130282082079,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-03-b/es/horizon_detailed_lang-es_seed-20260719.json:seed=20260719",
+          "decision_noise_h1": 4.914564458069685,
+          "decision_noise_h6": 6.239082942662589,
+          "random_exploration_effect": 1.3245184845929039,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-04-a/es/horizon_detailed_lang-es_seed-20260720.json:seed=20260720",
+          "decision_noise_h1": 3.451594939226114,
+          "decision_noise_h6": 4.584387853005561,
+          "random_exploration_effect": 1.132792913779447,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-04-a/es/horizon_detailed_lang-es_seed-20260721.json:seed=20260721",
+          "decision_noise_h1": 2.219421932442651,
+          "decision_noise_h6": 7.685312188841412,
+          "random_exploration_effect": 5.465890256398762,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-04-b/es/horizon_detailed_lang-es_seed-20260722.json:seed=20260722",
+          "decision_noise_h1": 3.7510552628291105,
+          "decision_noise_h6": 5.104603694997236,
+          "random_exploration_effect": 1.3535484321681253,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-04-b/es/horizon_detailed_lang-es_seed-20260723.json:seed=20260723",
+          "decision_noise_h1": 4.5406993382299525,
+          "decision_noise_h6": 2.6128850450711827,
+          "random_exploration_effect": -1.9278142931587698,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-05-a/es/horizon_detailed_lang-es_seed-20260724.json:seed=20260724",
+          "decision_noise_h1": 3.1274012324207714,
+          "decision_noise_h6": 3.986895934393553,
+          "random_exploration_effect": 0.8594947019727814,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-05-a/es/horizon_detailed_lang-es_seed-20260725.json:seed=20260725",
+          "decision_noise_h1": 5.98672573765038,
+          "decision_noise_h6": 3.0284797634374763,
+          "random_exploration_effect": -2.9582459742129035,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-05-b/es/horizon_detailed_lang-es_seed-20260726.json:seed=20260726",
+          "decision_noise_h1": 3.2856307036466315,
+          "decision_noise_h6": 3.6915712476570595,
+          "random_exploration_effect": 0.405940544010428,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-05-b/es/horizon_detailed_lang-es_seed-20260727.json:seed=20260727",
+          "decision_noise_h1": 3.326987982723256,
+          "decision_noise_h6": 3.6123590389043567,
+          "random_exploration_effect": 0.2853710561811007,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        }
+      ]
+    },
+    "role_human": {
+      "status": "ok",
+      "prompt_condition": "role_human",
+      "model": "hierarchical_logistic_map_fixed_gaussian_shrinkage",
+      "definition": "decision_noise_h6 - decision_noise_h1",
+      "first_free_choices_only": true,
+      "run_effect_sd": 0.5,
+      "n_runs": 20,
+      "n_choices": 800,
+      "converged": true,
+      "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+      "objective": 196.01641558346364,
+      "condition_estimate": {
+        "decision_noise_h1": 3.568190903490348,
+        "decision_noise_h6": 4.441494172237055,
+        "random_exploration_effect": 0.8733032687467075,
+        "information_bonus_h1": 1.4294230489946245,
+        "information_bonus_h6": 2.4975963191767048,
+        "label_bias_h1": -1.2435036868795495,
+        "label_bias_h6": -1.6001728357140912
+      },
+      "run_estimates": [
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-01-a/es/horizon_role_human_lang-es_seed-20260708.json:seed=20260708",
+          "decision_noise_h1": 4.0338711287233835,
+          "decision_noise_h6": 5.502585414847371,
+          "random_exploration_effect": 1.468714286123988,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-01-a/es/horizon_role_human_lang-es_seed-20260709.json:seed=20260709",
+          "decision_noise_h1": 3.9172185538739743,
+          "decision_noise_h6": 3.232902324989958,
+          "random_exploration_effect": -0.6843162288840161,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-01-b/es/horizon_role_human_lang-es_seed-20260710.json:seed=20260710",
+          "decision_noise_h1": 4.171424713172643,
+          "decision_noise_h6": 3.683392366799985,
+          "random_exploration_effect": -0.4880323463726577,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-01-b/es/horizon_role_human_lang-es_seed-20260711.json:seed=20260711",
+          "decision_noise_h1": 3.327432011804477,
+          "decision_noise_h6": 2.820290093471218,
+          "random_exploration_effect": -0.5071419183332591,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-02-a/es/horizon_role_human_lang-es_seed-20260712.json:seed=20260712",
+          "decision_noise_h1": 2.392962131848878,
+          "decision_noise_h6": 2.878719212762427,
+          "random_exploration_effect": 0.4857570809135492,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-02-a/es/horizon_role_human_lang-es_seed-20260713.json:seed=20260713",
+          "decision_noise_h1": 4.643395375931749,
+          "decision_noise_h6": 3.249326479112786,
+          "random_exploration_effect": -1.394068896818963,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-02-b/es/horizon_role_human_lang-es_seed-20260714.json:seed=20260714",
+          "decision_noise_h1": 5.599393091500181,
+          "decision_noise_h6": 8.409735553919042,
+          "random_exploration_effect": 2.810342462418861,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-02-b/es/horizon_role_human_lang-es_seed-20260715.json:seed=20260715",
+          "decision_noise_h1": 2.483963604687777,
+          "decision_noise_h6": 7.178788801153336,
+          "random_exploration_effect": 4.694825196465558,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-03-a/es/horizon_role_human_lang-es_seed-20260716.json:seed=20260716",
+          "decision_noise_h1": 2.593356301597615,
+          "decision_noise_h6": 3.060065509504631,
+          "random_exploration_effect": 0.4667092079070163,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-03-a/es/horizon_role_human_lang-es_seed-20260717.json:seed=20260717",
+          "decision_noise_h1": 4.862633159055621,
+          "decision_noise_h6": 4.301927181596201,
+          "random_exploration_effect": -0.5607059774594196,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-03-b/es/horizon_role_human_lang-es_seed-20260718.json:seed=20260718",
+          "decision_noise_h1": 2.9291636805985157,
+          "decision_noise_h6": 4.362650184331304,
+          "random_exploration_effect": 1.4334865037327886,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-03-b/es/horizon_role_human_lang-es_seed-20260719.json:seed=20260719",
+          "decision_noise_h1": 4.782916503902197,
+          "decision_noise_h6": 3.2995672151811815,
+          "random_exploration_effect": -1.4833492887210151,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-04-a/es/horizon_role_human_lang-es_seed-20260720.json:seed=20260720",
+          "decision_noise_h1": 6.134802824392082,
+          "decision_noise_h6": 5.963109664086997,
+          "random_exploration_effect": -0.17169316030508508,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-04-a/es/horizon_role_human_lang-es_seed-20260721.json:seed=20260721",
+          "decision_noise_h1": 2.795932899809302,
+          "decision_noise_h6": 7.036983796663652,
+          "random_exploration_effect": 4.24105089685435,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-04-b/es/horizon_role_human_lang-es_seed-20260722.json:seed=20260722",
+          "decision_noise_h1": 3.2192318226162504,
+          "decision_noise_h6": 5.352913409563833,
+          "random_exploration_effect": 2.1336815869475823,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-04-b/es/horizon_role_human_lang-es_seed-20260723.json:seed=20260723",
+          "decision_noise_h1": 3.2831852538209856,
+          "decision_noise_h6": 4.43893360391465,
+          "random_exploration_effect": 1.1557483500936647,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-05-a/es/horizon_role_human_lang-es_seed-20260724.json:seed=20260724",
+          "decision_noise_h1": 2.818084895802004,
+          "decision_noise_h6": 4.200021733528018,
+          "random_exploration_effect": 1.3819368377260144,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-05-a/es/horizon_role_human_lang-es_seed-20260725.json:seed=20260725",
+          "decision_noise_h1": 3.7923462858798014,
+          "decision_noise_h6": 6.113013162621844,
+          "random_exploration_effect": 2.320666876742042,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-05-b/es/horizon_role_human_lang-es_seed-20260726.json:seed=20260726",
+          "decision_noise_h1": 2.841996012562388,
+          "decision_noise_h6": 3.8350487763860417,
+          "random_exploration_effect": 0.9930527638236537,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-05-b/es/horizon_role_human_lang-es_seed-20260727.json:seed=20260727",
+          "decision_noise_h1": 3.1033877115151194,
+          "decision_noise_h6": 4.305879496525631,
+          "random_exploration_effect": 1.202491785010512,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        }
+      ]
+    },
+    "uncertainty_emphasis": {
+      "status": "ok",
+      "prompt_condition": "uncertainty_emphasis",
+      "model": "hierarchical_logistic_map_fixed_gaussian_shrinkage",
+      "definition": "decision_noise_h6 - decision_noise_h1",
+      "first_free_choices_only": true,
+      "run_effect_sd": 0.5,
+      "n_runs": 20,
+      "n_choices": 800,
+      "converged": true,
+      "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+      "objective": 225.3398404387749,
+      "condition_estimate": {
+        "decision_noise_h1": 4.604258611387221,
+        "decision_noise_h6": 5.149109706245814,
+        "random_exploration_effect": 0.5448510948585934,
+        "information_bonus_h1": 2.3600701897023715,
+        "information_bonus_h6": 6.539357036491861,
+        "label_bias_h1": -0.5822111356549483,
+        "label_bias_h6": -2.2432221264287797
+      },
+      "run_estimates": [
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-01-a/es/horizon_uncertainty_emphasis_lang-es_seed-20260708.json:seed=20260708",
+          "decision_noise_h1": 2.982043680884853,
+          "decision_noise_h6": 5.5115011629646835,
+          "random_exploration_effect": 2.5294574820798306,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-01-a/es/horizon_uncertainty_emphasis_lang-es_seed-20260709.json:seed=20260709",
+          "decision_noise_h1": 3.861905008741413,
+          "decision_noise_h6": 3.9643564143360357,
+          "random_exploration_effect": 0.10245140559462262,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-01-b/es/horizon_uncertainty_emphasis_lang-es_seed-20260710.json:seed=20260710",
+          "decision_noise_h1": 4.591842222207298,
+          "decision_noise_h6": 5.088365376186232,
+          "random_exploration_effect": 0.4965231539789343,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-01-b/es/horizon_uncertainty_emphasis_lang-es_seed-20260711.json:seed=20260711",
+          "decision_noise_h1": 2.866181973830114,
+          "decision_noise_h6": 7.056285222034056,
+          "random_exploration_effect": 4.1901032482039415,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-02-a/es/horizon_uncertainty_emphasis_lang-es_seed-20260712.json:seed=20260712",
+          "decision_noise_h1": 3.5218558929890027,
+          "decision_noise_h6": 3.5779085099945926,
+          "random_exploration_effect": 0.056052617005589944,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-02-a/es/horizon_uncertainty_emphasis_lang-es_seed-20260713.json:seed=20260713",
+          "decision_noise_h1": 7.326934540207087,
+          "decision_noise_h6": 5.555785150503242,
+          "random_exploration_effect": -1.7711493897038446,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-02-b/es/horizon_uncertainty_emphasis_lang-es_seed-20260714.json:seed=20260714",
+          "decision_noise_h1": 3.9639752258856253,
+          "decision_noise_h6": 7.804793051064235,
+          "random_exploration_effect": 3.8408178251786094,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-02-b/es/horizon_uncertainty_emphasis_lang-es_seed-20260715.json:seed=20260715",
+          "decision_noise_h1": 6.606919034626587,
+          "decision_noise_h6": 3.593550569341111,
+          "random_exploration_effect": -3.013368465285476,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-03-a/es/horizon_uncertainty_emphasis_lang-es_seed-20260716.json:seed=20260716",
+          "decision_noise_h1": 4.211612842368969,
+          "decision_noise_h6": 3.499552417601394,
+          "random_exploration_effect": -0.712060424767575,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-03-a/es/horizon_uncertainty_emphasis_lang-es_seed-20260717.json:seed=20260717",
+          "decision_noise_h1": 5.567203573497469,
+          "decision_noise_h6": 5.133086024584406,
+          "random_exploration_effect": -0.4341175489130631,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-03-b/es/horizon_uncertainty_emphasis_lang-es_seed-20260718.json:seed=20260718",
+          "decision_noise_h1": 3.8738094991958336,
+          "decision_noise_h6": 6.36296521333018,
+          "random_exploration_effect": 2.4891557141343466,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-03-b/es/horizon_uncertainty_emphasis_lang-es_seed-20260719.json:seed=20260719",
+          "decision_noise_h1": 7.3634169116487636,
+          "decision_noise_h6": 4.266612069269957,
+          "random_exploration_effect": -3.0968048423788064,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-04-a/es/horizon_uncertainty_emphasis_lang-es_seed-20260720.json:seed=20260720",
+          "decision_noise_h1": 6.831663286437204,
+          "decision_noise_h6": 6.625455117281708,
+          "random_exploration_effect": -0.206208169155496,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-04-a/es/horizon_uncertainty_emphasis_lang-es_seed-20260721.json:seed=20260721",
+          "decision_noise_h1": 5.291164907150186,
+          "decision_noise_h6": 7.584681544549694,
+          "random_exploration_effect": 2.2935166373995077,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-04-b/es/horizon_uncertainty_emphasis_lang-es_seed-20260722.json:seed=20260722",
+          "decision_noise_h1": 3.3971566222063507,
+          "decision_noise_h6": 3.942229556370655,
+          "random_exploration_effect": 0.5450729341643044,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-04-b/es/horizon_uncertainty_emphasis_lang-es_seed-20260723.json:seed=20260723",
+          "decision_noise_h1": 4.273830534995474,
+          "decision_noise_h6": 4.7392699907299605,
+          "random_exploration_effect": 0.46543945573448653,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-05-a/es/horizon_uncertainty_emphasis_lang-es_seed-20260724.json:seed=20260724",
+          "decision_noise_h1": 3.23617655790231,
+          "decision_noise_h6": 4.644575085101426,
+          "random_exploration_effect": 1.408398527199116,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-05-a/es/horizon_uncertainty_emphasis_lang-es_seed-20260725.json:seed=20260725",
+          "decision_noise_h1": 7.616310080313978,
+          "decision_noise_h6": 5.821641518371603,
+          "random_exploration_effect": -1.794668561942375,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-05-b/es/horizon_uncertainty_emphasis_lang-es_seed-20260726.json:seed=20260726",
+          "decision_noise_h1": 3.247317900286804,
+          "decision_noise_h6": 6.514648082006535,
+          "random_exploration_effect": 3.267330181719731,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/wave-05-b/es/horizon_uncertainty_emphasis_lang-es_seed-20260727.json:seed=20260727",
+          "decision_noise_h1": 5.990705142141076,
+          "decision_noise_h6": 4.633295398055165,
+          "random_exploration_effect": -1.3574097440859108,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        }
+      ]
+    }
+  },
+  "diagnostics": {
+    "baseline": {
+      "shrinkage_sensitivity": [
+        {
+          "run_effect_sd": 0.25,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 4.8410367497862286,
+          "decision_noise_h6": 5.42244948197639,
+          "random_exploration_effect": 0.5814127321901612,
+          "information_bonus_h1": 7.544262850044815,
+          "information_bonus_h6": 6.010251102853185,
+          "label_bias_h1": -2.3740030596720474,
+          "label_bias_h6": -2.03747590264144
+        },
+        {
+          "run_effect_sd": 0.5,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 4.467294135056447,
+          "decision_noise_h6": 5.099619589083358,
+          "random_exploration_effect": 0.632325454026911,
+          "information_bonus_h1": 6.971184660913511,
+          "information_bonus_h6": 5.628986653464779,
+          "label_bias_h1": -2.123744926060337,
+          "label_bias_h6": -2.0022367482795675
+        },
+        {
+          "run_effect_sd": 1.0,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 4.011132076229813,
+          "decision_noise_h6": 4.800860782963255,
+          "random_exploration_effect": 0.7897287067334426,
+          "information_bonus_h1": 6.290240356604153,
+          "information_bonus_h6": 5.136817540756125,
+          "label_bias_h1": -1.7974570501689904,
+          "label_bias_h6": -1.9303892866423893
+        }
+      ]
+    },
+    "detailed": {
+      "shrinkage_sensitivity": [
+        {
+          "run_effect_sd": 0.25,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 3.7689023995788347,
+          "decision_noise_h6": 4.394326512183816,
+          "random_exploration_effect": 0.6254241126049811,
+          "information_bonus_h1": 3.7310501657443584,
+          "information_bonus_h6": 4.187858399071255,
+          "label_bias_h1": -2.808729882765729,
+          "label_bias_h6": -3.076169435477155
+        },
+        {
+          "run_effect_sd": 0.5,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 3.5165688691605803,
+          "decision_noise_h6": 4.017773476253659,
+          "random_exploration_effect": 0.5012046070930785,
+          "information_bonus_h1": 3.5607068791940444,
+          "information_bonus_h6": 3.9146980594503002,
+          "label_bias_h1": -2.608274283203262,
+          "label_bias_h6": -2.9350901231751676
+        },
+        {
+          "run_effect_sd": 1.0,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 3.270620615221289,
+          "decision_noise_h6": 3.5825278050600957,
+          "random_exploration_effect": 0.3119071898388066,
+          "information_bonus_h1": 3.6505861665779804,
+          "information_bonus_h6": 3.6951098725078735,
+          "label_bias_h1": -2.4647410442556437,
+          "label_bias_h6": -2.9019827004902417
+        }
+      ]
+    },
+    "role_human": {
+      "shrinkage_sensitivity": [
+        {
+          "run_effect_sd": 0.25,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 3.841802118738195,
+          "decision_noise_h6": 4.909090806672938,
+          "random_exploration_effect": 1.067288687934743,
+          "information_bonus_h1": 1.6124616136131467,
+          "information_bonus_h6": 2.973599573541719,
+          "label_bias_h1": -1.2047394936834528,
+          "label_bias_h6": -1.6501230359392067
+        },
+        {
+          "run_effect_sd": 0.5,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 3.568190903490348,
+          "decision_noise_h6": 4.441494172237055,
+          "random_exploration_effect": 0.8733032687467075,
+          "information_bonus_h1": 1.4294230489946245,
+          "information_bonus_h6": 2.4975963191767048,
+          "label_bias_h1": -1.2435036868795495,
+          "label_bias_h6": -1.6001728357140912
+        },
+        {
+          "run_effect_sd": 1.0,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 3.2324147041793148,
+          "decision_noise_h6": 3.9703483053333293,
+          "random_exploration_effect": 0.7379336011540145,
+          "information_bonus_h1": 1.1826088386465337,
+          "information_bonus_h6": 2.0771250326578365,
+          "label_bias_h1": -1.2937658700706163,
+          "label_bias_h6": -1.5551285373460089
+        }
+      ]
+    },
+    "uncertainty_emphasis": {
+      "shrinkage_sensitivity": [
+        {
+          "run_effect_sd": 0.25,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 5.063149504165835,
+          "decision_noise_h6": 5.471754813037373,
+          "random_exploration_effect": 0.4086053088715378,
+          "information_bonus_h1": 3.050506107822034,
+          "information_bonus_h6": 6.989484478757298,
+          "label_bias_h1": -0.8211323013426078,
+          "label_bias_h6": -2.4400165223580097
+        },
+        {
+          "run_effect_sd": 0.5,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 4.604258611387221,
+          "decision_noise_h6": 5.149109706245814,
+          "random_exploration_effect": 0.5448510948585934,
+          "information_bonus_h1": 2.3600701897023715,
+          "information_bonus_h6": 6.539357036491861,
+          "label_bias_h1": -0.5822111356549483,
+          "label_bias_h6": -2.2432221264287797
+        },
+        {
+          "run_effect_sd": 1.0,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 4.069293242990341,
+          "decision_noise_h6": 4.698531346717689,
+          "random_exploration_effect": 0.6292381037273485,
+          "information_bonus_h1": 1.564325926460636,
+          "information_bonus_h6": 5.8979022624657,
+          "label_bias_h1": -0.370863347481513,
+          "label_bias_h6": -1.9844619193475315
+        }
+      ]
+    }
+  }
+}

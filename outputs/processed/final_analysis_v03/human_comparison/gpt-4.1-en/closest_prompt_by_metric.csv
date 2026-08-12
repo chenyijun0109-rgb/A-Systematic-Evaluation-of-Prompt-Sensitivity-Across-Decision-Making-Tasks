@@ -1,0 +1,9 @@
+prompt_language,task,metric,closest_prompt_condition,human_sd_standardised_distance,llm_mean,human_mean,llm_mean_reference_position,llm_runs_within_human_reference_proportion
+en,horizon,directed_exploration,baseline,-0.020132059264525083,0.5425000000000001,0.5441666666666667,within,0.9
+en,horizon,horizon_effect,uncertainty_emphasis,-0.783806326292691,0.04250000000000001,0.11082527130415917,within,0.55
+en,horizon,random_exploration_effect,uncertainty_emphasis,-1.0937316953573335,1.920682780388787,8.909982267051527,within,0.55
+en,igt,advantageous_choice_rate,detailed,2.069622975075837,0.8669999999999998,0.5380952380952376,above,0.0
+en,igt,post_loss_switching_rate,detailed,-0.21524256421689233,0.6377637869377001,0.6946879629435914,within,1.0
+en,bart,adjusted_average_pumps,role_human,-0.11016700253049715,7.958517549261084,8.320018931754284,within,1.0
+en,bart,explosion_rate,baseline,-0.06854884885663051,0.27749999999999997,0.2852836879432623,within,1.0
+en,bart,post_explosion_adjustment,baseline,-0.5523467934471143,0.30276612276612275,1.191158698327816,within,0.95

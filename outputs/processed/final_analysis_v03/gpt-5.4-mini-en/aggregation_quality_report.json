@@ -1,0 +1,55 @@
+{
+  "analysis_complete": true,
+  "allow_incomplete": false,
+  "duplicate_policy": "error",
+  "expected_runs_per_cell": 20,
+  "expected_languages": [
+    "en"
+  ],
+  "discovered_file_count": 250,
+  "candidate_file_count": 240,
+  "valid_run_count": 240,
+  "ignored_files": [
+    {
+      "path": "E:\\UoE\\IPP\\project\\outputs\\model_comparison_en_v01\\gpt-5.4-mini-formal-v01\\wave-01-a\\multilingual_run_status.json",
+      "reason": "unrelated_task"
+    },
+    {
+      "path": "E:\\UoE\\IPP\\project\\outputs\\model_comparison_en_v01\\gpt-5.4-mini-formal-v01\\wave-01-b\\multilingual_run_status.json",
+      "reason": "unrelated_task"
+    },
+    {
+      "path": "E:\\UoE\\IPP\\project\\outputs\\model_comparison_en_v01\\gpt-5.4-mini-formal-v01\\wave-02-a\\multilingual_run_status.json",
+      "reason": "unrelated_task"
+    },
+    {
+      "path": "E:\\UoE\\IPP\\project\\outputs\\model_comparison_en_v01\\gpt-5.4-mini-formal-v01\\wave-02-b\\multilingual_run_status.json",
+      "reason": "unrelated_task"
+    },
+    {
+      "path": "E:\\UoE\\IPP\\project\\outputs\\model_comparison_en_v01\\gpt-5.4-mini-formal-v01\\wave-03-a\\multilingual_run_status.json",
+      "reason": "unrelated_task"
+    },
+    {
+      "path": "E:\\UoE\\IPP\\project\\outputs\\model_comparison_en_v01\\gpt-5.4-mini-formal-v01\\wave-03-b\\multilingual_run_status.json",
+      "reason": "unrelated_task"
+    },
+    {
+      "path": "E:\\UoE\\IPP\\project\\outputs\\model_comparison_en_v01\\gpt-5.4-mini-formal-v01\\wave-04-a\\multilingual_run_status.json",
+      "reason": "unrelated_task"
+    },
+    {
+      "path": "E:\\UoE\\IPP\\project\\outputs\\model_comparison_en_v01\\gpt-5.4-mini-formal-v01\\wave-04-b\\multilingual_run_status.json",
+      "reason": "unrelated_task"
+    },
+    {
+      "path": "E:\\UoE\\IPP\\project\\outputs\\model_comparison_en_v01\\gpt-5.4-mini-formal-v01\\wave-05-a\\multilingual_run_status.json",
+      "reason": "unrelated_task"
+    },
+    {
+      "path": "E:\\UoE\\IPP\\project\\outputs\\model_comparison_en_v01\\gpt-5.4-mini-formal-v01\\wave-05-b\\multilingual_run_status.json",
+      "reason": "unrelated_task"
+    }
+  ],
+  "issues": []
+}

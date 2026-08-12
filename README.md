@@ -2,6 +2,20 @@
 
 ## A Systematic Evaluation of Prompt Sensitivity Across Decision-Making Tasks
 
+The complete English LaTeX manuscript is `final.tex`. A School-template-aligned copy of the user-supplied complete manuscript is maintained as `skeleton_repaired.tex`. Both use the confirmed title *How Reliable Are LLMs as Cognitive Models? A Systematic Evaluation of Prompt Sensitivity Across Decision-Making Tasks*. Their preambles retain `infthesis` with `msccheck`, use only functional formula, table, figure, rotation, and URL packages, and omit `microtype` because it triggers the School checker's `\showhyphens` guard. The long repository URL is set in its own locally ragged-right block so that it can wrap without changing the dissertation's global layout. The manuscript is a polished British-academic-English translation of the current authoritative Chinese manuscript,
+with all manuscript tables embedded directly in the file and all figures linked
+through explicit `\includegraphics` paths. `final_references.bib` contains the
+corresponding bibliography, and `docs/final_overleaf_figure_manifest.md` lists
+the seven figure files that must be uploaded to Overleaf. The two concise design diagrams
+are generated as 600-dpi PNG files by `src/build_design_figures.py`;
+the five Results figures continue to come from the validated final-results
+visual package. The RQ3 text and figure use the symmetric joint three-language
+centred analysis and do not designate English as a statistical reference.
+
+The current body-length revision is documented in `docs/manuscript_page_reduction_plan.md`. It targets approximately 34--35 body pages without changing font, margins, or 1.5 spacing. Experimental Procedure now explicitly documents cell identification, task selection, frozen prompt lookup, task-specific parsing, state updates, retry handling, and metric derivation. Results use four clockwise landscape overview figures with reduced axis-label density; RQ4 deviation and coverage share one figure while retaining separate scales.
+
+The School-template manuscript uses `unsrt` so numbered references follow first citation rather than alphabetical bibliography order. Results figures are placed within their corresponding RQ sections, use explicit rightward landscape rotation, and have concise captions. Method Tables 3.1 and 3.2 and the Results summary tables have been shortened; detailed definitions remain in the surrounding prose and supplementary materials.
+
 The current formal thesis-writing handoff is
 `docs/thesis_writing_handoff_zh.md`. It records the completed three-model
 English data scope, authoritative raw and processed paths, exclusions, analysis
@@ -11,6 +25,41 @@ current writing entry point. Model-specific prompt-effect, PSI, and human-
 reference outputs now cover GPT-4.1, GPT-5.4, and GPT-5.4 Mini; a unified
 three-model manuscript table/figure package remains to be generated.
 
+The current integrated Chinese Introduction and Method draft is
+`tmp/final_revision_all.md`; the user-facing copy is maintained separately as
+`E:\chen\Documents\final.md`. The Introduction frames reliability as
+behavioural robustness to controlled prompt reformulation, separates prompt
+stability from task-specific behavioural outcomes and human-reference
+proximity, incorporates the fixed-model multilingual comparison, and now uses
+15 distinct sources. Bibliographic metadata should receive a final
+reference-manager check before submission.
+
+`docs/intro_citation_audit_zh.md` records the source-by-source Introduction
+citation audit and the redistribution of detailed prompt and multilingual
+sources into Background and Related Work.
+
+Background and Related Work in `tmp/final_revision_all.md` uses a compact
+thematic-synthesis structure with eight subsections and 30 distinct sources.
+It groups multiple studies under each argumentative claim instead of providing
+paper-by-paper summaries. The current sequence is: LLMs as behavioural subjects
+and computational models; reliability in behavioural measurement; prompt
+sensitivity; model variation and reproducibility; language effects; sequential
+decision-task constructs; human-reference comparisons; and the research gap.
+All 26 substantive review paragraphs contain supporting citations, and each
+section links the state of the literature and its methods to critical limits
+and the present design.
+
+The end of the Introduction now reserves an explicit 100--150 Chinese-character
+results-achieved paragraph to be completed only after the formal results are
+frozen. A completed document-roadmap paragraph follows it and outlines the
+Background, Method, Results and Discussion, and Conclusion sections.
+
+The Chinese Introduction uses a continuous, unheaded argument, with short
+paragraphs to reduce visual density. Its conceptual sequence remains:
+cognitive/behavioural framing; prompt sensitivity and measurement reliability;
+multilingual context and task selection; and study design, contributions, and
+research questions.
+
 The current Chinese inventory of results that need to be reported and
 discussed is `docs/results_discussion_inventory_zh.md`. It organises the
 provisional three-model findings by baseline behaviour, within-model prompt
@@ -18,14 +67,44 @@ effects, model-by-prompt interactions, PSI, human-reference comparison, and
 robustness requirements. It also records the interpretation boundaries that
 must be respected before the final three-model result package is frozen.
 
-The current primary Chinese draft of the thesis statistical-analysis Methods
-section is `docs/statistical_analysis_methods_draft_zh.md`; an English working
-translation is retained in `docs/statistical_analysis_methods_draft.md`. The
-draft covers behavioural
-metrics, descriptive analysis, within-model prompt effects, cross-model
-interaction contrasts, PSI, human-reference comparisons, and task-valid
-bootstrap uncertainty and robustness procedures. Planned but not yet frozen
-robustness and multiplicity procedures are explicitly labelled as such.
+The current Method revision note is
+`docs/method_revision_multilingual_metrics_zh.md`. It audits the 2026-08-04
+`final.pdf`, supplies paste-ready wording for the behavioural-metric rationale,
+removes prose that duplicates the metric table, and adds the formal GPT-4.1
+English/Simplified-Chinese/Spanish comparison. It also separates the
+three-model English analysis from the fixed-model multilingual analysis and
+records the required language-by-prompt comparison and bootstrap units. The
+Statistical Analysis sequence is: within-model/within-language prompt effects;
+cross-model comparisons with language fixed to English; and cross-language
+comparisons with the model fixed to GPT-4.1.
+
+The manuscript Method keeps only equations needed to define task mechanisms
+and primary estimands. Routine sample-size expansions, pooled-SD and
+small-sample correction details, expanded interaction contrasts, and complete
+human-reference change formulas are maintained in
+`tmp/appendix_content_zh.md`, Appendix J. This changes presentation only; the
+frozen estimands and analysis implementation are unchanged.
+
+The Study Design and Scope subsection now includes the TikZ overview figure in
+`docs/figures/study_design_scope.tex`. It visualises the two 720-run comparison
+arms, their shared 240-run English GPT-4.1 sample, the 1,200-run deduplicated
+dataset, and the complete-run analysis unit. The manuscript includes it with
+`\input{study_design_scope.tex}`; the final LaTeX project must place the figure
+file beside the main source or adjust that relative path.
+
+The Experimental Procedure and Data Quality subsection includes a second TikZ
+flowchart in `docs/figures/experimental_workflow.tex`. It shows specification
+freeze, logical-run definition, the repeated observation/API/parser/task-update
+cycle, completion and provenance checks, technical-failure handling, run-level
+metric construction, and planned analysis. The manuscript includes it with
+`\input{experimental_workflow.tex}`.
+
+The external Informatics thesis template `E:\download\skeleton (3).tex`
+contains both complete TikZ figures inline, rather than loading separate figure
+files. Its preamble uses TikZ with the `positioning`, `arrows.meta`,
+`shapes.geometric`, and `calc` libraries. The figures and their textual
+references are located in Study Design and Scope and Experimental Procedure and
+Data Quality respectively.
 
 ## Supervisor Review Deliverable (2026-07-15)
 
@@ -198,6 +277,14 @@ is not automatically better. Outputs, including
 `model_prompt_interaction_contrasts.csv`, are written to
 `outputs/processed/model_comparison_en_v01/gpt-4.1_vs_gpt-5.4/`.
 
+For manuscript reporting, GPT-5.4 is the reference model: the planned contrasts
+are `GPT-4.1 - GPT-5.4` (old versus new flagship) and
+`GPT-5.4 Mini - GPT-5.4` (same-generation mini versus full model). Each raw
+interaction is explicitly calculated as the target model's condition-minus-
+baseline effect minus GPT-5.4's corresponding effect, separately by task,
+condition, and metric. Percentile-bootstrap limits are the 2.5th and 97.5th
+percentiles of 2,000 recalculated interaction estimates.
+
 English two-model Figures 2-5 can be generated reproducibly with
 `src.plot_english_model_comparison`. The obsolete generated two-model PNG/PDF
 files were removed on 2026-08-01 before the three-model paper analysis. Figure 2 shows run-level primary
@@ -228,6 +315,38 @@ outputs/processed/model_comparison_en_v01/human_comparison/
   model_human_comparison.csv
   model_human_distance_changes.csv
   model_human_comparison_summary.json
+```
+
+The manuscript-facing three-model human-similarity tables are in:
+
+```text
+outputs/processed/model_comparison_en_v01/human_similarity_tables_v01/
+  table_human_reference.csv
+  table_human_similarity_long.csv
+  table_human_similarity_matrix.csv
+  table_human_similarity_matrix.md
+  table_human_similarity_matrix.tex
+  table_manifest.json
+```
+
+The matrix has one row per model-task-primary-metric combination. Each prompt
+cell reports the LLM condition mean's position relative to the empirical human
+2.5th-97.5th percentile interval (`○` within, `↑` above, `↓` below), the signed
+human-SD standardised distance, and the proportion of the 20 LLM runs within
+that interval. The long table additionally reports the below/within/above run
+counts. The empirical interval describes participant-level variation; it is
+not a confidence interval for the human population mean and does not replace
+the bootstrap intervals for within-model prompt effects. The LaTeX version
+contains one `table*` per model and requires `booktabs` and `graphicx`.
+
+Rebuild the tables from the frozen `human_comparison_refit_v02` inputs with:
+
+```powershell
+python -m src.build_human_similarity_tables `
+  --model-input "gpt-4.1=outputs/processed/model_comparison_en_v01/human_comparison_refit_v02/gpt-4.1/llm_human_comparison.csv=outputs/processed/formal_v01/llm_run_metrics.csv" `
+  --model-input "gpt-5.4=outputs/processed/model_comparison_en_v01/human_comparison_refit_v02/gpt-5.4/llm_human_comparison.csv=outputs/processed/model_comparison_en_v01/gpt-5.4/llm_run_metrics.csv" `
+  --model-input "gpt-5.4-mini=outputs/processed/model_comparison_en_v01/human_comparison_refit_v02/gpt-5.4-mini/llm_human_comparison.csv=outputs/processed/model_comparison_en_v01/gpt-5.4-mini-formal-v01/llm_run_metrics.csv" `
+  --output-dir outputs/processed/model_comparison_en_v01/human_similarity_tables_v01
 ```
 
 Figure 6 can plot signed human-SD distance for all eight primary metrics, with the
@@ -354,6 +473,55 @@ completed all 300 trials with parse success rate 1.0 and zero invalid
 responses. The remainder of the matched one-seed Chinese/Spanish smoke matrix
 is running before the other 19 seeds are released.
 
+Chinese formal collection resumed on 2026-08-03 with pinned model
+`gpt-4.1-2025-04-14`, the frozen 12-prompt Simplified Chinese matrix, and all
+20 matched base seeds. The active batch is
+`outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/`: five waves run two
+workers in parallel, each worker processes two seeds, and recorded failures are
+deferred until all five waves finish. An automatic repair phase then reruns only
+incomplete shards until all 240 Chinese task-runs are valid. Start or resume the
+same workflow with:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass `
+  -File scripts/start_gpt41_chinese_20run_five_waves.ps1
+```
+
+As of 2026-08-04, Chinese collection is still active. A handoff monitor waits
+for 240/240 valid Chinese task-runs, then automatically starts the frozen
+Spanish 12-prompt matrix with the same model, seeds, five-wave/two-worker
+schedule, failure deferral, and final repair policy. Spanish outputs are written
+to `outputs/formal_multilingual_v01/gpt-4.1-es-20run-v01/`; handoff status is
+recorded in `outputs/formal_multilingual_v01/logs/gpt-4.1-es-20run-v01/handoff.log`.
+
+Later on 2026-08-04, collection was paused at the user's request after 220/240
+Chinese task-run files had completed. The two Chinese workers, their scheduler,
+and the Spanish handoff monitor were stopped; Spanish had not started. Existing
+outputs and shard status files are retained for resumable continuation.
+
+Collection resumed on 2026-08-05 from those retained shard checkpoints. The
+Chinese scheduler skips existing successes, completes the remaining formal
+wave work, and then repairs deferred failures until 240/240 valid task-runs are
+present. The handoff monitor is active again and will start the Spanish
+five-wave collection only after Chinese completion.
+
+Chinese collection reached 240/240 valid task-runs on 2026-08-05. Duplicate
+handoff monitors left by repeated background launches were stopped before they
+could run concurrent Spanish workers, and one Spanish scheduler was started at
+12:04 local time. Spanish wave 1 is active with exactly two workers; later
+waves and the final repair phase remain automatic.
+
+Spanish collection reached 236/240 valid task-runs before its repair process
+stopped. On 2026-08-07 the final repair scheduler was restarted from the saved
+shard checkpoints; it skips the 236 existing successes and is completing the
+four missing `wave-04-b` results.
+
+Spanish collection completed on 2026-08-07 at 240/240 valid task-runs. The
+final `wave-04-b` repair finished with 23 existing successes skipped and one
+new success recorded in its last status pass. Chinese and Spanish GPT-4.1
+formal collection are therefore both complete; no collection worker remains
+active.
+
 Local process artifacts are intentionally excluded from the deliverable view:
 `.env`, `.venv/`, `.tmp/`, `.uv-cache/`, `DATASET/`, raw JSON runs under
 `outputs/`, and early pilot/debug outputs. They are not deleted by the
@@ -428,8 +596,8 @@ while manuscript tables and figures use the corresponding frozen display names:
 | `uncertainty_emphasis` | Uncertainty and information emphasis |
 | `reward_loss_emphasis` | Reward and loss emphasis |
 | `risk_emphasis` | Risk-taking and risk-management emphasis |
-| `directed_exploration` | Directed exploration |
-| `horizon_effect` | Horizon-related change in exploration rate |
+| `directed_exploration` | Information-seeking choice rate |
+| `horizon_effect` | Horizon-related exploration change |
 | `random_exploration_effect` | Random exploration effect |
 | `advantageous_choice_rate` | Advantageous choice rate |
 | `post_loss_switching_rate` | Post-loss switching rate |
@@ -471,6 +639,51 @@ pooled-SD Hedges' g, and PSI. This propagates model-fitting uncertainty instead
 of treating the fitted run estimates as fixed observations. Formal reporting
 checks `run_effect_sd` values `0.25`, `0.50`, and `1.00`. Results with fewer
 than 15 valid runs are diagnostic only; the target is 20 runs per condition.
+
+The legacy machine field `directed_exploration` is reported as
+**Information-seeking choice rate**: among unequal-information games, it is the
+proportion of first free choices selecting the less-observed option. The
+separate `horizon_effect` is **Horizon-related exploration change**: the
+Horizon-6 minus Horizon-1 difference in the proportion of eligible first free
+choices selecting the option with the lower observed mean. It includes both
+equal- and unequal-information games; choices for which the two observed means
+are tied are excluded because neither option can be classified as lower-valued.
+This tie rule is shared by LLM and human preprocessing. The 2026-08-08 audit
+found 160 tied first-free choices among 16,000 formal English LLM games and 151
+among 19,200 human games. The affected English Horizon run metrics, prompt-
+sensitivity outputs, model comparisons, human comparisons, and similarity
+tables were regenerated from retained raw records. Any later multilingual
+aggregation must use the same corrected preprocessing rule.
+
+IGT stores loss as a signed component: `0` means no loss and negative values
+mean that a loss occurred. Both the LLM payoff schedule and the human
+`lo_100.csv` source use this direction. Post-loss switching therefore uses
+`loss < 0`, not `loss > 0` and not `net_outcome < 0`; trial 100 is ineligible
+because it has no subsequent choice.
+
+In the Horizon hierarchical choice model, the code variable
+`reward_sensitivity` is the coefficient on observed reward difference because
+that term has unit coefficient inside the subjective-evidence bracket. The
+same parameter multiplies the entire bracket, including information bonus and
+label bias, so mathematically it is also the inverse-temperature for overall
+subjective evidence. Its reciprocal `decision_noise` must be interpreted with
+that parameterisation in mind.
+
+The manuscript now prespecifies pooled-SD Hedges' g as undefined whenever the
+pooled SD is zero: equal constant groups retain raw difference 0 and are flagged
+`constant_equal`; unequal constant groups retain their raw difference and are
+flagged `constant_unequal`. The analysis implementation and tests now follow
+that rule; no undefined standardised effect is replaced with zero. PSI is
+complete only when all configured component g values are defined. The
+analysis also enforces per-interval bootstrap validity gates
+of >=95% for routine reporting, 90%--<95% with a stability warning, and <90%
+withheld from formal inference. These diagnostics are written for raw,
+standardised, PSI, model-interaction, language-interaction, and hierarchical
+Random-exploration intervals. Horizon-related exploration change is missing
+rather than zero if either horizon has no eligible non-tied first-free choices.
+Human-reference coverage uses the number of non-missing LLM metric
+values as its denominator. Human empirical 2.5th and 97.5th percentiles use
+linear interpolation between adjacent ordered observations.
 
 BART `post_explosion_adjustment` averages `next balloon pumps - exploded
 balloon pumps` over explosions for which a subsequent balloon exists. A run or
@@ -1192,7 +1405,7 @@ python -m src.compute_prompt_sensitivity `
   outputs/processed/multilingual_v01/llm_run_metrics.csv `
   --expected-runs-per-cell 20 `
   --output-dir outputs/processed/multilingual_v01
-python -m src.compute_language_omnibus `
+python -m src.compute_language_interactions `
   outputs/processed/multilingual_v01/llm_run_metrics.csv `
   --output-dir outputs/processed/multilingual_v01
 ```
@@ -1200,27 +1413,80 @@ python -m src.compute_language_omnibus `
 This writes:
 
 ```text
-language_omnibus.csv
-language_prompt_omnibus.csv
-language_omnibus_summary.json
+language_baseline_contrasts.csv
+language_prompt_interactions.csv
+language_interaction_summary.json
 ```
 
-`language_omnibus.csv` evaluates `en`, `zh-CN`, and `es` together within each
-task, prompt condition, and metric. It uses a seed-paired Friedman omnibus test,
-Kendall's W effect size, and a within-seed permutation p-value. The primary
-analysis does not run pairwise language comparisons.
+`language_baseline_contrasts.csv` uses English as the prespecified reference
+and reports Simplified-Chinese-minus-English and Spanish-minus-English neutral-
+baseline differences in raw units and pooled-SD Hedges' g, with percentile-
+bootstrap 95% confidence intervals.
 
-`language_prompt_omnibus.csv` first calculates, within every language:
+`language_prompt_interactions.csv` first calculates, within every language:
 
 ```text
 condition - same-language baseline
 ```
 
-It then compares those prompt effects across all three languages together using
-the same omnibus procedure. This tests whether prompt sensitivity differs by
-language without selecting English as the only reference.
+It then reports the English-reference interaction contrasts
+`(target-language condition - target-language baseline) - (English condition -
+English baseline)` in raw and standardised units. Horizon and BART use matched-
+seed block bootstrap; deterministic-schedule IGT uses independent-cell run
+bootstrap. All intervals use 2,000 percentile-bootstrap replicates. The former
+Friedman/Kendall's W/permutation analysis is superseded.
+
+The manuscript treats the model and language contrasts as estimation-focused
+analyses. It does not apply family-wise multiplicity adjustment to the
+percentile intervals and does not make a claim solely because one unadjusted
+interval excludes zero. Interpretation emphasises prespecified raw contrasts,
+effect direction and magnitude, interval width, and consistency across related
+metrics and tasks. Standardised language interaction differences are
+supplementary because their component Hedges' g values can use different
+pooled standard deviations.
 
 ## Important Principles
+
+## Manuscript evidence and Results status (2026-08-09)
+
+- The current Background and Related Work has been re-audited paragraph by paragraph. It contains 8 thematic sections, 26 substantive paragraphs, and 33 unique sources; source count is not treated as a hard cap. The original IGT and BART task sources are now cited in the task-theory section. Evidence-boundary corrections and bibliography caveats are recorded in `docs/background_citation_audit_zh.md`.
+- The manuscript operationally limits behavioural-measurement reliability to robustness across prespecified prompt formulations under fixed model snapshot, task implementation, generation temperature, response format, and parser. The human-reference quantity \(D\) is named a `signed human-SD-scaled mean deviation`, not a standardised mean difference or conventional effect size.
+- Formal data collection is complete at 1,200 deduplicated valid task runs. The regenerated `outputs/processed/final_analysis_v03/` package now contains RQ1 effects/PSI, both GPT-5.4-reference RQ2 comparisons, RQ3 multilingual contrasts, Random-exploration diagnostics, and RQ4 human-reference outputs. Results prose must use this package rather than historical `*_refit_v02` or July deliverables.
+- The authoritative data/output inventory is `docs/results_data_inventory_20260809.md`; the Results chapter and figure plan is `docs/results_writing_architecture_zh.md`.
+- The multilingual aggregation explicitly audits the prespecified provenance split: reused English GPT-4.1 runs use `experiment_config_stage01` 0.5, while newly collected Chinese and Spanish runs use 0.7. This cross-language difference is accepted only through the frozen per-language allowlist; mixed or unexpected versions within a language remain errors.
+- Following completion of all analysis gates, `tmp/final_revision_all.md` now contains a source-linked Results draft covering RQ1--RQ4 and a separate Discussion draft. The Introduction's former Results-achieved placeholder has also been replaced with a non-numeric findings summary. These drafts use only `final_analysis_v03` outputs.
+- The post-analysis Method audit now states the deduplicated 1,200-run total, treats Neutral baseline language contrasts as primary RQ3 analyses, limits prompt-length provenance to reproducible text/character information rather than unverifiable proprietary-tokenizer counts, and describes the exact bootstrap diagnostic fields and frozen language-specific config provenance used by the code.
+- The corrected, analysis-gated writing plan is `docs/results_discussion_plan_revised_zh.md`. It supersedes the earlier Results architecture draft and explicitly separates RQ1 within-language effects from RQ3 cross-language contrasts, requires GPT-5.4-reference joint bootstraps for RQ2, and blocks prose until multilingual, Random-exploration, and human-reference change outputs are complete.
+- The Results/Discussion execution plan source is version 2.2. It aligns the zero-variance Hedges' g rule with the revised Method, adds per-interval bootstrap-validity gates, and makes human--LLM Random-exploration specification alignment a P0 requirement. The Word copy has been refreshed for external handoff.
+- `final_analysis_v03` contains 72 multilingual within-language prompt effects, 24 symmetric three-language centred Neutral deviations, 72 symmetric centred prompt-effect deviations, and two 24-row model-by-prompt interaction tables. English, Simplified Chinese, and Spanish are analysed jointly: each language is expressed relative to the three-language mean, the three deviations sum to zero, and no language is the statistical reference. Every generated interval currently has 2,000/2,000 valid replicates and status `report`.
+- Superseded English-reference RQ3 CSVs and figures are not part of the authoritative manifest or manuscript package; they are retained only under explicitly named archival folders for provenance.
+- A final independent manuscript audit corrected the last English-centred narrative sentence, distinguished the two RQ3 standardisation schemes in the caption and Results prose, replaced variance-decomposition language with descriptive centred-profile language, and stated the exact coverage resolution as `1 / n_valid` (with change-score resolution depending on both cells).
+- `tmp/final_revision_all.md` now begins with a thesis-aligned Abstract and keywords. It reports the 1,200-run design, task/model/language scope, primary estimands, joint three-language centred analysis, main conditionality finding, descriptive human-reference boundary, and auditable evaluation contribution without adding unsupported claims.
+- The Method's task-appropriate bootstrap description distinguishes general percentile-bootstrap support (Efron and Tibshirani, 1993) from dependence-preserving cluster/block resampling support (Field and Welsh, 2007). Matched seed blocks remain a design-specific application derived from the Horizon/BART randomisation structure, while IGT uses independent cell-run resampling and only Horizon Random exploration is hierarchically refitted.
+- The Introduction roadmap now mirrors the actual chapter functions: Results answers RQ1--RQ4; Discussion integrates measurement implications, methodological contribution, human-reference boundaries, limitations and reproducibility priorities; Conclusion directly answers the core objective and identifies the highest-priority extensions rather than merely repeating the limitations list.
+- `final.tex` now uses the School-provided `infthesis`/`msccheck` structure rather than the generic `article` class. The explicit `geometry`, `11pt`, `lmodern`, compressed-list spacing, longtable spacing overrides, `caption`, `enumitem`, `natbib`, and `cleveref` settings were removed. Abstract, declaration, and contents are preliminary material; Introduction is the first numbered body chapter and therefore begins at body page 1 under the class. The default thesis margins, font sizing, and 1.5 line spacing are left untouched. The 40-page body limit still requires an actual Overleaf compilation check.
+- No reduced-size text remains in the manuscript tables or table notes. The repository does not contain the official `infthesis.cls` or `msccheck.sty`; `final.tex` must therefore be compiled inside the University's official Overleaf template, not as a standalone generic project.
+- The Sebri et al. (2023) BART reference was corrected against the publisher record: the first author is Valeria Sebri (not Vincenzo), and the third author's full bibliographic form is Georg D. Granic.
+- Human-reference results contain 160 model-language cells and 120 manipulated-minus-Neutral change rows. Final schemas call the quantity a signed/absolute `human-SD-scaled mean deviation`; it is not Cohen's d. Human and LLM Random-exploration estimates passed the same-model-specification audit and all formal 0.25/0.5/1.0 shrinkage fits converged.
+- `python -m src.build_final_analysis_manifest` validates frozen row counts, interval statuses, aggregation completeness and Random-exploration convergence, then writes SHA-256 provenance to `outputs/processed/final_analysis_v03/analysis_manifest.json`. Results writing is permitted only when `analysis_ready` is true and `failures` is empty.
+- `python -m src.build_results_visual_package` converts the validated final tables into the main Results displays. Each figure is exported as vector PDF and 600-dpi PNG under `outputs/figures/final_results_v01/`; two manuscript tables and ready-to-input figure environments are written under `docs/results_visuals/`. Visual consistency comes from a common low-saturation, colour-vision-friendly blue--grey--brown-red palette, shared typography, and shared line weights rather than forcing every RQ into one chart type. RQ1 uses three task-grouped signed-Hedges-$g$ forest panels with formal standardised bootstrap intervals; RQ2 retains the compact interaction heatmap because its two-contrast matrix structure is naturally tabular; RQ3 jointly displays English, Simplified Chinese, and Spanish as centred Neutral and centred prompt-effect profiles, with no reference language. RQ4 remains split into separate absolute-deviation and coverage heatmaps. Labels and annotations are sized for A4 landscape reproduction, and the previous detailed RQ1--RQ3 figures remain under `outputs/figures/final_results_v01/detail_or_appendix/`.
+- For visual-version comparison, current manuscript displays are copied to `outputs/figures/final_results_v01/new_version/`, while the still-available superseded RQ3/RQ4 displays are copied to `outputs/figures/final_results_v01/old_version/`. Root-level files remain in place because the generated LaTeX environments reference those stable paths. Verified old RQ1/RQ2 copies were unavailable after their same-name outputs were regenerated.
+- The manuscript Results section now follows the revised visual logic: forest plots support RQ1, a compact interaction matrix supports RQ2, dot/forest panels support RQ3, and separate heatmaps support RQ4. Prose reports representative raw estimates and cross-cell patterns rather than narrating every cell. Discussion is consolidated into four sections: integrated findings and methodological contribution; conditionality of behavioural measurement; human-reference interpretation; and limitations, reproducibility implications, and future work. The former task-by-task discussion and duplicate concluding synthesis have been removed.
+- The final Results/Discussion boundary audit now limits matched-seed block bootstrap to Horizon/BART and hierarchical refitting to Horizon Random exploration; distinguishes run-level replication from independent synthetic-population sampling; states RQ2 and RQ3 interaction directions; distinguishes RQ1's standardised figure axis from raw prose estimates; records RQ4's no-CI status and coverage quantisation; and makes the fixed-human-reference inference explicitly conditional. The BART adjusted-pumps denominator and retained audit fields for three failed Mini attempts are also stated.
+- The previously empty Conclusion and Future Work section is now populated with a concise synthesis and forward-looking priorities. RQ4 figure captions and Results wording explicitly match the Method: human-reference proximity changes are descriptive point estimates, and no inferential intervals were constructed for those measures.
+- The conclusion now states the central finding as structured, conditional prompt sensitivity without a universal formulation ranking; frames the computer-science contribution as an auditable evaluation workflow; distinguishes LLM-run behaviour from human-population distributional equivalence; and prioritises replication before orthogonal prompt, multilingual, and human-reference extensions.
+- The four main Results displays are portrait-page figures: task panels are stacked vertically (RQ1/RQ2), or tasks occupy rows with two complementary analysis columns (RQ3/RQ4). No page or image rotation package is used, and the School class margins, font sizes, and line spacing remain unchanged.
+- Each Results RQ now uses two concise evidence paragraphs before its figure: one reports the principal cross-cell pattern and representative raw estimates, and the other states the RQ-level answer and statistical boundary. This restores necessary result detail without repeating the Discussion or narrating every plotted cell.
+- After the line-level compression pass, approximately 510 words of substantive Method explanation were restored: factorial-design logic, the limits of run-level replication, task-selection rationale, prompt-manipulation boundaries, language freezing, complete-run dependence, human-reference selection and interpretation, and multiplicity-aware contrast interpretation. Engineering version detail remains in the technical appendix; no task parameter, metric definition, contrast, equation, bootstrap gate, or provenance limitation was removed.
+- The Method now explicitly motivates the prespecified two-sided 95% percentile-bootstrap intervals, defines their 2.5th/97.5th percentile construction and interpretation boundary, and cites Efron and Tibshirani's classic bootstrap framework. The consolidated bibliography therefore contains 44 external sources.
+- The thesis Method has been edited to separate scientific design from implementation audit detail. The main text retains model versions, collection dates, generation settings, response-validity rules, analysis units and uncertainty procedures; internal data labels, hashes, client/network retry details, full prompt-generation settings and configuration mappings are routed to the technical appendix.
+- Introduction citation roles were tightened: Sclar et al. (2024) supports static benchmark/format sensitivity, whereas Loya et al. (2023) is presented as a sequential Horizon Task extension rather than evidence about single-turn responses.
+- `mybibfile.bib` is the consolidated BibTeX database for all 43 external sources currently cited in the manuscript. It uses the formal published versions where available and locks the ambiguous Lin, Hua, Kong, Steingroever, Hagendorff, Horton, Zhang, Mondshine, and Palmer records to the versions documented in the citation audits.
+- `intro_academic_english.tex` is the grammar-checked, British-academic-English LaTeX version of the current Introduction. Its citation commands use plain `\cite{...}` because the current dissertation skeleton uses `\bibliographystyle{plain}` and does not load `natbib`; every key resolves against `mybibfile.bib`.
+- `background_academic_english.tex` is the grammar-checked, British-academic-English LaTeX version of the eight-part Background and Related Work section. It uses template-compatible `\cite{...}` commands and removes the Method-direction sentence from the final research-positioning paragraph so that the literature review ends on the contribution.
+
+- `skeleton_repaired.tex` now contains a result-led Discussion revision. It interprets the reported RQ1--RQ4 estimates and sign reversals directly, separates observed behavioural patterns from possible cue-salience explanations, removes repeated Background definitions and duplicate literature-led discussion, and turns limitations into result-specific replication priorities. Results figures now use flexible top/bottom/page floats at a maximum height of `0.72\textheight`; intermediate float barriers were removed while the barrier before Discussion remains, reducing blank page areas without allowing Results figures to drift into the next chapter. The empty template appendix has been replaced by a concise research-materials appendix that indexes all frozen English, Chinese, and Spanish prompt files, the prompt provenance and translation-audit records, the authoritative `final_analysis_v03` outputs, bootstrap diagnostics, and detailed figures. It explicitly records why participant-information and consent-form appendices do not apply. The ethics declaration is set to the no-approval-required statement on the current design assumption that the project recruited no participants and used only existing human-reference datasets; this wording must still be confirmed with the supervisor. The acknowledgements block contains explicit placeholders that must be personalised or removed before submission.
+- For Overleaf portability, `skeleton_repaired.tex` now declares `\graphicspath{{figures/}{./}}`: the four Results images are referenced by filename and can be uploaded under `figures/`, while the two design images may remain either in `figures/` or the Overleaf project root. The appendix's reproducibility locations are presented as clickable GitHub URLs rather than local filesystem paths. `mybibfile.bib` remains a project-relative bibliography and must be uploaded beside the main `.tex` file.
 
 - 正式实验前锁定 task rules、prompt set、parser、model settings 和 output schema。
 - Prompt 修改必须记录在 `docs/research_log.md`。

@@ -1,0 +1,17 @@
+{
+  "analysis": "model_language_human_reference_comparison",
+  "models": [
+    "GPT-4.1",
+    "GPT-5.4",
+    "GPT-5.4 Mini"
+  ],
+  "prompt_languages": [
+    "en",
+    "es",
+    "zh-CN"
+  ],
+  "comparison_rows": 160,
+  "baseline_change_rows": 120,
+  "human_reference_metric_count": 8,
+  "interpretation_boundary": "Closer distributional location does not establish a shared cognitive mechanism."
+}

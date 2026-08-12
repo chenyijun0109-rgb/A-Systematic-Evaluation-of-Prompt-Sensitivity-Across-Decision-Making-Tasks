@@ -1,0 +1,1146 @@
+{
+  "analysis": "horizon_random_exploration",
+  "source_files": [
+    "outputs\\formal_v01\\horizon_baseline_seed-20260708.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260709.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260710.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260711.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260712.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260713.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260714.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260715.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260716.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260717.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260718.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260719.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260720.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260721.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260722.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260723.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260724.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260725.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260726.json",
+    "outputs\\formal_v01\\horizon_baseline_seed-20260727.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260708.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260709.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260710.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260711.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260712.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260713.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260714.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260715.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260716.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260717.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260718.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260719.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260720.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260721.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260722.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260723.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260724.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260725.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260726.json",
+    "outputs\\formal_v01\\horizon_detailed_seed-20260727.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260708.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260709.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260710.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260711.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260712.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260713.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260714.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260715.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260716.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260717.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260718.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260719.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260720.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260721.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260722.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260723.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260724.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260725.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260726.json",
+    "outputs\\formal_v01\\horizon_role_human_seed-20260727.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260708.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260709.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260710.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260711.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260712.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260713.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260714.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260715.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260716.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260717.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260718.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260719.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260720.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260721.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260722.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260723.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260724.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260725.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260726.json",
+    "outputs\\formal_v01\\horizon_uncertainty_emphasis_seed-20260727.json"
+  ],
+  "n_first_free_choices": 3200,
+  "conditions": {
+    "baseline": {
+      "status": "ok",
+      "prompt_condition": "baseline",
+      "model": "hierarchical_logistic_map_fixed_gaussian_shrinkage",
+      "definition": "decision_noise_h6 - decision_noise_h1",
+      "first_free_choices_only": true,
+      "run_effect_sd": 0.5,
+      "n_runs": 20,
+      "n_choices": 800,
+      "converged": true,
+      "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+      "objective": 131.43230198623846,
+      "condition_estimate": {
+        "decision_noise_h1": 2.3880742218383966,
+        "decision_noise_h6": 2.766319834743015,
+        "random_exploration_effect": 0.37824561290461833,
+        "information_bonus_h1": -0.05487807529876321,
+        "information_bonus_h6": 1.0596590481800214,
+        "label_bias_h1": 3.7583228243056124,
+        "label_bias_h6": 2.4340215943192467
+      },
+      "run_estimates": [
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260708.json:seed=20260708",
+          "decision_noise_h1": 2.1373059158721337,
+          "decision_noise_h6": 2.505498670490176,
+          "random_exploration_effect": 0.36819275461804235,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260709.json:seed=20260709",
+          "decision_noise_h1": 1.750363618129751,
+          "decision_noise_h6": 2.0923758327282136,
+          "random_exploration_effect": 0.34201221459846254,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260710.json:seed=20260710",
+          "decision_noise_h1": 1.9095911561514687,
+          "decision_noise_h6": 1.9751527427877293,
+          "random_exploration_effect": 0.06556158663626066,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260711.json:seed=20260711",
+          "decision_noise_h1": 2.366239451590678,
+          "decision_noise_h6": 6.2921802745852,
+          "random_exploration_effect": 3.925940822994522,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260712.json:seed=20260712",
+          "decision_noise_h1": 3.423354196182534,
+          "decision_noise_h6": 2.379535718607269,
+          "random_exploration_effect": -1.043818477575265,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260713.json:seed=20260713",
+          "decision_noise_h1": 3.4026867766247895,
+          "decision_noise_h6": 2.475479133552154,
+          "random_exploration_effect": -0.9272076430726353,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260714.json:seed=20260714",
+          "decision_noise_h1": 1.6463364007469679,
+          "decision_noise_h6": 2.00337760989734,
+          "random_exploration_effect": 0.3570412091503723,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260715.json:seed=20260715",
+          "decision_noise_h1": 3.6309583403309635,
+          "decision_noise_h6": 3.278732032037306,
+          "random_exploration_effect": -0.35222630829365764,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260716.json:seed=20260716",
+          "decision_noise_h1": 2.3323472138979686,
+          "decision_noise_h6": 2.067025120733951,
+          "random_exploration_effect": -0.26532209316401767,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260717.json:seed=20260717",
+          "decision_noise_h1": 1.9329396263708418,
+          "decision_noise_h6": 2.149626195620752,
+          "random_exploration_effect": 0.21668656924991025,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260718.json:seed=20260718",
+          "decision_noise_h1": 4.657400302973995,
+          "decision_noise_h6": 2.1489377115203396,
+          "random_exploration_effect": -2.5084625914536556,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260719.json:seed=20260719",
+          "decision_noise_h1": 3.2006115422035903,
+          "decision_noise_h6": 2.4418686657072466,
+          "random_exploration_effect": -0.7587428764963438,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260720.json:seed=20260720",
+          "decision_noise_h1": 1.5814155793333124,
+          "decision_noise_h6": 2.0623306098100076,
+          "random_exploration_effect": 0.48091503047669515,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260721.json:seed=20260721",
+          "decision_noise_h1": 1.9509510136106754,
+          "decision_noise_h6": 3.712495441131189,
+          "random_exploration_effect": 1.7615444275205137,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260722.json:seed=20260722",
+          "decision_noise_h1": 1.7730781399052422,
+          "decision_noise_h6": 3.173964160779653,
+          "random_exploration_effect": 1.4008860208744107,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260723.json:seed=20260723",
+          "decision_noise_h1": 2.410679967240094,
+          "decision_noise_h6": 2.4930761751969803,
+          "random_exploration_effect": 0.08239620795688651,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260724.json:seed=20260724",
+          "decision_noise_h1": 2.998858983926617,
+          "decision_noise_h6": 2.3640408642407578,
+          "random_exploration_effect": -0.6348181196858591,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260725.json:seed=20260725",
+          "decision_noise_h1": 2.015936986358235,
+          "decision_noise_h6": 2.1907605522421396,
+          "random_exploration_effect": 0.17482356588390457,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260726.json:seed=20260726",
+          "decision_noise_h1": 2.7500748241588364,
+          "decision_noise_h6": 4.749880287497874,
+          "random_exploration_effect": 1.9998054633390372,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_baseline_seed-20260727.json:seed=20260727",
+          "decision_noise_h1": 1.8342103785688233,
+          "decision_noise_h6": 6.986539024962359,
+          "random_exploration_effect": 5.152328646393536,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        }
+      ]
+    },
+    "detailed": {
+      "status": "ok",
+      "prompt_condition": "detailed",
+      "model": "hierarchical_logistic_map_fixed_gaussian_shrinkage",
+      "definition": "decision_noise_h6 - decision_noise_h1",
+      "first_free_choices_only": true,
+      "run_effect_sd": 0.5,
+      "n_runs": 20,
+      "n_choices": 800,
+      "converged": true,
+      "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+      "objective": 125.16806205862096,
+      "condition_estimate": {
+        "decision_noise_h1": 2.4372316841526134,
+        "decision_noise_h6": 2.2548796896439205,
+        "random_exploration_effect": -0.18235199450869288,
+        "information_bonus_h1": 1.471672623892575,
+        "information_bonus_h6": 3.4530036867965554,
+        "label_bias_h1": 1.0896151525931572,
+        "label_bias_h6": 0.929714324126007
+      },
+      "run_estimates": [
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260708.json:seed=20260708",
+          "decision_noise_h1": 1.8319985474763945,
+          "decision_noise_h6": 4.1745938906447435,
+          "random_exploration_effect": 2.342595343168349,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260709.json:seed=20260709",
+          "decision_noise_h1": 1.9200330667225323,
+          "decision_noise_h6": 1.643250910318446,
+          "random_exploration_effect": -0.2767821564040862,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260710.json:seed=20260710",
+          "decision_noise_h1": 1.878604380777081,
+          "decision_noise_h6": 1.937835947591913,
+          "random_exploration_effect": 0.05923156681483199,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260711.json:seed=20260711",
+          "decision_noise_h1": 1.8416614778027602,
+          "decision_noise_h6": 1.8156508637866127,
+          "random_exploration_effect": -0.02601061401614757,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260712.json:seed=20260712",
+          "decision_noise_h1": 1.6931611464672622,
+          "decision_noise_h6": 1.8835525683464713,
+          "random_exploration_effect": 0.1903914218792091,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260713.json:seed=20260713",
+          "decision_noise_h1": 2.0498510689057445,
+          "decision_noise_h6": 2.0255442139421804,
+          "random_exploration_effect": -0.024306854963564106,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260714.json:seed=20260714",
+          "decision_noise_h1": 1.7776197796560769,
+          "decision_noise_h6": 1.6734542365544993,
+          "random_exploration_effect": -0.10416554310157755,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260715.json:seed=20260715",
+          "decision_noise_h1": 5.542156472081266,
+          "decision_noise_h6": 2.028995723943257,
+          "random_exploration_effect": -3.513160748138009,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260716.json:seed=20260716",
+          "decision_noise_h1": 4.252595371328871,
+          "decision_noise_h6": 2.6263189532554376,
+          "random_exploration_effect": -1.6262764180734335,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260717.json:seed=20260717",
+          "decision_noise_h1": 2.972393407417877,
+          "decision_noise_h6": 4.0035520477712145,
+          "random_exploration_effect": 1.0311586403533375,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260718.json:seed=20260718",
+          "decision_noise_h1": 2.5467173749274963,
+          "decision_noise_h6": 1.874056071277047,
+          "random_exploration_effect": -0.6726613036504492,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260719.json:seed=20260719",
+          "decision_noise_h1": 3.3662767344869096,
+          "decision_noise_h6": 2.3312246082719232,
+          "random_exploration_effect": -1.0350521262149863,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260720.json:seed=20260720",
+          "decision_noise_h1": 1.54211605424548,
+          "decision_noise_h6": 5.197009359554601,
+          "random_exploration_effect": 3.6548933053091206,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260721.json:seed=20260721",
+          "decision_noise_h1": 2.935942603133334,
+          "decision_noise_h6": 2.6429991643292254,
+          "random_exploration_effect": -0.2929434388041088,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260722.json:seed=20260722",
+          "decision_noise_h1": 2.2893826218724382,
+          "decision_noise_h6": 2.0528538366638216,
+          "random_exploration_effect": -0.23652878520861664,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260723.json:seed=20260723",
+          "decision_noise_h1": 2.2905900077029586,
+          "decision_noise_h6": 2.0734607473039612,
+          "random_exploration_effect": -0.21712926039899738,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260724.json:seed=20260724",
+          "decision_noise_h1": 5.891719347482393,
+          "decision_noise_h6": 1.871822116390303,
+          "random_exploration_effect": -4.01989723109209,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260725.json:seed=20260725",
+          "decision_noise_h1": 1.8817057819225524,
+          "decision_noise_h6": 1.931574906786218,
+          "random_exploration_effect": 0.04986912486366557,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260726.json:seed=20260726",
+          "decision_noise_h1": 1.9356041160016146,
+          "decision_noise_h6": 1.9003542438276522,
+          "random_exploration_effect": -0.03524987217396247,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_detailed_seed-20260727.json:seed=20260727",
+          "decision_noise_h1": 2.085964471066689,
+          "decision_noise_h6": 1.73852777117804,
+          "random_exploration_effect": -0.3474366998886489,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        }
+      ]
+    },
+    "role_human": {
+      "status": "ok",
+      "prompt_condition": "role_human",
+      "model": "hierarchical_logistic_map_fixed_gaussian_shrinkage",
+      "definition": "decision_noise_h6 - decision_noise_h1",
+      "first_free_choices_only": true,
+      "run_effect_sd": 0.5,
+      "n_runs": 20,
+      "n_choices": 800,
+      "converged": true,
+      "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+      "objective": 98.40660935604778,
+      "condition_estimate": {
+        "decision_noise_h1": 1.7957001289093717,
+        "decision_noise_h6": 1.7660686296669288,
+        "random_exploration_effect": -0.029631499242442905,
+        "information_bonus_h1": -2.356193607632441,
+        "information_bonus_h6": -2.343076401752482,
+        "label_bias_h1": 1.8890871858599954,
+        "label_bias_h6": 0.4667528747288553
+      },
+      "run_estimates": [
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260708.json:seed=20260708",
+          "decision_noise_h1": 1.5460525646951433,
+          "decision_noise_h6": 2.467789606252325,
+          "random_exploration_effect": 0.9217370415571817,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260709.json:seed=20260709",
+          "decision_noise_h1": 1.6886313054415063,
+          "decision_noise_h6": 1.3605153997112964,
+          "random_exploration_effect": -0.3281159057302099,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260710.json:seed=20260710",
+          "decision_noise_h1": 1.5501883771185987,
+          "decision_noise_h6": 1.3700180164025175,
+          "random_exploration_effect": -0.18017036071608117,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260711.json:seed=20260711",
+          "decision_noise_h1": 1.3631242539794497,
+          "decision_noise_h6": 1.5085236803581903,
+          "random_exploration_effect": 0.1453994263787406,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260712.json:seed=20260712",
+          "decision_noise_h1": 1.439081137922211,
+          "decision_noise_h6": 1.9989269784578998,
+          "random_exploration_effect": 0.5598458405356888,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260713.json:seed=20260713",
+          "decision_noise_h1": 1.565618510282565,
+          "decision_noise_h6": 1.6271800273112587,
+          "random_exploration_effect": 0.06156151702869361,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260714.json:seed=20260714",
+          "decision_noise_h1": 1.4648546455983444,
+          "decision_noise_h6": 1.4056906259023545,
+          "random_exploration_effect": -0.059164019695989944,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260715.json:seed=20260715",
+          "decision_noise_h1": 1.4152877096432304,
+          "decision_noise_h6": 1.654625703521986,
+          "random_exploration_effect": 0.23933799387875565,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260716.json:seed=20260716",
+          "decision_noise_h1": 1.5952441264996342,
+          "decision_noise_h6": 2.326510624789697,
+          "random_exploration_effect": 0.731266498290063,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260717.json:seed=20260717",
+          "decision_noise_h1": 1.7202629979702857,
+          "decision_noise_h6": 1.7399913853942082,
+          "random_exploration_effect": 0.019728387423922467,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260718.json:seed=20260718",
+          "decision_noise_h1": 1.5538562904364421,
+          "decision_noise_h6": 1.3209827656669884,
+          "random_exploration_effect": -0.23287352476945378,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260719.json:seed=20260719",
+          "decision_noise_h1": 2.785361353665286,
+          "decision_noise_h6": 1.3928140106945677,
+          "random_exploration_effect": -1.3925473429707182,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260720.json:seed=20260720",
+          "decision_noise_h1": 3.1079236102161736,
+          "decision_noise_h6": 1.733782108171805,
+          "random_exploration_effect": -1.3741415020443686,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260721.json:seed=20260721",
+          "decision_noise_h1": 1.9979388177034108,
+          "decision_noise_h6": 1.3244666504328255,
+          "random_exploration_effect": -0.6734721672705852,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260722.json:seed=20260722",
+          "decision_noise_h1": 1.7770115652378071,
+          "decision_noise_h6": 2.501774738681862,
+          "random_exploration_effect": 0.7247631734440549,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260723.json:seed=20260723",
+          "decision_noise_h1": 1.6532309513938603,
+          "decision_noise_h6": 2.5880270998447132,
+          "random_exploration_effect": 0.9347961484508529,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260724.json:seed=20260724",
+          "decision_noise_h1": 3.51559419455188,
+          "decision_noise_h6": 2.016603250655866,
+          "random_exploration_effect": -1.4989909438960138,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260725.json:seed=20260725",
+          "decision_noise_h1": 2.3701989761723508,
+          "decision_noise_h6": 2.2509821533590233,
+          "random_exploration_effect": -0.11921682281332746,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260726.json:seed=20260726",
+          "decision_noise_h1": 1.4879962518120582,
+          "decision_noise_h6": 1.9642386304574082,
+          "random_exploration_effect": 0.47624237864535,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_role_human_seed-20260727.json:seed=20260727",
+          "decision_noise_h1": 1.4869813004666574,
+          "decision_noise_h6": 1.4211874810221934,
+          "random_exploration_effect": -0.06579381944446405,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        }
+      ]
+    },
+    "uncertainty_emphasis": {
+      "status": "ok",
+      "prompt_condition": "uncertainty_emphasis",
+      "model": "hierarchical_logistic_map_fixed_gaussian_shrinkage",
+      "definition": "decision_noise_h6 - decision_noise_h1",
+      "first_free_choices_only": true,
+      "run_effect_sd": 0.5,
+      "n_runs": 20,
+      "n_choices": 800,
+      "converged": true,
+      "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+      "objective": 205.96650018041356,
+      "condition_estimate": {
+        "decision_noise_h1": 3.9753108161201265,
+        "decision_noise_h6": 5.877518046728329,
+        "random_exploration_effect": 1.9022072306082025,
+        "information_bonus_h1": 5.366684037155334,
+        "information_bonus_h6": 16.082559031859414,
+        "label_bias_h1": 4.588319944479615,
+        "label_bias_h6": 6.739153132757762
+      },
+      "run_estimates": [
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260708.json:seed=20260708",
+          "decision_noise_h1": 4.75117116690246,
+          "decision_noise_h6": 6.68060416397713,
+          "random_exploration_effect": 1.9294329970746702,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260709.json:seed=20260709",
+          "decision_noise_h1": 5.09706784762228,
+          "decision_noise_h6": 5.433668247755673,
+          "random_exploration_effect": 0.3366004001333929,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260710.json:seed=20260710",
+          "decision_noise_h1": 3.4128463586816786,
+          "decision_noise_h6": 6.10853176965041,
+          "random_exploration_effect": 2.6956854109687316,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260711.json:seed=20260711",
+          "decision_noise_h1": 3.5617953545280576,
+          "decision_noise_h6": 6.758742747629937,
+          "random_exploration_effect": 3.1969473931018797,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260712.json:seed=20260712",
+          "decision_noise_h1": 3.8396327317481784,
+          "decision_noise_h6": 5.0152210561382065,
+          "random_exploration_effect": 1.175588324390028,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260713.json:seed=20260713",
+          "decision_noise_h1": 4.225995808371608,
+          "decision_noise_h6": 7.3092565030445105,
+          "random_exploration_effect": 3.0832606946729024,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260714.json:seed=20260714",
+          "decision_noise_h1": 2.618288839327671,
+          "decision_noise_h6": 6.265975646757209,
+          "random_exploration_effect": 3.6476868074295377,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260715.json:seed=20260715",
+          "decision_noise_h1": 4.01479545275541,
+          "decision_noise_h6": 3.797526465171638,
+          "random_exploration_effect": -0.21726898758377233,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260716.json:seed=20260716",
+          "decision_noise_h1": 3.3094687628906954,
+          "decision_noise_h6": 6.671518418522959,
+          "random_exploration_effect": 3.362049655632264,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260717.json:seed=20260717",
+          "decision_noise_h1": 4.707357463711766,
+          "decision_noise_h6": 5.8018837427652015,
+          "random_exploration_effect": 1.0945262790534356,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260718.json:seed=20260718",
+          "decision_noise_h1": 6.185535830726464,
+          "decision_noise_h6": 4.775014030084097,
+          "random_exploration_effect": -1.4105218006423677,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260719.json:seed=20260719",
+          "decision_noise_h1": 3.786981750336237,
+          "decision_noise_h6": 8.169250805707922,
+          "random_exploration_effect": 4.382269055371685,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260720.json:seed=20260720",
+          "decision_noise_h1": 4.004057224905915,
+          "decision_noise_h6": 5.204415453350506,
+          "random_exploration_effect": 1.2003582284445908,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260721.json:seed=20260721",
+          "decision_noise_h1": 4.593752315393187,
+          "decision_noise_h6": 7.235670114957147,
+          "random_exploration_effect": 2.6419177995639593,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260722.json:seed=20260722",
+          "decision_noise_h1": 4.864971619783826,
+          "decision_noise_h6": 5.14379990508349,
+          "random_exploration_effect": 0.27882828529966464,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260723.json:seed=20260723",
+          "decision_noise_h1": 3.550925920220256,
+          "decision_noise_h6": 5.037545185922931,
+          "random_exploration_effect": 1.486619265702675,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260724.json:seed=20260724",
+          "decision_noise_h1": 3.6706467671704908,
+          "decision_noise_h6": 7.11558436855522,
+          "random_exploration_effect": 3.4449376013847295,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260725.json:seed=20260725",
+          "decision_noise_h1": 5.094863482476727,
+          "decision_noise_h6": 5.050554714867475,
+          "random_exploration_effect": -0.04430876760925173,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260726.json:seed=20260726",
+          "decision_noise_h1": 2.8386279244139954,
+          "decision_noise_h6": 4.722972273621492,
+          "random_exploration_effect": 1.8843443492074967,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_v01/horizon_uncertainty_emphasis_seed-20260727.json:seed=20260727",
+          "decision_noise_h1": 2.9088063438581786,
+          "decision_noise_h6": 7.153508960378668,
+          "random_exploration_effect": 4.244702616520489,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        }
+      ]
+    }
+  },
+  "diagnostics": {
+    "baseline": {
+      "shrinkage_sensitivity": [
+        {
+          "run_effect_sd": 0.25,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 2.691842516400496,
+          "decision_noise_h6": 3.287334560339423,
+          "random_exploration_effect": 0.5954920439389269,
+          "information_bonus_h1": 0.46456985905830395,
+          "information_bonus_h6": 1.406198828696043,
+          "label_bias_h1": 4.07485627921879,
+          "label_bias_h6": 2.7985590267080585
+        },
+        {
+          "run_effect_sd": 0.5,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 2.3880742218383966,
+          "decision_noise_h6": 2.766319834743015,
+          "random_exploration_effect": 0.37824561290461833,
+          "information_bonus_h1": -0.05487807529876321,
+          "information_bonus_h6": 1.0596590481800214,
+          "label_bias_h1": 3.7583228243056124,
+          "label_bias_h6": 2.4340215943192467
+        },
+        {
+          "run_effect_sd": 1.0,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 1.9718257325088284,
+          "decision_noise_h6": 2.209935904371256,
+          "random_exploration_effect": 0.23811017186242744,
+          "information_bonus_h1": -0.6407572134479641,
+          "information_bonus_h6": 0.999457599430344,
+          "label_bias_h1": 3.396171253255014,
+          "label_bias_h6": 2.179793784724068
+        }
+      ]
+    },
+    "detailed": {
+      "shrinkage_sensitivity": [
+        {
+          "run_effect_sd": 0.25,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 2.907487308006474,
+          "decision_noise_h6": 2.627262668891094,
+          "random_exploration_effect": -0.28022463911537976,
+          "information_bonus_h1": 1.7235327588218674,
+          "information_bonus_h6": 3.7483925847769735,
+          "label_bias_h1": 1.130862601627068,
+          "label_bias_h6": 0.8670533719266598
+        },
+        {
+          "run_effect_sd": 0.5,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 2.4372316841526134,
+          "decision_noise_h6": 2.2548796896439205,
+          "random_exploration_effect": -0.18235199450869288,
+          "information_bonus_h1": 1.471672623892575,
+          "information_bonus_h6": 3.4530036867965554,
+          "label_bias_h1": 1.0896151525931572,
+          "label_bias_h6": 0.929714324126007
+        },
+        {
+          "run_effect_sd": 1.0,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 1.9649149702838113,
+          "decision_noise_h6": 1.8597785389077293,
+          "random_exploration_effect": -0.10513643137608208,
+          "information_bonus_h1": 1.2668024419229809,
+          "information_bonus_h6": 3.4246778485444986,
+          "label_bias_h1": 1.0694551311838352,
+          "label_bias_h6": 1.0052293814796578
+        }
+      ]
+    },
+    "role_human": {
+      "shrinkage_sensitivity": [
+        {
+          "run_effect_sd": 0.25,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 2.0394215685282733,
+          "decision_noise_h6": 1.9334829472697086,
+          "random_exploration_effect": -0.10593862125856468,
+          "information_bonus_h1": -2.305667454989511,
+          "information_bonus_h6": -2.2912997656061633,
+          "label_bias_h1": 2.0757663110024107,
+          "label_bias_h6": 0.37737160583910084
+        },
+        {
+          "run_effect_sd": 0.5,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 1.7957001289093717,
+          "decision_noise_h6": 1.7660686296669288,
+          "random_exploration_effect": -0.029631499242442905,
+          "information_bonus_h1": -2.356193607632441,
+          "information_bonus_h6": -2.343076401752482,
+          "label_bias_h1": 1.8890871858599954,
+          "label_bias_h6": 0.4667528747288553
+        },
+        {
+          "run_effect_sd": 1.0,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 1.4942208759514555,
+          "decision_noise_h6": 1.5364271892908636,
+          "random_exploration_effect": 0.042206313339408164,
+          "information_bonus_h1": -2.3373964127654974,
+          "information_bonus_h6": -2.390154538438268,
+          "label_bias_h1": 1.6965074125481983,
+          "label_bias_h6": 0.6031167184481073
+        }
+      ]
+    },
+    "uncertainty_emphasis": {
+      "shrinkage_sensitivity": [
+        {
+          "run_effect_sd": 0.25,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 4.186950605232929,
+          "decision_noise_h6": 6.100518374206779,
+          "random_exploration_effect": 1.9135677689738495,
+          "information_bonus_h1": 5.680627439805577,
+          "information_bonus_h6": 16.419189454522602,
+          "label_bias_h1": 4.617569731080209,
+          "label_bias_h6": 6.513599889211581
+        },
+        {
+          "run_effect_sd": 0.5,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 3.9753108161201265,
+          "decision_noise_h6": 5.877518046728329,
+          "random_exploration_effect": 1.9022072306082025,
+          "information_bonus_h1": 5.366684037155334,
+          "information_bonus_h6": 16.082559031859414,
+          "label_bias_h1": 4.588319944479615,
+          "label_bias_h6": 6.739153132757762
+        },
+        {
+          "run_effect_sd": 1.0,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 3.6872296114701344,
+          "decision_noise_h6": 5.663335971547762,
+          "random_exploration_effect": 1.9761063600776279,
+          "information_bonus_h1": 4.9386321278586,
+          "information_bonus_h6": 15.828583939417856,
+          "label_bias_h1": 4.468236868108304,
+          "label_bias_h6": 7.074292074769466
+        }
+      ]
+    }
+  }
+}

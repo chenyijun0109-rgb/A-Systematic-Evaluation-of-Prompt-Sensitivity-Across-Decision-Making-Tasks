@@ -1,0 +1,155 @@
+{
+  "manifest_version": "final_analysis_v03",
+  "analysis_ready": true,
+  "failures": [],
+  "validated_claim_scope": [
+    "RQ1",
+    "RQ2",
+    "RQ3",
+    "descriptive_RQ4"
+  ],
+  "files": {
+    "configs/experiment_config_stage01.json": {
+      "sha256": "1d445577185202bc82879a153f2b642e9d27c803441c8fa5acd52ff7dcfe6e10",
+      "bytes": 16175
+    },
+    "configs/formal_experiment_freeze.json": {
+      "sha256": "34c92df31624535c297b3089a9be56c3817f9580f0322474823b84c8681dfd0c",
+      "bytes": 6799
+    },
+    "configs/multilingual_experiment_freeze_v01.json": {
+      "sha256": "816db945c456201d24047cf85a1d1c402c88df0951d206ea1c4975bffc1f3cc5",
+      "bytes": 7153
+    },
+    "gpt-4.1-en/aggregation_quality_report.json": {
+      "sha256": "46cf11df8de42f9868a58e1f88e2b33fb4b966023038b2c6e29dc05d7e9431b6",
+      "bytes": 304
+    },
+    "gpt-4.1-en/llm_run_metrics.csv": {
+      "sha256": "4b6858568fc758f9689ae260a9a9c8e478cbadc146a0a85b8336cc9fb02c676a",
+      "bytes": 102915,
+      "rows": 240
+    },
+    "gpt-4.1-en/prompt_effects.csv": {
+      "sha256": "723d9e5f2295d91eaf759372397d355434a6c3056576a83f3da97bb2d5fb1ae6",
+      "bytes": 9885,
+      "rows": 24
+    },
+    "gpt-4.1-en/prompt_sensitivity.csv": {
+      "sha256": "da63c88956a8b244cc9c3fbc0e027f6eb37f8b42355bc215fffb0c4674476b16",
+      "bytes": 1583,
+      "rows": 9
+    },
+    "gpt-4.1-minus-gpt-5.4/model_prompt_interaction_contrasts.csv": {
+      "sha256": "3691ebc54d73711f3cbdb48ed9a21b8220d675b79540661828bce06d15f0d852",
+      "bytes": 5886,
+      "rows": 24
+    },
+    "gpt-4.1-multilingual/aggregation_quality_report.json": {
+      "sha256": "37878041accbe59f87792e7138953a3333edb26f05e0def30cbaf9768d58c5eb",
+      "bytes": 4573
+    },
+    "gpt-4.1-multilingual/language_centered_baselines.csv": {
+      "sha256": "f670ee0cc26bd614d355b01a358a715b73e34cd015c5f2ce4861a5e1a3785d41",
+      "bytes": 6400,
+      "rows": 24
+    },
+    "gpt-4.1-multilingual/language_centered_prompt_effects.csv": {
+      "sha256": "ed8a5530923560ee0ecefa11a0efbc4d75ba47fce723223330a37e0dc8ce09ef",
+      "bytes": 23157,
+      "rows": 72
+    },
+    "gpt-4.1-multilingual/llm_run_metrics.csv": {
+      "sha256": "52deb644ad640fd8a7d2957a0b682aaae2dbb901f1c5d79e34bdea8a6ee6de98",
+      "bytes": 345981,
+      "rows": 720
+    },
+    "gpt-4.1-multilingual/prompt_effects.csv": {
+      "sha256": "49fc932d3cc6bec7995bf7f5a76f3c1a1c9bda4fba599008c7ce9e93d7c0debf",
+      "bytes": 28587,
+      "rows": 72
+    },
+    "gpt-4.1-multilingual/prompt_sensitivity.csv": {
+      "sha256": "12d3ec3327312f98cc535fcb1923012be7b7ba965feb7da52ca01be39735a408",
+      "bytes": 4288,
+      "rows": 27
+    },
+    "gpt-5.4-en/aggregation_quality_report.json": {
+      "sha256": "7380912f7e31e0d338710752f9e5b9ba8e6a0c2dfd777326bae78a0523ddb2de",
+      "bytes": 2541
+    },
+    "gpt-5.4-en/llm_run_metrics.csv": {
+      "sha256": "41b341d28932f72ff50a6b8bb21bdb669b35ab2c4c720ce47c83a8bed657ed5b",
+      "bytes": 104912,
+      "rows": 240
+    },
+    "gpt-5.4-en/prompt_effects.csv": {
+      "sha256": "94272470c998cedd286f71d83db3a126eeb33ca324dd4b85063314496d122d04",
+      "bytes": 9990,
+      "rows": 24
+    },
+    "gpt-5.4-en/prompt_sensitivity.csv": {
+      "sha256": "d3f533a2a637f744c491fce2be749c47c987808e6dc60ffae2e80994a5b79c81",
+      "bytes": 1582,
+      "rows": 9
+    },
+    "gpt-5.4-mini-en/aggregation_quality_report.json": {
+      "sha256": "6ef36c59534a7e83a7a6535ee1030feec7d20be3deea7274d7a4895f95fa47ab",
+      "bytes": 2197
+    },
+    "gpt-5.4-mini-en/llm_run_metrics.csv": {
+      "sha256": "c20a3d7cd62d3cacf5f6eee90dc00abb03ac83bb413dda749c4ec5cfd2673807",
+      "bytes": 112796,
+      "rows": 240
+    },
+    "gpt-5.4-mini-en/prompt_effects.csv": {
+      "sha256": "f6401a045be39f95bbf20072acc268d026fffb6867dc4b8bc513446f83661bec",
+      "bytes": 9775,
+      "rows": 24
+    },
+    "gpt-5.4-mini-en/prompt_sensitivity.csv": {
+      "sha256": "1c33d6c5f59a29e9e088d40e9cc827947c8b69b9735e5ce3019aa430299cb477",
+      "bytes": 1578,
+      "rows": 9
+    },
+    "gpt-5.4-mini-minus-gpt-5.4/model_prompt_interaction_contrasts.csv": {
+      "sha256": "80db9a0c6fa9e1eb114589a0f10cde13cdac6ef13a6dee36fa171755de6a50ac",
+      "bytes": 5948,
+      "rows": 24
+    },
+    "human_reference_results/model_human_comparison.csv": {
+      "sha256": "dcddf7bf735467fedb781e7922d0311f01084c0f58ff528b9de9881da5335c3c",
+      "bytes": 31605,
+      "rows": 160
+    },
+    "human_reference_results/model_human_distance_changes.csv": {
+      "sha256": "0cdf23d028fd9a748caf99265bc1622b2f4415d9120c53593c5d1a5b758f1b8f",
+      "bytes": 23391,
+      "rows": 120
+    },
+    "random_exploration_diagnostics/gpt-4.1-en.json": {
+      "sha256": "d8024af9de339db9ad367c1df1ebddff9e09a8eeea815a952e5482a1126ceb79",
+      "bytes": 56552
+    },
+    "random_exploration_diagnostics/gpt-4.1-es.json": {
+      "sha256": "a7a13879bb8697d5e6f26d2fa4aa2d43c3aa8b2dafda3ac8de529a2d007dc991",
+      "bytes": 65617
+    },
+    "random_exploration_diagnostics/gpt-4.1-zh-CN.json": {
+      "sha256": "eabf4a29d530f8fe0e0acab51e8a14b220fccf0c16bb78f2d84c30d4675852ad",
+      "bytes": 67191
+    },
+    "random_exploration_diagnostics/gpt-5.4-en.json": {
+      "sha256": "79fab3e901a0f9fcfc730def4a9f0fba41fffcc0bea3a06c07b65c14c28c34bc",
+      "bytes": 62543
+    },
+    "random_exploration_diagnostics/gpt-5.4-mini-en.json": {
+      "sha256": "05417c087f79395c290be88165b75afedaa55970c0d1600e99fe9d794d85d3e6",
+      "bytes": 64910
+    },
+    "random_exploration_diagnostics/human.json": {
+      "sha256": "5494e416edd068005ca68dbd0b1e60b95c6fe998cb547b90cd77f865f6ac4bb8",
+      "bytes": 28295
+    }
+  }
+}

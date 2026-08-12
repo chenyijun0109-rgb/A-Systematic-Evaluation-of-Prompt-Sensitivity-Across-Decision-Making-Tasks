@@ -1,0 +1,10 @@
+prompt_language,task,prompt_condition,psi,expected_metric_count,valid_metric_count,excluded_metrics,status,bootstrap_unit,confidence_level,bootstrap_replicates,psi_valid_replicates,psi_valid_proportion,psi_interval_status,psi_ci_lower,psi_ci_upper
+en,horizon,detailed,0.24993771283305077,3,3,,complete,paired_environment_seed_hierarchical_refit,0.95,2000,2000,1.0,report,0.056274178622528474,0.8747855853678836
+en,horizon,role_human,0.2028799053752302,3,3,,complete,paired_environment_seed_hierarchical_refit,0.95,2000,2000,1.0,report,0.05544159509210978,0.9394450243293753
+en,horizon,uncertainty_emphasis,0.2103866977339358,3,3,,complete,paired_environment_seed_hierarchical_refit,0.95,2000,2000,1.0,report,0.067108343212315,0.9028317150650058
+en,igt,detailed,0.529650022784624,2,2,,complete,independent_cell,0.95,2000,2000,1.0,report,0.20560407541307235,1.0939181274496612
+en,igt,role_human,0.4249156694627155,2,2,,complete,independent_cell,0.95,2000,2000,1.0,report,0.20589970573488958,0.9991606450263614
+en,igt,reward_loss_emphasis,0.8504832007769474,2,2,,complete,independent_cell,0.95,2000,2000,1.0,report,0.5245952785645769,1.675965837486918
+en,bart,detailed,0.16040058377040325,3,3,,complete,paired_environment_seed,0.95,2000,2000,1.0,report,0.10681634755589885,0.4613958799580705
+en,bart,role_human,1.0573573882801746,3,3,,complete,paired_environment_seed,0.95,2000,2000,1.0,report,0.7437910061330936,1.577358659413063
+en,bart,risk_emphasis,0.3074655908546526,3,3,,complete,paired_environment_seed,0.95,2000,2000,1.0,report,0.15183201549076064,0.5097797795722149

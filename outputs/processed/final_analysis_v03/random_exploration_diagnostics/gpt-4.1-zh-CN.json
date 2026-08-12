@@ -1,0 +1,1146 @@
+{
+  "analysis": "horizon_random_exploration",
+  "source_files": [
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-01-a\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260708.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-01-a\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260709.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-01-a\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260708.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-01-a\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260709.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-01-a\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260708.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-01-a\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260709.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-01-a\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260708.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-01-a\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260709.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-01-b\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260710.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-01-b\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260711.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-01-b\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260710.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-01-b\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260711.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-01-b\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260710.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-01-b\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260711.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-01-b\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260710.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-01-b\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260711.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-02-a\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260712.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-02-a\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260713.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-02-a\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260712.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-02-a\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260713.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-02-a\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260712.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-02-a\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260713.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-02-a\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260712.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-02-a\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260713.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-02-b\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260714.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-02-b\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260715.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-02-b\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260714.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-02-b\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260715.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-02-b\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260714.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-02-b\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260715.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-02-b\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260714.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-02-b\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260715.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-03-a\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260716.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-03-a\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260717.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-03-a\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260716.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-03-a\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260717.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-03-a\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260716.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-03-a\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260717.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-03-a\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260716.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-03-a\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260717.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-03-b\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260718.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-03-b\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260719.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-03-b\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260718.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-03-b\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260719.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-03-b\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260718.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-03-b\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260719.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-03-b\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260718.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-03-b\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260719.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-04-a\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260720.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-04-a\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260721.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-04-a\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260720.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-04-a\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260721.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-04-a\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260720.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-04-a\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260721.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-04-a\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260720.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-04-a\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260721.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-04-b\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260722.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-04-b\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260723.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-04-b\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260722.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-04-b\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260723.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-04-b\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260722.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-04-b\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260723.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-04-b\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260722.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-04-b\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260723.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-05-a\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260724.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-05-a\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260725.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-05-a\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260724.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-05-a\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260725.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-05-a\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260724.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-05-a\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260725.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-05-a\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260724.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-05-a\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260725.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-05-b\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260726.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-05-b\\zh-CN\\horizon_baseline_lang-zh-CN_seed-20260727.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-05-b\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260726.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-05-b\\zh-CN\\horizon_detailed_lang-zh-CN_seed-20260727.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-05-b\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260726.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-05-b\\zh-CN\\horizon_role_human_lang-zh-CN_seed-20260727.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-05-b\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260726.json",
+    "outputs\\formal_multilingual_v01\\gpt-4.1-zh-CN-20run-v01\\wave-05-b\\zh-CN\\horizon_uncertainty_emphasis_lang-zh-CN_seed-20260727.json"
+  ],
+  "n_first_free_choices": 3200,
+  "conditions": {
+    "baseline": {
+      "status": "ok",
+      "prompt_condition": "baseline",
+      "model": "hierarchical_logistic_map_fixed_gaussian_shrinkage",
+      "definition": "decision_noise_h6 - decision_noise_h1",
+      "first_free_choices_only": true,
+      "run_effect_sd": 0.5,
+      "n_runs": 20,
+      "n_choices": 800,
+      "converged": true,
+      "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+      "objective": 129.2137590445736,
+      "condition_estimate": {
+        "decision_noise_h1": 2.3261669663377282,
+        "decision_noise_h6": 2.7171310697407143,
+        "random_exploration_effect": 0.39096410340298604,
+        "information_bonus_h1": -1.5892799682517726,
+        "information_bonus_h6": 0.8479217368603841,
+        "label_bias_h1": 0.671887698781596,
+        "label_bias_h6": 1.9497974013456252
+      },
+      "run_estimates": [
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-01-a/zh-CN/horizon_baseline_lang-zh-CN_seed-20260708.json:seed=20260708",
+          "decision_noise_h1": 3.2398598668841934,
+          "decision_noise_h6": 4.112357409988367,
+          "random_exploration_effect": 0.8724975431041737,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-01-a/zh-CN/horizon_baseline_lang-zh-CN_seed-20260709.json:seed=20260709",
+          "decision_noise_h1": 2.200250472256799,
+          "decision_noise_h6": 2.0219472419417466,
+          "random_exploration_effect": -0.17830323031505246,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-01-b/zh-CN/horizon_baseline_lang-zh-CN_seed-20260710.json:seed=20260710",
+          "decision_noise_h1": 1.8945521328424155,
+          "decision_noise_h6": 2.3624334467105585,
+          "random_exploration_effect": 0.467881313868143,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-01-b/zh-CN/horizon_baseline_lang-zh-CN_seed-20260711.json:seed=20260711",
+          "decision_noise_h1": 1.7188953680154202,
+          "decision_noise_h6": 5.104909609575334,
+          "random_exploration_effect": 3.386014241559914,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-02-a/zh-CN/horizon_baseline_lang-zh-CN_seed-20260712.json:seed=20260712",
+          "decision_noise_h1": 1.721303745139646,
+          "decision_noise_h6": 3.0718998564938307,
+          "random_exploration_effect": 1.3505961113541847,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-02-a/zh-CN/horizon_baseline_lang-zh-CN_seed-20260713.json:seed=20260713",
+          "decision_noise_h1": 3.616252043884021,
+          "decision_noise_h6": 2.900669826213574,
+          "random_exploration_effect": -0.7155822176704469,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-02-b/zh-CN/horizon_baseline_lang-zh-CN_seed-20260714.json:seed=20260714",
+          "decision_noise_h1": 1.7370677786491526,
+          "decision_noise_h6": 1.9387757264440357,
+          "random_exploration_effect": 0.2017079477948831,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-02-b/zh-CN/horizon_baseline_lang-zh-CN_seed-20260715.json:seed=20260715",
+          "decision_noise_h1": 1.7616070911808732,
+          "decision_noise_h6": 5.170091578590981,
+          "random_exploration_effect": 3.4084844874101075,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-03-a/zh-CN/horizon_baseline_lang-zh-CN_seed-20260716.json:seed=20260716",
+          "decision_noise_h1": 1.748866499813423,
+          "decision_noise_h6": 2.5050897452315763,
+          "random_exploration_effect": 0.7562232454181534,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-03-a/zh-CN/horizon_baseline_lang-zh-CN_seed-20260717.json:seed=20260717",
+          "decision_noise_h1": 2.017344673505687,
+          "decision_noise_h6": 2.1205900531064037,
+          "random_exploration_effect": 0.10324537960071689,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-03-b/zh-CN/horizon_baseline_lang-zh-CN_seed-20260718.json:seed=20260718",
+          "decision_noise_h1": 2.268440686090079,
+          "decision_noise_h6": 2.102306671447022,
+          "random_exploration_effect": -0.166134014643057,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-03-b/zh-CN/horizon_baseline_lang-zh-CN_seed-20260719.json:seed=20260719",
+          "decision_noise_h1": 3.2430915897980834,
+          "decision_noise_h6": 1.9419735801061448,
+          "random_exploration_effect": -1.3011180096919386,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-04-a/zh-CN/horizon_baseline_lang-zh-CN_seed-20260720.json:seed=20260720",
+          "decision_noise_h1": 2.4990331189552277,
+          "decision_noise_h6": 2.053677725953691,
+          "random_exploration_effect": -0.4453553930015368,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-04-a/zh-CN/horizon_baseline_lang-zh-CN_seed-20260721.json:seed=20260721",
+          "decision_noise_h1": 2.4157218261935935,
+          "decision_noise_h6": 2.531219282181008,
+          "random_exploration_effect": 0.11549745598741445,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-04-b/zh-CN/horizon_baseline_lang-zh-CN_seed-20260722.json:seed=20260722",
+          "decision_noise_h1": 2.257033866237627,
+          "decision_noise_h6": 4.0217922844226095,
+          "random_exploration_effect": 1.7647584181849827,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-04-b/zh-CN/horizon_baseline_lang-zh-CN_seed-20260723.json:seed=20260723",
+          "decision_noise_h1": 2.193637365083983,
+          "decision_noise_h6": 1.7683545215006333,
+          "random_exploration_effect": -0.42528284358334956,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-05-a/zh-CN/horizon_baseline_lang-zh-CN_seed-20260724.json:seed=20260724",
+          "decision_noise_h1": 2.5783694629929688,
+          "decision_noise_h6": 3.397259953290537,
+          "random_exploration_effect": 0.8188904902975684,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-05-a/zh-CN/horizon_baseline_lang-zh-CN_seed-20260725.json:seed=20260725",
+          "decision_noise_h1": 3.0600544594603525,
+          "decision_noise_h6": 3.0251274661570324,
+          "random_exploration_effect": -0.03492699330332005,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-05-b/zh-CN/horizon_baseline_lang-zh-CN_seed-20260726.json:seed=20260726",
+          "decision_noise_h1": 2.3594065753917977,
+          "decision_noise_h6": 2.242556376644877,
+          "random_exploration_effect": -0.1168501987469206,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-05-b/zh-CN/horizon_baseline_lang-zh-CN_seed-20260727.json:seed=20260727",
+          "decision_noise_h1": 2.937506422033723,
+          "decision_noise_h6": 2.57787936909726,
+          "random_exploration_effect": -0.3596270529364629,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        }
+      ]
+    },
+    "detailed": {
+      "status": "ok",
+      "prompt_condition": "detailed",
+      "model": "hierarchical_logistic_map_fixed_gaussian_shrinkage",
+      "definition": "decision_noise_h6 - decision_noise_h1",
+      "first_free_choices_only": true,
+      "run_effect_sd": 0.5,
+      "n_runs": 20,
+      "n_choices": 800,
+      "converged": true,
+      "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+      "objective": 150.28644874977954,
+      "condition_estimate": {
+        "decision_noise_h1": 3.1959527909481222,
+        "decision_noise_h6": 2.4769448063476434,
+        "random_exploration_effect": -0.7190079846004789,
+        "information_bonus_h1": -1.025463169602275,
+        "information_bonus_h6": -3.074066913791822,
+        "label_bias_h1": -0.27904638377085683,
+        "label_bias_h6": 0.23667315221201493
+      },
+      "run_estimates": [
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-01-a/zh-CN/horizon_detailed_lang-zh-CN_seed-20260708.json:seed=20260708",
+          "decision_noise_h1": 3.4924677752845277,
+          "decision_noise_h6": 3.9442475373544967,
+          "random_exploration_effect": 0.45177976206996906,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-01-a/zh-CN/horizon_detailed_lang-zh-CN_seed-20260709.json:seed=20260709",
+          "decision_noise_h1": 2.2657577286926056,
+          "decision_noise_h6": 2.4176577346872716,
+          "random_exploration_effect": 0.15190000599466602,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-01-b/zh-CN/horizon_detailed_lang-zh-CN_seed-20260710.json:seed=20260710",
+          "decision_noise_h1": 3.468904170456286,
+          "decision_noise_h6": 3.797162164857069,
+          "random_exploration_effect": 0.32825799440078285,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-01-b/zh-CN/horizon_detailed_lang-zh-CN_seed-20260711.json:seed=20260711",
+          "decision_noise_h1": 2.348652053696598,
+          "decision_noise_h6": 1.9820312184900302,
+          "random_exploration_effect": -0.36662083520656763,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-02-a/zh-CN/horizon_detailed_lang-zh-CN_seed-20260712.json:seed=20260712",
+          "decision_noise_h1": 2.1184012889644466,
+          "decision_noise_h6": 2.0292994640888975,
+          "random_exploration_effect": -0.08910182487554907,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-02-a/zh-CN/horizon_detailed_lang-zh-CN_seed-20260713.json:seed=20260713",
+          "decision_noise_h1": 4.184507553569621,
+          "decision_noise_h6": 3.0742524825607314,
+          "random_exploration_effect": -1.1102550710088899,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-02-b/zh-CN/horizon_detailed_lang-zh-CN_seed-20260714.json:seed=20260714",
+          "decision_noise_h1": 3.0897426774060817,
+          "decision_noise_h6": 2.059057441585275,
+          "random_exploration_effect": -1.0306852358208065,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-02-b/zh-CN/horizon_detailed_lang-zh-CN_seed-20260715.json:seed=20260715",
+          "decision_noise_h1": 2.239361764037909,
+          "decision_noise_h6": 3.2586748414909446,
+          "random_exploration_effect": 1.0193130774530355,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-03-a/zh-CN/horizon_detailed_lang-zh-CN_seed-20260716.json:seed=20260716",
+          "decision_noise_h1": 2.207027829990816,
+          "decision_noise_h6": 2.2885336546863733,
+          "random_exploration_effect": 0.08150582469555712,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-03-a/zh-CN/horizon_detailed_lang-zh-CN_seed-20260717.json:seed=20260717",
+          "decision_noise_h1": 2.597967293455334,
+          "decision_noise_h6": 2.1430782635456533,
+          "random_exploration_effect": -0.4548890299096806,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-03-b/zh-CN/horizon_detailed_lang-zh-CN_seed-20260718.json:seed=20260718",
+          "decision_noise_h1": 3.4664624613890314,
+          "decision_noise_h6": 1.7965565313392706,
+          "random_exploration_effect": -1.6699059300497607,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-03-b/zh-CN/horizon_detailed_lang-zh-CN_seed-20260719.json:seed=20260719",
+          "decision_noise_h1": 3.8419595571869776,
+          "decision_noise_h6": 1.804576218783991,
+          "random_exploration_effect": -2.0373833384029867,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-04-a/zh-CN/horizon_detailed_lang-zh-CN_seed-20260720.json:seed=20260720",
+          "decision_noise_h1": 6.377799691508185,
+          "decision_noise_h6": 2.720790082876305,
+          "random_exploration_effect": -3.6570096086318804,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-04-a/zh-CN/horizon_detailed_lang-zh-CN_seed-20260721.json:seed=20260721",
+          "decision_noise_h1": 4.232479252142236,
+          "decision_noise_h6": 2.216376971856157,
+          "random_exploration_effect": -2.016102280286079,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-04-b/zh-CN/horizon_detailed_lang-zh-CN_seed-20260722.json:seed=20260722",
+          "decision_noise_h1": 4.99296661229669,
+          "decision_noise_h6": 2.44327422250246,
+          "random_exploration_effect": -2.5496923897942296,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-04-b/zh-CN/horizon_detailed_lang-zh-CN_seed-20260723.json:seed=20260723",
+          "decision_noise_h1": 3.1295809266981967,
+          "decision_noise_h6": 2.7606189702577275,
+          "random_exploration_effect": -0.36896195644046914,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-05-a/zh-CN/horizon_detailed_lang-zh-CN_seed-20260724.json:seed=20260724",
+          "decision_noise_h1": 2.410552612001821,
+          "decision_noise_h6": 2.5311522383698017,
+          "random_exploration_effect": 0.12059962636798094,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-05-a/zh-CN/horizon_detailed_lang-zh-CN_seed-20260725.json:seed=20260725",
+          "decision_noise_h1": 3.604314576381576,
+          "decision_noise_h6": 3.0718399504272975,
+          "random_exploration_effect": -0.5324746259542783,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-05-b/zh-CN/horizon_detailed_lang-zh-CN_seed-20260726.json:seed=20260726",
+          "decision_noise_h1": 2.74424197784093,
+          "decision_noise_h6": 2.2708184386956365,
+          "random_exploration_effect": -0.47342353914529367,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-05-b/zh-CN/horizon_detailed_lang-zh-CN_seed-20260727.json:seed=20260727",
+          "decision_noise_h1": 3.675124741080748,
+          "decision_noise_h6": 1.9335279041951108,
+          "random_exploration_effect": -1.7415968368856374,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        }
+      ]
+    },
+    "role_human": {
+      "status": "ok",
+      "prompt_condition": "role_human",
+      "model": "hierarchical_logistic_map_fixed_gaussian_shrinkage",
+      "definition": "decision_noise_h6 - decision_noise_h1",
+      "first_free_choices_only": true,
+      "run_effect_sd": 0.5,
+      "n_runs": 20,
+      "n_choices": 800,
+      "converged": true,
+      "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+      "objective": 173.17174857602328,
+      "condition_estimate": {
+        "decision_noise_h1": 3.3547304579036674,
+        "decision_noise_h6": 3.5678078141960627,
+        "random_exploration_effect": 0.21307735629239533,
+        "information_bonus_h1": 0.6050400115768689,
+        "information_bonus_h6": 1.428625211878382,
+        "label_bias_h1": 0.06802150843579548,
+        "label_bias_h6": -0.15410905079455534
+      },
+      "run_estimates": [
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-01-a/zh-CN/horizon_role_human_lang-zh-CN_seed-20260708.json:seed=20260708",
+          "decision_noise_h1": 3.571790993383226,
+          "decision_noise_h6": 3.98507101186327,
+          "random_exploration_effect": 0.41328001848004403,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-01-a/zh-CN/horizon_role_human_lang-zh-CN_seed-20260709.json:seed=20260709",
+          "decision_noise_h1": 3.1193254314918724,
+          "decision_noise_h6": 2.9297658250302057,
+          "random_exploration_effect": -0.1895596064616667,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-01-b/zh-CN/horizon_role_human_lang-zh-CN_seed-20260710.json:seed=20260710",
+          "decision_noise_h1": 2.3819847934568497,
+          "decision_noise_h6": 3.355124236445658,
+          "random_exploration_effect": 0.9731394429888085,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-01-b/zh-CN/horizon_role_human_lang-zh-CN_seed-20260711.json:seed=20260711",
+          "decision_noise_h1": 2.6018742522977196,
+          "decision_noise_h6": 5.843966087369075,
+          "random_exploration_effect": 3.242091835071355,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-02-a/zh-CN/horizon_role_human_lang-zh-CN_seed-20260712.json:seed=20260712",
+          "decision_noise_h1": 2.154681352458439,
+          "decision_noise_h6": 3.1855009903713354,
+          "random_exploration_effect": 1.0308196379128964,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-02-a/zh-CN/horizon_role_human_lang-zh-CN_seed-20260713.json:seed=20260713",
+          "decision_noise_h1": 4.429163499762925,
+          "decision_noise_h6": 2.7919654965096226,
+          "random_exploration_effect": -1.6371980032533027,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-02-b/zh-CN/horizon_role_human_lang-zh-CN_seed-20260714.json:seed=20260714",
+          "decision_noise_h1": 5.543554189283657,
+          "decision_noise_h6": 2.41812690072189,
+          "random_exploration_effect": -3.1254272885617667,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-02-b/zh-CN/horizon_role_human_lang-zh-CN_seed-20260715.json:seed=20260715",
+          "decision_noise_h1": 2.4543126719508543,
+          "decision_noise_h6": 4.015420120983967,
+          "random_exploration_effect": 1.5611074490331123,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-03-a/zh-CN/horizon_role_human_lang-zh-CN_seed-20260716.json:seed=20260716",
+          "decision_noise_h1": 4.307915379421434,
+          "decision_noise_h6": 2.569188292012096,
+          "random_exploration_effect": -1.7387270874093383,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-03-a/zh-CN/horizon_role_human_lang-zh-CN_seed-20260717.json:seed=20260717",
+          "decision_noise_h1": 2.9193173528344833,
+          "decision_noise_h6": 5.037930112797122,
+          "random_exploration_effect": 2.1186127599626388,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-03-b/zh-CN/horizon_role_human_lang-zh-CN_seed-20260718.json:seed=20260718",
+          "decision_noise_h1": 2.4017510862722933,
+          "decision_noise_h6": 3.3180246863371186,
+          "random_exploration_effect": 0.9162736000648253,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-03-b/zh-CN/horizon_role_human_lang-zh-CN_seed-20260719.json:seed=20260719",
+          "decision_noise_h1": 3.9235069759784738,
+          "decision_noise_h6": 2.6683279501704247,
+          "random_exploration_effect": -1.255179025808049,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-04-a/zh-CN/horizon_role_human_lang-zh-CN_seed-20260720.json:seed=20260720",
+          "decision_noise_h1": 3.608274493337397,
+          "decision_noise_h6": 2.778362205227366,
+          "random_exploration_effect": -0.8299122881100307,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-04-a/zh-CN/horizon_role_human_lang-zh-CN_seed-20260721.json:seed=20260721",
+          "decision_noise_h1": 3.2253843693545914,
+          "decision_noise_h6": 3.7209903646059406,
+          "random_exploration_effect": 0.4956059952513492,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-04-b/zh-CN/horizon_role_human_lang-zh-CN_seed-20260722.json:seed=20260722",
+          "decision_noise_h1": 4.9209248661420935,
+          "decision_noise_h6": 4.113661081541998,
+          "random_exploration_effect": -0.8072637846000958,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-04-b/zh-CN/horizon_role_human_lang-zh-CN_seed-20260723.json:seed=20260723",
+          "decision_noise_h1": 2.8070776573163747,
+          "decision_noise_h6": 5.208355203455803,
+          "random_exploration_effect": 2.4012775461394287,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-05-a/zh-CN/horizon_role_human_lang-zh-CN_seed-20260724.json:seed=20260724",
+          "decision_noise_h1": 2.4818451281350695,
+          "decision_noise_h6": 3.78536306341955,
+          "random_exploration_effect": 1.3035179352844803,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-05-a/zh-CN/horizon_role_human_lang-zh-CN_seed-20260725.json:seed=20260725",
+          "decision_noise_h1": 5.596416119762111,
+          "decision_noise_h6": 3.456219311235354,
+          "random_exploration_effect": -2.140196808526757,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-05-b/zh-CN/horizon_role_human_lang-zh-CN_seed-20260726.json:seed=20260726",
+          "decision_noise_h1": 3.316792558763494,
+          "decision_noise_h6": 5.413988049976727,
+          "random_exploration_effect": 2.0971954912132325,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-05-b/zh-CN/horizon_role_human_lang-zh-CN_seed-20260727.json:seed=20260727",
+          "decision_noise_h1": 3.7606025572463966,
+          "decision_noise_h6": 2.872696610692584,
+          "random_exploration_effect": -0.8879059465538126,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        }
+      ]
+    },
+    "uncertainty_emphasis": {
+      "status": "ok",
+      "prompt_condition": "uncertainty_emphasis",
+      "model": "hierarchical_logistic_map_fixed_gaussian_shrinkage",
+      "definition": "decision_noise_h6 - decision_noise_h1",
+      "first_free_choices_only": true,
+      "run_effect_sd": 0.5,
+      "n_runs": 20,
+      "n_choices": 800,
+      "converged": true,
+      "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+      "objective": 117.47260602138515,
+      "condition_estimate": {
+        "decision_noise_h1": 1.6266285433711458,
+        "decision_noise_h6": 3.203662360596775,
+        "random_exploration_effect": 1.5770338172256293,
+        "information_bonus_h1": 0.14738304517141895,
+        "information_bonus_h6": 5.170038901104399,
+        "label_bias_h1": 0.6111819407256716,
+        "label_bias_h6": 3.385055400260865
+      },
+      "run_estimates": [
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-01-a/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260708.json:seed=20260708",
+          "decision_noise_h1": 1.3150099240731743,
+          "decision_noise_h6": 4.531905953838349,
+          "random_exploration_effect": 3.2168960297651745,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-01-a/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260709.json:seed=20260709",
+          "decision_noise_h1": 1.6326090442307202,
+          "decision_noise_h6": 4.161347239660973,
+          "random_exploration_effect": 2.528738195430253,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-01-b/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260710.json:seed=20260710",
+          "decision_noise_h1": 2.48867510911871,
+          "decision_noise_h6": 2.3480188932484705,
+          "random_exploration_effect": -0.14065621587023935,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-01-b/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260711.json:seed=20260711",
+          "decision_noise_h1": 1.2433794433461904,
+          "decision_noise_h6": 2.4917966557792504,
+          "random_exploration_effect": 1.24841721243306,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-02-a/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260712.json:seed=20260712",
+          "decision_noise_h1": 1.3026303838733495,
+          "decision_noise_h6": 2.554887734575589,
+          "random_exploration_effect": 1.2522573507022396,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-02-a/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260713.json:seed=20260713",
+          "decision_noise_h1": 2.2155597389122006,
+          "decision_noise_h6": 2.4290223363641243,
+          "random_exploration_effect": 0.21346259745192375,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-02-b/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260714.json:seed=20260714",
+          "decision_noise_h1": 1.2743104665090716,
+          "decision_noise_h6": 2.36105605596143,
+          "random_exploration_effect": 1.0867455894523586,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-02-b/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260715.json:seed=20260715",
+          "decision_noise_h1": 1.3648950016966135,
+          "decision_noise_h6": 3.1357566743459473,
+          "random_exploration_effect": 1.7708616726493338,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-03-a/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260716.json:seed=20260716",
+          "decision_noise_h1": 1.851748229130207,
+          "decision_noise_h6": 3.638966513012401,
+          "random_exploration_effect": 1.787218283882194,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-03-a/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260717.json:seed=20260717",
+          "decision_noise_h1": 1.8162966105680902,
+          "decision_noise_h6": 4.934845110994641,
+          "random_exploration_effect": 3.118548500426551,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-03-b/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260718.json:seed=20260718",
+          "decision_noise_h1": 1.2768769113696807,
+          "decision_noise_h6": 4.809511500735765,
+          "random_exploration_effect": 3.5326345893660847,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-03-b/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260719.json:seed=20260719",
+          "decision_noise_h1": 1.3911417403538215,
+          "decision_noise_h6": 2.3533627126456476,
+          "random_exploration_effect": 0.962220972291826,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-04-a/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260720.json:seed=20260720",
+          "decision_noise_h1": 2.027525459162261,
+          "decision_noise_h6": 2.7602012573851993,
+          "random_exploration_effect": 0.7326757982229384,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-04-a/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260721.json:seed=20260721",
+          "decision_noise_h1": 2.004676906552631,
+          "decision_noise_h6": 3.6506844606376228,
+          "random_exploration_effect": 1.6460075540849917,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-04-b/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260722.json:seed=20260722",
+          "decision_noise_h1": 1.3056447491786043,
+          "decision_noise_h6": 3.014004447598961,
+          "random_exploration_effect": 1.7083596984203566,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-04-b/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260723.json:seed=20260723",
+          "decision_noise_h1": 1.3146835445832519,
+          "decision_noise_h6": 2.9846647196760974,
+          "random_exploration_effect": 1.6699811750928455,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-05-a/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260724.json:seed=20260724",
+          "decision_noise_h1": 1.4151982587127714,
+          "decision_noise_h6": 4.003828207755526,
+          "random_exploration_effect": 2.5886299490427547,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-05-a/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260725.json:seed=20260725",
+          "decision_noise_h1": 3.43459106157433,
+          "decision_noise_h6": 2.658095329643968,
+          "random_exploration_effect": -0.7764957319303618,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-05-b/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260726.json:seed=20260726",
+          "decision_noise_h1": 1.3900423094510517,
+          "decision_noise_h6": 4.1542455621249434,
+          "random_exploration_effect": 2.7642032526738918,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_id": "E:/UoE/IPP/project/outputs/formal_multilingual_v01/gpt-4.1-zh-CN-20run-v01/wave-05-b/zh-CN/horizon_uncertainty_emphasis_lang-zh-CN_seed-20260727.json:seed=20260727",
+          "decision_noise_h1": 1.5002745919407514,
+          "decision_noise_h6": 2.836983143975845,
+          "random_exploration_effect": 1.3367085520350936,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        }
+      ]
+    }
+  },
+  "diagnostics": {
+    "baseline": {
+      "shrinkage_sensitivity": [
+        {
+          "run_effect_sd": 0.25,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 2.5029043346030537,
+          "decision_noise_h6": 3.1107455278033074,
+          "random_exploration_effect": 0.6078411932002536,
+          "information_bonus_h1": -1.6000458025598656,
+          "information_bonus_h6": 1.1562914838428646,
+          "label_bias_h1": 0.7523531230782914,
+          "label_bias_h6": 2.2315072235067306
+        },
+        {
+          "run_effect_sd": 0.5,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 2.3261669663377282,
+          "decision_noise_h6": 2.7171310697407143,
+          "random_exploration_effect": 0.39096410340298604,
+          "information_bonus_h1": -1.5892799682517726,
+          "information_bonus_h6": 0.8479217368603841,
+          "label_bias_h1": 0.671887698781596,
+          "label_bias_h6": 1.9497974013456252
+        },
+        {
+          "run_effect_sd": 1.0,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 2.056524235132264,
+          "decision_noise_h6": 2.240279902561485,
+          "random_exploration_effect": 0.1837556674292209,
+          "information_bonus_h1": -1.7064960257956914,
+          "information_bonus_h6": 0.45993989393661056,
+          "label_bias_h1": 0.5161627980709309,
+          "label_bias_h6": 1.6839542390406124
+        }
+      ]
+    },
+    "detailed": {
+      "shrinkage_sensitivity": [
+        {
+          "run_effect_sd": 0.25,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 3.508241772091978,
+          "decision_noise_h6": 2.6801298597116467,
+          "random_exploration_effect": -0.8281119123803311,
+          "information_bonus_h1": -0.8075885467662467,
+          "information_bonus_h6": -2.9297888671324523,
+          "label_bias_h1": -0.3179953394440452,
+          "label_bias_h6": 0.2412973891863402
+        },
+        {
+          "run_effect_sd": 0.5,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 3.1959527909481222,
+          "decision_noise_h6": 2.4769448063476434,
+          "random_exploration_effect": -0.7190079846004789,
+          "information_bonus_h1": -1.025463169602275,
+          "information_bonus_h6": -3.074066913791822,
+          "label_bias_h1": -0.27904638377085683,
+          "label_bias_h6": 0.23667315221201493
+        },
+        {
+          "run_effect_sd": 1.0,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 2.822558331237182,
+          "decision_noise_h6": 2.2186720074250794,
+          "random_exploration_effect": -0.6038863238121026,
+          "information_bonus_h1": -1.2770507984884947,
+          "information_bonus_h6": -3.242492609311538,
+          "label_bias_h1": -0.24878033389146806,
+          "label_bias_h6": 0.2943435522695405
+        }
+      ]
+    },
+    "role_human": {
+      "shrinkage_sensitivity": [
+        {
+          "run_effect_sd": 0.25,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 3.636697130679912,
+          "decision_noise_h6": 3.878408662887095,
+          "random_exploration_effect": 0.24171153220718278,
+          "information_bonus_h1": 0.8423302387925755,
+          "information_bonus_h6": 1.9084239545087904,
+          "label_bias_h1": 0.10600838112309816,
+          "label_bias_h6": -0.10577218464442469
+        },
+        {
+          "run_effect_sd": 0.5,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 3.3547304579036674,
+          "decision_noise_h6": 3.5678078141960627,
+          "random_exploration_effect": 0.21307735629239533,
+          "information_bonus_h1": 0.6050400115768689,
+          "information_bonus_h6": 1.428625211878382,
+          "label_bias_h1": 0.06802150843579548,
+          "label_bias_h6": -0.15410905079455534
+        },
+        {
+          "run_effect_sd": 1.0,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 3.022783966735597,
+          "decision_noise_h6": 3.203603547737009,
+          "random_exploration_effect": 0.18081958100141193,
+          "information_bonus_h1": 0.4113481551066101,
+          "information_bonus_h6": 0.8271768136104393,
+          "label_bias_h1": -0.09060945471574477,
+          "label_bias_h6": -0.16590987591918835
+        }
+      ]
+    },
+    "uncertainty_emphasis": {
+      "shrinkage_sensitivity": [
+        {
+          "run_effect_sd": 0.25,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 1.8516913326622724,
+          "decision_noise_h6": 3.4792883350302413,
+          "random_exploration_effect": 1.627597002367969,
+          "information_bonus_h1": 0.1285472281996422,
+          "information_bonus_h6": 5.2422231912815915,
+          "label_bias_h1": 0.7740621530190038,
+          "label_bias_h6": 3.3103427405611394
+        },
+        {
+          "run_effect_sd": 0.5,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 1.6266285433711458,
+          "decision_noise_h6": 3.203662360596775,
+          "random_exploration_effect": 1.5770338172256293,
+          "information_bonus_h1": 0.14738304517141895,
+          "information_bonus_h6": 5.170038901104399,
+          "label_bias_h1": 0.6111819407256716,
+          "label_bias_h6": 3.385055400260865
+        },
+        {
+          "run_effect_sd": 1.0,
+          "converged": true,
+          "optimizer_message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+          "decision_noise_h1": 1.3174167991804289,
+          "decision_noise_h6": 2.7411727740307494,
+          "random_exploration_effect": 1.4237559748503206,
+          "information_bonus_h1": 0.2796205784134046,
+          "information_bonus_h6": 4.674162136071384,
+          "label_bias_h1": 0.2842040888654643,
+          "label_bias_h6": 3.2969658423038557
+        }
+      ]
+    }
+  }
+}

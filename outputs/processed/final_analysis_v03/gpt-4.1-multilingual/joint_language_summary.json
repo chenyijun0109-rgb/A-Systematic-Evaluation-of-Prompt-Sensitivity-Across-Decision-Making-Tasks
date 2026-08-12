@@ -1,0 +1,11 @@
+{
+  "analysis": "symmetric_three_language_centered_contrasts",
+  "languages": [
+    "en",
+    "zh-CN",
+    "es"
+  ],
+  "baseline_rows": 24,
+  "prompt_rows": 72,
+  "bootstrap_replicates": 2000
+}

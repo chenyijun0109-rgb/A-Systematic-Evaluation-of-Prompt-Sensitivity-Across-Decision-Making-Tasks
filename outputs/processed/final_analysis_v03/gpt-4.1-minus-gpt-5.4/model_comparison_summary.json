@@ -1,0 +1,17 @@
+{
+  "analysis": "two_model_english_comparison",
+  "model_a": "GPT-5.4",
+  "model_b": "GPT-4.1",
+  "metric_comparison_rows": 128,
+  "psi_comparison_rows": 9,
+  "model_prompt_interaction_rows": 24,
+  "model_prompt_interaction_definition": "[(model_b condition - model_b baseline) - (model_a condition - model_a baseline)]",
+  "bootstrap_units": {
+    "horizon_and_bart": "matched_environment_seed_block",
+    "horizon_random_exploration": "matched_environment_seed_block_hierarchical_refit",
+    "igt": "independent_run_within_model_prompt_cell"
+  },
+  "metric_keys_match": true,
+  "psi_keys_match": true,
+  "notes": "Positive differences and Hedges g indicate model_b exceeds model_a; direction is metric-specific and is not inherently better."
+}
