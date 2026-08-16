@@ -3343,3 +3343,18 @@ Implemented the reviewer-recommended changes in `skeleton_repaired.tex`:
   `human_reference_bootstrap.csv` (7 rows) and its summary JSON, then
   regenerated `analysis_manifest.json`; `analysis_ready` remains true with no
   failures.
+
+
+## 2026-08-16 (twelfth pass) - Consistency fix after third review
+
+- Aligned three sentences with the new human-reference bootstrap reporting:
+  * 5.4 Limitations: replaced "fixed human summary statistics were treated
+    without propagating their sampling uncertainty" with "reference-summary
+    uncertainty was quantified by bootstrap but not propagated through the
+    cell-level deviation and coverage changes".
+  * 5.4 Future work: future human-reference work should propagate
+    reference-sample uncertainty through cell-level deviation and coverage
+    changes (rather than "in the reference samples").
+  * Conclusions: same propagation wording for the human-reference future-work
+    sentence.
+- Re-verified citations (43/43), labels, brace balance, and non-ASCII absence.
