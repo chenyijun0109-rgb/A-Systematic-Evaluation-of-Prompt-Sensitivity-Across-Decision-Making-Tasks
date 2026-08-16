@@ -117,6 +117,15 @@
       "bytes": 5948,
       "rows": 24
     },
+    "human_reference_results/human_reference_bootstrap.csv": {
+      "sha256": "0709ad3e4e49cebc2bb512b72f4ad8be1579ab414f47c64c1ee40c4be3d2f159",
+      "bytes": 1057,
+      "rows": 7
+    },
+    "human_reference_results/human_reference_bootstrap_summary.json": {
+      "sha256": "a32efdfe19e94851cb29cb0018e32793d8d7abbab79b306d3bc8d55d37a7d63a",
+      "bytes": 360
+    },
     "human_reference_results/model_human_comparison.csv": {
       "sha256": "dcddf7bf735467fedb781e7922d0311f01084c0f58ff528b9de9881da5335c3c",
       "bytes": 31605,

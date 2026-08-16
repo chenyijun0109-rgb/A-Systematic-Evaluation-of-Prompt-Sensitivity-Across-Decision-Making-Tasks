@@ -3122,3 +3122,224 @@ Responses API; the resumable experiment plan remains ready.
 - Added `src/compute_joint_language_contrasts.py`. Neutral means and within-language prompt effects are centred on their corresponding three-language means; the three language deviations sum to zero, so no language is a reference category.
 - Generated 24 centred Neutral deviations and 72 centred prompt-effect deviations with 2,000-replicate task-appropriate bootstrap intervals.
 - Updated the analysis manifest, RQ3 figure, Method, Results, Discussion, Conclusion, and README to use only the symmetric three-language estimands.
+
+
+## 2026-08-16 - Thesis draft copy-edit (skeleton_repaired.tex)
+
+- Copy-edited the submission draft in `skeleton_repaired.tex` (the file that
+  produced the 2026-08-12 `dissertation.pdf`). Changes are presentation-level
+  precision fixes; no task, metric, model, language, prompt, RQ, estimand, or
+  analysis result was altered.
+- Clarified the Horizon structure: four forced choices precede one free choice
+  in H1 and six free choices in H6, matching `src/tasks/horizon.py`.
+- Made the behavioural-metric scopes explicit: information-seeking rate uses
+  first free choices in unequal-information games, while the horizon-related
+  exploration-change rate includes first free choices from both game types with
+  pre-choice mean ties excluded.
+- Added the run-level random effect notation to the random-exploration model and
+  stated the number of primary metrics per task in the PSI definition.
+- Clarified the human-reference wording for the Horizon sample (320 games per
+  participant versus 40 games per LLM run) and normalised CI interval spacing
+  in Results.
+- Removed a garbled non-ASCII comment from the preamble, standardised two
+  subsection titles, and added missing publisher fields to eight bibliography
+  entries in `mybibfile.bib`.
+- Verified all 45 citation keys resolve, all 16 cross-references resolve, brace
+  balance is intact, and all 60 representative estimates cited in Results match
+  `outputs/processed/final_analysis_v03` exactly (three values differ only by
+  3-decimal rounding).
+
+
+## 2026-08-16 (second pass) - Manuscript re-synced from user export
+
+- The project copy of `skeleton_repaired.tex` was replaced by the user's
+  updated export `E:/download/skeleton (2).tex` (same content as the
+  pre-copy-edit working tree: it contains the user's earlier uncommitted
+  revisions but not the 2026-08-16 copy-edit).
+- Re-applied the full copy-edit pass on the restored file: Horizon structure
+  wording, metric-scope clarifications, random-exploration notation, human
+  reference sample wording, PSI definition, reproducibility wording, preamble
+  comment cleanup, subsection title casing, and CI interval spacing.
+- `intro_academic_english.tex` remains deleted per the user's file management;
+  it is an intermediate draft not referenced by the manuscript.
+- Verified after the sync: all 45 citation keys resolve, all cross-references
+  resolve, no non-ASCII characters remain in the manuscript, brace balance is
+  intact, and the manuscript compiles logically with `mybibfile.bib` (local TeX
+  engine still unavailable, so final compilation must run in Overleaf).
+
+
+## 2026-08-16 (third pass) - Content revision addressing reviewer feedback
+
+- Results interpretation: added per-figure key-pattern prose and precision
+  counts to RQ1--RQ4, all verified against final_analysis_v03. RQ1: 29/72
+  condition-minus-Neutral intervals exclude zero (43 straddle); RQ2: 19/48
+  interaction contrasts exclude zero; RQ3: 15/24 centred baselines and 31/72
+  centred prompt effects exclude zero; RQ4: absolute deviation closer in 69/120
+  cells, coverage unchanged in 55/120, opposite-direction movement in 49/120.
+  Analysis Sample now states explicitly that more than half of the primary
+  RQ1--RQ3 intervals straddle zero, so conclusions rest on direction and
+  concentration rather than isolated interval exclusions.
+- Study design: expanded the 20-runs-per-cell rationale (balanced 720-run arms
+  and 1,200-run total under a computational budget, no prespecified precision
+  target, bootstrap intervals as the primary uncertainty expression).
+- Random exploration: added a non-technical account of the hierarchical choice
+  model (evidence score, inverse temperature as consistency, decision noise as
+  its inverse, and the H6-vs-H1 noise difference as the random-exploration
+  effect).
+- Discussion: added a paragraph on framework transferability to vision-language
+  models, tool-using agents, and embodied decision-makers (fixed measurement
+  specification, prespecified formulation variants, complete-trajectory units,
+  bootstrap uncertainty, descriptive reference), and strengthened the
+  non-normative reading of the human reference (proximity is a coordinate for
+  comparing measurement specifications, not a target for model quality).
+- All citation keys, labels, brace balance, and the absence of non-ASCII
+  characters were re-verified; added text adds roughly 2,300 characters
+  (~0.3--0.4 body pages), so Overleaf compilation should confirm the page count.
+
+
+## 2026-08-16 (fourth pass) - Horizontal overflow fixes
+
+- Diagnosed the overfull lines by parsing the rendered PDF: the true text right
+  edge is 524.4 pt, and characters extending past it were located page by page.
+  Overflows were found in the model-settings `texttt` line (up to x=591),
+  the BART explosion equation tail ("32." at x=539), the 3.8 GitHub URL
+  (x=569), appendix `url` lines (x=544-567), several body lines (x=526-539),
+  the abstract Keywords line, and the long section headings 2.1, 2.4, 2.6 and
+  4.5.
+- Fixes applied to `skeleton_repaired.tex`: split `texttt{parameter = value}`
+  into `texttt{parameter} = value` for all four generation settings; moved the
+  "for k = 1,...,32" range of the BART formula into prose; replaced the URL
+  block's `Urlmuskip` tweak with `sloppy`; added `sloppy` for the appendix;
+  added `emergencystretch=2em` to the preamble to absorb residual body-line
+  overflows; and shortened headings 2.1, 2.4 and 4.5 (4.5 is now "RQ4:
+  Prompt-Associated Proximity Changes"), which also shortens the running
+  header on the RQ4 pages.
+- Re-verified citations (45/45), labels, brace balance, and the absence of
+  non-ASCII characters. Final visual confirmation still requires an Overleaf
+  compile because no local TeX engine is available.
+
+
+## 2026-08-16 (fifth pass) - RQ4 figure redraw
+
+- Redrew `figure_rq4_human_reference_overview` because the bottom-row x-axis
+  tick labels (metric x condition, two-line labels) overlapped at the original
+  8.2-inch width.
+- Changed `figure_rq4_v2` in `src/build_results_visual_package.py`: canvas
+  widened from (8.2, 11.0) to (12.4, 11.0) inches, and x tick labels are now
+  rotated 30 degrees. Data, colour scales, annotations, and cell values are
+  unchanged (read from the same `model_human_distance_changes.csv`).
+- Regenerated the 600-dpi PNG and the vector PDF in
+  `outputs/figures/final_results_v01/`, then copied the PNG and PDF to
+  `figures/` so the dissertation graphics path picks up the new version.
+- Verified the output: PNG is now 7509x6826 (wider than tall), and a character-
+  coordinate check of the vector PDF found no horizontal overlap between
+  distinct tick labels.
+
+
+## 2026-08-16 (sixth pass) - GitHub URL overflow fix
+
+- The 3.8 research-materials URL still overflowed after the earlier sloppy
+  pass because the url package does not break after hyphens by default, and
+  the repository-name segment ("A-Systematic-Evaluation-...-Tasks", 64
+  characters) exceeded one text line in the package's default typewriter
+  font (estimated ~533 pt vs a ~454 pt line).
+- Fix: switched the preamble to `usepackage[hyphens]{url}` so explicit hyphen
+  characters become legal break points, and set `urlstyle{same}` inside the
+  3.8 URL block so the URL is typeset in the body font (widest hyphen-free
+  segment is now 11 characters, ~66 pt). Kept `raggedright` and `sloppy` in
+  the block.
+- Re-verified citations, brace balance, and that the URL block contains all
+  four settings. Final confirmation still requires an Overleaf compile.
+
+
+## 2026-08-16 (seventh pass) - Citation audit: removed strained citations
+
+- Audited every `cite` against the sentence it supports. Kept the 43
+  remaining citations, which map one-to-one to task originals, human data
+  sources, methods references, and directly supporting studies.
+- Removed six strained/stacked citation uses in `skeleton_repaired.tex`:
+  * Shanahan2023RolePlay (Introduction): a role-play paper was used to support
+    "behavioural similarity does not establish a shared mechanism"; the claim
+    is now stated as the study position without a citation.
+  * Lampinen2024ContentEffects (3 places): that paper reports LLM-human content
+    effects in reasoning, which points in the opposite direction from "no
+    shared mechanism / proximity is not mechanistic equivalence"; kept
+    Lin2025SixFallacies in all three sentences.
+  * Webson2022PromptMeaning (1 of 2 places): kept only the semantically
+    misleading-instructions claim, where the paper directly applies; removed
+    the measurement-procedure sentence use.
+  * Wilson2014, Buelow2009IGTValidity, Wallsten2005BARTModel (Section 2.7): a
+    five-citation stack on one sentence; the three task papers do not directly
+    support "task length/presentation/familiarisation constrain comparison".
+    Kept Dillion2023ReplaceParticipants and Bisbee2024SyntheticSurveyData.
+- `Shanahan2023RolePlay` and `Lampinen2024ContentEffects` are now uncited in
+  the manuscript but remain in `mybibfile.bib` (unsrt only outputs cited
+  entries, so the reference list shrinks automatically from 45 to 43 items).
+  Reference numbers will renumber after the next compile.
+
+
+## 2026-08-16 (eighth pass) - Bibliography cleanup after citation audit
+
+- Removed the now-uncited `Shanahan2023RolePlay` and
+  `Lampinen2024ContentEffects` entries from `mybibfile.bib` after the user
+  approved the citation-audit changes. The manuscript and bibliography are now
+  one-to-one: 43 cited keys and 43 bibliography entries, no missing and no
+  uncited entries.
+- Verified brace balance in both the manuscript and the bibliography.
+- The reference list will contain 43 numbered items on the next compile.
+
+
+## 2026-08-16 (ninth pass) - Address supervisor-review recommendations
+
+Implemented the reviewer-recommended changes in `skeleton_repaired.tex`:
+- Replaced the brief RQ summary table with a wider "Results overview with
+  representative estimates" table that reports, for each RQ, the interval
+  exclusion counts, representative raw estimates with percentile-bootstrap
+  95% intervals, and the interpretive boundary. All table values reuse the
+  already-audited final_analysis_v03 numbers.
+- Strengthened the human-reference positioning: the human mean, SD, and
+  interval are now explicitly described as fixed empirical benchmark
+  coordinates rather than estimated population parameters, with their sampling
+  uncertainty not propagated.
+- Made the prompt-variant non-orthogonality an explicit design limitation in
+  Method, and reworded the inferential object as the complete formulation, not
+  an isolated causal effect of role, specificity, or emphasis.
+- Added a sentence that the random-exploration sensitivity fits all converged
+  but their magnitudes changed with shrinkage scale, so the main text treats
+  that latent estimate as model-dependent rather than precise.
+- Left Abstract and Conclusions mostly unchanged because they already state the
+  three main lines (conditional reliability, audit framework, non-normative
+  human reference) compactly.
+- Re-verified citations (43/43), labels, brace balance, and the absence of
+  non-ASCII characters.
+
+
+## 2026-08-16 (tenth pass) - Human-reference uncertainty, transfer checklist, table slim-down
+
+- Added `src/build_human_reference_uncertainty.py`. It bootstrap-resamples the
+  participant-level human summaries (2,000 replicates, seed 20260615) for the
+  seven directly computed human-reference metrics and reports 95% percentile
+  intervals for the reference mean and SD. Output:
+  `outputs/processed/final_analysis_v03/human_reference_results/human_reference_bootstrap.csv`
+  plus a summary JSON. Random exploration is excluded because its human-side
+  value is hierarchical rather than participant-level.
+- Updated Method 3.7.6 and Results 4.5 to report that the human reference
+  means have bootstrap half-widths from 0.014 to 0.556 in original units, with
+  three examples (Horizon information seeking, IGT advantageous choices, BART
+  adjusted pumps). Appendix A.2 now lists the new bootstrap file.
+- Replaced the RQ summary table with a slimmer four-column version using
+  compact "29/72" style counts and one representative example per RQ, to reduce
+  reader load.
+- Rewrote the Discussion transfer paragraph as an explicit minimal transfer
+  checklist (freeze new degrees of freedom; specify modality-specific variants;
+  extend the parser; keep trajectories/seeds/snapshots/diagnostics in the
+  measurement specification).
+- Re-verified citations (43/43), labels, brace balance, and non-ASCII absence.
+
+
+## 2026-08-16 (eleventh pass) - Manifest update for human bootstrap
+
+- Extended `src/build_final_analysis_manifest.py` to validate and hash the new
+  `human_reference_bootstrap.csv` (7 rows) and its summary JSON, then
+  regenerated `analysis_manifest.json`; `analysis_ready` remains true with no
+  failures.

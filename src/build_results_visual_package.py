@@ -1233,7 +1233,7 @@ def figure_rq4_v2() -> None:
     for field, _, _ in fields:
         maximum = max(abs(f(row, field)) for row in rows)
         norms[field] = TwoSlopeNorm(vmin=-maximum, vcenter=0, vmax=maximum)
-    fig, axes = plt.subplots(3, 2, figsize=(8.2, 11.0), constrained_layout=True)
+    fig, axes = plt.subplots(3, 2, figsize=(12.4, 11.0), constrained_layout=True)
     row_images = [None, None]
     for r_index, (field, row_title, cmap) in enumerate(fields):
         for column, task in enumerate(TASKS):
@@ -1259,7 +1259,7 @@ def figure_rq4_v2() -> None:
             image = heatmap(axes[column, r_index], matrix, annotations, xlabels=xlabels,
                             ylabels=[label for _, _, label in groups], title=TASK_LABELS[task],
                             norm=norms[field], cmap=cmap)
-            axes[column, r_index].tick_params(axis="x", labelsize=8.5)
+            axes[column, r_index].tick_params(axis="x", labelsize=8.5, rotation=30)
             axes[column, r_index].tick_params(axis="y", labelsize=9.5)
             if row_images[r_index] is None:
                 row_images[r_index] = image

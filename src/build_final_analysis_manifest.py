@@ -85,6 +85,13 @@ def build_manifest(root: Path) -> dict[str, Any]:
         path = human_dir / name
         require(len(csv_rows(path)) == count, f"Unexpected RQ4 rows: {name}", failures)
         record(path)
+    for name, count in (("human_reference_bootstrap.csv", 7),):
+        path = human_dir / name
+        require(len(csv_rows(path)) == count, f"Unexpected human bootstrap rows: {name}", failures)
+        record(path)
+    bootstrap_summary = human_dir / "human_reference_bootstrap_summary.json"
+    require(bootstrap_summary.exists(), "Missing human reference bootstrap summary", failures)
+    record(bootstrap_summary)
 
     diagnostics_dir = root / "random_exploration_diagnostics"
     diagnostic_files = sorted(diagnostics_dir.glob("*.json"))
