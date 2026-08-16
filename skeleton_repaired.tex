@@ -12,7 +12,7 @@
 % \documentclass[logo,msc,di]{infthesis}      % Design Inf
 % \documentclass[logo,msc,dsti]{infthesis}    % Data Sci TI
 % \documentclass[logo,msc,inf]{infthesis}     % Informatics
-\documentclass[logo,msc]{infthesis}           % degree unspecified, do not change except to add your degree
+\documentclass[logo,msc,inf]{infthesis}       % Informatics
 %%%%%%%%%%%%%%%%%%%%%%%%
 % Understand any problems and seek approval before assuming it's ok to remove ugcheck.
 \usepackage{msccheck}
@@ -65,7 +65,7 @@ from the Informatics Research Ethics committee.
 
 
 \begin{acknowledgements}
-I would like to thank my supervisor, Bonan Zhao, for their guidance, feedback,
+I would like to thank my supervisor, Bonan Zhao, for her guidance, feedback,
 and support throughout this project.
 \end{acknowledgements}
 
@@ -307,13 +307,13 @@ partially pooled run-level estimates.
 \textbf{Task} & \textbf{Metric} & \textbf{Operational definition} \\
 \midrule
 Horizon & Information-seeking choice rate & Proportion of first free choices in unequal-information games on which the less-observed option was chosen. \\
-Horizon & Horizon-related exploration change & H6 minus H1 exploratory-choice rate; pre-choice mean ties excluded. \\
+Horizon & Horizon-related\newline exploration change & H6 minus H1 exploratory-choice rate; pre-choice mean ties excluded. \\
 Horizon & Random exploration effect & H6 minus H1 model-estimated decision noise. \\
 IGT & Advantageous choice rate & Proportion of choices from decks C or D. \\
 IGT & Post-loss switching rate & Deck switch after a negative loss component. \\
 BART & Adjusted average pumps & Mean pumps on non-exploded balloons. \\
 BART & Explosion rate & Proportion of balloons that exploded. \\
-BART & Post-explosion adjustment & Pumps on the next balloon minus pumps on the exploded balloon. \\
+BART & Post-explosion\newline adjustment & Pumps on the next balloon minus pumps on the exploded balloon. \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -467,7 +467,7 @@ The clearest reversals occurred in BART. GPT-5.4 Role framing reduced adjusted p
 
 \begin{figure}[!tbp]
 \centering
-\includegraphics[width=0.96\textwidth,height=0.72\textheight,keepaspectratio]{figure_rq1_prompt_effects_overview.png}
+\includegraphics[width=0.96\textwidth,height=0.80\textheight,keepaspectratio]{figure_rq1_prompt_effects_overview.png}
 \caption{Within-model prompt effects relative to Neutral. Points show signed Hedges' $g$; lines show 95\% bootstrap confidence intervals.}
 \label{fig:rq1}
 \end{figure}
@@ -479,7 +479,7 @@ Mini differed most clearly from GPT-5.4 in BART. Its adjusted-pump interaction w
 
 \begin{figure}[!tbp]
 \centering
-\includegraphics[width=0.96\textwidth,height=0.72\textheight,keepaspectratio]{figure_rq2_model_interactions_overview.png}
+\includegraphics[width=0.96\textwidth,height=0.80\textheight,keepaspectratio]{figure_rq2_model_interactions_overview.png}
 \caption{Model-by-prompt interactions relative to GPT-5.4. Cell text gives raw contrasts; colour shows differences in signed Hedges' $g$.}
 \label{fig:rq2}
 \end{figure}
@@ -503,7 +503,7 @@ No formulation improved both proximity measures uniformly. English GPT-4.1 Horiz
 
 \begin{figure}[!tbp]
 \centering
-\includegraphics[width=0.96\textwidth,height=0.72\textheight,keepaspectratio]{figure_rq4_human_reference_overview.png}
+\includegraphics[width=1.0\textwidth,height=0.80\textheight,keepaspectratio]{figure_rq4_human_reference_overview.png}
 \caption{Prompt-associated changes in absolute mean deviation (left) and empirical coverage (right) relative to Neutral.}
 \label{fig:rq4}
 \end{figure}

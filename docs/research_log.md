@@ -3358,3 +3358,95 @@ Implemented the reviewer-recommended changes in `skeleton_repaired.tex`:
   * Conclusions: same propagation wording for the human-reference future-work
     sentence.
 - Re-verified citations (43/43), labels, brace balance, and non-ASCII absence.
+
+
+## 2026-08-16 (thirteenth pass) - Figure legibility pass
+
+- Diagnosed that the four Results figures were displayed at small effective
+  font sizes: RQ1-3 body text rendered at roughly 4.6-5.0 pt and RQ4 cell
+  digits at about 3.2 pt, which makes them tiring to read.
+- Raised internal font sizes in `src/build_results_visual_package.py` for all
+  four overview figures (ticks/labels/legends/titles/cell text up roughly
+  1.5-2.5 pt, RQ4 heatmap cell text 7.3 -> 9.5 via a new `cell_fontsize`
+  parameter), and widened the LaTeX display box in `skeleton_repaired.tex`
+  (RQ1-3 height 0.72 -> 0.80 textheight; RQ4 width 0.96 -> 1.0 textwidth).
+  Estimated effective displayed font sizes now about 7-8.3 pt for RQ1-3 and
+  4.8-5.3 pt for RQ4.
+- Regenerated the four PNG/PDF figures and copied them into `figures/`.
+- Re-verified citations, labels, and brace balance. Page count must be
+  re-confirmed in Overleaf because the figures now occupy more space.
+
+
+## 2026-08-16 (fourteenth pass) - RQ3 figure legend overlap fix
+
+- After the legibility pass, the RQ3 B-panel x labels collided with the bottom
+  legend. Fixed in `figure_rq3_overview`: increased the figure bottom margin
+  (0.11 -> 0.17), reduced the legend font size back to 10.5, and shortened the
+  x-axis labels ("Centred baseline (pooled-SD units)" / "Standardised prompt
+  effect").
+- Regenerated the RQ3 PNG/PDF and synced `figures/`. A character-coordinate
+  check of the vector PDF confirms the x labels (bottom at y=726) and the
+  legend (starting y=801) are now separated by ~75 pt with no overlap.
+
+
+## 2026-08-16 (fifteenth pass) - RQ3 B-panel labels vs left markers overlap
+
+- Real overlap source: the right (B) panel y-axis labels used the full metric
+  names (e.g. "Information-seeking choice rate"), which with the then-current
+  column spacing reached leftward into the left (A) panel plot area and
+  visually collided with its markers (triangles etc.).
+- Fixed in `figure_rq3_overview`: B panel now uses short metric labels
+  ("Info seeking", "Horizon change", "Advantageous", "Post-loss switch",
+  "Adjusted pumps", "Explosion rate", "Post-explosion adj.") at 10.5 pt, and
+  the column spacing wspace was increased from 0.72 to 1.05.
+- Verified with the vector PDF: the left panel axes now end at x~344 pt while
+  the B-panel labels start at x~387-421 pt (a >=40 pt gap), with zero word
+  overlaps across the whole figure.
+- Regenerated PNG/PDF and synced `figures/`.
+
+
+## 2026-08-16 (sixteenth pass) - Revert figure legibility changes per user
+
+- The user decided to keep all four Results figures in their original (dis (4)
+  review) style for consistency, so the figure legibility and RQ3 label
+  adjustments were reverted.
+- Restored `src/build_results_visual_package.py`, `skeleton_repaired.tex`, and
+  all tracked figure files (figures/ and outputs/figures/final_results_v01/)
+  to HEAD, and removed the three untracked RQ1-3 PDF copies added in the
+  legibility pass.
+- Verified: RQ1-3 figures are back to their pre-legibility dimensions (RQ1
+  5099x6807, RQ2 4988x6520, RQ3 5553x6984), RQ4 remains the user-requested
+  widened version (7509x6826), and the LaTeX display box is back to
+  width=0.96 textwidth, height=0.72 textheight for all four figures.
+- Working tree now differs from HEAD only in this research log.
+
+
+## 2026-08-16 (seventeenth pass) - Partial revert: RQ3 original, RQ1/2/4 enlarged
+
+- Per the user's clarification, only Figure RQ3 keeps the original (dis (4))
+  style; Figures RQ1, RQ2, and RQ4 keep the enlarged-font legibility version.
+- Re-applied the 13th-pass font increases to RQ1/RQ2/RQ4 only in
+  `src/build_results_visual_package.py` (RQ1 ticks/labels/legend/title, RQ2
+  matrix fonts and colorbar, RQ4 heatmap cell/tick/title/colorbar fonts),
+  regenerated those three figures, and updated `skeleton_repaired.tex` display
+  boxes: RQ1/RQ2 height 0.80 textheight, RQ4 width 1.0 textwidth and height
+  0.80 textheight, while RQ3 remains width 0.96/height 0.72.
+- Verified: RQ1 5293x6799, RQ2 4988x6520, RQ4 7509x6826; RQ3 5553x6984 and
+  untouched in git. Citations and brace balance re-checked.
+
+
+## 2026-08-16 (eighteenth pass) - Table 3.2 metric-name line breaks
+
+- In the Primary behavioural metrics table, forced word-boundary line breaks for
+  two metric names so they no longer hyphenate mid-word: "Horizon-related
+  exploration change" now breaks after "Horizon-related", and "Post-explosion
+  adjustment" after "Post-explosion". Column width unchanged; both second-line
+  fragments fit comfortably in the 3.8 cm metric column.
+
+
+## 2026-08-16 (nineteenth pass) - Sync title-page degree and acknowledgement wording
+
+- Per the user's latest version, changed the document class to
+  `[logo,msc,inf]` so the title page shows "Informatics", and changed the
+  acknowledgement to "for her guidance" (Bonan Zhao). Citations and brace
+  balance re-verified.

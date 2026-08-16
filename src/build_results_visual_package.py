@@ -242,6 +242,7 @@ def heatmap(
     title: str,
     norm: TwoSlopeNorm,
     cmap: str = "RdBu_r",
+    cell_fontsize: float = 7.3,
 ) -> Any:
     image = ax.imshow(matrix, cmap=cmap, norm=norm, aspect="auto")
     ax.set_xticks(range(len(xlabels)), labels=xlabels)
@@ -251,7 +252,7 @@ def heatmap(
             value = matrix[i, j]
             rgba = image.cmap(image.norm(value))
             luminance = 0.2126 * rgba[0] + 0.7152 * rgba[1] + 0.0722 * rgba[2]
-            ax.text(j, i, annotations[i][j], ha="center", va="center", fontsize=7.3, color="black" if luminance > 0.52 else "white")
+            ax.text(j, i, annotations[i][j], ha="center", va="center", fontsize=cell_fontsize, color="black" if luminance > 0.52 else "white")
     ax.set_title(title)
     ax.tick_params(axis="x", rotation=0)
     ax.set_xticks(np.arange(-0.5, len(xlabels), 1), minor=True)
@@ -768,7 +769,7 @@ def figure_rq3_overview() -> None:
         ax.set_xticks(range(3), language_names, fontsize=8.5, weight="bold")
         ax.set_yticks(range(len(ylabels)), ylabels, fontsize=7.1)
         ax.tick_params(top=True, labeltop=True, bottom=False, labelbottom=False, length=0)
-        ax.set_title(heading, fontsize=10.5, pad=14, weight="bold")
+        ax.set_title(heading, fontsize=12, pad=14, weight="bold")
         ax.set_xticks(np.arange(-0.5, 3, 1), minor=True)
         ax.set_yticks(np.arange(-0.5, len(ylabels), 1), minor=True)
         ax.grid(which="minor", color="white", linewidth=0.9)
@@ -799,10 +800,10 @@ def _draw_task_matrix(
     show_ylabels: bool = True,
 ) -> Any:
     image = ax.imshow(matrix, cmap=OVERVIEW_CMAP, norm=norm, aspect="auto")
-    ax.set_xticks(range(len(xlabels)), xlabels, fontsize=10, weight="bold")
-    ax.set_yticks(range(len(ylabels)), ylabels if show_ylabels else [], fontsize=9)
+    ax.set_xticks(range(len(xlabels)), xlabels, fontsize=12, weight="bold")
+    ax.set_yticks(range(len(ylabels)), ylabels if show_ylabels else [], fontsize=11)
     ax.tick_params(top=True, labeltop=True, bottom=False, labelbottom=False, length=0, pad=6)
-    ax.set_title(title, fontsize=13, weight="bold", pad=14)
+    ax.set_title(title, fontsize=14.5, weight="bold", pad=14)
     ax.set_xticks(np.arange(-0.5, len(xlabels), 1), minor=True)
     ax.set_yticks(np.arange(-0.5, len(ylabels), 1), minor=True)
     ax.grid(which="minor", color="white", linewidth=1.1)
@@ -810,7 +811,7 @@ def _draw_task_matrix(
         for j in range(matrix.shape[1]):
             rgba = image.cmap(image.norm(matrix[i, j]))
             luminance = 0.2126 * rgba[0] + 0.7152 * rgba[1] + 0.0722 * rgba[2]
-            ax.text(j, i, annotations[i][j], ha="center", va="center", fontsize=9,
+            ax.text(j, i, annotations[i][j], ha="center", va="center", fontsize=11,
                     color="#202020" if luminance > 0.55 else "white")
     return image
 
@@ -1089,9 +1090,9 @@ def figure_rq1_overview() -> None:
         ax.axvline(0, color="#555555", linewidth=1.0, linestyle="--")
         ax.set_yticks(range(len(metrics)), [METRIC_LABELS[m] for m in reversed(metrics)])
         ax.set_ylim(-0.65, len(metrics) - 0.35)
-        ax.set_title(TASK_LABELS[task], fontsize=14, weight="bold")
-        ax.set_xlabel("Signed Hedges' g (95% bootstrap CI)", fontsize=11)
-        ax.tick_params(labelsize=10)
+        ax.set_title(TASK_LABELS[task], fontsize=15.5, weight="bold")
+        ax.set_xlabel("Signed Hedges' g (95% bootstrap CI)", fontsize=12.5)
+        ax.tick_params(labelsize=12)
         ax.grid(axis="x", color="#dedbd5", linewidth=0.7)
     model_legend = [Line2D([0], [0], marker="o", color=MODEL_STYLE[m][0], linestyle="none",
                            markersize=7, label=m) for m in models]
@@ -1103,10 +1104,10 @@ def figure_rq1_overview() -> None:
         Line2D([0], [0], marker="^", color="#444444", linestyle="none", markersize=7,
                label="Task-specific emphasis"),
     ]
-    fig.subplots_adjust(left=0.28, right=0.98, top=0.92, bottom=0.10, hspace=0.48)
+    fig.subplots_adjust(left=0.30, right=0.98, top=0.92, bottom=0.10, hspace=0.48)
     fig.legend(handles=model_legend + condition_legend, loc="lower center", ncol=3,
-               frameon=False, bbox_to_anchor=(0.5, 0.01), fontsize=9.5)
-    fig.suptitle("RQ1: Within-model prompt effects", fontsize=16, y=0.985)
+               frameon=False, bbox_to_anchor=(0.5, 0.01), fontsize=11.5)
+    fig.suptitle("RQ1: Within-model prompt effects", fontsize=17, y=0.985)
     save_figure(fig, "figure_rq1_prompt_effects_overview")
 
 
@@ -1148,8 +1149,8 @@ def figure_rq2_overview() -> None:
                                         ylabels=[METRIC_LABELS[m] for m in METRICS[task]],
                                         norm=norm, title=TASK_LABELS[task]))
     cbar = fig.colorbar(images[0], ax=axes, shrink=0.55, pad=0.02)
-    cbar.set_label("Difference in signed Hedges' g", fontsize=11)
-    fig.suptitle("RQ2: Candidate model minus GPT-5.4 prompt effects", fontsize=16, y=1.02)
+    cbar.set_label("Difference in signed Hedges' g", fontsize=12.5)
+    fig.suptitle("RQ2: Candidate model minus GPT-5.4 prompt effects", fontsize=17, y=1.02)
     save_figure(fig, "figure_rq2_model_interactions_overview")
 
 
@@ -1258,17 +1259,17 @@ def figure_rq4_v2() -> None:
             xlabels = [f"{short_metric[m]}\n{short_condition[c]}" for m, c in columns]
             image = heatmap(axes[column, r_index], matrix, annotations, xlabels=xlabels,
                             ylabels=[label for _, _, label in groups], title=TASK_LABELS[task],
-                            norm=norms[field], cmap=cmap)
-            axes[column, r_index].tick_params(axis="x", labelsize=8.5, rotation=30)
-            axes[column, r_index].tick_params(axis="y", labelsize=9.5)
+                            norm=norms[field], cmap=cmap, cell_fontsize=9.5)
+            axes[column, r_index].tick_params(axis="x", labelsize=10.5, rotation=30)
+            axes[column, r_index].tick_params(axis="y", labelsize=11.5)
             if row_images[r_index] is None:
                 row_images[r_index] = image
-        axes[0, r_index].set_title(row_title, fontsize=13, weight="bold")
+        axes[0, r_index].set_title(row_title, fontsize=14.5, weight="bold")
     cbar_a = fig.colorbar(row_images[0], ax=axes[:, 0], shrink=0.55, pad=0.015)
-    cbar_a.set_label("Δ absolute deviation (− closer)", fontsize=10.5)
+    cbar_a.set_label("Δ absolute deviation (− closer)", fontsize=12)
     cbar_b = fig.colorbar(row_images[1], ax=axes[:, 1], shrink=0.55, pad=0.015)
-    cbar_b.set_label("Δ coverage (+ greater overlap)", fontsize=10.5)
-    fig.suptitle("RQ4: Prompt-associated changes in human-reference proximity", fontsize=16, y=1.02)
+    cbar_b.set_label("Δ coverage (+ greater overlap)", fontsize=12)
+    fig.suptitle("RQ4: Prompt-associated changes in human-reference proximity", fontsize=17, y=1.02)
     save_figure(fig, "figure_rq4_human_reference_overview")
 
 
