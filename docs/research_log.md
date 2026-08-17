@@ -142,16 +142,6 @@ must apply the wording and replace its model-collection date placeholders.
 
 Status: IGT uncertainty correction complete.
 
-## 2026-08-01: Delete superseded GPT-5.4 Mini failed attempts
-
-- Deleted the three failed-attempt JSON files under
-  `outputs/model_comparison_en_v01/gpt-5.4-mini-failed-audit-v01/` after their
-  logical runs had been successfully repaired.
-- Retained all 240 successful formal runs and all processed analysis outputs.
-- Future processing inputs contain successful formal data only.
-
-Status: Superseded failures deleted; successful dataset unchanged.
-
 ## 2026-08-01: Remove obsolete two-model manuscript figures and tables
 
 - Removed the generated GPT-4.1-versus-GPT-5.4 Figures 2-6 directory.
@@ -165,11 +155,6 @@ Status: Obsolete two-model figure/table outputs removed.
 
 - Completed the five-wave, two-worker English GPT-5.4 Mini collection with
   240/240 successful logical runs.
-- Deferred failures during formal collection and repaired all three failed
-  logical runs after wave 5.
-- Preserved the superseded failed-attempt JSON files under
-  `outputs/model_comparison_en_v01/gpt-5.4-mini-failed-audit-v01/` so they do
-  not collide with their successful replacements during strict aggregation.
 - Strict aggregation completed with 240 valid runs and `issues=[]`.
 - Prompt-sensitivity analysis produced 128 metric-summary rows, 24
   prompt-effect rows, and 9 PSI rows with `analysis_complete=true`.
