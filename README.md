@@ -48,6 +48,11 @@ as evidence of shared cognitive mechanisms.
   class files are not included in this repository.
 - `docs/final_overleaf_figure_manifest.md` lists the figure files that must be
   uploaded for compilation.
+- The appendix of `skeleton_repaired.tex` reproduces all 36 frozen prompts
+  verbatim (English, Simplified Chinese, Spanish) and includes a terminology
+  mapping table (thesis terms, code identifiers, and three-language glosses).
+  Compiling it requires the `CJKutf8` package (already declared in the
+  preamble).
 
 ## Repository layout
 

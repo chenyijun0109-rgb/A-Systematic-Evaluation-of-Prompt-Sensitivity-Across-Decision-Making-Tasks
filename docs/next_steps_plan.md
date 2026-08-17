@@ -30,9 +30,13 @@ more closely aligned (task length, familiarisation, information presentation).
 
 ## 5. Repository and submission hygiene
 
-- Align dissertation Table 3.1 collection dates with the run records
+- Table 3.1 collection dates are aligned with the run records in the source
   (English GPT-4.1 08–13 July; GPT-5.4 30–31 July; GPT-5.4 Mini 01 August;
-  zh-CN 03–05 August; es 05–07 August).
+  zh-CN 03–05 August; es 05–07 August); recompile the dissertation PDF so the
+  rendered table matches.
+- The appendix now reproduces all 36 frozen prompts verbatim with a
+  terminology mapping table; confirm the rendered appendix (CJK fonts, table
+  widths) inside the official Overleaf template.
 - Keep the public GitHub repository English-only and free of local absolute
   paths; raw run JSONs and human datasets remain local audit materials.
 - Package the `PROJECT/` archive (with `PROJECT/README.md`) for the School's

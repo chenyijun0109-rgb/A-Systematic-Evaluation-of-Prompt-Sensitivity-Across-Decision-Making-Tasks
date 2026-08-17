@@ -25,6 +25,9 @@
 \usepackage{amsmath}
 \usepackage[hyphens]{url}
 \usepackage{placeins}  % keeps each Results figure with its RQ section
+% UTF-8 input and CJK support for the verbatim multilingual prompt appendix.
+\usepackage[utf8]{inputenc}
+\usepackage{CJKutf8}
 % Allow LaTeX extra freedom when choosing line breaks so that long tokens,
 % identifiers, and URLs can wrap instead of overflowing the text width.
 \emergencystretch=2em
@@ -251,7 +254,7 @@ The variants were designed as controlled measurement implementations rather than
 
 \subsection{Prompt Provenance, Validation, and Freezing}
 
-Three literature-based baselines and nine constrained variants were checked for task information, response format, manipulation fidelity, unintended disclosure, and strategy advice. Pretesting established parser compatibility; materials were then frozen. Appendix~\ref{app:materials} records the prompt inventory and provenance trail, while the complete verbatim prompt texts are deposited in the research repository.
+Three literature-based baselines and nine constrained variants were checked for task information, response format, manipulation fidelity, unintended disclosure, and strategy advice. Pretesting established parser compatibility; materials were then frozen. Appendix~\ref{app:materials} records the prompt inventory and provenance trail; the complete verbatim prompt texts are reproduced in Appendix~\ref{app:prompts}.
 
 \subsection{Multilingual Prompt Construction and Validation}
 
@@ -397,7 +400,7 @@ This hierarchy was prespecified to limit overinterpretation across the large set
 
 \section{Reproducibility}
 
-Tasks, prompts, and analyses were frozen before collection. Records retained model version, time, generation settings, condition, environment, and response history; multilingual batches were audited before reusing English GPT-4.1. Versioned scripts separated raw responses from cleaned and derived files. Findings remain conditional on recorded snapshots and dates because deployment details are unobservable. Three failed GPT-5.4 Mini attempts retained identifiers, condition, time, status, and replacement mapping but not raw payloads. Code, prompts, definitions, scripts, and de-identified results are deposited in the research repository linked below.
+Tasks, prompts, and analyses were frozen before collection. Records retained model version, time, generation settings, condition, environment, and response history; multilingual batches were audited before reusing English GPT-4.1. Versioned scripts separated raw responses from cleaned and derived files. Findings remain conditional on recorded snapshots and dates because deployment details are unobservable. Code, prompts, definitions, scripts, and de-identified results are deposited in the research repository linked below.
 
 \noindent\textbf{Research materials:}\par
 \begingroup
@@ -456,7 +459,7 @@ RQ4 & Mean deviation and coverage did not always move together. & 69/120 closer,
 
 \section{Analysis Sample and Data Quality}
 
-The analysis included 1,200 unique complete runs, 20 per cell (Table~\ref{tab:results_quality}); shared English GPT-4.1 runs were counted once. All multilingual runs parsed successfully, and one Mini run succeeded after the prespecified retry. Three other failed attempts retained identifiers, status, time, and replacement mapping but not raw payloads.
+The analysis included 1,200 unique complete runs, 20 per cell (Table~\ref{tab:results_quality}); shared English GPT-4.1 runs were counted once. All multilingual runs parsed successfully, and one Mini run succeeded after the prespecified retry.
 
 All cells passed completeness checks and all formal contrasts obtained 2,000/2,000 valid bootstrap estimates; no pooled cell SD was zero. Intervals describe uncertainty rather than multiplicity-adjusted confirmatory tests. Many effects were also imprecise: across the primary RQ1--RQ3 contrasts, more than half of the bootstrap intervals straddled zero, so the conclusions rest on the direction and concentration of the effects rather than on isolated interval exclusions. Random-exploration and sensitivity fits converged under aligned human/LLM specifications, but shrinkage changed magnitude, so their standardised and human-reference results remain model-dependent. Table~\ref{tab:rq_summary} summarises the RQ-level conclusions and representative evidence.
 
@@ -492,7 +495,7 @@ Within-language prompt responses also occupied different centred positions. For 
 \begin{figure}[!tbp]
 \centering
 \includegraphics[width=0.96\textwidth,height=0.72\textheight,keepaspectratio]{figure_rq3_language_overview.png}
-\caption{Joint centred three-language comparison. Left: standardised Neutral baselines; right: centred prompt effects. No language is the reference.}
+\caption{Joint centred three-language comparison. Panel A: standardised Neutral baselines; Panel B: centred prompt effects. No language is the reference.}
 \label{fig:rq3}
 \end{figure}
 
@@ -588,10 +591,12 @@ Future work should prioritise replication at different collection times and acro
 This appendix identifies the materials supporting reproduction and audit of the
 study. The complete files are deposited in the online research repository cited
 in the Reproducibility section. The links below refer to that repository rather
-than to the local or Overleaf project filesystem. They are indexed here rather than reproduced verbatim
-because the 36 language--task--condition prompt files and complete cell-level
-outputs would add substantial length without adding evidence required to follow
-the main argument.
+than to the local or Overleaf project filesystem. The 36 frozen prompt files are
+reproduced verbatim in Appendix~\ref{app:prompts}, and the terminology mapping
+between dissertation terms, code identifiers, and the three prompt languages is
+given in Appendix~\ref{app:terminology}. Complete cell-level outputs are indexed
+rather than reproduced, because they would add substantial length without adding
+evidence required to follow the main argument.
 
 \section{Frozen Prompt Materials}
 
@@ -625,6 +630,1602 @@ including the dated generation records.
 Multilingual constraints and the completed audit trail are in
 \url{prompts/multilingual/}. These records document informational checks and
 freezing; they do not establish complete pragmatic or cultural equivalence.
+
+\section{Verbatim Prompt Texts}
+\label{app:prompts}
+
+The 36 frozen prompt files are reproduced below exactly as used in data collection: English first, then Simplified Chinese, then Spanish; within each language the order is Horizon Task, Iowa Gambling Task, and BART, with the four conditions per task. Placeholders such as \texttt{\{observation\}} are literal template tokens from the frozen files; the runner substituted the current task state at every decision.
+
+\subsection*{English --- Horizon Task --- Neutral (\texttt{baseline.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Two-Option Reward Task \\
+ \\
+You will complete 40 separate games. In each game, you make a \\
+series of \\
+choices between option A and option B. \\
+ \\
+Each game begins with four forced choices. On a forced-choice \\
+trial, the \\
+current task state tells you which option you must choose. After \\
+these four \\
+choices, you will make either one or six free choices between A \\
+and B. \\
+ \\
+Within a game, A and B may have different reward patterns that \\
+are not known \\
+to you in advance. After every choice, you are shown the reward \\
+from the \\
+selected option. You may use the observed rewards and the number \\
+of choices \\
+remaining in the current game when making later choices. \\
+ \\
+Your aim is to finish the full task with as much total reward as \\
+possible. \\
+ \\
+Current task state: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Valid responses: \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+``` \\
+ \\
+Respond with exactly one valid response and no additional text. \\
+\end{quote}
+
+
+\subsection*{English --- Horizon Task --- Instruction specificity (\texttt{detailed.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Two-Option Reward Task \\
+ \\
+You will complete 40 separate games. Each game consists of a \\
+series of \\
+choices between two options: option A and option B. \\
+ \\
+At the start of each game, you will make four forced choices. \\
+During these \\
+forced-choice trials, the current task state will specify which \\
+option you \\
+must select. After completing these four forced choices, you \\
+will proceed to \\
+make either one or six free choices, where you can freely choose \\
+between \\
+option A and option B. \\
+ \\
+Within each game, the reward patterns for options A and B may \\
+differ, and \\
+these patterns are not revealed to you beforehand. After every \\
+choice you \\
+make, you will receive feedback showing the reward associated \\
+with the option \\
+you selected. You can use the rewards you observe, along with \\
+the number of \\
+remaining choices in the current game, to inform your subsequent \\
+decisions. \\
+ \\
+Your aim is to finish the full task with as much total reward as \\
+possible. \\
+ \\
+Current task state: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Valid responses: \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+``` \\
+ \\
+Respond with exactly one valid response and no additional text. \\
+\end{quote}
+
+
+\subsection*{English --- Horizon Task --- Role framing (\texttt{role_human.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Two-Option Reward Task \\
+ \\
+Take the role of a human participant completing this task. \\
+ \\
+You will complete 40 separate games. In each game, you make a \\
+series of \\
+choices between option A and option B. \\
+ \\
+Each game begins with four forced choices. On a forced-choice \\
+trial, the \\
+current task state tells you which option you must choose. After \\
+these four \\
+choices, you will make either one or six free choices between A \\
+and B. \\
+ \\
+Within a game, A and B may have different reward patterns that \\
+are not known \\
+to you in advance. After every choice, you are shown the reward \\
+from the \\
+selected option. You may use the observed rewards and the number \\
+of choices \\
+remaining in the current game when making later choices. \\
+ \\
+Your aim is to finish the full task with as much total reward as \\
+possible. \\
+ \\
+Current task state: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Valid responses: \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+``` \\
+ \\
+Respond with exactly one valid response and no additional text. \\
+\end{quote}
+
+
+\subsection*{English --- Horizon Task --- Construct emphasis (uncertainty) (\texttt{uncertainty_emphasis.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Two-Option Reward Task \\
+ \\
+You will complete 40 separate games. In each game, you make a \\
+series of \\
+choices between option A and option B. \\
+ \\
+Each game begins with four forced choices. On a forced-choice \\
+trial, the \\
+current task state tells you which option you must choose. After \\
+these four \\
+choices, you will make either one or six free choices between A \\
+and B. \\
+ \\
+Within a game, A and B may have different reward patterns that \\
+are not known \\
+to you in advance. Each observed reward provides only partial \\
+information \\
+about those patterns. After every choice, you are shown the \\
+reward from the \\
+selected option. You may use this incomplete information and the \\
+number of \\
+choices remaining in the current game when making later choices. \\
+ \\
+Your aim is to finish the full task with as much total reward as \\
+possible. \\
+ \\
+Current task state: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Valid responses: \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+``` \\
+ \\
+Respond with exactly one valid response and no additional text. \\
+\end{quote}
+
+
+\subsection*{English --- Iowa Gambling Task --- Neutral (\texttt{baseline.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Four-Deck Reward Task \\
+ \\
+You will make 100 choices. Your cumulative score starts at 2000. \\
+ \\
+On each trial, choose one of four decks: A, B, C, or D. Each \\
+deck may have a \\
+different pattern of rewards and losses that is not known to you \\
+in advance. \\
+After every choice, you are shown the reward, any loss, the net \\
+outcome, and \\
+your updated cumulative score. You may use the feedback and the \\
+displayed \\
+history when making later choices. \\
+ \\
+Your aim is to finish the full task with as much total reward as \\
+possible. \\
+ \\
+Current task state: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Valid responses: \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+CHOICE: C \\
+CHOICE: D \\
+``` \\
+ \\
+Respond with exactly one valid response and no additional text. \\
+\end{quote}
+
+
+\subsection*{English --- Iowa Gambling Task --- Instruction specificity (\texttt{detailed.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Four-Deck Reward Task \\
+ \\
+You will make a total of 100 choices during this task. Your \\
+cumulative score \\
+begins at 2000 points. \\
+ \\
+On each trial, you will select one of four decks: A, B, C, or D. \\
+Each deck may \\
+have a different pattern of rewards and losses, but these \\
+patterns are not \\
+known to you at the start of the task. After making a choice, \\
+you will receive \\
+feedback that includes: \\
+ \\
+- The reward you received from the chosen deck. \\
+- Any loss associated with the chosen deck. \\
+- The net outcome. \\
+- Your updated cumulative score. \\
+ \\
+You can use the feedback provided after each choice, as well as \\
+the displayed \\
+history of your previous choices and outcomes, to inform your \\
+decisions in \\
+subsequent trials. \\
+ \\
+Your aim is to finish the full task with as much total reward as \\
+possible. \\
+ \\
+Current task state: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Valid responses: \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+CHOICE: C \\
+CHOICE: D \\
+``` \\
+ \\
+Respond with exactly one valid response and no additional text. \\
+\end{quote}
+
+
+\subsection*{English --- Iowa Gambling Task --- Role framing (\texttt{role_human.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Four-Deck Reward Task \\
+ \\
+Take the role of a human participant completing this task. \\
+ \\
+You will make 100 choices. Your cumulative score starts at 2000. \\
+ \\
+On each trial, choose one of four decks: A, B, C, or D. Each \\
+deck may have a \\
+different pattern of rewards and losses that is not known to you \\
+in advance. \\
+After every choice, you are shown the reward, any loss, the net \\
+outcome, and \\
+your updated cumulative score. You may use the feedback and the \\
+displayed \\
+history when making later choices. \\
+ \\
+Your aim is to finish the full task with as much total reward as \\
+possible. \\
+ \\
+Current task state: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Valid responses: \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+CHOICE: C \\
+CHOICE: D \\
+``` \\
+ \\
+Respond with exactly one valid response and no additional text. \\
+\end{quote}
+
+
+\subsection*{English --- Iowa Gambling Task --- Construct emphasis (reward/loss) (\texttt{reward_loss_emphasis.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Four-Deck Reward Task \\
+ \\
+You will make 100 choices. Your cumulative score starts at 2000. \\
+ \\
+On each trial, choose one of four decks: A, B, C, or D. Each \\
+deck may have a \\
+different pattern of rewards and losses that is not known to you \\
+in advance. \\
+After every choice, pay particular attention to the reward, any \\
+loss, the net \\
+outcome, and your updated cumulative score. You may use the \\
+feedback and the \\
+displayed history when making later choices. \\
+ \\
+Your aim is to finish the full task with as much total reward as \\
+possible. \\
+ \\
+Current task state: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Valid responses: \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+CHOICE: C \\
+CHOICE: D \\
+``` \\
+ \\
+Respond with exactly one valid response and no additional text. \\
+\end{quote}
+
+
+\subsection*{English --- Balloon Analogue Risk Task --- Neutral (\texttt{baseline.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Balloon Earnings Task \\
+ \\
+You will complete 40 balloons. For each balloon, choose either \\
+to pump the \\
+balloon or to cash out. \\
+ \\
+Every successful pump adds 0.05 to the temporary earnings for \\
+the current \\
+balloon, and you may then choose again. A pump can also cause \\
+the balloon to \\
+explode. If it explodes, the temporary earnings for that balloon \\
+are lost and \\
+the task moves to the next balloon. \\
+ \\
+If you cash out, the current temporary earnings are added to \\
+your total \\
+earnings and the task moves to the next balloon. \\
+ \\
+Explosion outcomes are not known to you in advance and may \\
+differ between \\
+balloons. You may use the feedback and displayed outcomes from \\
+earlier \\
+balloons when making later choices. \\
+ \\
+Your aim is to finish the full task with as much total reward as \\
+possible. \\
+ \\
+Current task state: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Valid responses: \\
+ \\
+```text \\
+ACTION: PUMP \\
+ACTION: CASH\_OUT \\
+``` \\
+ \\
+Respond with exactly one valid response and no additional text. \\
+\end{quote}
+
+
+\subsection*{English --- Balloon Analogue Risk Task --- Instruction specificity (\texttt{detailed.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Balloon Earnings Task \\
+ \\
+You will complete a total of 40 balloons. For each balloon, you \\
+will make a \\
+choice between two actions: either to pump the balloon or to \\
+cash out. \\
+ \\
+Each time you successfully pump the balloon, 0.05 will be added \\
+to the \\
+temporary earnings for that specific balloon. After each \\
+successful pump, you \\
+will again decide whether to pump the balloon further or to cash \\
+out. A pump \\
+can also cause the balloon to explode. If the balloon explodes, \\
+all temporary \\
+earnings for that balloon will be lost, and the task will \\
+proceed to the next \\
+balloon. \\
+ \\
+If you choose to cash out, the temporary earnings accumulated \\
+for the current \\
+balloon will be added to your total earnings, and the task will \\
+move on to the \\
+next balloon. \\
+ \\
+Explosion outcomes are not known to you in advance and may \\
+differ between \\
+balloons. You can use the feedback and outcomes from earlier \\
+balloons to \\
+inform your decisions on subsequent balloons. \\
+ \\
+Your aim is to finish the full task with as much total reward as \\
+possible. \\
+ \\
+Current task state: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Valid responses: \\
+ \\
+```text \\
+ACTION: PUMP \\
+ACTION: CASH\_OUT \\
+``` \\
+ \\
+Respond with exactly one valid response and no additional text. \\
+\end{quote}
+
+
+\subsection*{English --- Balloon Analogue Risk Task --- Role framing (\texttt{role_human.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Balloon Earnings Task \\
+ \\
+Take the role of a human participant completing this task. \\
+ \\
+You will complete 40 balloons. For each balloon, choose either \\
+to pump the \\
+balloon or to cash out. \\
+ \\
+Every successful pump adds 0.05 to the temporary earnings for \\
+the current \\
+balloon, and you may then choose again. A pump can also cause \\
+the balloon to \\
+explode. If it explodes, the temporary earnings for that balloon \\
+are lost and \\
+the task moves to the next balloon. \\
+ \\
+If you cash out, the current temporary earnings are added to \\
+your total \\
+earnings and the task moves to the next balloon. \\
+ \\
+Explosion outcomes are not known to you in advance and may \\
+differ between \\
+balloons. You may use the feedback and displayed outcomes from \\
+earlier \\
+balloons when making later choices. \\
+ \\
+Your aim is to finish the full task with as much total reward as \\
+possible. \\
+ \\
+Current task state: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Valid responses: \\
+ \\
+```text \\
+ACTION: PUMP \\
+ACTION: CASH\_OUT \\
+``` \\
+ \\
+Respond with exactly one valid response and no additional text. \\
+\end{quote}
+
+
+\subsection*{English --- Balloon Analogue Risk Task --- Construct emphasis (risk) (\texttt{risk_emphasis.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Balloon Earnings Task \\
+ \\
+You will complete 40 balloons. For each balloon, choose either \\
+to pump the \\
+balloon or to cash out. \\
+ \\
+Every successful pump adds 0.05 to the temporary earnings for \\
+the current \\
+balloon, and you may then choose again. Pumping therefore \\
+involves a \\
+trade-off: it can increase the temporary earnings, but it can \\
+also cause the \\
+balloon to explode. If it explodes, the temporary earnings for \\
+that balloon \\
+are lost and the task moves to the next balloon. \\
+ \\
+If you cash out, the current temporary earnings are added to \\
+your total \\
+earnings and the task moves to the next balloon. \\
+ \\
+Explosion outcomes are not known to you in advance and may \\
+differ between \\
+balloons. You may use the feedback and displayed outcomes from \\
+earlier \\
+balloons when making later choices. \\
+ \\
+Your aim is to finish the full task with as much total reward as \\
+possible. \\
+ \\
+Current task state: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Valid responses: \\
+ \\
+```text \\
+ACTION: PUMP \\
+ACTION: CASH\_OUT \\
+``` \\
+ \\
+Respond with exactly one valid response and no additional text. \\
+\end{quote}
+
+
+\subsection*{Simplified Chinese --- Horizon Task --- Neutral (\texttt{baseline.md})}
+\begin{quote}\ttfamily\footnotesize
+\begin{CJK}{UTF8}{gbsn}
+\# 双选项奖励任务 \\
+ \\
+你将完成 40 个相互独立的游戏。在每个游戏中，你需要在选项 A \\
+和选项 B \\
+之间进行一系列选择。 \\
+ \\
+每个游戏开始时有四次强制选择。在强制选择的回合中，当前任务状态会 \\
+告诉你 \\
+必须选择哪个选项。完成这四次选择后，你将在 A 和 B \\
+之间进行一次或六次 \\
+自由选择。 \\
+ \\
+在一个游戏中，A 和 B \\
+可能具有不同的奖励模式，而你事先并不知道这些模式。 \\
+每次选择后，你都会看到所选选项带来的奖励。在之后进行选择时，你可 \\
+以参考 \\
+已经观察到的奖励以及当前游戏的剩余选择次数。 \\
+ \\
+你的目标是在完成整个任务时获得尽可能多的总奖励。 \\
+ \\
+当前任务状态： \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+有效回复： \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+``` \\
+ \\
+请仅回复一个有效回复，不要添加任何其他文字。 \\
+\end{CJK}
+\end{quote}
+
+
+\subsection*{Simplified Chinese --- Horizon Task --- Instruction specificity (\texttt{detailed.md})}
+\begin{quote}\ttfamily\footnotesize
+\begin{CJK}{UTF8}{gbsn}
+\# 双选项奖励任务 \\
+ \\
+你将完成总共 40 \\
+个相互独立的游戏。每个游戏都由在两个选项之间进行的一系列 \\
+选择组成：选项 A 和选项 B。 \\
+ \\
+每个游戏开始时，你将进行四次强制选择。在这些强制选择回合中，当前 \\
+任务状态 \\
+会指定你必须选择的选项。完成四次强制选择后，你将进行一次或六次自 \\
+由选择， \\
+此时你可以在选项 A 和选项 B 之间自由选择。 \\
+ \\
+在每个游戏中，选项 A 和 B \\
+的奖励模式可能不同，而这些模式不会事先告诉你。 \\
+每次选择后，你都会收到反馈，其中显示你所选选项带来的奖励。在之后 \\
+进行选择 \\
+时，你可以参考观察到的奖励以及当前游戏中剩余的选择次数。 \\
+ \\
+你的目标是在完成整个任务时获得尽可能多的总奖励。 \\
+ \\
+当前任务状态： \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+有效回复： \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+``` \\
+ \\
+请仅回复一个有效回复，不要添加任何其他文字。 \\
+\end{CJK}
+\end{quote}
+
+
+\subsection*{Simplified Chinese --- Horizon Task --- Role framing (\texttt{role_human.md})}
+\begin{quote}\ttfamily\footnotesize
+\begin{CJK}{UTF8}{gbsn}
+\# 双选项奖励任务 \\
+ \\
+请以一名正在完成此任务的人类参与者的身份作答。 \\
+ \\
+你将完成 40 个相互独立的游戏。在每个游戏中，你需要在选项 A \\
+和选项 B \\
+之间进行一系列选择。 \\
+ \\
+每个游戏开始时有四次强制选择。在强制选择的回合中，当前任务状态会 \\
+告诉你 \\
+必须选择哪个选项。完成这四次选择后，你将在 A 和 B \\
+之间进行一次或六次 \\
+自由选择。 \\
+ \\
+在一个游戏中，A 和 B \\
+可能具有不同的奖励模式，而你事先并不知道这些模式。 \\
+每次选择后，你都会看到所选选项带来的奖励。在之后进行选择时，你可 \\
+以参考 \\
+已经观察到的奖励以及当前游戏的剩余选择次数。 \\
+ \\
+你的目标是在完成整个任务时获得尽可能多的总奖励。 \\
+ \\
+当前任务状态： \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+有效回复： \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+``` \\
+ \\
+请仅回复一个有效回复，不要添加任何其他文字。 \\
+\end{CJK}
+\end{quote}
+
+
+\subsection*{Simplified Chinese --- Horizon Task --- Construct emphasis (uncertainty) (\texttt{uncertainty_emphasis.md})}
+\begin{quote}\ttfamily\footnotesize
+\begin{CJK}{UTF8}{gbsn}
+\# 双选项奖励任务 \\
+ \\
+你将完成 40 个相互独立的游戏。在每个游戏中，你需要在选项 A \\
+和选项 B \\
+之间进行一系列选择。 \\
+ \\
+每个游戏开始时有四次强制选择。在强制选择的回合中，当前任务状态会 \\
+告诉你 \\
+必须选择哪个选项。完成这四次选择后，你将在 A 和 B \\
+之间进行一次或六次 \\
+自由选择。 \\
+ \\
+在一个游戏中，A 和 B \\
+可能具有不同的奖励模式，而你事先并不知道这些模式。 \\
+每次观察到的奖励都只能提供有关这些模式的部分信息。每次选择后，你 \\
+都会看到 \\
+所选选项带来的奖励。在之后进行选择时，你可以参考这些不完整的信息 \\
+以及当前 \\
+游戏的剩余选择次数。 \\
+ \\
+你的目标是在完成整个任务时获得尽可能多的总奖励。 \\
+ \\
+当前任务状态： \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+有效回复： \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+``` \\
+ \\
+请仅回复一个有效回复，不要添加任何其他文字。 \\
+\end{CJK}
+\end{quote}
+
+
+\subsection*{Simplified Chinese --- Iowa Gambling Task --- Neutral (\texttt{baseline.md})}
+\begin{quote}\ttfamily\footnotesize
+\begin{CJK}{UTF8}{gbsn}
+\# 四牌组奖励任务 \\
+ \\
+你将进行 100 次选择。你的累计得分从 2000 开始。 \\
+ \\
+每个回合请选择四个牌组之一：A、B、C 或 \\
+D。每个牌组可能具有不同的奖励和 \\
+损失模式，而你事先并不知道这些模式。每次选择后，你都会看到奖励、 \\
+任何损失、 \\
+净结果以及更新后的累计得分。在之后进行选择时，你可以参考这些反馈 \\
+和显示的 \\
+历史记录。 \\
+ \\
+你的目标是在完成整个任务时获得尽可能多的总奖励。 \\
+ \\
+当前任务状态： \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+有效回复： \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+CHOICE: C \\
+CHOICE: D \\
+``` \\
+ \\
+请仅回复一个有效回复，不要添加任何其他文字。 \\
+\end{CJK}
+\end{quote}
+
+
+\subsection*{Simplified Chinese --- Iowa Gambling Task --- Instruction specificity (\texttt{detailed.md})}
+\begin{quote}\ttfamily\footnotesize
+\begin{CJK}{UTF8}{gbsn}
+\# 四牌组奖励任务 \\
+ \\
+在这项任务中，你总共将进行 100 次选择。你的累计得分从 2000 \\
+分开始。 \\
+ \\
+每个回合，你将从四个牌组中选择一个：A、B、C 或 \\
+D。每个牌组可能具有不同的 \\
+奖励和损失模式，但在任务开始时你并不知道这些模式。做出选择后，你 \\
+将收到 \\
+以下反馈： \\
+ \\
+- 从所选牌组获得的奖励； \\
+- 与所选牌组相关的任何损失； \\
+- 净结果； \\
+- 更新后的累计得分。 \\
+ \\
+在之后的回合中，你可以参考每次选择后的反馈，以及显示的先前选择和 \\
+结果的 \\
+历史记录。 \\
+ \\
+你的目标是在完成整个任务时获得尽可能多的总奖励。 \\
+ \\
+当前任务状态： \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+有效回复： \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+CHOICE: C \\
+CHOICE: D \\
+``` \\
+ \\
+请仅回复一个有效回复，不要添加任何其他文字。 \\
+\end{CJK}
+\end{quote}
+
+
+\subsection*{Simplified Chinese --- Iowa Gambling Task --- Role framing (\texttt{role_human.md})}
+\begin{quote}\ttfamily\footnotesize
+\begin{CJK}{UTF8}{gbsn}
+\# 四牌组奖励任务 \\
+ \\
+请以一名正在完成此任务的人类参与者的身份作答。 \\
+ \\
+你将进行 100 次选择。你的累计得分从 2000 开始。 \\
+ \\
+每个回合请选择四个牌组之一：A、B、C 或 \\
+D。每个牌组可能具有不同的奖励和 \\
+损失模式，而你事先并不知道这些模式。每次选择后，你都会看到奖励、 \\
+任何损失、 \\
+净结果以及更新后的累计得分。在之后进行选择时，你可以参考这些反馈 \\
+和显示的 \\
+历史记录。 \\
+ \\
+你的目标是在完成整个任务时获得尽可能多的总奖励。 \\
+ \\
+当前任务状态： \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+有效回复： \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+CHOICE: C \\
+CHOICE: D \\
+``` \\
+ \\
+请仅回复一个有效回复，不要添加任何其他文字。 \\
+\end{CJK}
+\end{quote}
+
+
+\subsection*{Simplified Chinese --- Iowa Gambling Task --- Construct emphasis (reward/loss) (\texttt{reward_loss_emphasis.md})}
+\begin{quote}\ttfamily\footnotesize
+\begin{CJK}{UTF8}{gbsn}
+\# 四牌组奖励任务 \\
+ \\
+你将进行 100 次选择。你的累计得分从 2000 开始。 \\
+ \\
+每个回合请选择四个牌组之一：A、B、C 或 \\
+D。每个牌组可能具有不同的奖励和 \\
+损失模式，而你事先并不知道这些模式。每次选择后，请特别留意奖励、 \\
+任何损失、 \\
+净结果以及更新后的累计得分。在之后进行选择时，你可以参考这些反馈 \\
+和显示的 \\
+历史记录。 \\
+ \\
+你的目标是在完成整个任务时获得尽可能多的总奖励。 \\
+ \\
+当前任务状态： \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+有效回复： \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+CHOICE: C \\
+CHOICE: D \\
+``` \\
+ \\
+请仅回复一个有效回复，不要添加任何其他文字。 \\
+\end{CJK}
+\end{quote}
+
+
+\subsection*{Simplified Chinese --- Balloon Analogue Risk Task --- Neutral (\texttt{baseline.md})}
+\begin{quote}\ttfamily\footnotesize
+\begin{CJK}{UTF8}{gbsn}
+\# 气球收益任务 \\
+ \\
+你将完成 40 个气球。对于每个气球，请选择给气球充气或兑现收益。 \\
+ \\
+每次成功充气都会使当前气球的临时收益增加 \\
+0.05，之后你可以再次选择。 \\
+充气也可能导致气球爆炸。如果气球爆炸，该气球的临时收益将会损失， \\
+任务会 \\
+进入下一个气球。 \\
+ \\
+如果你选择兑现，当前的临时收益将计入你的总收益，任务会进入下一个 \\
+气球。 \\
+ \\
+你事先不知道气球是否会爆炸，而且不同气球的爆炸结果可能不同。在之 \\
+后进行 \\
+选择时，你可以参考先前气球的反馈和显示的结果。 \\
+ \\
+你的目标是在完成整个任务时获得尽可能多的总奖励。 \\
+ \\
+当前任务状态： \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+有效回复： \\
+ \\
+```text \\
+ACTION: PUMP \\
+ACTION: CASH\_OUT \\
+``` \\
+ \\
+请仅回复一个有效回复，不要添加任何其他文字。 \\
+\end{CJK}
+\end{quote}
+
+
+\subsection*{Simplified Chinese --- Balloon Analogue Risk Task --- Instruction specificity (\texttt{detailed.md})}
+\begin{quote}\ttfamily\footnotesize
+\begin{CJK}{UTF8}{gbsn}
+\# 气球收益任务 \\
+ \\
+你将完成总共 40 \\
+个气球。对于每个气球，你要在两个动作之间选择：给气球充气， \\
+或兑现收益。 \\
+ \\
+每次成功给气球充气，都会使该气球的临时收益增加 \\
+0.05。每次成功充气后，你 \\
+都要再次决定继续充气还是兑现收益。充气也可能导致气球爆炸。如果气 \\
+球爆炸， \\
+该气球的所有临时收益都会损失，任务随后会进入下一个气球。 \\
+ \\
+如果你选择兑现，当前气球累积的临时收益将计入你的总收益，任务随后 \\
+会进入 \\
+下一个气球。 \\
+ \\
+你事先不知道气球是否会爆炸，而且不同气球的爆炸结果可能不同。在之 \\
+后处理 \\
+气球时，你可以参考先前气球的反馈和结果。 \\
+ \\
+你的目标是在完成整个任务时获得尽可能多的总奖励。 \\
+ \\
+当前任务状态： \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+有效回复： \\
+ \\
+```text \\
+ACTION: PUMP \\
+ACTION: CASH\_OUT \\
+``` \\
+ \\
+请仅回复一个有效回复，不要添加任何其他文字。 \\
+\end{CJK}
+\end{quote}
+
+
+\subsection*{Simplified Chinese --- Balloon Analogue Risk Task --- Role framing (\texttt{role_human.md})}
+\begin{quote}\ttfamily\footnotesize
+\begin{CJK}{UTF8}{gbsn}
+\# 气球收益任务 \\
+ \\
+请以一名正在完成此任务的人类参与者的身份作答。 \\
+ \\
+你将完成 40 个气球。对于每个气球，请选择给气球充气或兑现收益。 \\
+ \\
+每次成功充气都会使当前气球的临时收益增加 \\
+0.05，之后你可以再次选择。 \\
+充气也可能导致气球爆炸。如果气球爆炸，该气球的临时收益将会损失， \\
+任务会 \\
+进入下一个气球。 \\
+ \\
+如果你选择兑现，当前的临时收益将计入你的总收益，任务会进入下一个 \\
+气球。 \\
+ \\
+你事先不知道气球是否会爆炸，而且不同气球的爆炸结果可能不同。在之 \\
+后进行 \\
+选择时，你可以参考先前气球的反馈和显示的结果。 \\
+ \\
+你的目标是在完成整个任务时获得尽可能多的总奖励。 \\
+ \\
+当前任务状态： \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+有效回复： \\
+ \\
+```text \\
+ACTION: PUMP \\
+ACTION: CASH\_OUT \\
+``` \\
+ \\
+请仅回复一个有效回复，不要添加任何其他文字。 \\
+\end{CJK}
+\end{quote}
+
+
+\subsection*{Simplified Chinese --- Balloon Analogue Risk Task --- Construct emphasis (risk) (\texttt{risk_emphasis.md})}
+\begin{quote}\ttfamily\footnotesize
+\begin{CJK}{UTF8}{gbsn}
+\# 气球收益任务 \\
+ \\
+你将完成 40 个气球。对于每个气球，请选择给气球充气或兑现收益。 \\
+ \\
+每次成功充气都会使当前气球的临时收益增加 \\
+0.05，之后你可以再次选择。 \\
+因此，充气涉及一种权衡：它可以增加临时收益，但也可能导致气球爆炸 \\
+。如果 \\
+气球爆炸，该气球的临时收益将会损失，任务会进入下一个气球。 \\
+ \\
+如果你选择兑现，当前的临时收益将计入你的总收益，任务会进入下一个 \\
+气球。 \\
+ \\
+你事先不知道气球是否会爆炸，而且不同气球的爆炸结果可能不同。在之 \\
+后进行 \\
+选择时，你可以参考先前气球的反馈和显示的结果。 \\
+ \\
+你的目标是在完成整个任务时获得尽可能多的总奖励。 \\
+ \\
+当前任务状态： \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+有效回复： \\
+ \\
+```text \\
+ACTION: PUMP \\
+ACTION: CASH\_OUT \\
+``` \\
+ \\
+请仅回复一个有效回复，不要添加任何其他文字。 \\
+\end{CJK}
+\end{quote}
+
+
+\subsection*{Spanish --- Horizon Task --- Neutral (\texttt{baseline.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Tarea de recompensa con dos opciones \\
+ \\
+Completarás 40 juegos independientes. En cada juego, realizarás \\
+una serie de \\
+elecciones entre la opción A y la opción B. \\
+ \\
+Cada juego comienza con cuatro elecciones forzadas. En un turno \\
+de elección \\
+forzada, el estado actual de la tarea te indica qué opción debes \\
+elegir. Después \\
+de estas cuatro elecciones, realizarás una o seis elecciones \\
+libres entre A y B. \\
+ \\
+Dentro de un juego, A y B pueden tener diferentes patrones de \\
+recompensa que no \\
+conoces de antemano. Después de cada elección, se te muestra la \\
+recompensa de la \\
+opción seleccionada. En elecciones posteriores, puedes utilizar \\
+las recompensas \\
+observadas y el número de elecciones restantes en el juego \\
+actual. \\
+ \\
+Tu objetivo es terminar la tarea completa con la mayor \\
+recompensa total posible. \\
+ \\
+Estado actual de la tarea: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Respuestas válidas: \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+``` \\
+ \\
+Responde exactamente con una respuesta válida y sin texto \\
+adicional. \\
+\end{quote}
+
+
+\subsection*{Spanish --- Horizon Task --- Instruction specificity (\texttt{detailed.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Tarea de recompensa con dos opciones \\
+ \\
+Completarás un total de 40 juegos independientes. Cada juego \\
+consiste en una \\
+serie de elecciones entre dos opciones: la opción A y la opción \\
+B. \\
+ \\
+Al comienzo de cada juego, realizarás cuatro elecciones \\
+forzadas. Durante estos \\
+turnos de elección forzada, el estado actual de la tarea \\
+especificará qué opción \\
+debes seleccionar. Después de completar las cuatro elecciones \\
+forzadas, \\
+realizarás una o seis elecciones libres, en las que podrás \\
+elegir libremente \\
+entre la opción A y la opción B. \\
+ \\
+Dentro de cada juego, los patrones de recompensa de las opciones \\
+A y B pueden \\
+ser diferentes y no se te revelan de antemano. Después de cada \\
+elección, \\
+recibirás información que muestra la recompensa de la opción \\
+seleccionada. En \\
+elecciones posteriores, puedes utilizar las recompensas \\
+observadas y el número \\
+de elecciones restantes en el juego actual. \\
+ \\
+Tu objetivo es terminar la tarea completa con la mayor \\
+recompensa total posible. \\
+ \\
+Estado actual de la tarea: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Respuestas válidas: \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+``` \\
+ \\
+Responde exactamente con una respuesta válida y sin texto \\
+adicional. \\
+\end{quote}
+
+
+\subsection*{Spanish --- Horizon Task --- Role framing (\texttt{role_human.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Tarea de recompensa con dos opciones \\
+ \\
+Asume el papel de un participante humano que está completando \\
+esta tarea. \\
+ \\
+Completarás 40 juegos independientes. En cada juego, realizarás \\
+una serie de \\
+elecciones entre la opción A y la opción B. \\
+ \\
+Cada juego comienza con cuatro elecciones forzadas. En un turno \\
+de elección \\
+forzada, el estado actual de la tarea te indica qué opción debes \\
+elegir. Después \\
+de estas cuatro elecciones, realizarás una o seis elecciones \\
+libres entre A y B. \\
+ \\
+Dentro de un juego, A y B pueden tener diferentes patrones de \\
+recompensa que no \\
+conoces de antemano. Después de cada elección, se te muestra la \\
+recompensa de la \\
+opción seleccionada. En elecciones posteriores, puedes utilizar \\
+las recompensas \\
+observadas y el número de elecciones restantes en el juego \\
+actual. \\
+ \\
+Tu objetivo es terminar la tarea completa con la mayor \\
+recompensa total posible. \\
+ \\
+Estado actual de la tarea: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Respuestas válidas: \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+``` \\
+ \\
+Responde exactamente con una respuesta válida y sin texto \\
+adicional. \\
+\end{quote}
+
+
+\subsection*{Spanish --- Horizon Task --- Construct emphasis (uncertainty) (\texttt{uncertainty_emphasis.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Tarea de recompensa con dos opciones \\
+ \\
+Completarás 40 juegos independientes. En cada juego, realizarás \\
+una serie de \\
+elecciones entre la opción A y la opción B. \\
+ \\
+Cada juego comienza con cuatro elecciones forzadas. En un turno \\
+de elección \\
+forzada, el estado actual de la tarea te indica qué opción debes \\
+elegir. Después \\
+de estas cuatro elecciones, realizarás una o seis elecciones \\
+libres entre A y B. \\
+ \\
+Dentro de un juego, A y B pueden tener diferentes patrones de \\
+recompensa que no \\
+conoces de antemano. Cada recompensa observada aporta solo \\
+información parcial \\
+sobre esos patrones. Después de cada elección, se te muestra la \\
+recompensa de la \\
+opción seleccionada. En elecciones posteriores, puedes utilizar \\
+esta información \\
+incompleta y el número de elecciones restantes en el juego \\
+actual. \\
+ \\
+Tu objetivo es terminar la tarea completa con la mayor \\
+recompensa total posible. \\
+ \\
+Estado actual de la tarea: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Respuestas válidas: \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+``` \\
+ \\
+Responde exactamente con una respuesta válida y sin texto \\
+adicional. \\
+\end{quote}
+
+
+\subsection*{Spanish --- Iowa Gambling Task --- Neutral (\texttt{baseline.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Tarea de recompensa con cuatro mazos \\
+ \\
+Realizarás 100 elecciones. Tu puntuación acumulada comienza en \\
+2000. \\
+ \\
+En cada turno, elige uno de los cuatro mazos: A, B, C o D. Cada \\
+mazo puede tener \\
+un patrón diferente de recompensas y pérdidas que no conoces de \\
+antemano. Después \\
+de cada elección, se te muestran la recompensa, cualquier \\
+pérdida, el resultado \\
+neto y tu puntuación acumulada actualizada. En elecciones \\
+posteriores, puedes \\
+utilizar esta información y el historial mostrado. \\
+ \\
+Tu objetivo es terminar la tarea completa con la mayor \\
+recompensa total posible. \\
+ \\
+Estado actual de la tarea: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Respuestas válidas: \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+CHOICE: C \\
+CHOICE: D \\
+``` \\
+ \\
+Responde exactamente con una respuesta válida y sin texto \\
+adicional. \\
+\end{quote}
+
+
+\subsection*{Spanish --- Iowa Gambling Task --- Instruction specificity (\texttt{detailed.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Tarea de recompensa con cuatro mazos \\
+ \\
+Realizarás un total de 100 elecciones durante esta tarea. Tu \\
+puntuación acumulada \\
+comienza en 2000 puntos. \\
+ \\
+En cada turno, seleccionarás uno de los cuatro mazos: A, B, C o \\
+D. Cada mazo \\
+puede tener un patrón diferente de recompensas y pérdidas, pero \\
+no conoces estos \\
+patrones al comienzo de la tarea. Después de realizar una \\
+elección, recibirás \\
+información que incluye: \\
+ \\
+- La recompensa recibida del mazo elegido. \\
+- Cualquier pérdida asociada al mazo elegido. \\
+- El resultado neto. \\
+- Tu puntuación acumulada actualizada. \\
+ \\
+En turnos posteriores, puedes utilizar la información \\
+proporcionada después de \\
+cada elección y el historial mostrado de tus elecciones y \\
+resultados anteriores. \\
+ \\
+Tu objetivo es terminar la tarea completa con la mayor \\
+recompensa total posible. \\
+ \\
+Estado actual de la tarea: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Respuestas válidas: \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+CHOICE: C \\
+CHOICE: D \\
+``` \\
+ \\
+Responde exactamente con una respuesta válida y sin texto \\
+adicional. \\
+\end{quote}
+
+
+\subsection*{Spanish --- Iowa Gambling Task --- Role framing (\texttt{role_human.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Tarea de recompensa con cuatro mazos \\
+ \\
+Asume el papel de un participante humano que está completando \\
+esta tarea. \\
+ \\
+Realizarás 100 elecciones. Tu puntuación acumulada comienza en \\
+2000. \\
+ \\
+En cada turno, elige uno de los cuatro mazos: A, B, C o D. Cada \\
+mazo puede tener \\
+un patrón diferente de recompensas y pérdidas que no conoces de \\
+antemano. Después \\
+de cada elección, se te muestran la recompensa, cualquier \\
+pérdida, el resultado \\
+neto y tu puntuación acumulada actualizada. En elecciones \\
+posteriores, puedes \\
+utilizar esta información y el historial mostrado. \\
+ \\
+Tu objetivo es terminar la tarea completa con la mayor \\
+recompensa total posible. \\
+ \\
+Estado actual de la tarea: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Respuestas válidas: \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+CHOICE: C \\
+CHOICE: D \\
+``` \\
+ \\
+Responde exactamente con una respuesta válida y sin texto \\
+adicional. \\
+\end{quote}
+
+
+\subsection*{Spanish --- Iowa Gambling Task --- Construct emphasis (reward/loss) (\texttt{reward_loss_emphasis.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Tarea de recompensa con cuatro mazos \\
+ \\
+Realizarás 100 elecciones. Tu puntuación acumulada comienza en \\
+2000. \\
+ \\
+En cada turno, elige uno de los cuatro mazos: A, B, C o D. Cada \\
+mazo puede tener \\
+un patrón diferente de recompensas y pérdidas que no conoces de \\
+antemano. Después \\
+de cada elección, presta especial atención a la recompensa, \\
+cualquier pérdida, \\
+el resultado neto y tu puntuación acumulada actualizada. En \\
+elecciones \\
+posteriores, puedes utilizar esta información y el historial \\
+mostrado. \\
+ \\
+Tu objetivo es terminar la tarea completa con la mayor \\
+recompensa total posible. \\
+ \\
+Estado actual de la tarea: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Respuestas válidas: \\
+ \\
+```text \\
+CHOICE: A \\
+CHOICE: B \\
+CHOICE: C \\
+CHOICE: D \\
+``` \\
+ \\
+Responde exactamente con una respuesta válida y sin texto \\
+adicional. \\
+\end{quote}
+
+
+\subsection*{Spanish --- Balloon Analogue Risk Task --- Neutral (\texttt{baseline.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Tarea de ganancias con globos \\
+ \\
+Completarás 40 globos. Para cada globo, elige entre inflarlo o \\
+cobrar las \\
+ganancias. \\
+ \\
+Cada inflado exitoso añade 0.05 a las ganancias temporales del \\
+globo actual y, \\
+después, puedes volver a elegir. Inflar también puede hacer que \\
+el globo explote. \\
+Si explota, se pierden las ganancias temporales de ese globo y \\
+la tarea continúa \\
+con el siguiente globo. \\
+ \\
+Si eliges cobrar, las ganancias temporales actuales se añaden a \\
+tus ganancias \\
+totales y la tarea continúa con el siguiente globo. \\
+ \\
+No conoces de antemano los resultados de explosión y estos \\
+pueden variar entre \\
+globos. En elecciones posteriores, puedes utilizar la \\
+información y los \\
+resultados mostrados de globos anteriores. \\
+ \\
+Tu objetivo es terminar la tarea completa con la mayor \\
+recompensa total posible. \\
+ \\
+Estado actual de la tarea: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Respuestas válidas: \\
+ \\
+```text \\
+ACTION: PUMP \\
+ACTION: CASH\_OUT \\
+``` \\
+ \\
+Responde exactamente con una respuesta válida y sin texto \\
+adicional. \\
+\end{quote}
+
+
+\subsection*{Spanish --- Balloon Analogue Risk Task --- Instruction specificity (\texttt{detailed.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Tarea de ganancias con globos \\
+ \\
+Completarás un total de 40 globos. Para cada globo, elegirás \\
+entre dos acciones: \\
+inflar el globo o cobrar las ganancias. \\
+ \\
+Cada vez que inflas el globo con éxito, se añaden 0.05 a las \\
+ganancias temporales \\
+de ese globo. Después de cada inflado exitoso, decidirás de \\
+nuevo si continúas \\
+inflando o si cobras. Inflar también puede hacer que el globo \\
+explote. Si el \\
+globo explota, se pierden todas las ganancias temporales de ese \\
+globo y la tarea \\
+continúa con el siguiente globo. \\
+ \\
+Si eliges cobrar, las ganancias temporales acumuladas del globo \\
+actual se añaden \\
+a tus ganancias totales y la tarea continúa con el siguiente \\
+globo. \\
+ \\
+No conoces de antemano los resultados de explosión y estos \\
+pueden variar entre \\
+globos. En globos posteriores, puedes utilizar la información y \\
+los resultados \\
+de globos anteriores. \\
+ \\
+Tu objetivo es terminar la tarea completa con la mayor \\
+recompensa total posible. \\
+ \\
+Estado actual de la tarea: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Respuestas válidas: \\
+ \\
+```text \\
+ACTION: PUMP \\
+ACTION: CASH\_OUT \\
+``` \\
+ \\
+Responde exactamente con una respuesta válida y sin texto \\
+adicional. \\
+\end{quote}
+
+
+\subsection*{Spanish --- Balloon Analogue Risk Task --- Role framing (\texttt{role_human.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Tarea de ganancias con globos \\
+ \\
+Asume el papel de un participante humano que está completando \\
+esta tarea. \\
+ \\
+Completarás 40 globos. Para cada globo, elige entre inflarlo o \\
+cobrar las \\
+ganancias. \\
+ \\
+Cada inflado exitoso añade 0.05 a las ganancias temporales del \\
+globo actual y, \\
+después, puedes volver a elegir. Inflar también puede hacer que \\
+el globo explote. \\
+Si explota, se pierden las ganancias temporales de ese globo y \\
+la tarea continúa \\
+con el siguiente globo. \\
+ \\
+Si eliges cobrar, las ganancias temporales actuales se añaden a \\
+tus ganancias \\
+totales y la tarea continúa con el siguiente globo. \\
+ \\
+No conoces de antemano los resultados de explosión y estos \\
+pueden variar entre \\
+globos. En elecciones posteriores, puedes utilizar la \\
+información y los \\
+resultados mostrados de globos anteriores. \\
+ \\
+Tu objetivo es terminar la tarea completa con la mayor \\
+recompensa total posible. \\
+ \\
+Estado actual de la tarea: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Respuestas válidas: \\
+ \\
+```text \\
+ACTION: PUMP \\
+ACTION: CASH\_OUT \\
+``` \\
+ \\
+Responde exactamente con una respuesta válida y sin texto \\
+adicional. \\
+\end{quote}
+
+
+\subsection*{Spanish --- Balloon Analogue Risk Task --- Construct emphasis (risk) (\texttt{risk_emphasis.md})}
+\begin{quote}\ttfamily\footnotesize
+\# Tarea de ganancias con globos \\
+ \\
+Completarás 40 globos. Para cada globo, elige entre inflarlo o \\
+cobrar las \\
+ganancias. \\
+ \\
+Cada inflado exitoso añade 0.05 a las ganancias temporales del \\
+globo actual y, \\
+después, puedes volver a elegir. Por lo tanto, inflar implica \\
+una disyuntiva: \\
+puede aumentar las ganancias temporales, pero también puede \\
+hacer que el globo \\
+explote. Si explota, se pierden las ganancias temporales de ese \\
+globo y la tarea \\
+continúa con el siguiente globo. \\
+ \\
+Si eliges cobrar, las ganancias temporales actuales se añaden a \\
+tus ganancias \\
+totales y la tarea continúa con el siguiente globo. \\
+ \\
+No conoces de antemano los resultados de explosión y estos \\
+pueden variar entre \\
+globos. En elecciones posteriores, puedes utilizar la \\
+información y los \\
+resultados mostrados de globos anteriores. \\
+ \\
+Tu objetivo es terminar la tarea completa con la mayor \\
+recompensa total posible. \\
+ \\
+Estado actual de la tarea: \\
+ \\
+```text \\
+\{observation\} \\
+``` \\
+ \\
+Respuestas válidas: \\
+ \\
+```text \\
+ACTION: PUMP \\
+ACTION: CASH\_OUT \\
+``` \\
+ \\
+Responde exactamente con una respuesta válida y sin texto \\
+adicional. \\
+\end{quote}
 
 \section{Supplementary Result Files}
 \label{app:supplementary-results}
