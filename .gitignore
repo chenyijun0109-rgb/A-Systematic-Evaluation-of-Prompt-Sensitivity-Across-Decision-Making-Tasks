@@ -64,3 +64,6 @@ Desktop.ini
 
 # Local proposal/assessment documents
 IPP_proposal*.pdf
+
+# School submission archive (kept out of the public GitHub repository)
+PROJECT/

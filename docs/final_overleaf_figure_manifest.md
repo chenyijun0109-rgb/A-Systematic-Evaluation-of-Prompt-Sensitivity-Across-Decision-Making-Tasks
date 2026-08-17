@@ -1,6 +1,6 @@
-# `final.tex` Overleaf figure manifest
+# `skeleton_repaired.tex` Overleaf figure manifest
 
-Upload the seven figure files below while preserving the listed relative paths. The two design figures are high-resolution PNG files; the five Results figures remain vector PDFs. The paths are the ones used by `\includegraphics` in `final.tex`. All result figures are the current joint-analysis versions. In particular, the RQ3 figure treats English, Simplified Chinese, and Spanish symmetrically and contains no English-reference or pairwise-language analysis.
+Upload the seven figure files below while preserving the listed relative paths. The two design figures are high-resolution PNG files; the five Results figures remain vector PDFs. The paths are the ones used by `\includegraphics` in `skeleton_repaired.tex`. All result figures are the current joint-analysis versions. In particular, the RQ3 figure treats English, Simplified Chinese, and Spanish symmetrically and contains no English-reference or pairwise-language analysis.
 
 ## Design and workflow figures
 
@@ -21,7 +21,7 @@ Upload the seven figure files below while preserving the listed relative paths. 
 
 ## School-template files required before compilation
 
-`final.tex` now uses the mandatory School format:
+`skeleton_repaired.tex` uses the mandatory School format:
 
 - `\documentclass[logo,msc]{infthesis}`
 - `\usepackage{msccheck}`
@@ -32,7 +32,10 @@ After compilation, confirm that Introduction begins on body page 1 and that Conc
 
 ## Other files required by Overleaf
 
-- `final.tex`
-- `final_references.bib`
+- `skeleton_repaired.tex`
+- `mybibfile.bib`
 
-The tables are embedded directly in `final.tex`; no separate table files are required. Compile inside the official School template with pdfLaTeX, BibTeX, pdfLaTeX, and pdfLaTeX (or the corresponding Overleaf automatic sequence).
+The tables are embedded directly in `skeleton_repaired.tex`; no separate table
+files are required. Compile inside the official School template with pdfLaTeX,
+BibTeX, pdfLaTeX, and pdfLaTeX (or the corresponding Overleaf automatic
+sequence).

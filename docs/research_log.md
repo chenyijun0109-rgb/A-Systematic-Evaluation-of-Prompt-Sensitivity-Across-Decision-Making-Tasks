@@ -180,7 +180,7 @@ Status: Obsolete two-model figure/table outputs removed.
 
 Status: Complete and analysis-ready.
 
-这个文件用于记录项目后续每一步实质性工作。规则是：只要一个步骤会影响实验设计、代码实现、prompt、数据、分析或论文写作，就必须在这里留下记录。
+This file records every substantive step of the project. Rule: any step that affects experimental design, code implementation, prompts, data, analysis, or thesis writing must be recorded here.
 
 ## 2026-06-15: GitHub repository organization
 
@@ -198,7 +198,7 @@ Status: Complete and analysis-ready.
 - Repaired current documentation references that pointed to files no longer
   present in the repository.
 
-## 记录模板
+## Record template
 
 ```text
 Date:
@@ -215,9 +215,9 @@ Next step:
 Notes:
 ```
 
-## Evidence / Basis 标签
+## Evidence / Basis tags
 
-如果某一步不是直接来自文献，也必须说明依据类型：
+If a step does not come directly from the literature, the type of basis must still be stated:
 
 - Literature-based decision
 - Dataset-based decision
@@ -329,7 +329,7 @@ Change:
 
 Status: Done
 
-### 2026-05-26 - 建立研究记录与引用规则
+### 2026-05-26 - Establish research logging and citation rules
 
 Date: 2026-05-26
 
@@ -339,16 +339,16 @@ Step: Establish recording and citation workflow
 
 Action:
 
-- 在 `plan.md` 中加入“研究记录与引用规则”；
-- 新建 `docs/research_log.md`；
-- 新建 `docs/citation_map.md`；
-- 规定后续每一步工作都要记录，并同步记录文献依据和引用位置。
+- Add "research logging and citation rules" to `plan.md`;
+- Create `docs/research_log.md`;
+- Create `docs/citation_map.md`;
+- Require that every subsequent step is recorded, together with its literature basis and citation location.
 
 Why this was done:
 
-- 本项目是学术毕业设计，需要保证实验设计、任务实现、prompt manipulation、metrics 和分析都有可追踪依据；
-- prompt sensitivity 是项目核心，因此 prompt 的每一次设计和修改都必须可追溯；
-- 后期 dissertation 写作需要清楚说明“哪里引用哪篇文献”。
+- This is an academic dissertation project; experimental design, task implementation, prompt manipulation, metrics, and analysis must all have traceable bases;
+- Prompt sensitivity is the project core, so every prompt design or modification must be traceable;
+- Dissertation writing must clearly state which reference is cited where.
 
 Evidence / basis:
 
@@ -358,7 +358,7 @@ Evidence / basis:
 
 Related citations:
 
-- 暂无单一特定文献；这是项目管理和学术写作规范。
+- No single specific reference; this is a project-management and academic-writing norm.
 
 Files changed or created:
 
@@ -368,7 +368,7 @@ Files changed or created:
 
 Output / result:
 
-- 项目建立了后续工作记录与引用登记机制。
+- The project established a mechanism for recording subsequent work and registering citations.
 
 Status: Done
 
@@ -954,32 +954,32 @@ Status: Done
 
 Next step:
 
-- 后续进行 Phase 1 固定研究设计时，逐项记录 research questions、task parameters、prompt conditions、metrics 和 human datasets 的依据。
+- When Phase 1 fixed research design is undertaken, record the basis of research questions, task parameters, prompt conditions, metrics, and human datasets item by item.
 
 Notes:
 
-- 如果某个决定暂时没有文献依据，应在记录中标记为 `Assumption to verify`，不能留空。
+- If a decision temporarily has no literature basis, mark it as `Assumption to verify` in the record; do not leave it blank.
 
 ### 2026-05-26 - Draft Final Experiment Design Table
 
 Date: 2026-05-26
 
-Phase: Phase 1 / 固定研究设计
+Phase: Phase 1 / fixed research design
 
 Step: Step 1 - Final Experiment Design Table
 
 Action:
 
-- 新建 `docs/project_design.md`；
-- 写出三项任务的 draft final experiment design table；
-- 为每个 task 整理 prompt conditions、runs per condition、trials / units per run、main metrics、human dataset 和 citation basis；
-- 标记了进入 implementation 前需要确认的 open decisions。
+- Create `docs/project_design.md`;
+- Write the draft final experiment design table for the three tasks;
+- Compile prompt conditions, runs per condition, trials / units per run, main metrics, human dataset, and citation basis for each task;
+- Mark the open decisions that must be confirmed before implementation.
 
 Why this was done:
 
-- 用户询问 Step 1 中 “Task, Prompt conditions, Runs per condition, Trials per run, Main metrics, Human dataset” 应该具体做什么；
-- 在写代码前，需要先固定实验矩阵，避免 task implementation、prompt writing 和 analysis 指标后续反复变化；
-- 这一步是后续 data schema、task environment 和 pilot 的前置条件。
+- The user asked what exactly "Task, Prompt conditions, Runs per condition, Trials per run, Main metrics, Human dataset" in Step 1 should contain;
+- The experiment matrix must be fixed before writing code, to avoid repeated later changes to task implementation, prompt writing, and analysis metrics;
+- This step is a prerequisite for the later data schema, task environments, and pilots.
 
 Evidence / basis:
 
@@ -1015,21 +1015,21 @@ Files changed or created:
 
 Output / result:
 
-- 生成了 draft final experiment design table；
-- 明确了当前可以固定的内容；
-- 标记了 Horizon reward schedule、IGT payoff schedule、BART balloon count / explosion rule、response labels 和空 config 文件等待确认事项。
+- Generated the draft final experiment design table;
+- Clarified what can be fixed at the current stage;
+- Marked the Horizon reward schedule, IGT payoff schedule, BART balloon count / explosion rule, response labels, and empty config files as pending confirmation.
 
 Status: Draft completed
 
 Next step:
 
-- 继续完成 Step 2：确定每个 task 的 exact parameters；
-- 在实现代码前恢复或重新生成 `configs/experiment_config_stage01.json`。
+- Continue with Step 2: determine the exact parameters of each task;
+- Restore or regenerate `configs/experiment_config_stage01.json` before implementing code.
 
 Notes:
 
-- 当前 `docs/project_design.md` 是 draft，不是 locked design。
-- BART 的 30 vs 40 balloons、Horizon exact game structure、IGT exact payoff table 需要在下一步确认。
+- `docs/project_design.md` is currently a draft, not a locked design.
+- BART 30 vs 40 balloons, the Horizon exact game structure, and the IGT exact payoff table must be confirmed in the next step.
 ### 2026-05-26 - Project Action Plan
 
 Date: 2026-05-26
@@ -1082,22 +1082,22 @@ Notes:
 
 Date: 2026-05-26
 
-Phase: Phase 1 / 固定研究设计
+Phase: Phase 1 / fixed research design
 
 Step: Create detailed task description document
 
 Action:
 
-- 新建 `docs/task_details.md`；
-- 详细说明 Horizon Task / two-option bandit、Iowa Gambling Task 和 Balloon Analogue Risk Task；
-- 为每个 task 整理概述、任务内容、流程、变量、prompt 条件、主要 metrics、human dataset 对齐和待确认事项；
-- 汇总跨任务共同变量、控制变量、记录字段和 dissertation 对应位置。
+- Create `docs/task_details.md`;
+- Describe the Horizon Task / two-option bandit, Iowa Gambling Task, and Balloon Analogue Risk Task in detail;
+- Compile overview, task content, procedure, variables, prompt conditions, main metrics, human dataset alignment, and open items for each task;
+- Summarise cross-task common variables, control variables, recorded fields, and their corresponding dissertation sections.
 
 Why this was done:
 
-- 用户要求“再做一份文档，详细说一下这三个 task，包括概述，任务内容，不同变量等”；
-- 后续实现 task environments、编写 prompts、设计 data schema 和写 dissertation methodology 都需要一份更细的 task-level 说明；
-- 当前 `docs/project_design.md` 是实验矩阵层面的设计，不足以直接作为 task implementation specification。
+- The user requested "another document describing the three tasks in detail, including overview, task content, and different variables";
+- Later task-environment implementation, prompt writing, data-schema design, and dissertation methodology all need a finer-grained task-level specification;
+- `docs/project_design.md` is at the experiment-matrix level and is not sufficient as a task implementation specification.
 
 Evidence / basis:
 
@@ -1125,24 +1125,24 @@ Files changed or created:
 
 Output / result:
 
-- 生成了一份中文 task details 文档，覆盖三个任务的概述、流程、变量、prompt 条件、metrics、human data alignment 和 open decisions。
+- Generated a Chinese task-details document covering the overview, procedure, variables, prompt conditions, metrics, human data alignment, and open decisions of the three tasks.
 
 Status: Draft completed
 
 Next step:
 
-- 继续确认 Horizon、IGT 和 BART 的 exact parameters；
-- 将确认后的参数写入 `docs/task_parameters.md` 或 `configs/experiment_config_stage01.json`。
+- Continue confirming the exact parameters of Horizon, IGT, and BART;
+- Write the confirmed parameters into `docs/task_parameters.md` or `configs/experiment_config_stage01.json`.
 
 Notes:
 
-- 文档中未锁定的参数均标记为 `To verify`，避免把草案误写成最终实验规则。
+- Parameters not locked in the document are marked `To verify`, so a draft is never mistaken for the final experimental rules.
 
 ### 2026-05-26 - Prompt Sensitivity Formula Basis
 
 Date: 2026-05-26
 
-Phase: Phase 1 / 固定研究设计
+Phase: Phase 1 / fixed research design
 
 Step: Clarify prompt sensitivity operationalisation
 

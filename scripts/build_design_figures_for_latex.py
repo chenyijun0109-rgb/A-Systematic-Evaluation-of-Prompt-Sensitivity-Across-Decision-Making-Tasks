@@ -1,4 +1,4 @@
-"""Render the two study-design diagrams used by final.tex as vector PDFs."""
+"""Render the two study-design diagrams used by skeleton_repaired.tex."""
 
 from pathlib import Path
 

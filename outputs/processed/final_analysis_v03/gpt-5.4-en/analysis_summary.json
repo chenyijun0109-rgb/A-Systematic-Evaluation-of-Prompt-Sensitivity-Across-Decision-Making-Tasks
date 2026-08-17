@@ -1,6 +1,6 @@
 {
   "analysis": "prompt_sensitivity",
-  "source_run_metrics": "E:\\UoE\\IPP\\project\\outputs\\processed\\final_analysis_v03\\gpt-5.4-en\\llm_run_metrics.csv",
+  "source_run_metrics": "outputs\\processed\\final_analysis_v03\\gpt-5.4-en\\llm_run_metrics.csv",
   "baseline_condition": "baseline",
   "expected_runs_per_cell": 20,
   "allow_incomplete": false,

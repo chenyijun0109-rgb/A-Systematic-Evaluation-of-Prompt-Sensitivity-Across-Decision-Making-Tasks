@@ -107,7 +107,7 @@
       },
       "run_estimates": [
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-01-a/en/horizon_baseline_seed-20260708.json:seed=20260708",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-01-a/en/horizon_baseline_seed-20260708.json:seed=20260708",
           "decision_noise_h1": 1.123241213183724,
           "decision_noise_h6": 1.8034698856028784,
           "random_exploration_effect": 0.6802286724191544,
@@ -117,7 +117,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-01-a/en/horizon_baseline_seed-20260709.json:seed=20260709",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-01-a/en/horizon_baseline_seed-20260709.json:seed=20260709",
           "decision_noise_h1": 1.106010407749787,
           "decision_noise_h6": 1.3229802964015165,
           "random_exploration_effect": 0.2169698886517295,
@@ -127,7 +127,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-01-b/en/horizon_baseline_seed-20260710.json:seed=20260710",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-01-b/en/horizon_baseline_seed-20260710.json:seed=20260710",
           "decision_noise_h1": 2.5467612783999227,
           "decision_noise_h6": 1.820252593376898,
           "random_exploration_effect": -0.7265086850230247,
@@ -137,7 +137,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-01-b/en/horizon_baseline_seed-20260711.json:seed=20260711",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-01-b/en/horizon_baseline_seed-20260711.json:seed=20260711",
           "decision_noise_h1": 1.210382767813334,
           "decision_noise_h6": 1.4103383668374856,
           "random_exploration_effect": 0.1999555990241515,
@@ -147,7 +147,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-02-a/en/horizon_baseline_seed-20260712.json:seed=20260712",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-02-a/en/horizon_baseline_seed-20260712.json:seed=20260712",
           "decision_noise_h1": 1.2671323726810748,
           "decision_noise_h6": 1.5780622131240845,
           "random_exploration_effect": 0.31092984044300964,
@@ -157,7 +157,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-02-a/en/horizon_baseline_seed-20260713.json:seed=20260713",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-02-a/en/horizon_baseline_seed-20260713.json:seed=20260713",
           "decision_noise_h1": 1.4109266505923854,
           "decision_noise_h6": 1.581302797678227,
           "random_exploration_effect": 0.1703761470858416,
@@ -167,7 +167,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-02-b/en/horizon_baseline_seed-20260714.json:seed=20260714",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-02-b/en/horizon_baseline_seed-20260714.json:seed=20260714",
           "decision_noise_h1": 1.3358022608186002,
           "decision_noise_h6": 1.569049596830393,
           "random_exploration_effect": 0.23324733601179282,
@@ -177,7 +177,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-02-b/en/horizon_baseline_seed-20260715.json:seed=20260715",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-02-b/en/horizon_baseline_seed-20260715.json:seed=20260715",
           "decision_noise_h1": 1.1885184983293136,
           "decision_noise_h6": 1.801938117782403,
           "random_exploration_effect": 0.6134196194530894,
@@ -187,7 +187,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-03-a/en/horizon_baseline_seed-20260716.json:seed=20260716",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-03-a/en/horizon_baseline_seed-20260716.json:seed=20260716",
           "decision_noise_h1": 1.2016820676193793,
           "decision_noise_h6": 1.3804957937353477,
           "random_exploration_effect": 0.17881372611596835,
@@ -197,7 +197,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-03-a/en/horizon_baseline_seed-20260717.json:seed=20260717",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-03-a/en/horizon_baseline_seed-20260717.json:seed=20260717",
           "decision_noise_h1": 1.2516081914454813,
           "decision_noise_h6": 1.360123229856336,
           "random_exploration_effect": 0.10851503841085464,
@@ -207,7 +207,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-03-b/en/horizon_baseline_seed-20260718.json:seed=20260718",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-03-b/en/horizon_baseline_seed-20260718.json:seed=20260718",
           "decision_noise_h1": 2.2870762508975897,
           "decision_noise_h6": 1.596149997947462,
           "random_exploration_effect": -0.6909262529501277,
@@ -217,7 +217,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-03-b/en/horizon_baseline_seed-20260719.json:seed=20260719",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-03-b/en/horizon_baseline_seed-20260719.json:seed=20260719",
           "decision_noise_h1": 1.243099490204826,
           "decision_noise_h6": 2.968948547684883,
           "random_exploration_effect": 1.725849057480057,
@@ -227,7 +227,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-04-a/en/horizon_baseline_seed-20260720.json:seed=20260720",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-04-a/en/horizon_baseline_seed-20260720.json:seed=20260720",
           "decision_noise_h1": 1.1098350547448006,
           "decision_noise_h6": 1.4476665151154537,
           "random_exploration_effect": 0.33783146037065315,
@@ -237,7 +237,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-04-a/en/horizon_baseline_seed-20260721.json:seed=20260721",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-04-a/en/horizon_baseline_seed-20260721.json:seed=20260721",
           "decision_noise_h1": 2.135792115696656,
           "decision_noise_h6": 1.8647066095446465,
           "random_exploration_effect": -0.27108550615200966,
@@ -247,7 +247,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-04-b/en/horizon_baseline_seed-20260722.json:seed=20260722",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-04-b/en/horizon_baseline_seed-20260722.json:seed=20260722",
           "decision_noise_h1": 2.2318144576461476,
           "decision_noise_h6": 2.1327479446418622,
           "random_exploration_effect": -0.09906651300428537,
@@ -257,7 +257,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-04-b/en/horizon_baseline_seed-20260723.json:seed=20260723",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-04-b/en/horizon_baseline_seed-20260723.json:seed=20260723",
           "decision_noise_h1": 1.626331476376927,
           "decision_noise_h6": 1.4863880615377156,
           "random_exploration_effect": -0.13994341483921136,
@@ -267,7 +267,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-05-a/en/horizon_baseline_seed-20260724.json:seed=20260724",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-05-a/en/horizon_baseline_seed-20260724.json:seed=20260724",
           "decision_noise_h1": 1.246843159964111,
           "decision_noise_h6": 1.5169049753646515,
           "random_exploration_effect": 0.27006181540054053,
@@ -277,7 +277,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-05-a/en/horizon_baseline_seed-20260725.json:seed=20260725",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-05-a/en/horizon_baseline_seed-20260725.json:seed=20260725",
           "decision_noise_h1": 2.1762187322602724,
           "decision_noise_h6": 1.7709018834184684,
           "random_exploration_effect": -0.40531684884180397,
@@ -287,7 +287,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-05-b/en/horizon_baseline_seed-20260726.json:seed=20260726",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-05-b/en/horizon_baseline_seed-20260726.json:seed=20260726",
           "decision_noise_h1": 1.8832241946598123,
           "decision_noise_h6": 1.3394507028906943,
           "random_exploration_effect": -0.5437734917691179,
@@ -297,7 +297,7 @@
           "label_bias_h6": -0.9331165066297642
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-05-b/en/horizon_baseline_seed-20260727.json:seed=20260727",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-05-b/en/horizon_baseline_seed-20260727.json:seed=20260727",
           "decision_noise_h1": 1.5044755148705478,
           "decision_noise_h6": 1.7774007188681702,
           "random_exploration_effect": 0.27292520399762243,
@@ -331,7 +331,7 @@
       },
       "run_estimates": [
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-01-a/en/horizon_detailed_seed-20260708.json:seed=20260708",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-01-a/en/horizon_detailed_seed-20260708.json:seed=20260708",
           "decision_noise_h1": 2.329760523718686,
           "decision_noise_h6": 2.8274527938854797,
           "random_exploration_effect": 0.4976922701667936,
@@ -341,7 +341,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-01-a/en/horizon_detailed_seed-20260709.json:seed=20260709",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-01-a/en/horizon_detailed_seed-20260709.json:seed=20260709",
           "decision_noise_h1": 1.1026534264505534,
           "decision_noise_h6": 1.4655766028299542,
           "random_exploration_effect": 0.36292317637940075,
@@ -351,7 +351,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-01-b/en/horizon_detailed_seed-20260710.json:seed=20260710",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-01-b/en/horizon_detailed_seed-20260710.json:seed=20260710",
           "decision_noise_h1": 1.3485437802143254,
           "decision_noise_h6": 1.9030139613075552,
           "random_exploration_effect": 0.5544701810932298,
@@ -361,7 +361,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-01-b/en/horizon_detailed_seed-20260711.json:seed=20260711",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-01-b/en/horizon_detailed_seed-20260711.json:seed=20260711",
           "decision_noise_h1": 1.2229086973949648,
           "decision_noise_h6": 1.594505503443959,
           "random_exploration_effect": 0.37159680604899425,
@@ -371,7 +371,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-02-a/en/horizon_detailed_seed-20260712.json:seed=20260712",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-02-a/en/horizon_detailed_seed-20260712.json:seed=20260712",
           "decision_noise_h1": 1.2688261913484116,
           "decision_noise_h6": 1.8408997918071093,
           "random_exploration_effect": 0.5720736004586977,
@@ -381,7 +381,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-02-a/en/horizon_detailed_seed-20260713.json:seed=20260713",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-02-a/en/horizon_detailed_seed-20260713.json:seed=20260713",
           "decision_noise_h1": 2.1353797902572147,
           "decision_noise_h6": 2.776720391239944,
           "random_exploration_effect": 0.6413406009827294,
@@ -391,7 +391,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-02-b/en/horizon_detailed_seed-20260714.json:seed=20260714",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-02-b/en/horizon_detailed_seed-20260714.json:seed=20260714",
           "decision_noise_h1": 1.6982281303349385,
           "decision_noise_h6": 1.920532557279191,
           "random_exploration_effect": 0.22230442694425245,
@@ -401,7 +401,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-02-b/en/horizon_detailed_seed-20260715.json:seed=20260715",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-02-b/en/horizon_detailed_seed-20260715.json:seed=20260715",
           "decision_noise_h1": 1.1836180475371083,
           "decision_noise_h6": 1.8203001455465455,
           "random_exploration_effect": 0.6366820980094372,
@@ -411,7 +411,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-03-a/en/horizon_detailed_seed-20260716.json:seed=20260716",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-03-a/en/horizon_detailed_seed-20260716.json:seed=20260716",
           "decision_noise_h1": 1.552586811320106,
           "decision_noise_h6": 1.5835237137141482,
           "random_exploration_effect": 0.03093690239404223,
@@ -421,7 +421,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-03-a/en/horizon_detailed_seed-20260717.json:seed=20260717",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-03-a/en/horizon_detailed_seed-20260717.json:seed=20260717",
           "decision_noise_h1": 1.2544936318685729,
           "decision_noise_h6": 1.9139308556069499,
           "random_exploration_effect": 0.659437223738377,
@@ -431,7 +431,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-03-b/en/horizon_detailed_seed-20260718.json:seed=20260718",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-03-b/en/horizon_detailed_seed-20260718.json:seed=20260718",
           "decision_noise_h1": 1.6804947013599385,
           "decision_noise_h6": 1.834779935635388,
           "random_exploration_effect": 0.1542852342754495,
@@ -441,7 +441,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-03-b/en/horizon_detailed_seed-20260719.json:seed=20260719",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-03-b/en/horizon_detailed_seed-20260719.json:seed=20260719",
           "decision_noise_h1": 1.2424249440311648,
           "decision_noise_h6": 1.4938800134691146,
           "random_exploration_effect": 0.2514550694379498,
@@ -451,7 +451,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-04-a/en/horizon_detailed_seed-20260720.json:seed=20260720",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-04-a/en/horizon_detailed_seed-20260720.json:seed=20260720",
           "decision_noise_h1": 1.1163713719564483,
           "decision_noise_h6": 2.4270015528777558,
           "random_exploration_effect": 1.3106301809213075,
@@ -461,7 +461,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-04-a/en/horizon_detailed_seed-20260721.json:seed=20260721",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-04-a/en/horizon_detailed_seed-20260721.json:seed=20260721",
           "decision_noise_h1": 1.8841172272796494,
           "decision_noise_h6": 1.5291893823299003,
           "random_exploration_effect": -0.35492784494974905,
@@ -471,7 +471,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-04-b/en/horizon_detailed_seed-20260722.json:seed=20260722",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-04-b/en/horizon_detailed_seed-20260722.json:seed=20260722",
           "decision_noise_h1": 2.0825166634545593,
           "decision_noise_h6": 2.617858110443114,
           "random_exploration_effect": 0.5353414469885545,
@@ -481,7 +481,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-04-b/en/horizon_detailed_seed-20260723.json:seed=20260723",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-04-b/en/horizon_detailed_seed-20260723.json:seed=20260723",
           "decision_noise_h1": 1.5929097386392856,
           "decision_noise_h6": 1.4282464060304754,
           "random_exploration_effect": -0.16466333260881028,
@@ -491,7 +491,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-05-a/en/horizon_detailed_seed-20260724.json:seed=20260724",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-05-a/en/horizon_detailed_seed-20260724.json:seed=20260724",
           "decision_noise_h1": 1.2472814075361187,
           "decision_noise_h6": 1.6818041898234148,
           "random_exploration_effect": 0.4345227822872961,
@@ -501,7 +501,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-05-a/en/horizon_detailed_seed-20260725.json:seed=20260725",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-05-a/en/horizon_detailed_seed-20260725.json:seed=20260725",
           "decision_noise_h1": 1.657085230081186,
           "decision_noise_h6": 1.5847349354076405,
           "random_exploration_effect": -0.07235029467354548,
@@ -511,7 +511,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-05-b/en/horizon_detailed_seed-20260726.json:seed=20260726",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-05-b/en/horizon_detailed_seed-20260726.json:seed=20260726",
           "decision_noise_h1": 1.5068852603666179,
           "decision_noise_h6": 1.6360398369858227,
           "random_exploration_effect": 0.12915457661920482,
@@ -521,7 +521,7 @@
           "label_bias_h6": 0.25591044266769725
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-05-b/en/horizon_detailed_seed-20260727.json:seed=20260727",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-05-b/en/horizon_detailed_seed-20260727.json:seed=20260727",
           "decision_noise_h1": 1.499069699353976,
           "decision_noise_h6": 3.629402116779056,
           "random_exploration_effect": 2.13033241742508,
@@ -555,7 +555,7 @@
       },
       "run_estimates": [
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-01-a/en/horizon_role_human_seed-20260708.json:seed=20260708",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-01-a/en/horizon_role_human_seed-20260708.json:seed=20260708",
           "decision_noise_h1": 2.333230263921589,
           "decision_noise_h6": 1.2117984151733456,
           "random_exploration_effect": -1.1214318487482433,
@@ -565,7 +565,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-01-a/en/horizon_role_human_seed-20260709.json:seed=20260709",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-01-a/en/horizon_role_human_seed-20260709.json:seed=20260709",
           "decision_noise_h1": 1.145857849523669,
           "decision_noise_h6": 1.693519473568717,
           "random_exploration_effect": 0.5476616240450478,
@@ -575,7 +575,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-01-b/en/horizon_role_human_seed-20260710.json:seed=20260710",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-01-b/en/horizon_role_human_seed-20260710.json:seed=20260710",
           "decision_noise_h1": 2.4849850836923206,
           "decision_noise_h6": 1.5695698076269866,
           "random_exploration_effect": -0.915415276065334,
@@ -585,7 +585,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-01-b/en/horizon_role_human_seed-20260711.json:seed=20260711",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-01-b/en/horizon_role_human_seed-20260711.json:seed=20260711",
           "decision_noise_h1": 1.2295037760104965,
           "decision_noise_h6": 1.2600616592098761,
           "random_exploration_effect": 0.030557883199379576,
@@ -595,7 +595,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-02-a/en/horizon_role_human_seed-20260712.json:seed=20260712",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-02-a/en/horizon_role_human_seed-20260712.json:seed=20260712",
           "decision_noise_h1": 1.283809712894049,
           "decision_noise_h6": 2.0382243549455623,
           "random_exploration_effect": 0.7544146420515132,
@@ -605,7 +605,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-02-a/en/horizon_role_human_seed-20260713.json:seed=20260713",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-02-a/en/horizon_role_human_seed-20260713.json:seed=20260713",
           "decision_noise_h1": 1.4359644249557826,
           "decision_noise_h6": 2.1974161998016513,
           "random_exploration_effect": 0.7614517748458687,
@@ -615,7 +615,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-02-b/en/horizon_role_human_seed-20260714.json:seed=20260714",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-02-b/en/horizon_role_human_seed-20260714.json:seed=20260714",
           "decision_noise_h1": 1.5596266578374252,
           "decision_noise_h6": 1.396558670011349,
           "random_exploration_effect": -0.16306798782607612,
@@ -625,7 +625,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-02-b/en/horizon_role_human_seed-20260715.json:seed=20260715",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-02-b/en/horizon_role_human_seed-20260715.json:seed=20260715",
           "decision_noise_h1": 1.3240528972251695,
           "decision_noise_h6": 1.3045936331389623,
           "random_exploration_effect": -0.01945926408620724,
@@ -635,7 +635,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-03-a/en/horizon_role_human_seed-20260716.json:seed=20260716",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-03-a/en/horizon_role_human_seed-20260716.json:seed=20260716",
           "decision_noise_h1": 1.5918542941583718,
           "decision_noise_h6": 1.2188087794225337,
           "random_exploration_effect": -0.373045514735838,
@@ -645,7 +645,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-03-a/en/horizon_role_human_seed-20260717.json:seed=20260717",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-03-a/en/horizon_role_human_seed-20260717.json:seed=20260717",
           "decision_noise_h1": 1.2849187633232326,
           "decision_noise_h6": 1.189958529286413,
           "random_exploration_effect": -0.09496023403681964,
@@ -655,7 +655,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-03-b/en/horizon_role_human_seed-20260718.json:seed=20260718",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-03-b/en/horizon_role_human_seed-20260718.json:seed=20260718",
           "decision_noise_h1": 1.891886170729337,
           "decision_noise_h6": 1.3790295606008234,
           "random_exploration_effect": -0.5128566101285137,
@@ -665,7 +665,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-03-b/en/horizon_role_human_seed-20260719.json:seed=20260719",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-03-b/en/horizon_role_human_seed-20260719.json:seed=20260719",
           "decision_noise_h1": 1.2648311807968415,
           "decision_noise_h6": 1.220571752254413,
           "random_exploration_effect": -0.04425942854242848,
@@ -675,7 +675,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-04-a/en/horizon_role_human_seed-20260720.json:seed=20260720",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-04-a/en/horizon_role_human_seed-20260720.json:seed=20260720",
           "decision_noise_h1": 1.1695931122349648,
           "decision_noise_h6": 1.7597389294477468,
           "random_exploration_effect": 0.590145817212782,
@@ -685,7 +685,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-04-a/en/horizon_role_human_seed-20260721.json:seed=20260721",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-04-a/en/horizon_role_human_seed-20260721.json:seed=20260721",
           "decision_noise_h1": 1.8798552601823653,
           "decision_noise_h6": 1.3071079367609961,
           "random_exploration_effect": -0.5727473234213691,
@@ -695,7 +695,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-04-b/en/horizon_role_human_seed-20260722.json:seed=20260722",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-04-b/en/horizon_role_human_seed-20260722.json:seed=20260722",
           "decision_noise_h1": 1.701386820769954,
           "decision_noise_h6": 1.282698519994845,
           "random_exploration_effect": -0.418688300775109,
@@ -705,7 +705,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-04-b/en/horizon_role_human_seed-20260723.json:seed=20260723",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-04-b/en/horizon_role_human_seed-20260723.json:seed=20260723",
           "decision_noise_h1": 1.5738493295521758,
           "decision_noise_h6": 1.0288818512572662,
           "random_exploration_effect": -0.5449674782949097,
@@ -715,7 +715,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-05-a/en/horizon_role_human_seed-20260724.json:seed=20260724",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-05-a/en/horizon_role_human_seed-20260724.json:seed=20260724",
           "decision_noise_h1": 1.26173781543425,
           "decision_noise_h6": 1.3311427205204507,
           "random_exploration_effect": 0.06940490508620067,
@@ -725,7 +725,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-05-a/en/horizon_role_human_seed-20260725.json:seed=20260725",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-05-a/en/horizon_role_human_seed-20260725.json:seed=20260725",
           "decision_noise_h1": 1.6465805158827764,
           "decision_noise_h6": 1.6179410476831624,
           "random_exploration_effect": -0.02863946819961405,
@@ -735,7 +735,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-05-b/en/horizon_role_human_seed-20260726.json:seed=20260726",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-05-b/en/horizon_role_human_seed-20260726.json:seed=20260726",
           "decision_noise_h1": 1.5541910946778996,
           "decision_noise_h6": 1.154905699808435,
           "random_exploration_effect": -0.39928539486946457,
@@ -745,7 +745,7 @@
           "label_bias_h6": -0.8484161099453598
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-05-b/en/horizon_role_human_seed-20260727.json:seed=20260727",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-05-b/en/horizon_role_human_seed-20260727.json:seed=20260727",
           "decision_noise_h1": 1.5054591235527655,
           "decision_noise_h6": 1.4299975732305528,
           "random_exploration_effect": -0.07546155032221269,
@@ -779,7 +779,7 @@
       },
       "run_estimates": [
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-01-a/en/horizon_uncertainty_emphasis_seed-20260708.json:seed=20260708",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-01-a/en/horizon_uncertainty_emphasis_seed-20260708.json:seed=20260708",
           "decision_noise_h1": 0.7034098859627124,
           "decision_noise_h6": 1.0026990695067615,
           "random_exploration_effect": 0.2992891835440491,
@@ -789,7 +789,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-01-a/en/horizon_uncertainty_emphasis_seed-20260709.json:seed=20260709",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-01-a/en/horizon_uncertainty_emphasis_seed-20260709.json:seed=20260709",
           "decision_noise_h1": 0.6475743701751583,
           "decision_noise_h6": 0.9673316047206432,
           "random_exploration_effect": 0.3197572345454849,
@@ -799,7 +799,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-01-b/en/horizon_uncertainty_emphasis_seed-20260710.json:seed=20260710",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-01-b/en/horizon_uncertainty_emphasis_seed-20260710.json:seed=20260710",
           "decision_noise_h1": 0.7878010561939542,
           "decision_noise_h6": 1.3081068436686327,
           "random_exploration_effect": 0.5203057874746785,
@@ -809,7 +809,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-01-b/en/horizon_uncertainty_emphasis_seed-20260711.json:seed=20260711",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-01-b/en/horizon_uncertainty_emphasis_seed-20260711.json:seed=20260711",
           "decision_noise_h1": 0.7573432253173696,
           "decision_noise_h6": 1.0415114680187174,
           "random_exploration_effect": 0.2841682427013478,
@@ -819,7 +819,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-02-a/en/horizon_uncertainty_emphasis_seed-20260712.json:seed=20260712",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-02-a/en/horizon_uncertainty_emphasis_seed-20260712.json:seed=20260712",
           "decision_noise_h1": 0.8031669867987541,
           "decision_noise_h6": 1.1859433223397293,
           "random_exploration_effect": 0.38277633554097523,
@@ -829,7 +829,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-02-a/en/horizon_uncertainty_emphasis_seed-20260713.json:seed=20260713",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-02-a/en/horizon_uncertainty_emphasis_seed-20260713.json:seed=20260713",
           "decision_noise_h1": 0.8338215581950357,
           "decision_noise_h6": 1.1903249909289166,
           "random_exploration_effect": 0.35650343273388096,
@@ -839,7 +839,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-02-b/en/horizon_uncertainty_emphasis_seed-20260714.json:seed=20260714",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-02-b/en/horizon_uncertainty_emphasis_seed-20260714.json:seed=20260714",
           "decision_noise_h1": 0.7984537808744031,
           "decision_noise_h6": 1.38740655131782,
           "random_exploration_effect": 0.5889527704434169,
@@ -849,7 +849,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-02-b/en/horizon_uncertainty_emphasis_seed-20260715.json:seed=20260715",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-02-b/en/horizon_uncertainty_emphasis_seed-20260715.json:seed=20260715",
           "decision_noise_h1": 0.7481404575108214,
           "decision_noise_h6": 1.0598144071303415,
           "random_exploration_effect": 0.3116739496195201,
@@ -859,7 +859,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-03-a/en/horizon_uncertainty_emphasis_seed-20260716.json:seed=20260716",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-03-a/en/horizon_uncertainty_emphasis_seed-20260716.json:seed=20260716",
           "decision_noise_h1": 0.738758672849707,
           "decision_noise_h6": 1.0120582885285,
           "random_exploration_effect": 0.27329961567879313,
@@ -869,7 +869,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-03-a/en/horizon_uncertainty_emphasis_seed-20260717.json:seed=20260717",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-03-a/en/horizon_uncertainty_emphasis_seed-20260717.json:seed=20260717",
           "decision_noise_h1": 0.753532087695479,
           "decision_noise_h6": 0.9411716200408361,
           "random_exploration_effect": 0.18763953234535713,
@@ -879,7 +879,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-03-b/en/horizon_uncertainty_emphasis_seed-20260718.json:seed=20260718",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-03-b/en/horizon_uncertainty_emphasis_seed-20260718.json:seed=20260718",
           "decision_noise_h1": 1.255207958338802,
           "decision_noise_h6": 1.1915669865056664,
           "random_exploration_effect": -0.06364097183313566,
@@ -889,7 +889,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-03-b/en/horizon_uncertainty_emphasis_seed-20260719.json:seed=20260719",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-03-b/en/horizon_uncertainty_emphasis_seed-20260719.json:seed=20260719",
           "decision_noise_h1": 0.7426320392170438,
           "decision_noise_h6": 1.1099766215818807,
           "random_exploration_effect": 0.3673445823648369,
@@ -899,7 +899,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-04-a/en/horizon_uncertainty_emphasis_seed-20260720.json:seed=20260720",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-04-a/en/horizon_uncertainty_emphasis_seed-20260720.json:seed=20260720",
           "decision_noise_h1": 0.6721268723523063,
           "decision_noise_h6": 1.2917648852882262,
           "random_exploration_effect": 0.6196380129359199,
@@ -909,7 +909,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-04-a/en/horizon_uncertainty_emphasis_seed-20260721.json:seed=20260721",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-04-a/en/horizon_uncertainty_emphasis_seed-20260721.json:seed=20260721",
           "decision_noise_h1": 1.1476586600812568,
           "decision_noise_h6": 1.5047819991933133,
           "random_exploration_effect": 0.3571233391120565,
@@ -919,7 +919,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-04-b/en/horizon_uncertainty_emphasis_seed-20260722.json:seed=20260722",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-04-b/en/horizon_uncertainty_emphasis_seed-20260722.json:seed=20260722",
           "decision_noise_h1": 1.1394773388650001,
           "decision_noise_h6": 1.2937290606936789,
           "random_exploration_effect": 0.15425172182867875,
@@ -929,7 +929,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-04-b/en/horizon_uncertainty_emphasis_seed-20260723.json:seed=20260723",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-04-b/en/horizon_uncertainty_emphasis_seed-20260723.json:seed=20260723",
           "decision_noise_h1": 0.7703112202486345,
           "decision_noise_h6": 0.8863310820317531,
           "random_exploration_effect": 0.11601986178311863,
@@ -939,7 +939,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-05-a/en/horizon_uncertainty_emphasis_seed-20260724.json:seed=20260724",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-05-a/en/horizon_uncertainty_emphasis_seed-20260724.json:seed=20260724",
           "decision_noise_h1": 0.7606531838940108,
           "decision_noise_h6": 1.087119835777125,
           "random_exploration_effect": 0.3264666518831142,
@@ -949,7 +949,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-05-a/en/horizon_uncertainty_emphasis_seed-20260725.json:seed=20260725",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-05-a/en/horizon_uncertainty_emphasis_seed-20260725.json:seed=20260725",
           "decision_noise_h1": 1.2667059673827856,
           "decision_noise_h6": 1.0180368474960744,
           "random_exploration_effect": -0.24866911988671125,
@@ -959,7 +959,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-05-b/en/horizon_uncertainty_emphasis_seed-20260726.json:seed=20260726",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-05-b/en/horizon_uncertainty_emphasis_seed-20260726.json:seed=20260726",
           "decision_noise_h1": 0.9432224416658289,
           "decision_noise_h6": 0.9518023274324333,
           "random_exploration_effect": 0.0085798857666044,
@@ -969,7 +969,7 @@
           "label_bias_h6": -0.3717088143012374
         },
         {
-          "run_id": "E:/UoE/IPP/project/outputs/model_comparison_en_v01/gpt-5.4/wave-05-b/en/horizon_uncertainty_emphasis_seed-20260727.json:seed=20260727",
+          "run_id": "outputs/model_comparison_en_v01/gpt-5.4/wave-05-b/en/horizon_uncertainty_emphasis_seed-20260727.json:seed=20260727",
           "decision_noise_h1": 0.7869117242186244,
           "decision_noise_h6": 1.2282107379630798,
           "random_exploration_effect": 0.44129901374445535,

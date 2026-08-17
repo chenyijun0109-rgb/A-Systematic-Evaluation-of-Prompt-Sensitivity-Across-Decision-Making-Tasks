@@ -1,0 +1,7 @@
+{
+  "analysis": "human_reference_bootstrap_uncertainty",
+  "seed": 20260615,
+  "bootstrap_replicates": 2000,
+  "metrics": 7,
+  "interpretation": "Percentile bootstrap intervals describe sampling uncertainty in the participant-level human reference summaries; they are descriptive, not posterior probability, significance tests, or normative targets."
+}

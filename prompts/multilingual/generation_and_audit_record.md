@@ -64,8 +64,9 @@ English source, then compared every variant with its parent baseline. It checked
 
 - quantities, option labels, reward values, task sequence, and uncertainty;
 - modal strength and whether optional information use remained optional;
-- consistent Chinese terminology for 奖励、损失、净结果、累计得分、临时收益、
-  总收益;
+- consistent Chinese terminology for reward, loss, net outcome, cumulative
+  score, temporary earnings, and total earnings (canonical Chinese terms are in
+  `src/observation_renderer.py` and the frozen zh-CN prompts);
 - consistent Spanish terminology for recompensa, pérdida, resultado neto,
   puntuación acumulada, ganancia temporal, and ganancia total;
 - neutral international Spanish without regional strategy cues;

@@ -76,7 +76,9 @@ elaboration, interpretation, and emphasis are not. In particular:
 
 Add exactly one sentence after the title and before the baseline body:
 
-- `zh-CN`: `请以一名正在完成此任务的人类参与者的身份作答。`
+- `zh-CN`: the role instruction is translated as "You will answer as a human
+  participant completing this task." (canonical Chinese wording is retained in
+  the frozen zh-CN prompt files)
 - `es`: `Asume el papel de un participante humano que está completando esta tarea.`
 
 After removing this sentence and its following blank line, the file must be
