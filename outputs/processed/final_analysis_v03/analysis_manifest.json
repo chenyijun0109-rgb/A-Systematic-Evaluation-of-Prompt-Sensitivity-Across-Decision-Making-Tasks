@@ -159,6 +159,11 @@
     "random_exploration_diagnostics/human.json": {
       "sha256": "5494e416edd068005ca68dbd0b1e60b95c6fe998cb547b90cd77f865f6ac4bb8",
       "bytes": 28295
+    },
+    "human_reference_results/model_human_distance_changes_bootstrap.csv": {
+      "sha256": "d1a0a1e40cc87bee5d8c171e80b2d99c93a3a92df2f5a68adb7ac5795597c483",
+      "bytes": 16348,
+      "rows": 105
     }
   }
 }

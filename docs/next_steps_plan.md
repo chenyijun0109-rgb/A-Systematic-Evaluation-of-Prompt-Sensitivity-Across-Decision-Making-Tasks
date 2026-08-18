@@ -24,9 +24,12 @@ that language implementation is not confounded with temporal drift.
 
 ## 4. Full propagation of human-reference uncertainty
 
-Reference-sample bootstrap uncertainty should be propagated through the
-cell-level deviation and coverage changes, and task implementations should be
-more closely aligned (task length, familiarisation, information presentation).
+Run-level resampling intervals for the RQ4 prompt-associated changes are now
+reported for the seven directly computed metrics
+(`model_human_distance_changes_bootstrap.csv`). The remaining item is to
+propagate reference-sample bootstrap uncertainty through the cell-level
+deviation and coverage changes, and to align task implementations more closely
+(task length, familiarisation, information presentation).
 
 ## 5. Repository and submission hygiene
 

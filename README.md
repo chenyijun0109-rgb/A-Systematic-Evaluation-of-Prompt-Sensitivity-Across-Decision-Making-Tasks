@@ -122,7 +122,10 @@ are:
 
 Participant-level human summaries are in `outputs/processed/human_metrics/`;
 participant-level bootstrap uncertainty is in
-`outputs/processed/final_analysis_v03/human_reference_results/`.
+`outputs/processed/final_analysis_v03/human_reference_results/`. Run-level
+bootstrap intervals for the RQ4 prompt-associated changes (seven directly
+computed metrics) are in
+`human_reference_results/model_human_distance_changes_bootstrap.csv`.
 
 ## Results package
 
