@@ -2061,6 +2061,83 @@ Responde exactamente con una respuesta válida y sin texto \\
 adicional. \\
 \end{quote}
 
+\section{Terminology Mapping}
+\label{app:terminology}
+
+Table~\ref{tab:term-tasks} maps the three task titles across the prompt languages; Table~\ref{tab:term-conditions} maps the prompt-condition keys to the dissertation terminology; Table~\ref{tab:term-metrics} maps the eight primary behavioural metrics to their code identifiers; and Table~\ref{tab:term-obs} lists the key observation and feedback terms used in the dynamically generated task states.
+
+\begin{table}[htbp]
+\centering
+\caption{Task titles across prompt languages.}
+\label{tab:term-tasks}
+\begin{tabularx}{\textwidth}{@{}lXXX@{}}\toprule
+Dissertation task & English prompt title & Simplified Chinese & Spanish \\
+\midrule
+Horizon Task & Two-Option Reward Task & {\begin{CJK}{UTF8}{gbsn}双选项奖励任务\end{CJK}} & Tarea de recompensa con dos opciones \\
+Iowa Gambling Task & Four-Deck Reward Task & {\begin{CJK}{UTF8}{gbsn}四牌组奖励任务\end{CJK}} & Tarea de recompensa con cuatro mazos \\
+BART & Balloon Earnings Task & {\begin{CJK}{UTF8}{gbsn}气球收益任务\end{CJK}} & Tarea de ganancias con globos \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Prompt-condition keys and dissertation terminology. The zh-CN and es names are glosses; exact wording is in the verbatim prompt texts.}
+\label{tab:term-conditions}
+\begin{tabularx}{\textwidth}{@{}lp{3.4cm}XXX@{}}\toprule
+File key & Dissertation term & Simplified Chinese & Spanish \\
+\midrule
+baseline & Neutral & {\begin{CJK}{UTF8}{gbsn}中性基准\end{CJK}} & l\'inea base neutral \\
+detailed & Instruction specificity & {\begin{CJK}{UTF8}{gbsn}详细指令\end{CJK}} & especificidad de instrucciones \\
+role\_human & Role framing & {\begin{CJK}{UTF8}{gbsn}人类参与者角色\end{CJK}} & rol de participante humano \\
+uncertainty\_emphasis & Construct emphasis (uncertainty) & {\begin{CJK}{UTF8}{gbsn}不确定性强调\end{CJK}} & \'enfasis en la incertidumbre \\
+reward\_loss\_emphasis & Construct emphasis (reward/loss) & {\begin{CJK}{UTF8}{gbsn}奖励与损失强调\end{CJK}} & \'enfasis en recompensas y p\'erdidas \\
+risk\_emphasis & Construct emphasis (risk) & {\begin{CJK}{UTF8}{gbsn}风险强调\end{CJK}} & \'enfasis en riesgo \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Primary behavioural metrics: dissertation terms, code identifiers, and three-language field glosses.}
+\label{tab:term-metrics}
+\begin{tabularx}{\textwidth}{@{}lp{4.1cm}XXX@{}}\toprule
+Dissertation metric & Code identifier & Simplified Chinese & Spanish \\
+\midrule
+Information-seeking choice rate & \texttt{directed_exploration} & {\begin{CJK}{UTF8}{gbsn}信息寻求选择率\end{CJK}} & tasa de elecci\'on de b\'usqueda de informaci\'on \\
+Horizon-related exploration change & \texttt{horizon_effect} & {\begin{CJK}{UTF8}{gbsn}视界相关探索变化\end{CJK}} & cambio de exploraci\'on seg\'un el horizonte \\
+Random exploration effect & \texttt{random_exploration_effect} & {\begin{CJK}{UTF8}{gbsn}随机探索效应\end{CJK}} & efecto de exploraci\'on aleatoria \\
+Advantageous choice rate & \texttt{advantageous_choice_rate} & {\begin{CJK}{UTF8}{gbsn}有利牌组选择率\end{CJK}} & tasa de elecci\'on de mazos ventajosos \\
+Post-loss switching rate & \texttt{post_loss_switching_rate} & {\begin{CJK}{UTF8}{gbsn}损失后换牌率\end{CJK}} & tasa de cambio tras p\'erdida \\
+Adjusted average pumps & \texttt{adjusted_average_pumps} & {\begin{CJK}{UTF8}{gbsn}调整后平均充气次数\end{CJK}} & inflados medios ajustados \\
+Explosion rate & \texttt{explosion_rate} & {\begin{CJK}{UTF8}{gbsn}爆炸率\end{CJK}} & tasa de explosiones \\
+Post-explosion adjustment & \texttt{post_explosion_adjustment} & {\begin{CJK}{UTF8}{gbsn}爆炸后调整\end{CJK}} & ajuste tras explosi\'on \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Key observation and feedback terms in the dynamically generated task states (English token, Simplified Chinese, Spanish).}
+\label{tab:term-obs}
+\begin{tabularx}{\textwidth}{@{}XXX@{}}\toprule
+English token & Simplified Chinese & Spanish \\
+\midrule
+\texttt{reward} & {\begin{CJK}{UTF8}{gbsn}奖励\end{CJK}} & recompensa \\
+\texttt{loss} & {\begin{CJK}{UTF8}{gbsn}损失\end{CJK}} & p\'erdida \\
+\texttt{net outcome} & {\begin{CJK}{UTF8}{gbsn}净结果\end{CJK}} & resultado neto \\
+\texttt{cumulative score} & {\begin{CJK}{UTF8}{gbsn}累计得分\end{CJK}} & puntuaci\'on acumulada \\
+\texttt{temporary earnings} & {\begin{CJK}{UTF8}{gbsn}临时收益\end{CJK}} & ganancias temporales \\
+\texttt{total earnings} & {\begin{CJK}{UTF8}{gbsn}总收益\end{CJK}} & ganancias totales \\
+\texttt{pump count / inflation} & {\begin{CJK}{UTF8}{gbsn}充气次数\end{CJK}} & inflados \\
+\texttt{exploded} & {\begin{CJK}{UTF8}{gbsn}爆炸\end{CJK}} & explot\'o \\
+\texttt{cashed out} & {\begin{CJK}{UTF8}{gbsn}已兑现\end{CJK}} & cobrado \\
+\texttt{forced choice} & {\begin{CJK}{UTF8}{gbsn}强制选择\end{CJK}} & elecci\'on forzada \\
+\texttt{free choice} & {\begin{CJK}{UTF8}{gbsn}自由选择\end{CJK}} & elecci\'on libre \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
 \section{Supplementary Result Files}
 \label{app:supplementary-results}
 
