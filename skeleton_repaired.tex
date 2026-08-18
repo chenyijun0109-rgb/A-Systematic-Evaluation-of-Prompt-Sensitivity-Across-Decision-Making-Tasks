@@ -601,27 +601,16 @@ evidence required to follow the main argument.
 \section{Frozen Prompt Materials}
 
 For each task, the four formal conditions were Neutral, Instruction
-specificity, Role framing, and Task-specific construct emphasis. Table~\ref{tab:prompt-inventory}
-maps the dissertation terminology to the frozen repository files. In the file
-paths, \texttt{TASK} is \texttt{bandit}, \texttt{igt}, or \texttt{bart}.
-
-\begin{table}[htbp]
-\centering
-\caption{Inventory of frozen prompt files.}
-\label{tab:prompt-inventory}
-\begin{tabularx}{\textwidth}{@{}p{3.2cm}p{3.2cm}X@{}}
-\toprule
-Language & Condition & Repository path pattern \\
-\midrule
-English & Neutral & Repository \url{prompts/TASK/baseline.md} \\
-English & Instruction specificity & Repository \url{prompts/TASK/detailed.md} \\
-English & Role framing & Repository \url{prompts/TASK/role_human.md} \\
-English & Construct emphasis & Repository files \url{uncertainty_emphasis.md}, \url{reward_loss_emphasis.md}, and \url{risk_emphasis.md} in the respective task folders \\
-Simplified Chinese & All four conditions & Repository \url{prompts/multilingual/zh-CN/TASK/} \\
-Spanish & All four conditions & Repository \url{prompts/multilingual/es/TASK/} \\
-\bottomrule
-\end{tabularx}
-\end{table}
+specificity, Role framing, and Task-specific construct emphasis. The frozen
+English files follow the naming scheme \texttt{baseline.md} (Neutral),
+\texttt{detailed.md} (Instruction specificity), \texttt{role\_human.md} (Role
+framing), and \texttt{uncertainty\_emphasis.md},
+\texttt{reward\_loss\_emphasis.md}, and \texttt{risk\_emphasis.md}
+(Task-specific construct emphasis) under \url{prompts/TASK/}, where
+\texttt{TASK} is \texttt{bandit}, \texttt{igt}, or \texttt{bart}. The
+Simplified Chinese and Spanish versions of all four conditions are under
+\url{prompts/multilingual/zh-CN/TASK/} and
+\url{prompts/multilingual/es/TASK/}.
 
 The complete prompt collection is available in the \url{prompts/} directory of
 the research repository linked in the Reproducibility section. The
