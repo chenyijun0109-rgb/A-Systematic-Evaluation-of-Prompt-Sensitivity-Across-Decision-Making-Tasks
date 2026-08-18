@@ -176,7 +176,12 @@ required.
 For the School's electronic submission, a separate `PROJECT/` archive is
 prepared with its own README (`PROJECT/README.md`). It contains source, scripts,
 configs, prompts, tests, the processed analysis package, and documentation,
-and it records where the raw data came from and how outputs are regenerated.
+plus the manuscript source (`skeleton_repaired.tex` and `mybibfile.bib`), the
+figure manifest, and environment files (`pyproject.toml`, `uv.lock`,
+`.env.example`). It records where the raw data came from and how outputs are
+regenerated. The compiled `dissertation.pdf` is submitted separately through
+the School's submission page; raw LLM run JSONs and human datasets are kept as
+local audit materials and are not part of the archive.
 
 ## Links
 
