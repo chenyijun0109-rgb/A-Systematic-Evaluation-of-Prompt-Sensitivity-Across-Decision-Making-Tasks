@@ -42,17 +42,17 @@ as evidence of shared cognitive mechanisms.
 
 ## Manuscript
 
-- `skeleton_repaired.tex` (with `mybibfile.bib`) is the authoritative manuscript
-  source. The 2026-08-12 `dissertation.pdf` was compiled from it inside the
-  University's official `infthesis`/`msccheck` Overleaf template. The template
-  class files are not included in this repository.
+- The dissertation manuscript is compiled in the University's official
+  `infthesis`/`msccheck` Overleaf template and submitted through the School's
+  submission page; the manuscript source is therefore not included in this
+  repository. `mybibfile.bib` is retained as the bibliography used by the
+  manuscript.
 - `docs/final_overleaf_figure_manifest.md` lists the figure files that must be
   uploaded for compilation.
-- The appendix of `skeleton_repaired.tex` reproduces all 36 frozen prompts
-  verbatim (English, Simplified Chinese, Spanish) and includes a terminology
-  mapping table (thesis terms, code identifiers, and three-language glosses).
-  Compiling it requires the `CJKutf8` package (already declared in the
-  preamble).
+- The 36 frozen prompts (English, Simplified Chinese, Spanish) are reproduced
+  verbatim under `prompts/`, and the appendix terminology mapping (thesis
+  terms, code identifiers, and three-language glosses) is documented in the
+  manuscript itself.
 
 ## Repository layout
 
@@ -180,8 +180,11 @@ plus the manuscript source (`skeleton_repaired.tex` and `mybibfile.bib`), the
 figure manifest, and environment files (`pyproject.toml`, `uv.lock`,
 `.env.example`). It records where the raw data came from and how outputs are
 regenerated. The compiled `dissertation.pdf` is submitted separately through
-the School's submission page; raw LLM run JSONs and human datasets are kept as
-local audit materials and are not part of the archive.
+the School's submission page. Two archive variants are prepared: the standard
+archive contains processed results only (raw LLM run JSONs and human datasets
+remain local audit materials), and a full variant additionally bundles the raw
+run JSONs under `outputs/` and the human datasets under `DATASET/` so that
+every reported result can be checked against primary evidence.
 
 ## Links
 
