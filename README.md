@@ -44,9 +44,8 @@ as evidence of shared cognitive mechanisms.
 
 - The dissertation manuscript is compiled in the University's official
   `infthesis`/`msccheck` Overleaf template and submitted through the School's
-  submission page; the manuscript source is therefore not included in this
-  repository. `mybibfile.bib` is retained as the bibliography used by the
-  manuscript.
+  submission page; neither the manuscript source nor its bibliography file is
+  included in this repository. Both are maintained in Overleaf.
 - `docs/final_overleaf_figure_manifest.md` lists the figure files that must be
   uploaded for compilation.
 - The 36 frozen prompts (English, Simplified Chinese, Spanish) are reproduced
