@@ -132,8 +132,7 @@ computed metrics) are in
 `outputs/processed/final_analysis_v03/` is the authoritative analysis package.
 `analysis_manifest.json` records file hashes, expected row counts,
 bootstrap-validity checks, aggregation completeness, and Random-exploration
-convergence. Publication figures are under `outputs/figures/final_results_v01/`
-and `figures/`.
+convergence. All publication figures are in the top-level `figures/` directory.
 
 ## Reproducibility
 

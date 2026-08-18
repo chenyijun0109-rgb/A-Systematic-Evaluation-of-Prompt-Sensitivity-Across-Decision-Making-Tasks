@@ -1,23 +1,22 @@
 # `skeleton_repaired.tex` Overleaf figure manifest
 
-Upload the seven figure files below while preserving the listed relative paths. The two design figures are high-resolution PNG files; the five Results figures remain vector PDFs. The paths are the ones used by `\includegraphics` in `skeleton_repaired.tex`. All result figures are the current joint-analysis versions. In particular, the RQ3 figure treats English, Simplified Chinese, and Spanish symmetrically and contains no English-reference or pairwise-language analysis.
+Upload the six figure files below while preserving the listed relative paths. The paths are the ones used by `\includegraphics` in `skeleton_repaired.tex` and resolve through the declared `\graphicspath{{figures/}{./}}`. All result figures are the current joint-analysis versions. In particular, the RQ3 figure treats English, Simplified Chinese, and Spanish symmetrically and contains no English-reference or pairwise-language analysis.
 
 ## Design and workflow figures
 
 | Source file in this repository | Overleaf relative path | LaTeX label | Purpose/caption |
 | --- | --- | --- | --- |
-| `outputs/figures/design/study_design_scope.png` | `outputs/figures/design/study_design_scope.png` | `fig:study_design_scope` | Concise study design and deduplicated data structure. |
-| `outputs/figures/design/experimental_workflow.png` | `outputs/figures/design/experimental_workflow.png` | `fig:experimental_workflow` | Concise workflow from frozen materials to formal analysis. |
+| `figures/study_design_scope.png` | `figures/study_design_scope.png` | `fig:study_design_scope` | Concise study design and deduplicated data structure. |
+| `figures/experimental_workflow.png` | `figures/experimental_workflow.png` | `fig:experimental_workflow` | Concise workflow from frozen materials to formal analysis. |
 
 ## Main Results figures
 
 | Source file in this repository | Overleaf relative path | LaTeX label | Purpose/caption |
 | --- | --- | --- | --- |
-| `outputs/figures/final_results_v01/figure_rq1_prompt_effects_overview.pdf` | `outputs/figures/final_results_v01/figure_rq1_prompt_effects_overview.pdf` | `fig:rq1` | Task-grouped forest plots of within-model prompt effects relative to Neutral; points are signed Hedges' \(g\), with percentile-bootstrap 95% confidence intervals. |
-| `outputs/figures/final_results_v01/figure_rq2_model_interactions_overview.pdf` | `outputs/figures/final_results_v01/figure_rq2_model_interactions_overview.pdf` | `fig:rq2` | Model-by-prompt interaction overview; raw candidate-minus-GPT-5.4 interactions are printed in cells and colour encodes differences in signed Hedges' \(g\). |
-| `outputs/figures/final_results_v01/figure_rq3_language_overview.pdf` | `outputs/figures/final_results_v01/figure_rq3_language_overview.pdf` | `fig:rq3` | Joint three-language centred comparison. No language is designated as the reference; deviations sum to zero within each comparison. |
-| `outputs/figures/final_results_v01/figure_rq4_absolute_deviation_heatmap.pdf` | `outputs/figures/final_results_v01/figure_rq4_absolute_deviation_heatmap.pdf` | `fig:rq4a` | Descriptive prompt-associated changes in absolute human-SD-scaled mean deviation. |
-| `outputs/figures/final_results_v01/figure_rq4_coverage_heatmap.pdf` | `outputs/figures/final_results_v01/figure_rq4_coverage_heatmap.pdf` | `fig:rq4b` | Descriptive prompt-associated changes in empirical human-reference coverage. |
+| `figures/figure_rq1_prompt_effects_overview.png` | `figures/figure_rq1_prompt_effects_overview.png` | `fig:rq1` | Task-grouped forest plots of within-model prompt effects relative to Neutral; points are signed Hedges' \(g\), with percentile-bootstrap 95% confidence intervals. |
+| `figures/figure_rq2_model_interactions_overview.png` | `figures/figure_rq2_model_interactions_overview.png` | `fig:rq2` | Model-by-prompt interaction overview; raw candidate-minus-GPT-5.4 interactions are printed in cells and colour encodes differences in signed Hedges' \(g\). |
+| `figures/figure_rq3_language_overview.png` | `figures/figure_rq3_language_overview.png` | `fig:rq3` | Joint three-language centred comparison. No language is designated as the reference; deviations sum to zero within each comparison. |
+| `figures/figure_rq4_human_reference_overview.png` | `figures/figure_rq4_human_reference_overview.png` | `fig:rq4` | Descriptive prompt-associated changes in absolute human-SD-scaled mean deviation (left) and empirical human-reference coverage (right) relative to Neutral. |
 
 ## School-template files required before compilation
 
